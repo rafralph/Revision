@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Computer Science · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+code{font-family:var(--f-mono);font-size:.9em}
+.ste code,.work code,.qtext code{background:var(--accent-soft);padding:0 4px;border-radius:3px}
+.qtext{flex:1 1 18rem;min-width:0;display:grid;gap:8px}
+.qtext pre{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:10px 12px;font:400 .85rem/1.5 var(--f-mono)}
+.qtext pre code,pre.code code{background:none;padding:0;color:inherit}
+table.ctab td,table.ctab th{white-space:normal}
+table.ctab{font-family:var(--f-mono);font-size:.82rem}
+.paper{font-family:var(--f-mono);font-size:.72rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px}
+.topic{scroll-margin-top:60px}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../combined-science/">Combined Science</a></li><li><a href="../computer-science/" aria-current="page">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<header>
+  <p class="code">AQA GCSE COMPUTER SCIENCE 8525 · PYTHON</p>
+  <h1>Every topic, ranked by marks</h1>
+  <p class="lede">Every sub-question from the four public AQA papers (Paper 1 Python and Paper 2, June 2022 and June 2023) is sorted into a topic. Each topic has a short video, a plain-English explanation, a diagram or code example, and a worked exam question.</p>
+  <div class="facts"><span><b>4</b> papers</span><span><b>360</b> marks</span><span><b>18%</b> from writing whole programs</span><span>June 2022 and June 2023</span></div>
+</header>
+<section class="rank" aria-labelledby="rank-h">
+  <h2 id="rank-h">Most frequent topics</h2>
+  <p class="lede">Ranked by total marks. Only two years of papers exist, so a topic can rank low by chance. Treat the order as a guide to where the big marks are.</p>
+  <ol class="rows"><li class="row"><span class="n">1</span><div><a href="#programs">Writing complete programs</a><span class="paper">Paper 1</span><div class="bar"><i style="width:100%"></i></div><span class="sub">64 marks · in 2 of 4 papers</span></div><span class="pct">17.8%</span></li><li class="row"><span class="n">2</span><div><a href="#sql">Databases and SQL</a><span class="paper">Paper 2</span><div class="bar"><i style="width:39%"></i></div><span class="sub">25 marks · in 2 of 4 papers</span></div><span class="pct">6.9%</span></li><li class="row"><span class="n">3</span><div><a href="#trace-tables">Algorithms, trace tables and pseudocode</a><span class="paper">Paper 1</span><div class="bar"><i style="width:34%"></i></div><span class="sub">22 marks · in 2 of 4 papers</span></div><span class="pct">6.1%</span></li><li class="row"><span class="n">4</span><div><a href="#validation">Validation, testing and errors</a><span class="paper">Paper 1</span><div class="bar"><i style="width:31%"></i></div><span class="sub">20 marks · in 2 of 4 papers</span></div><span class="pct">5.6%</span></li><li class="row"><span class="n">5</span><div><a href="#networks">Networks and protocols</a><span class="paper">Paper 2</span><div class="bar"><i style="width:30%"></i></div><span class="sub">19 marks · in 2 of 4 papers</span></div><span class="pct">5.3%</span></li><li class="row"><span class="n">6</span><div><a href="#binary">Binary, hex and binary arithmetic</a><span class="paper">Paper 2</span><div class="bar"><i style="width:28%"></i></div><span class="sub">18 marks · in 2 of 4 papers</span></div><span class="pct">5.0%</span></li><li class="row"><span class="n">7</span><div><a href="#cyber-security">Cyber security</a><span class="paper">Paper 2</span><div class="bar"><i style="width:28%"></i></div><span class="sub">18 marks · in 2 of 4 papers</span></div><span class="pct">5.0%</span></li><li class="row"><span class="n">8</span><div><a href="#subroutines">Subroutines and parameters</a><span class="paper">Paper 1</span><div class="bar"><i style="width:25%"></i></div><span class="sub">16 marks · in 2 of 4 papers</span></div><span class="pct">4.4%</span></li><li class="row"><span class="n">9</span><div><a href="#ethics">Ethical, legal and environmental issues</a><span class="paper">Paper 2</span><div class="bar"><i style="width:23%"></i></div><span class="sub">15 marks · in 2 of 4 papers</span></div><span class="pct">4.2%</span></li><li class="row"><span class="n">10</span><div><a href="#selection-iteration">Selection and iteration</a><span class="paper">Paper 1</span><div class="bar"><i style="width:19%"></i></div><span class="sub">12 marks · in 2 of 4 papers</span></div><span class="pct">3.3%</span></li><li class="row"><span class="n">11</span><div><a href="#logic">Boolean logic and logic gates</a><span class="paper">Paper 2</span><div class="bar"><i style="width:19%"></i></div><span class="sub">12 marks · in 2 of 4 papers</span></div><span class="pct">3.3%</span></li><li class="row"><span class="n">12</span><div><a href="#lists">Lists, arrays and records</a><span class="paper">Paper 1</span><div class="bar"><i style="width:17%"></i></div><span class="sub">11 marks · in 2 of 4 papers</span></div><span class="pct">3.1%</span></li><li class="row"><span class="n">13</span><div><a href="#sorting">Sorting algorithms</a><span class="paper">Paper 1</span><div class="bar"><i style="width:17%"></i></div><span class="sub">11 marks · in 2 of 4 papers</span></div><span class="pct">3.1%</span></li><li class="row"><span class="n">14</span><div><a href="#languages">Programming languages and translators</a><span class="paper">Paper 2</span><div class="bar"><i style="width:17%"></i></div><span class="sub">11 marks · in 2 of 4 papers</span></div><span class="pct">3.1%</span></li><li class="row"><span class="n">15</span><div><a href="#operating-system">Hardware, software and the OS</a><span class="paper">Paper 2</span><div class="bar"><i style="width:16%"></i></div><span class="sub">10 marks · in 2 of 4 papers</span></div><span class="pct">2.8%</span></li><li class="row"><span class="n">16</span><div><a href="#memory-storage">Memory and storage</a><span class="paper">Paper 2</span><div class="bar"><i style="width:16%"></i></div><span class="sub">10 marks · in 2 of 4 papers</span></div><span class="pct">2.8%</span></li><li class="row"><span class="n">17</span><div><a href="#strings">String handling</a><span class="paper">Paper 1</span><div class="bar"><i style="width:14%"></i></div><span class="sub">9 marks · in 2 of 4 papers</span></div><span class="pct">2.5%</span></li><li class="row"><span class="n">18</span><div><a href="#images">Representing images</a><span class="paper">Paper 2</span><div class="bar"><i style="width:14%"></i></div><span class="sub">9 marks · in 2 of 4 papers</span></div><span class="pct">2.5%</span></li><li class="row"><span class="n">19</span><div><a href="#sound">Representing sound</a><span class="paper">Paper 2</span><div class="bar"><i style="width:12%"></i></div><span class="sub">8 marks · in 2 of 4 papers</span></div><span class="pct">2.2%</span></li><li class="row"><span class="n">20</span><div><a href="#cpu">The CPU and the fetch–execute cycle</a><span class="paper">Paper 2</span><div class="bar"><i style="width:12%"></i></div><span class="sub">8 marks · in 1 of 4 papers</span></div><span class="pct">2.2%</span></li><li class="row"><span class="n">21</span><div><a href="#compression">Data compression</a><span class="paper">Paper 2</span><div class="bar"><i style="width:11%"></i></div><span class="sub">7 marks · in 2 of 4 papers</span></div><span class="pct">1.9%</span></li><li class="row"><span class="n">22</span><div><a href="#data-types">Data types, variables and constants</a><span class="paper">Paper 1</span><div class="bar"><i style="width:8%"></i></div><span class="sub">5 marks · in 2 of 4 papers</span></div><span class="pct">1.4%</span></li><li class="row"><span class="n">23</span><div><a href="#operators">Arithmetic, relational and Boolean operators</a><span class="paper">Paper 1</span><div class="bar"><i style="width:8%"></i></div><span class="sub">5 marks · in 2 of 4 papers</span></div><span class="pct">1.4%</span></li><li class="row"><span class="n">24</span><div><a href="#searching">Searching algorithms</a><span class="paper">Paper 1</span><div class="bar"><i style="width:8%"></i></div><span class="sub">5 marks · in 1 of 4 papers</span></div><span class="pct">1.4%</span></li><li class="row"><span class="n">25</span><div><a href="#units">Units of information</a><span class="paper">Paper 2</span><div class="bar"><i style="width:6%"></i></div><span class="sub">4 marks · in 2 of 4 papers</span></div><span class="pct">1.1%</span></li><li class="row"><span class="n">26</span><div><a href="#network-security">Network security</a><span class="paper">Paper 2</span><div class="bar"><i style="width:6%"></i></div><span class="sub">4 marks · in 1 of 4 papers</span></div><span class="pct">1.1%</span></li><li class="row"><span class="n">27</span><div><a href="#characters">Character encoding</a><span class="paper">Paper 2</span><div class="bar"><i style="width:3%"></i></div><span class="sub">2 marks · in 1 of 4 papers</span></div><span class="pct">0.6%</span></li></ol>
+  <p>Paper 1 (programming) is half the qualification. Writing complete programs is the biggest single area, so regular coding practice matters most.</p>
+</section>
+<article class="topic" id="programs">
+  <div class="topic-head"><span class="qnum">1</span><h2>Writing complete programs</h2><span class="meta">Paper 1 · 64 marks · 17.8% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c01programs.jpg" src="videos/c01programs.mp4" aria-label="Explainer video: Writing complete programs"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A long program is just small pieces in the right order. Split the task into input, process and output, then write and check one piece at a time.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The last questions on Paper 1 ask you to write a complete Python program. They are worth 6 to 11 marks each. Marks are given for each correct part, so a partly working program still scores.</p>
+<ol><li>Read the task twice. Underline every input, every output and every rule.</li>
+<li>Set up the variables you need, such as counters and totals.</li>
+<li>Choose the right structure: a <code>for</code> loop for a fixed number of repeats, a <code>while</code> loop to repeat until a condition changes.</li>
+<li>Put input inside the loop if it must be asked more than once.</li>
+<li>Put the final output after the loop.</li>
+<li>Trace your code with one test value before you move on.</li></ol>
+<p class="caution"><span>CAUTION</span>Indentation matters in Python. Code inside a loop or <code>if</code> must be indented.</p></div>
+    <figure><h3>Code example</h3><pre class="code"><code>attempts = 0
+password = &quot;&quot;
+while password != &quot;secret&quot;:
+    password = input(&quot;Password: &quot;)
+    attempts = attempts + 1
+print(&quot;Access granted after&quot;, attempts, &quot;attempts&quot;)</code></pre><figcaption>Each line earns a mark: the counter, the loop, the input, the update and the output.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Write a Python program that asks the user to enter five test scores. The program must output the total and the highest score.</div><span class="marks">[6 marks]</span></div>
+      <ol class="work"><li>Set total = 0 and highest = 0 before the loop</li><li>Use <code>for i in range(5):</code> to repeat five times</li><li>Inside: <code>score = int(input("Score: "))</code> and <code>total = total + score</code></li><li>Inside: <code>if score &gt; highest: highest = score</code></li><li>After the loop: <code>print(total, highest)</code></li></ol>
+      <p class="ans">Answer: <mark>A loop of 5 inputs, a running total and a running maximum</mark></p><pre class="code"><code>total = 0
+highest = 0
+for i in range(5):
+    score = int(input(&quot;Score: &quot;))
+    total = total + score
+    if score &gt; highest:
+        highest = score
+print(&quot;Total:&quot;, total)
+print(&quot;Highest:&quot;, highest)</code></pre>
+    </div>
+  </div>
+</article><article class="topic" id="sql">
+  <div class="topic-head"><span class="qnum">2</span><h2>Databases and SQL</h2><span class="meta">Paper 2 · 25 marks · 6.9% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c02sql.jpg" src="videos/c02sql.mp4" aria-label="Explainer video: Databases and SQL"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Read a query like a sentence: choose these columns, from this table, but only the rows that pass this test.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A relational database stores data in tables. A record is a row. A field is a column. A primary key uniquely identifies each record. A foreign key links to the primary key of another table.</p>
+<ol><li><code>SELECT</code> lists the fields to show. <code>*</code> means all fields.</li>
+<li><code>FROM</code> names the table.</li>
+<li><code>WHERE</code> gives the condition. Join conditions with <code>AND</code> or <code>OR</code>.</li>
+<li><code>ORDER BY</code> sorts: <code>ASC</code> (smallest first) or <code>DESC</code>.</li>
+<li><code>INSERT INTO</code>, <code>UPDATE … SET</code> and <code>DELETE FROM</code> change the data.</li></ol>
+<p class="caution"><span>CAUTION</span>Put text values in quotes: <code>WHERE Rating = 'PG'</code>. Do not put numbers in quotes.</p></div>
+    <figure><h3>Diagram and code</h3><div class="tbl"><table class="ctab"><thead><tr><th>FilmID</th><th>Title</th><th>Year</th><th>Rating</th></tr></thead><tbody><tr><td>1</td><td>Up</td><td>2009</td><td>U</td></tr><tr><td>2</td><td>Coco</td><td>2017</td><td>PG</td></tr><tr><td>3</td><td>Soul</td><td>2020</td><td>PG</td></tr><tr><td>4</td><td>Elf</td><td>2003</td><td>PG</td></tr><tr><td>5</td><td>Wish</td><td>2023</td><td>U</td></tr></tbody></table></div><pre class="code"><code>SELECT Title, Year
+FROM Film
+WHERE Year &gt; 2015 AND Rating = &#x27;PG&#x27;
+ORDER BY Year DESC</code></pre><figcaption>This query returns Soul (2020), then Coco (2017).</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Using the Film table, write an SQL statement to (a) list the titles of all films with rating U, and (b) change the rating of Elf to U.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) <code>SELECT Title FROM Film WHERE Rating = 'U'</code></li><li>Result: Up, Wish</li><li>(b) <code>UPDATE Film SET Rating = 'U' WHERE FilmID = 4</code></li><li>Use the primary key in WHERE so only one record changes</li></ol>
+      <p class="ans">Answer: <mark>(a) SELECT Title FROM Film WHERE Rating = 'U'  (b) UPDATE Film SET Rating = 'U' WHERE FilmID = 4</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="trace-tables">
+  <div class="topic-head"><span class="qnum">3</span><h2>Algorithms, trace tables and pseudocode</h2><span class="meta">Paper 1 · 22 marks · 6.1% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c03trace.jpg" src="videos/c03trace.mp4" aria-label="Explainer video: Algorithms, trace tables and pseudocode"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A trace table is you playing the part of the computer: one line at a time, writing down every change.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>An algorithm is a sequence of steps that solves a problem. It can be shown in pseudocode, as a flowchart or as program code. Decomposition breaks a problem into smaller parts. Abstraction removes details that are not needed.</p>
+<ol><li>Make one column for each variable, plus one for output.</li>
+<li>Go through the code one line at a time.</li>
+<li>Write a new value only when it changes.</li>
+<li>For a loop, check the condition each time round.</li>
+<li>Stop when the loop condition is false. Write the final output.</li></ol>
+<p class="caution"><span>CAUTION</span><code>range(1, 4)</code> gives 1, 2, 3. It stops before 4.</p></div>
+    <figure><h3>Diagram and code</h3><div class="tbl"><table class="ctab"><thead><tr><th>i</th><th>total</th><th>output</th></tr></thead><tbody><tr><td></td><td>0</td><td></td></tr><tr><td>1</td><td>2</td><td></td></tr><tr><td>2</td><td>6</td><td></td></tr><tr><td>3</td><td>12</td><td></td></tr><tr><td></td><td></td><td>12</td></tr></tbody></table></div><pre class="code"><code>total = 0
+for i in range(1, 4):
+    total = total + i * 2
+print(total)</code></pre><figcaption>Each row shows the values after one pass of the loop.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Complete a trace table for this code when the user enters 13.<pre><code>n = int(input())
+steps = 0
+while n != 1:
+    if n % 2 == 0:
+        n = n // 2
+    else:
+        n = 3 * n + 1
+    steps = steps + 1
+print(steps)</code></pre></div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>n: 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1</li><li>steps goes up by 1 each time round the loop: 1, 2, … 9</li><li>The loop stops when n = 1</li><li>Output: 9</li></ol>
+      <p class="ans">Answer: <mark>Output 9</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="validation">
+  <div class="topic-head"><span class="qnum">4</span><h2>Validation, testing and errors</h2><span class="meta">Paper 1 · 20 marks · 5.6% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c04validation.jpg" src="videos/c04validation.mp4" aria-label="Explainer video: Validation, testing and errors"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Good testing attacks the edges. Most bugs live at the boundary between accepted and rejected values.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Validation checks that input is sensible and in the right form. Authentication checks who a user is. Testing checks that a program works. AQA tests validation code, test data and error types.</p>
+<ol><li>Range check: is the value between limits?</li>
+<li>Length check, presence check and type check are also common.</li>
+<li>Use a <code>while</code> loop to ask again until the input is valid.</li>
+<li>Choose test data: normal (inside the range), boundary (at and just outside the edges) and erroneous (wrong type or far outside).</li>
+<li>Syntax error: breaks the rules of the language, so the program will not run. Logic error: runs but gives the wrong result.</li></ol>
+<p class="caution"><span>CAUTION</span>Validation cannot check that data is true. A valid age can still be the wrong age.</p></div>
+    <figure><h3>Diagram and code</h3><div class="tbl"><table class="ctab"><thead><tr><th>Test type</th><th>Example for age 11–16</th><th>Expected</th></tr></thead><tbody><tr><td>Normal</td><td>13</td><td>accepted</td></tr><tr><td>Boundary</td><td>11, 16</td><td>accepted</td></tr><tr><td>Boundary</td><td>10, 17</td><td>rejected</td></tr><tr><td>Erroneous</td><td>25, "abc"</td><td>rejected</td></tr></tbody></table></div><pre class="code"><code>age = int(input(&quot;Age: &quot;))
+while age &lt; 11 or age &gt; 16:
+    print(&quot;Must be 11 to 16&quot;)
+    age = int(input(&quot;Age: &quot;))
+print(&quot;Accepted&quot;)</code></pre><figcaption>Boundary tests check both sides of each limit.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A program accepts a quantity from 1 to 50. Give one example each of normal, boundary and erroneous test data, and explain the difference between a syntax error and a logic error.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Normal: 25</li><li>Boundary: 1 or 50 (or 0 / 51 just outside)</li><li>Erroneous: 100 or "ten"</li><li>Syntax error: code breaks language rules and will not run; logic error: code runs but gives a wrong result</li></ol>
+      <p class="ans">Answer: <mark>25; 50; "ten"; syntax stops it running, logic gives wrong output</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="networks">
+  <div class="topic-head"><span class="qnum">5</span><h2>Networks and protocols</h2><span class="meta">Paper 2 · 19 marks · 5.3% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c05networks.jpg" src="videos/c05networks.mp4" aria-label="Explainer video: Networks and protocols"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Protocols are agreed rules, and layers split one huge job into four smaller jobs. Each layer only talks to the layers next to it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A network is two or more computers connected to share data and resources. A LAN covers a small area. A WAN covers a large area. A PAN connects devices close to one person, for example with Bluetooth.</p>
+<ol><li>Star topology: every device connects to a central switch. One cable failure only affects one device.</li>
+<li>Bus topology: all devices share one cable. Cheap, but a cable failure stops the network.</li>
+<li>Wired networks are faster and more secure. Wireless networks are flexible.</li>
+<li>The TCP/IP model has four layers: application, transport, internet and link.</li>
+<li>Protocols: HTTP/HTTPS (web), SMTP (send email), IMAP (receive email), FTP (files), TCP and UDP (transport), IP (addressing).</li></ol>
+<p class="caution"><span>CAUTION</span>HTTPS is HTTP with encryption. It does not stop viruses.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Layer</th><th>Job</th><th>Protocols</th></tr></thead><tbody><tr><td>Application</td><td>what the user's program needs</td><td>HTTP, HTTPS, SMTP, IMAP, FTP</td></tr><tr><td>Transport</td><td>splits data into packets; reliable delivery</td><td>TCP, UDP</td></tr><tr><td>Internet</td><td>addresses and routes packets</td><td>IP</td></tr><tr><td>Link</td><td>sends bits over the cable or radio</td><td>Ethernet, Wi-Fi</td></tr></tbody></table></div><figcaption>Four layers. Each layer does one job.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">(a) Give two advantages of a star topology. (b) Name the protocol used to send an email, and the layer of the TCP/IP model it belongs to.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) If one cable fails, the other devices still work</li><li>(a) It is easy to add new devices / performance stays good</li><li>(b) SMTP</li><li>(b) Application layer</li></ol>
+      <p class="ans">Answer: <mark>(a) fault-tolerant; easy to add devices  (b) SMTP, application layer</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="binary">
+  <div class="topic-head"><span class="qnum">6</span><h2>Binary, hex and binary arithmetic</h2><span class="meta">Paper 2 · 18 marks · 5.0% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c06binary.jpg" src="videos/c06binary.mp4" aria-label="Explainer video: Binary, hex and binary arithmetic"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Every binary column is worth double the one to its right. Hex is just a short way to write four bits at a time.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Computers store all data in binary (base 2). Hexadecimal (base 16) is a short way for people to write binary. AQA tests conversions, binary addition and binary shifts, for numbers up to 255.</p>
+<ol><li>Write the column values: 128, 64, 32, 16, 8, 4, 2, 1.</li>
+<li>Denary to binary: put a 1 under the biggest value that fits, subtract, and repeat.</li>
+<li>Binary to hex: split into two groups of 4 bits. Convert each group (10 = A … 15 = F).</li>
+<li>Binary addition: 1 + 1 = 10 (write 0, carry 1); 1 + 1 + 1 = 11.</li>
+<li>A left shift of n places multiplies by 2ⁿ. A right shift divides by 2ⁿ.</li></ol>
+<p class="caution"><span>CAUTION</span>If an 8-bit addition gives a 9th bit, that is an overflow error.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>128</th><th>64</th><th>32</th><th>16</th><th>8</th><th>4</th><th>2</th><th>1</th></tr></thead><tbody><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr></tbody></table></div><figcaption>173 = 128 + 32 + 8 + 4 + 1 = 1010 1101 = AD in hex.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">(a) Convert 173 to 8-bit binary. (b) Convert your answer to hexadecimal. (c) Apply a left shift of 1 to 00101101 and give the result in denary.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) 173 − 128 = 45; 45 − 32 = 13; 13 − 8 = 5; 5 − 4 = 1; 1 − 1 = 0 → 10101101</li><li>(b) 1010 = 10 = A; 1101 = 13 = D → AD</li><li>(c) 00101101 = 45; shift left 1 → 01011010</li><li>= 90 (45 × 2)</li></ol>
+      <p class="ans">Answer: <mark>(a) 10101101  (b) AD  (c) 90</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="cyber-security">
+  <div class="topic-head"><span class="qnum">7</span><h2>Cyber security</h2><span class="meta">Paper 2 · 18 marks · 5.0% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c07cyber.jpg" src="videos/c07cyber.mp4" aria-label="Explainer video: Cyber security"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Most attacks target people, not machines. That is why the defences include training and checks on people, not only software.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Cyber security protects networks, computers, programs and data from attack, damage or unauthorised access. AQA tests threats, social engineering, malware and ways to prevent attacks.</p>
+<ol><li>Social engineering tricks people: phishing (fake emails), blagging (an invented story), shouldering (watching someone enter a PIN).</li>
+<li>Malware is harmful software: viruses, trojans and spyware.</li>
+<li>Other threats: weak passwords, misconfigured access rights, removable media, unpatched software.</li>
+<li>Defences: biometrics, strong passwords, CAPTCHA, email confirmation, automatic software updates.</li>
+<li>Penetration testing: experts attack a system on purpose to find weaknesses.</li></ol>
+<p class="caution"><span>CAUTION</span>Match each defence to a specific threat in your answer, for example "CAPTCHA stops automated bots".</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Threat</th><th>Defence</th></tr></thead><tbody><tr><td>Phishing</td><td>staff training; check sender address</td></tr><tr><td>Shouldering</td><td>cover the keypad; biometrics</td></tr><tr><td>Weak passwords</td><td>password rules; two-step login</td></tr><tr><td>Malware</td><td>anti-malware; automatic updates</td></tr><tr><td>Unknown weaknesses</td><td>penetration testing</td></tr></tbody></table></div><figcaption>Each threat has a matching defence.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A bank receives reports that customers have been sent emails asking for their login details. (a) Name this type of attack. (b) Describe two ways the bank can protect its customers.</div><span class="marks">[5 marks]</span></div>
+      <ol class="work"><li>(a) Phishing (a form of social engineering)</li><li>(b) Tell customers the bank will never ask for passwords by email</li><li>(b) Use two-step authentication, so a stolen password alone is not enough</li><li>(b) Other valid answers: email filtering, customer education, biometric login</li></ol>
+      <p class="ans">Answer: <mark>(a) Phishing  (b) e.g. education; two-step authentication</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="subroutines">
+  <div class="topic-head"><span class="qnum">8</span><h2>Subroutines and parameters</h2><span class="meta">Paper 1 · 16 marks · 4.4% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c08subroutines.jpg" src="videos/c08subroutines.mp4" aria-label="Explainer video: Subroutines and parameters"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A function is a small machine inside your program: parameters go in, a return value comes out, and its working stays private.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A subroutine is a named block of code that does one task. A function returns a value. A procedure does not. AQA tests writing subroutines, parameters, return values, and local and global variables.</p>
+<ol><li>Define it with <code>def name(parameters):</code>.</li>
+<li>Parameters receive the values passed in when it is called.</li>
+<li>Use <code>return</code> to send a result back.</li>
+<li>A local variable exists only inside the subroutine.</li>
+<li>Advantages: code can be reused, tested separately, and shared between programmers. Programs are easier to read (structured programming).</li></ol>
+<p class="caution"><span>CAUTION</span><code>print</code> inside a function is not the same as <code>return</code>. If the question says "return", use <code>return</code>.</p></div>
+    <figure><h3>Code example</h3><pre class="code"><code>def area(width, height):
+    result = width * height
+    return result
+
+a = area(4, 5)
+print(a)   # 20</code></pre><figcaption>4 and 5 are passed in; 20 is returned.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Write a Python function called <code>isEven</code> that takes an integer and returns True if it is even and False if it is odd.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Define the function with one parameter</li><li>Use MOD (%) to test the remainder when divided by 2</li><li>Return True or False</li></ol>
+      <p class="ans">Answer: <mark>def isEven(n): return n % 2 == 0</mark></p><pre class="code"><code>def isEven(n):
+    if n % 2 == 0:
+        return True
+    else:
+        return False
+
+print(isEven(4), isEven(7))   # True False</code></pre>
+    </div>
+  </div>
+</article><article class="topic" id="ethics">
+  <div class="topic-head"><span class="qnum">9</span><h2>Ethical, legal and environmental issues</h2><span class="meta">Paper 2 · 15 marks · 4.2% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c09ethics.jpg" src="videos/c09ethics.mp4" aria-label="Explainer video: Ethical, legal and environmental issues"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Look at any technology through three lenses (ethical, legal and environmental) and always show both sides.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>This topic is often a 9-mark extended answer about a new technology, such as self-driving cars, facial recognition or wearable devices. Marks are for a range of points, explained, and linked to the example.</p>
+<ol><li>Ethical: privacy, fairness, effect on jobs, who is responsible when something goes wrong.</li>
+<li>Legal: Data Protection Act (personal data), Computer Misuse Act (hacking), copyright law.</li>
+<li>Environmental: energy use, e-waste, rare materials; but also less travel or paper.</li>
+<li>For each point, explain the effect on people.</li>
+<li>Give benefits and drawbacks, then a short conclusion.</li></ol>
+<p class="caution"><span>CAUTION</span>A list of words earns few marks. Each point needs an explanation and a link to the scenario.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Lens</th><th>Points to consider</th></tr></thead><tbody><tr><td>Ethical</td><td>privacy, bias, jobs, responsibility</td></tr><tr><td>Legal</td><td>Data Protection Act, Computer Misuse Act, copyright</td></tr><tr><td>Environmental</td><td>energy, e-waste, rare metals, less travel</td></tr></tbody></table></div><figcaption>Plan three short paragraphs, one for each lens.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A city plans to use cameras with facial recognition in the town centre. Discuss the ethical, legal and environmental issues.</div><span class="marks">[9 marks]</span></div>
+      <ol class="work"><li>Ethical: could reduce crime, but people are watched without consent; errors may target innocent people</li><li>Legal: images are personal data under the Data Protection Act; must be stored securely and not kept too long</li><li>Environmental: cameras and servers use electricity and create e-waste when replaced</li><li>Conclusion: benefits for safety must be balanced against privacy, with clear rules</li></ol>
+      <p class="ans">Answer: <mark>Range of points across all three areas, each explained, both sides, linked to cameras</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="selection-iteration">
+  <div class="topic-head"><span class="qnum">10</span><h2>Selection and iteration</h2><span class="meta">Paper 1 · 12 marks · 3.3% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c10control.jpg" src="videos/c10control.mp4" aria-label="Explainer video: Selection and iteration"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Selection chooses a path; iteration repeats one. A for loop counts, a while loop waits for something to change.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>All programs are built from three structures: sequence, selection and iteration.</p>
+<ol><li>Selection: <code>if</code>, <code>elif</code>, <code>else</code>. Python runs the first branch whose condition is true.</li>
+<li>Definite iteration: <code>for i in range(n):</code> repeats a fixed number of times.</li>
+<li>Indefinite iteration: <code>while condition:</code> repeats until the condition is false.</li>
+<li>Structures can be nested: a loop inside a loop, or an <code>if</code> inside a loop.</li>
+<li>Make sure something inside a <code>while</code> loop changes, or the loop never ends.</li></ol>
+<p class="caution"><span>CAUTION</span>Order <code>elif</code> conditions from the highest boundary down. Otherwise an earlier branch catches values first.</p></div>
+    <figure><h3>Code example</h3><pre class="code"><code>mark = int(input(&quot;Mark: &quot;))
+if mark &gt;= 70:
+    print(&quot;Grade 7&quot;)
+elif mark &gt;= 50:
+    print(&quot;Grade 5&quot;)
+else:
+    print(&quot;Try again&quot;)</code></pre><figcaption>A mark of 75 prints Grade 7; the elif is never checked.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">What does this code print?<pre><code>for i in range(2, 11, 3):
+    print(i)</code></pre></div><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>range(2, 11, 3) starts at 2, adds 3 each time, and stops before 11</li><li>Values: 2, 5, 8</li></ol>
+      <p class="ans">Answer: <mark>2, 5, 8 (each on a new line)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="logic">
+  <div class="topic-head"><span class="qnum">11</span><h2>Boolean logic and logic gates</h2><span class="meta">Paper 2 · 12 marks · 3.3% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c11logic.jpg" src="videos/c11logic.mp4" aria-label="Explainer video: Boolean logic and logic gates"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A truth table is a complete list of every possible input. Build it one column at a time and you cannot miss a case.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Logic gates process binary inputs. AQA tests AND, OR, NOT and XOR gates, truth tables, logic circuits and Boolean expressions.</p>
+<ol><li>AND: output 1 only when both inputs are 1.</li>
+<li>OR: output 1 when at least one input is 1.</li>
+<li>NOT: output is the opposite of the input.</li>
+<li>XOR: output 1 when exactly one input is 1.</li>
+<li>For a truth table, list every input combination (2 inputs: 4 rows; 3 inputs: 8 rows). Add one column for each gate.</li></ol>
+<p class="caution"><span>CAUTION</span>Work out the brackets first, as in maths.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>A</th><th>B</th><th>C</th><th>A AND B</th><th>NOT C</th><th>Q</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr></tbody></table></div><figcaption>Q = (A AND B) OR (NOT C).</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Complete the truth table for Q = (A AND B) OR (NOT C). How many rows give Q = 1?</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>List the 8 combinations of A, B, C</li><li>Column A AND B: 1 only in the last two rows</li><li>Column NOT C: 1 when C = 0</li><li>Q = 1 in rows 1, 3, 5, 7 and 8</li></ol>
+      <p class="ans">Answer: <mark>Q = 1 in 5 of the 8 rows</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="lists">
+  <div class="topic-head"><span class="qnum">12</span><h2>Lists, arrays and records</h2><span class="meta">Paper 1 · 11 marks · 3.1% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c12lists.jpg" src="videos/c12lists.mp4" aria-label="Explainer video: Lists, arrays and records"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A list is a row of numbered boxes. The numbers start at zero, so the first box is box 0.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A data structure stores many values under one name. In Python, lists are used for arrays. A two-dimensional list is a list of lists, like a table. A record groups related fields of different types.</p>
+<ol><li>Create a list: <code>scores = [12, 7, 19, 4, 15]</code>.</li>
+<li>Indexes start at 0: <code>scores[0]</code> is 12.</li>
+<li>Use <code>len(scores)</code> for the number of items.</li>
+<li>Loop through every item: <code>for s in scores:</code>.</li>
+<li>2D list: <code>grid[row][column]</code>.</li></ol>
+<p class="caution"><span>CAUTION</span>The last index is <code>len(list) − 1</code>. <code>scores[5]</code> gives an error for a list of 5 items.</p></div>
+    <figure><h3>Code example</h3><pre class="code"><code>scores = [12, 7, 19, 4, 15]
+total = 0
+for s in scores:
+    total = total + s
+print(total / len(scores))   # 11.4
+
+grid = [[3, 5, 1],
+        [8, 2, 6]]
+print(grid[1][2])            # 6</code></pre><figcaption>Loop through a list to total it; use two indexes for a 2D list.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><code>temps = [14, 19, 11, 22, 17]</code>. Write Python code to output the index of the highest temperature.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Store the index of the highest so far, starting at 0</li><li>Loop through indexes 1 to 4 with <code>range(1, len(temps))</code></li><li>If <code>temps[i] &gt; temps[best]</code>, set <code>best = i</code></li><li>Output best after the loop (3)</li></ol>
+      <p class="ans">Answer: <mark>3</mark></p><pre class="code"><code>temps = [14, 19, 11, 22, 17]
+best = 0
+for i in range(1, len(temps)):
+    if temps[i] &gt; temps[best]:
+        best = i
+print(best)   # 3</code></pre>
+    </div>
+  </div>
+</article><article class="topic" id="sorting">
+  <div class="topic-head"><span class="qnum">13</span><h2>Sorting algorithms</h2><span class="meta">Paper 1 · 11 marks · 3.1% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c13sorting.jpg" src="videos/c13sorting.mp4" aria-label="Explainer video: Sorting algorithms"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Bubble sort lets the largest value float to the end on each pass. Merge sort splits until each piece is trivially sorted, then zips pieces together.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>AQA tests bubble sort and merge sort: how they work, tracing them, and comparing them.</p>
+<ol><li>Bubble sort: compare items 1 and 2; swap if out of order. Then items 2 and 3, and so on to the end. That is one pass.</li>
+<li>After each pass, the largest remaining item is in its final place.</li>
+<li>Stop when a pass makes no swaps.</li>
+<li>Merge sort: split the list in half again and again until each list has one item.</li>
+<li>Merge pairs of lists in order until one list remains.</li></ol>
+<p>Merge sort is faster for large lists. Bubble sort is simpler and uses less memory.</p>
+<p class="caution"><span>CAUTION</span>In a "first pass" question, write the list after one complete pass, not after one swap.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Start</th><th>5 1 4 2 8</th></tr></thead><tbody><tr><td>compare 5,1 → swap</td><td>1 5 4 2 8</td></tr><tr><td>compare 5,4 → swap</td><td>1 4 5 2 8</td></tr><tr><td>compare 5,2 → swap</td><td>1 4 2 5 8</td></tr><tr><td>compare 5,8 → no swap</td><td>1 4 2 5 8</td></tr></tbody></table></div><figcaption>One full pass of bubble sort. 8 is now in its final place.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">(a) Show the list [5, 1, 4, 2, 8] after the first pass of a bubble sort. (b) Give one advantage of merge sort over bubble sort.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) Swap 5 and 1, then 5 and 4, then 5 and 2; 5 and 8 stay</li><li>[1, 4, 2, 5, 8]</li><li>(b) Merge sort is much faster (fewer comparisons) for large lists</li></ol>
+      <p class="ans">Answer: <mark>(a) [1, 4, 2, 5, 8]  (b) faster on large lists</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="languages">
+  <div class="topic-head"><span class="qnum">14</span><h2>Programming languages and translators</h2><span class="meta">Paper 2 · 11 marks · 3.1% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c14languages.jpg" src="videos/c14languages.mp4" aria-label="Explainer video: Programming languages and translators"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The CPU only understands binary. Every other language is a translation layer, built for people rather than for the machine.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Processors run machine code (binary). AQA tests high-level and low-level languages and the three types of translator.</p>
+<ol><li>High-level languages (Python, C#) are easy to read and write, and work on different processors.</li>
+<li>Low-level languages: machine code and assembly language. Each assembly instruction matches one machine code instruction.</li>
+<li>Low-level code gives direct control of hardware, fast code and small programs. It is used in embedded systems.</li>
+<li>Compiler: translates the whole program into machine code once. The result runs fast and without the compiler.</li>
+<li>Interpreter: translates and runs one line at a time. Easy to debug, but slower. Assembler: assembly → machine code.</li></ol>
+<p class="caution"><span>CAUTION</span>A compiler reports errors after translating everything. An interpreter stops at the first error line.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Translator</th><th>Input</th><th>How</th></tr></thead><tbody><tr><td>Compiler</td><td>high-level</td><td>whole program at once; makes an executable</td></tr><tr><td>Interpreter</td><td>high-level</td><td>one line at a time; no executable</td></tr><tr><td>Assembler</td><td>assembly</td><td>one-to-one into machine code</td></tr></tbody></table></div><figcaption>Three translators, three jobs.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">(a) Give two reasons why a programmer might write in a high-level language. (b) Explain one advantage of a compiler over an interpreter.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) Easier to read and write / closer to English</li><li>(a) Portable: runs on different types of processor</li><li>(b) The compiled program runs faster</li><li>(b) Or: the user does not need the translator to run it / source code stays private</li></ol>
+      <p class="ans">Answer: <mark>(a) readable; portable  (b) compiled code runs faster without the translator</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="operating-system">
+  <div class="topic-head"><span class="qnum">15</span><h2>Hardware, software and the OS</h2><span class="meta">Paper 2 · 10 marks · 2.8% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c15os.jpg" src="videos/c15os.mp4" aria-label="Explainer video: Hardware, software and the OS"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The operating system is the manager in the middle: it shares the hardware fairly between programs and users.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Hardware is the physical parts of a computer. Software is the programs. System software runs and manages the computer. Application software lets users do tasks.</p>
+<ol><li>The operating system (OS) manages the processor: it schedules which program runs.</li>
+<li>It manages memory: it gives each program space in RAM.</li>
+<li>It manages peripherals using drivers.</li>
+<li>It manages users (log-ins and access rights) and files.</li>
+<li>Utility software maintains the computer: encryption, defragmentation, data compression and backup.</li></ol>
+<p class="caution"><span>CAUTION</span>An operating system is system software. A web browser is application software.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>OS job</th><th>Example</th></tr></thead><tbody><tr><td>Processor scheduling</td><td>shares CPU time between open programs</td></tr><tr><td>Memory management</td><td>allocates RAM to each program</td></tr><tr><td>Peripheral management</td><td>drivers for a printer</td></tr><tr><td>User management</td><td>log-ins, access rights</td></tr><tr><td>File management</td><td>folders, naming, permissions</td></tr></tbody></table></div><figcaption>Five jobs of an operating system.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Describe three functions of an operating system.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Processor management: schedules which program uses the CPU</li><li>Memory management: allocates RAM to programs</li><li>Peripheral management: controls devices such as printers using drivers</li></ol>
+      <p class="ans">Answer: <mark>Any three of: processor, memory, peripheral, user, file management (described)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="memory-storage">
+  <div class="topic-head"><span class="qnum">16</span><h2>Memory and storage</h2><span class="meta">Paper 2 · 10 marks · 2.8% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c16memory.jpg" src="videos/c16memory.mp4" aria-label="Explainer video: Memory and storage"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Main memory is a desk (fast, small, cleared at the end of the day); secondary storage is a filing cabinet (slower, bigger, permanent).</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Main memory holds data and programs that are in use. RAM is volatile: it loses data when the power is off. ROM is non-volatile and stores the boot program. Secondary storage keeps data permanently.</p>
+<ol><li>Magnetic (hard disk): cheap per GB, large capacity, has moving parts.</li>
+<li>Optical (DVD, Blu-ray): cheap, portable, low capacity, easily scratched.</li>
+<li>Solid state (SSD, USB stick): fast, small, no moving parts, so it is robust.</li>
+<li>Choose by capacity, speed, portability, durability, reliability and cost.</li>
+<li>Cloud storage: data on remote servers. Access anywhere, but needs internet.</li></ol>
+<p class="caution"><span>CAUTION</span>Cache is memory inside the CPU. It is faster than RAM but much smaller.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Type</th><th>Example</th><th>Strength</th><th>Weakness</th></tr></thead><tbody><tr><td>Magnetic</td><td>hard disk</td><td>cheap, large</td><td>moving parts</td></tr><tr><td>Optical</td><td>DVD</td><td>cheap, portable</td><td>small, scratches</td></tr><tr><td>Solid state</td><td>SSD, USB</td><td>fast, robust</td><td>costs more per GB</td></tr></tbody></table></div><figcaption>Match the type to the use.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A student needs storage for a laptop she carries to school every day. Recommend a type of secondary storage and justify your choice.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Solid state (SSD)</li><li>No moving parts, so it is not damaged if the laptop is dropped or moved</li><li>Fast access and low power use (longer battery life)</li></ol>
+      <p class="ans">Answer: <mark>Solid state: robust, fast, low power</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="strings">
+  <div class="topic-head"><span class="qnum">17</span><h2>String handling</h2><span class="meta">Paper 1 · 9 marks · 2.5% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c17strings.jpg" src="videos/c17strings.mp4" aria-label="Explainer video: String handling"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A string is a row of character boxes numbered from 0. A slice takes boxes from the start index up to, but not including, the end index.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A string is a sequence of characters. AQA tests length, position, substrings, concatenation, character codes and case.</p>
+<ol><li><code>len(word)</code> gives the number of characters.</li>
+<li><code>word[0]</code> is the first character.</li>
+<li><code>word[a:b]</code> gives characters from index a up to b − 1.</li>
+<li><code>+</code> joins strings (concatenation). Use <code>str()</code> to join a number.</li>
+<li><code>ord("A")</code> gives 65. <code>chr(65)</code> gives "A". <code>.upper()</code> and <code>.lower()</code> change case.</li></ol>
+<p class="caution"><span>CAUTION</span><code>"Score: " + 5</code> causes an error. Write <code>"Score: " + str(5)</code>.</p></div>
+    <figure><h3>Diagram and code</h3><div class="tbl"><table class="ctab"><thead><tr><th>index</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody><tr><td>char</td><td>P</td><td>Y</td><td>T</td><td>H</td><td>O</td><td>N</td></tr></tbody></table></div><pre class="code"><code>word = &quot;PYTHON&quot;
+print(len(word))      # 6
+print(word[1:4])      # YTH
+print(word.lower())   # python
+print(ord(&quot;A&quot;))       # 65
+print(word + &quot;!&quot;)     # PYTHON!</code></pre><figcaption>word[1:4] takes indexes 1, 2 and 3.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><code>name = "Raphael"</code>. Write the output of: (a) <code>print(len(name))</code> (b) <code>print(name[0:4])</code> (c) <code>print(name[-1].upper())</code></div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) R-a-p-h-a-e-l has 7 characters</li><li>(b) indexes 0 to 3: Raph</li><li>(c) the last character is 'l', upper case: L</li></ol>
+      <p class="ans">Answer: <mark>(a) 7  (b) Raph  (c) L</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="images">
+  <div class="topic-head"><span class="qnum">18</span><h2>Representing images</h2><span class="meta">Paper 2 · 9 marks · 2.5% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c18images.jpg" src="videos/c18images.mp4" aria-label="Explainer video: Representing images"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>An image is a grid of pixels, and each pixel is a binary number. More pixels or more colours means more bits.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A bitmap image is made of pixels. Each pixel's colour is stored in binary. AQA tests colour depth, resolution and file size calculations.</p>
+<ol><li>Resolution = width × height in pixels.</li>
+<li>Colour depth = bits per pixel. n bits give 2ⁿ colours.</li>
+<li>File size (bits) = width × height × colour depth.</li>
+<li>Divide by 8 for bytes, then by 1000 for kB, and again for MB.</li>
+<li>Higher resolution or colour depth: better quality but a bigger file.</li></ol>
+<p class="caution"><span>CAUTION</span>Check whether the question wants bits, bytes or kilobytes.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Colour depth</th><th>Colours</th></tr></thead><tbody><tr><td>1 bit</td><td>2</td></tr><tr><td>2 bits</td><td>4</td></tr><tr><td>8 bits</td><td>256</td></tr><tr><td>24 bits</td><td>16,777,216</td></tr></tbody></table></div><figcaption>n bits give 2ⁿ colours.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">An image is 800 pixels wide and 600 pixels high, with a colour depth of 24 bits. Calculate the file size in kilobytes.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Bits = 800 × 600 × 24 = 11,520,000</li><li>Bytes = 11,520,000 ÷ 8 = 1,440,000</li><li>kB = 1,440,000 ÷ 1000</li></ol>
+      <p class="ans">Answer: <mark>1440 kB</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="sound">
+  <div class="topic-head"><span class="qnum">19</span><h2>Representing sound</h2><span class="meta">Paper 2 · 8 marks · 2.2% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c19sound.jpg" src="videos/c19sound.mp4" aria-label="Explainer video: Representing sound"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Sound is stored by measuring the wave many times a second. More measurements, and more precise ones, give better sound and bigger files.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Sound is analogue. It is converted to digital by sampling the amplitude at regular intervals. AQA tests sample rate, sample resolution and file size.</p>
+<ol><li>Sample rate: the number of samples per second, in hertz (Hz).</li>
+<li>Sample resolution: the number of bits per sample.</li>
+<li>File size (bits) = sample rate × sample resolution × length in seconds.</li>
+<li>Divide by 8 for bytes.</li>
+<li>Higher rate or resolution: closer to the real sound, but a bigger file.</li></ol>
+<p class="caution"><span>CAUTION</span>Convert minutes to seconds first.</p></div>
+    
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A 10-second clip is recorded at 44,100 Hz with a sample resolution of 16 bits. Calculate the file size in kilobytes.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Bits = 44,100 × 16 × 10 = 7,056,000</li><li>Bytes = 7,056,000 ÷ 8 = 882,000</li><li>kB = 882,000 ÷ 1000</li></ol>
+      <p class="ans">Answer: <mark>882 kB</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="cpu">
+  <div class="topic-head"><span class="qnum">20</span><h2>The CPU and the fetch–execute cycle</h2><span class="meta">Paper 2 · 8 marks · 2.2% of all marks · in 1 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c20cpu.jpg" src="videos/c20cpu.mp4" aria-label="Explainer video: The CPU and the fetch–execute cycle"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The CPU does one simple loop, billions of times a second: fetch an instruction, decode it, execute it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The CPU (central processing unit) processes data and instructions. AQA tests its parts, the fetch–execute cycle and factors that affect performance.</p>
+<ol><li>Control unit: decodes instructions and controls the other parts.</li>
+<li>ALU (arithmetic logic unit): does calculations and logical comparisons.</li>
+<li>Clock: sends pulses that time each step. Registers: tiny, very fast storage inside the CPU.</li>
+<li>Fetch the next instruction from memory; decode it; execute it; repeat.</li>
+<li>Performance improves with higher clock speed, more cores and more cache.</li></ol>
+<p>In the von Neumann architecture, data and instructions share the same memory.</p>
+<p class="caution"><span>CAUTION</span>More cores only help if the software can split the work into parallel tasks.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Factor</th><th>Why it helps</th></tr></thead><tbody><tr><td>Clock speed</td><td>more fetch–execute cycles per second</td></tr><tr><td>Number of cores</td><td>several instructions processed at once</td></tr><tr><td>Cache size</td><td>fewer slow fetches from RAM</td></tr></tbody></table></div><figcaption>Three ways to make a CPU faster.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">(a) Describe the fetch–execute cycle. (b) Explain why increasing cache size can improve performance.</div><span class="marks">[5 marks]</span></div>
+      <ol class="work"><li>(a) Fetch: the next instruction is copied from main memory into the CPU</li><li>(a) Decode: the control unit works out what the instruction means</li><li>(a) Execute: the instruction is carried out (for example by the ALU); then repeat</li><li>(b) Cache is faster than RAM and close to the processor</li><li>(b) More frequently used instructions/data can be kept there, so fewer slow RAM accesses</li></ol>
+      <p class="ans">Answer: <mark>Fetch → decode → execute; cache reduces slow trips to RAM</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="compression">
+  <div class="topic-head"><span class="qnum">21</span><h2>Data compression</h2><span class="meta">Paper 2 · 7 marks · 1.9% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c21compression.jpg" src="videos/c21compression.mp4" aria-label="Explainer video: Data compression"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Compression removes repetition. Run-length encoding counts repeats; Huffman coding gives the most common symbols the shortest codes.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Compression makes files smaller, so they use less storage and transfer faster. AQA tests run-length encoding (RLE) and Huffman coding.</p>
+<ol><li>RLE: replace each run of identical values with a count and the value. AAAABBB → 4A 3B.</li>
+<li>RLE works well when data has long runs, such as simple images.</li>
+<li>Huffman coding: build a tree from character frequencies.</li>
+<li>Common characters get short codes; rare characters get longer codes.</li>
+<li>Bits needed = Σ (frequency × code length). Compare with 7 bits per character for ASCII.</li></ol>
+<p class="caution"><span>CAUTION</span>RLE can make data bigger if there are no runs: ABCD → 1A1B1C1D.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Char</th><th>Frequency</th><th>Code</th><th>Bits</th></tr></thead><tbody><tr><td>A</td><td>4</td><td>0</td><td>4</td></tr><tr><td>B</td><td>3</td><td>10</td><td>6</td></tr><tr><td>C</td><td>2</td><td>110</td><td>6</td></tr><tr><td>D</td><td>1</td><td>111</td><td>3</td></tr><tr><td>Total</td><td></td><td></td><td>19</td></tr></tbody></table></div><figcaption>Huffman: 19 bits instead of 70 bits in 7-bit ASCII.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">(a) Show AAAABBBCCD using run-length encoding. (b) Using the Huffman codes in the table, how many bits are needed? (c) How many bits would 7-bit ASCII need?</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) 4A 3B 2C 1D</li><li>(b) 4×1 + 3×2 + 2×3 + 1×3</li><li>= 19 bits</li><li>(c) 10 characters × 7 bits = 70 bits</li></ol>
+      <p class="ans">Answer: <mark>(a) 4A3B2C1D  (b) 19 bits  (c) 70 bits</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="data-types">
+  <div class="topic-head"><span class="qnum">22</span><h2>Data types, variables and constants</h2><span class="meta">Paper 1 · 5 marks · 1.4% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c22datatypes.jpg" src="videos/c22datatypes.mp4" aria-label="Explainer video: Data types, variables and constants"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The data type is a label that tells the computer what a value is, and so what it can do with it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Every value has a data type. AQA tests choosing data types, variables, constants, casting and random numbers.</p>
+<ol><li>Integer: whole numbers. Real (float): numbers with a decimal point. Boolean: True or False. Character: one symbol. String: text.</li>
+<li><code>input()</code> always returns a string.</li>
+<li>Cast with <code>int()</code>, <code>float()</code> or <code>str()</code>.</li>
+<li>A constant is set once and does not change, for example <code>VAT = 0.2</code>.</li>
+<li>Random numbers: <code>import random</code>, then <code>random.randint(1, 6)</code> gives 1 to 6 inclusive.</li></ol>
+<p class="caution"><span>CAUTION</span>A phone number should be a string, not an integer. It can start with 0 and you never do maths with it.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Data</th><th>Best type</th></tr></thead><tbody><tr><td>Number of pupils</td><td>Integer</td></tr><tr><td>Price £4.99</td><td>Real (float)</td></tr><tr><td>Has paid?</td><td>Boolean</td></tr><tr><td>Grade 'A'</td><td>Character</td></tr><tr><td>Phone number</td><td>String</td></tr></tbody></table></div><figcaption>Choose the type by what you will do with the value.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">State the most suitable data type for: (a) the height of a person in metres (b) whether a library book is on loan (c) a postcode.</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) Real / float (has a decimal part)</li><li>(b) Boolean (only two values)</li><li>(c) String (letters and numbers; no maths)</li></ol>
+      <p class="ans">Answer: <mark>(a) Real  (b) Boolean  (c) String</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="operators">
+  <div class="topic-head"><span class="qnum">23</span><h2>Arithmetic, relational and Boolean operators</h2><span class="meta">Paper 1 · 5 marks · 1.4% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c23operators.jpg" src="videos/c23operators.mp4" aria-label="Explainer video: Arithmetic, relational and Boolean operators"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Integer division splits a number into 'how many whole times' and 'what is left over'. Python writes these as // and %.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Operators combine or compare values. AQA tests arithmetic (including DIV and MOD), relational and Boolean operators.</p>
+<ol><li>Arithmetic: <code>+ - * /</code> and <code>**</code> (power).</li>
+<li>Integer division (DIV): <code>17 // 5</code> gives 3.</li>
+<li>Modulus (MOD): <code>17 % 5</code> gives 2, the remainder.</li>
+<li>Relational: <code>== != &lt; &lt;= &gt; &gt;=</code>.</li>
+<li>Boolean: <code>and</code>, <code>or</code>, <code>not</code> join or reverse conditions.</li></ol>
+<p class="caution"><span>CAUTION</span><code>=</code> assigns a value. <code>==</code> compares two values.</p></div>
+    <figure><h3>Code example</h3><pre class="code"><code>print(17 // 5)    # 3
+print(17 % 5)     # 2
+n = 14
+print(n % 2 == 0) # True (n is even)
+age = 15
+print(age &gt;= 13 and age &lt;= 19)  # True</code></pre><figcaption>// gives the whole part, % gives the remainder.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A program converts a number of minutes into hours and minutes. Write the two lines of Python that calculate hours and mins from <code>total = 135</code>.</div><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>hours = total // 60 → 2</li><li>mins = total % 60 → 15</li></ol>
+      <p class="ans">Answer: <mark>hours = total // 60 ; mins = total % 60  (2 h 15 min)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="searching">
+  <div class="topic-head"><span class="qnum">24</span><h2>Searching algorithms</h2><span class="meta">Paper 1 · 5 marks · 1.4% of all marks · in 1 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c24searching.jpg" src="videos/c24searching.mp4" aria-label="Explainer video: Searching algorithms"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A binary search throws away half of the list with every comparison, so even a huge sorted list needs only a few steps.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>AQA tests linear search and binary search: how they work, tracing them, and comparing them.</p>
+<ol><li>Linear search: check each item from the start until you find the target or reach the end. Works on any list.</li>
+<li>Binary search needs a sorted list.</li>
+<li>Look at the middle item. If it is the target, stop.</li>
+<li>If the target is smaller, keep the left half; if larger, keep the right half.</li>
+<li>Repeat on the half that is left.</li></ol>
+<p>Binary search is much faster on large lists. Linear search is simpler and works on unsorted data.</p>
+<p class="caution"><span>CAUTION</span>If the list has an even number of items, use the rule in the question to pick the middle (usually the lower of the two).</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Step</th><th>List left</th><th>Middle</th><th>Action</th></tr></thead><tbody><tr><td>1</td><td>3 8 12 15 23 31 42</td><td>15</td><td>23 > 15: keep right</td></tr><tr><td>2</td><td>23 31 42</td><td>31</td><td>23 < 31: keep left</td></tr><tr><td>3</td><td>23</td><td>23</td><td>found</td></tr></tbody></table></div><figcaption>Three comparisons to find 23. A linear search would take five.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">Show the stages of a binary search for 23 in [3, 8, 12, 15, 23, 31, 42]. How many items are compared?</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Middle is 15; 23 > 15, so search [23, 31, 42]</li><li>Middle is 31; 23 < 31, so search [23]</li><li>Middle is 23: found after 3 comparisons</li></ol>
+      <p class="ans">Answer: <mark>3 comparisons (15, 31, 23)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="units">
+  <div class="topic-head"><span class="qnum">25</span><h2>Units of information</h2><span class="meta">Paper 2 · 4 marks · 1.1% of all marks · in 2 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c25units.jpg" src="videos/c25units.mp4" aria-label="Explainer video: Units of information"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Every step up the ladder of units is a thousand times bigger, and every byte is eight bits.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>AQA tests the units of information and converting between them.</p>
+<ol><li>1 bit is a single 0 or 1. 4 bits = 1 nibble. 8 bits = 1 byte.</li>
+<li>1 kilobyte (kB) = 1000 bytes; 1 MB = 1000 kB; 1 GB = 1000 MB; 1 TB = 1000 GB.</li>
+<li>To change to a smaller unit, multiply. To change to a larger unit, divide.</li>
+<li>Bytes to bits: × 8.</li>
+<li>Binary prefixes: 1 kibibyte (KiB) = 1024 bytes, 1 MiB = 1024 KiB.</li></ol>
+<p class="caution"><span>CAUTION</span>Use 1000 unless the question uses kibi, mebi or gibi.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Unit</th><th>Size</th></tr></thead><tbody><tr><td>nibble</td><td>4 bits</td></tr><tr><td>byte</td><td>8 bits</td></tr><tr><td>kB</td><td>1000 bytes</td></tr><tr><td>MB</td><td>1000 kB</td></tr><tr><td>GB</td><td>1000 MB</td></tr><tr><td>TB</td><td>1000 GB</td></tr></tbody></table></div><figcaption>×1000 for each step down; ×8 for bits.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A file is 2.5 MB. Calculate its size in (a) bytes and (b) bits.</div><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>(a) 2.5 × 1000 × 1000 = 2,500,000 bytes</li><li>(b) 2,500,000 × 8</li></ol>
+      <p class="ans">Answer: <mark>(a) 2,500,000 bytes  (b) 20,000,000 bits</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="network-security">
+  <div class="topic-head"><span class="qnum">26</span><h2>Network security</h2><span class="meta">Paper 2 · 4 marks · 1.1% of all marks · in 1 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c26netsec.jpg" src="videos/c26netsec.mp4" aria-label="Explainer video: Network security"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Each security method guards a different door: who you are, what can get in, which devices can join, and whether stolen data can be read.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Network security protects data that travels between devices. AQA tests authentication, encryption, firewalls and MAC address filtering.</p>
+<ol><li>Authentication checks a user's identity: passwords, biometrics, two-step checks.</li>
+<li>Encryption scrambles data with a key. Without the key it cannot be read.</li>
+<li>A firewall checks traffic coming in and going out against rules, and blocks unauthorised traffic.</li>
+<li>MAC address filtering only lets devices with listed MAC addresses connect.</li>
+<li>Use several methods together.</li></ol>
+<p class="caution"><span>CAUTION</span>Encryption does not stop data being intercepted. It stops it being understood.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Method</th><th>Protects against</th></tr></thead><tbody><tr><td>Authentication</td><td>unauthorised users</td></tr><tr><td>Encryption</td><td>stolen data being read</td></tr><tr><td>Firewall</td><td>unauthorised traffic</td></tr><tr><td>MAC filtering</td><td>unknown devices joining</td></tr></tbody></table></div><figcaption>Each method blocks a different threat.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">A school network uses Wi-Fi. Explain how encryption and MAC address filtering help to keep it secure.</div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Encryption scrambles data sent over the Wi-Fi</li><li>Data that is intercepted cannot be understood without the key</li><li>MAC filtering keeps a list of allowed device addresses</li><li>Devices not on the list cannot connect to the network</li></ol>
+      <p class="ans">Answer: <mark>Encryption makes intercepted data unreadable; MAC filtering blocks unknown devices</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="characters">
+  <div class="topic-head"><span class="qnum">27</span><h2>Character encoding</h2><span class="meta">Paper 2 · 2 marks · 0.6% of all marks · in 1 of 4 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/c27characters.jpg" src="videos/c27characters.mp4" aria-label="Explainer video: Character encoding"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Character codes are in alphabetical order, so if you know one code you can count on to any letter.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Each character is stored as a binary code from a character set. AQA tests ASCII, Unicode and working out codes.</p>
+<ol><li>ASCII uses 7 bits, so it has 2⁷ = 128 characters.</li>
+<li>Codes are in order: 'A' = 65, 'B' = 66 … 'a' = 97.</li>
+<li>To find a code, count on from a known code.</li>
+<li>Unicode uses more bits, so it can represent characters from every language and emojis.</li>
+<li>The first 128 Unicode codes are the same as ASCII.</li></ol>
+<p class="caution"><span>CAUTION</span>The digit '7' is not stored as 7. Its ASCII code is 55.</p></div>
+    <figure><h3>Diagram</h3><div class="tbl"><table class="ctab"><thead><tr><th>Character</th><th>Code</th></tr></thead><tbody><tr><td>A</td><td>65</td></tr><tr><td>B</td><td>66</td></tr><tr><td>E</td><td>69</td></tr><tr><td>Z</td><td>90</td></tr><tr><td>a</td><td>97</td></tr></tbody></table></div><figcaption>Upper case starts at 65; lower case starts at 97.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext">The ASCII code for 'A' is 65. (a) What is the code for 'G'? (b) Why does Unicode need more bits than ASCII?</div><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) G is 6 letters after A: 65 + 6</li><li>= 71</li><li>(b) Unicode represents many more characters (all languages, symbols), so it needs more bits per character</li></ol>
+      <p class="ans">Answer: <mark>(a) 71  (b) more characters need more bits</mark></p>
+    </div>
+  </div>
+</article>
+<footer>
+  <h3>How the data was collected</h3>
+  <p>The question papers came from AQA's own file store. The course started in 2020, so June 2022 was the first exam. AQA has not released the 2024 and 2025 papers to the public yet. Each sub-question went into one main topic.</p>
+  <details><summary>Sources</summary><ul class="mono" style="display:grid;gap:4px;padding-left:1.2rem;overflow-wrap:anywhere"><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-85251B-QP-JUN22.PDF" rel="noopener">AQA 8525/1B (Python) June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-85252-QP-JUN22.PDF" rel="noopener">AQA 8525/2 June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-85251B-QP-JUN23.PDF" rel="noopener">AQA 8525/1B (Python) June 2023</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-85252-QP-JUN23.PDF" rel="noopener">AQA 8525/2 June 2023</a></li></ul></details>
+  <p>Videos: made with Manim (the animation library from 3Blue1Brown) and an offline voice. Every Python example on this page was run to check its output.</p>
+</footer>
+</div>
+</body>
+</html>

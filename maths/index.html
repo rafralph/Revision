@@ -1,0 +1,1332 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maths · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/" aria-current="page">Maths</a></li><li><a href="../combined-science/">Combined Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<header>
+  <p class="code">AQA GCSE MATHEMATICS 8300 · HIGHER TIER</p>
+  <h1>Every topic, ranked by marks</h1>
+  <p class="lede">Every question from 24 AQA Higher papers is sorted into a topic. All 36 topics are below, in order of how many marks they get. Each topic has a short video, a plain-English explanation, a diagram and a worked exam-style question.</p>
+  <div class="facts"><span><b>24</b> papers</span><span><b>671</b> questions</span><span><b>1,920</b> marks</span><span>June 2017 to June 2023</span></div>
+</header>
+
+<section class="rank" aria-labelledby="rank-h">
+  <h2 id="rank-h">Most frequent topics</h2>
+  <p class="lede">Ranked by total marks. The bar shows the share of all marks. The small text shows how many of the 24 papers had the topic.</p>
+  <ol class="rows">
+    <li class="row"><span class="n">1</span><div><a href="#probability">Probability</a><div class="bar"><i style="width:100%"></i></div><span class="sub">47 questions · 147 marks · 24 of 24 papers</span></div><span class="pct">7.7%</span></li>
+    <li class="row"><span class="n">2</span><div><a href="#algebra">Algebraic manipulation</a><div class="bar"><i style="width:82%"></i></div><span class="sub">50 questions · 120 marks · 22 of 24 papers</span></div><span class="pct">6.3%</span></li>
+    <li class="row"><span class="n">3</span><div><a href="#percentages">Percentages, interest &amp; growth/decay</a><div class="bar"><i style="width:61%"></i></div><span class="sub">29 questions · 91 marks · 20 of 24 papers</span></div><span class="pct">4.7%</span></li>
+    <li class="row"><span class="n">4</span><div><a href="#area">Area, perimeter, arcs &amp; sectors</a><div class="bar"><i style="width:61%"></i></div><span class="sub">25 questions · 90 marks · 18 of 24 papers</span></div><span class="pct">4.7%</span></li>
+    <li class="row"><span class="n">5</span><div><a href="#statistics">Cumulative frequency, box plots &amp; histograms</a><div class="bar"><i style="width:60%"></i></div><span class="sub">21 questions · 89 marks · 18 of 24 papers</span></div><span class="pct">4.6%</span></li>
+    <li class="row"><span class="n">6</span><div><a href="#ratio">Ratio</a><div class="bar"><i style="width:56%"></i></div><span class="sub">33 questions · 82 marks · 20 of 24 papers</span></div><span class="pct">4.3%</span></li>
+    <li class="row"><span class="n">7</span><div><a href="#compound">Compound measures (speed, density, pressure)</a><div class="bar"><i style="width:49%"></i></div><span class="sub">24 questions · 73 marks · 19 of 24 papers</span></div><span class="pct">3.8%</span></li>
+    <li class="row"><span class="n">8</span><div><a href="#quadratics">Quadratics</a><div class="bar"><i style="width:48%"></i></div><span class="sub">27 questions · 71 marks · 16 of 24 papers</span></div><span class="pct">3.7%</span></li>
+    <li class="row"><span class="n">9</span><div><a href="#linear">Linear equations &amp; inequalities</a><div class="bar"><i style="width:45%"></i></div><span class="sub">27 questions · 67 marks · 16 of 24 papers</span></div><span class="pct">3.5%</span></li>
+    <li class="row"><span class="n">10</span><div><a href="#lines">Straight-line graphs</a><div class="bar"><i style="width:44%"></i></div><span class="sub">26 questions · 65 marks · 19 of 24 papers</span></div><span class="pct">3.4%</span></li>
+    <li class="row"><span class="n">11</span><div><a href="#volume">Volume, surface area &amp; 3D shapes</a><div class="bar"><i style="width:43%"></i></div><span class="sub">19 questions · 64 marks · 16 of 24 papers</span></div><span class="pct">3.3%</span></li>
+    <li class="row"><span class="n">12</span><div><a href="#averages">Averages &amp; grouped data</a><div class="bar"><i style="width:42%"></i></div><span class="sub">16 questions · 62 marks · 13 of 24 papers</span></div><span class="pct">3.2%</span></li>
+    <li class="row"><span class="n">13</span><div><a href="#indices">Indices &amp; surds</a><div class="bar"><i style="width:42%"></i></div><span class="sub">26 questions · 61 marks · 14 of 24 papers</span></div><span class="pct">3.2%</span></li>
+    <li class="row"><span class="n">14</span><div><a href="#fractions">Fractions, decimals &amp; recurring decimals</a><div class="bar"><i style="width:40%"></i></div><span class="sub">32 questions · 59 marks · 17 of 24 papers</span></div><span class="pct">3.1%</span></li>
+    <li class="row"><span class="n">15</span><div><a href="#sequences">Sequences</a><div class="bar"><i style="width:36%"></i></div><span class="sub">20 questions · 54 marks · 17 of 24 papers</span></div><span class="pct">2.8%</span></li>
+    <li class="row"><span class="n">16</span><div><a href="#trigonometry">Sine/cosine rule, ½ab sin C &amp; trig graphs</a><div class="bar"><i style="width:36%"></i></div><span class="sub">18 questions · 54 marks · 14 of 24 papers</span></div><span class="pct">2.8%</span></li>
+    <li class="row"><span class="n">17</span><div><a href="#bounds">Bounds, rounding &amp; estimation</a><div class="bar"><i style="width:35%"></i></div><span class="sub">20 questions · 52 marks · 17 of 24 papers</span></div><span class="pct">2.7%</span></li>
+    <li class="row"><span class="n">18</span><div><a href="#circles">Circle theorems</a><div class="bar"><i style="width:35%"></i></div><span class="sub">15 questions · 52 marks · 14 of 24 papers</span></div><span class="pct">2.7%</span></li>
+    <li class="row"><span class="n">19</span><div><a href="#rates">Real-life graphs, rates &amp; area under graphs</a><div class="bar"><i style="width:35%"></i></div><span class="sub">14 questions · 51 marks · 12 of 24 papers</span></div><span class="pct">2.7%</span></li>
+    <li class="row"><span class="n">20</span><div><a href="#transformations">Non-linear graphs &amp; graph transformations</a><div class="bar"><i style="width:34%"></i></div><span class="sub">20 questions · 50 marks · 17 of 24 papers</span></div><span class="pct">2.6%</span></li>
+    <li class="row"><span class="n">21</span><div><a href="#functions">Functions (composite &amp; inverse)</a><div class="bar"><i style="width:30%"></i></div><span class="sub">11 questions · 45 marks · 11 of 24 papers</span></div><span class="pct">2.3%</span></li>
+    <li class="row"><span class="n">22</span><div><a href="#transformations-shapes">Transformations</a><div class="bar"><i style="width:27%"></i></div><span class="sub">16 questions · 41 marks · 11 of 24 papers</span></div><span class="pct">2.1%</span></li>
+    <li class="row"><span class="n">23</span><div><a href="#polygons">Angles &amp; polygons</a><div class="bar"><i style="width:27%"></i></div><span class="sub">14 questions · 40 marks · 11 of 24 papers</span></div><span class="pct">2.1%</span></li>
+    <li class="row"><span class="n">24</span><div><a href="#pythagoras">Pythagoras &amp; right-angled trigonometry</a><div class="bar"><i style="width:26%"></i></div><span class="sub">12 questions · 39 marks · 9 of 24 papers</span></div><span class="pct">2.0%</span></li>
+    <li class="row"><span class="n">25</span><div><a href="#proportion">Direct &amp; inverse proportion</a><div class="bar"><i style="width:26%"></i></div><span class="sub">10 questions · 39 marks · 10 of 24 papers</span></div><span class="pct">2.0%</span></li>
+    <li class="row"><span class="n">26</span><div><a href="#similarity">Similarity &amp; congruence</a><div class="bar"><i style="width:25%"></i></div><span class="sub">17 questions · 36 marks · 15 of 24 papers</span></div><span class="pct">1.9%</span></li>
+    <li class="row"><span class="n">27</span><div><a href="#primes">Factors, multiples &amp; primes</a><div class="bar"><i style="width:23%"></i></div><span class="sub">14 questions · 35 marks · 12 of 24 papers</span></div><span class="pct">1.8%</span></li>
+    <li class="row"><span class="n">28</span><div><a href="#vectors">Vectors</a><div class="bar"><i style="width:22%"></i></div><span class="sub">10 questions · 33 marks · 10 of 24 papers</span></div><span class="pct">1.7%</span></li>
+    <li class="row"><span class="n">29</span><div><a href="#scatter">Scatter graphs, charts &amp; sampling</a><div class="bar"><i style="width:18%"></i></div><span class="sub">9 questions · 26 marks · 9 of 24 papers</span></div><span class="pct">1.4%</span></li>
+    <li class="row"><span class="n">30</span><div><a href="#simultaneous">Simultaneous equations</a><div class="bar"><i style="width:18%"></i></div><span class="sub">7 questions · 26 marks · 6 of 24 papers</span></div><span class="pct">1.4%</span></li>
+    <li class="row"><span class="n">31</span><div><a href="#circle-equation">Equation of a circle &amp; tangents</a><div class="bar"><i style="width:17%"></i></div><span class="sub">9 questions · 25 marks · 8 of 24 papers</span></div><span class="pct">1.3%</span></li>
+    <li class="row"><span class="n">32</span><div><a href="#standard-form">Standard form</a><div class="bar"><i style="width:14%"></i></div><span class="sub">11 questions · 22 marks · 11 of 24 papers</span></div><span class="pct">1.1%</span></li>
+    <li class="row"><span class="n">33</span><div><a href="#proof">Algebraic proof</a><div class="bar"><i style="width:12%"></i></div><span class="sub">5 questions · 17 marks · 5 of 24 papers</span></div><span class="pct">0.9%</span></li>
+    <li class="row"><span class="n">34</span><div><a href="#counting">Counting (product rule)</a><div class="bar"><i style="width:10%"></i></div><span class="sub">6 questions · 16 marks · 6 of 24 papers</span></div><span class="pct">0.8%</span></li>
+    <li class="row"><span class="n">35</span><div><a href="#bearings">Constructions, loci &amp; bearings</a><div class="bar"><i style="width:9%"></i></div><span class="sub">6 questions · 14 marks · 6 of 24 papers</span></div><span class="pct">0.7%</span></li>
+    <li class="row"><span class="n">36</span><div><a href="#iteration">Iteration</a><div class="bar"><i style="width:8%"></i></div><span class="sub">5 questions · 11 marks · 5 of 24 papers</span></div><span class="pct">0.6%</span></li>
+  </ol>
+  <p>The top 10 topics give <b>47% of all marks</b>. The top 20 give <b>76%</b>. Probability was in every paper. Low-ranked topics such as vectors, functions and proof often appear as the last questions, so they matter for grades 7 to 9.</p>
+  <details>
+    <summary>Show the full table</summary>
+    <div class="tbl"><table>
+      <thead><tr><th>#</th><th>Topic</th><th class="num">Qs</th><th class="num">Marks</th><th class="num">% marks</th><th class="num">Papers</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="t">Probability</td><td class="num">47</td><td class="num">147</td><td class="num">7.7</td><td class="num">24/24</td></tr>
+        <tr><td>2</td><td class="t">Algebraic manipulation</td><td class="num">50</td><td class="num">120</td><td class="num">6.3</td><td class="num">22/24</td></tr>
+        <tr><td>3</td><td class="t">Percentages, interest &amp; growth/decay</td><td class="num">29</td><td class="num">91</td><td class="num">4.7</td><td class="num">20/24</td></tr>
+        <tr><td>4</td><td class="t">Area, perimeter, arcs &amp; sectors</td><td class="num">25</td><td class="num">90</td><td class="num">4.7</td><td class="num">18/24</td></tr>
+        <tr><td>5</td><td class="t">Cumulative frequency, box plots &amp; histograms</td><td class="num">21</td><td class="num">89</td><td class="num">4.6</td><td class="num">18/24</td></tr>
+        <tr><td>6</td><td class="t">Ratio</td><td class="num">33</td><td class="num">82</td><td class="num">4.3</td><td class="num">20/24</td></tr>
+        <tr><td>7</td><td class="t">Compound measures (speed, density, pressure)</td><td class="num">24</td><td class="num">73</td><td class="num">3.8</td><td class="num">19/24</td></tr>
+        <tr><td>8</td><td class="t">Quadratics</td><td class="num">27</td><td class="num">71</td><td class="num">3.7</td><td class="num">16/24</td></tr>
+        <tr><td>9</td><td class="t">Linear equations &amp; inequalities</td><td class="num">27</td><td class="num">67</td><td class="num">3.5</td><td class="num">16/24</td></tr>
+        <tr><td>10</td><td class="t">Straight-line graphs</td><td class="num">26</td><td class="num">65</td><td class="num">3.4</td><td class="num">19/24</td></tr>
+        <tr><td>11</td><td class="t">Volume, surface area &amp; 3D shapes</td><td class="num">19</td><td class="num">64</td><td class="num">3.3</td><td class="num">16/24</td></tr>
+        <tr><td>12</td><td class="t">Averages &amp; grouped data</td><td class="num">16</td><td class="num">62</td><td class="num">3.2</td><td class="num">13/24</td></tr>
+        <tr><td>13</td><td class="t">Indices &amp; surds</td><td class="num">26</td><td class="num">61</td><td class="num">3.2</td><td class="num">14/24</td></tr>
+        <tr><td>14</td><td class="t">Fractions, decimals &amp; recurring decimals</td><td class="num">32</td><td class="num">59</td><td class="num">3.1</td><td class="num">17/24</td></tr>
+        <tr><td>15</td><td class="t">Sequences</td><td class="num">20</td><td class="num">54</td><td class="num">2.8</td><td class="num">17/24</td></tr>
+        <tr><td>16</td><td class="t">Sine/cosine rule, ½ab sin C &amp; trig graphs</td><td class="num">18</td><td class="num">54</td><td class="num">2.8</td><td class="num">14/24</td></tr>
+        <tr><td>17</td><td class="t">Bounds, rounding &amp; estimation</td><td class="num">20</td><td class="num">52</td><td class="num">2.7</td><td class="num">17/24</td></tr>
+        <tr><td>18</td><td class="t">Circle theorems</td><td class="num">15</td><td class="num">52</td><td class="num">2.7</td><td class="num">14/24</td></tr>
+        <tr><td>19</td><td class="t">Real-life graphs, rates &amp; area under graphs</td><td class="num">14</td><td class="num">51</td><td class="num">2.7</td><td class="num">12/24</td></tr>
+        <tr><td>20</td><td class="t">Non-linear graphs &amp; graph transformations</td><td class="num">20</td><td class="num">50</td><td class="num">2.6</td><td class="num">17/24</td></tr>
+        <tr><td>21</td><td class="t">Functions (composite &amp; inverse)</td><td class="num">11</td><td class="num">45</td><td class="num">2.3</td><td class="num">11/24</td></tr>
+        <tr><td>22</td><td class="t">Transformations</td><td class="num">16</td><td class="num">41</td><td class="num">2.1</td><td class="num">11/24</td></tr>
+        <tr><td>23</td><td class="t">Angles &amp; polygons</td><td class="num">14</td><td class="num">40</td><td class="num">2.1</td><td class="num">11/24</td></tr>
+        <tr><td>24</td><td class="t">Pythagoras &amp; right-angled trigonometry</td><td class="num">12</td><td class="num">39</td><td class="num">2.0</td><td class="num">9/24</td></tr>
+        <tr><td>25</td><td class="t">Direct &amp; inverse proportion</td><td class="num">10</td><td class="num">39</td><td class="num">2.0</td><td class="num">10/24</td></tr>
+        <tr><td>26</td><td class="t">Similarity &amp; congruence</td><td class="num">17</td><td class="num">36</td><td class="num">1.9</td><td class="num">15/24</td></tr>
+        <tr><td>27</td><td class="t">Factors, multiples &amp; primes</td><td class="num">14</td><td class="num">35</td><td class="num">1.8</td><td class="num">12/24</td></tr>
+        <tr><td>28</td><td class="t">Vectors</td><td class="num">10</td><td class="num">33</td><td class="num">1.7</td><td class="num">10/24</td></tr>
+        <tr><td>29</td><td class="t">Scatter graphs, charts &amp; sampling</td><td class="num">9</td><td class="num">26</td><td class="num">1.4</td><td class="num">9/24</td></tr>
+        <tr><td>30</td><td class="t">Simultaneous equations</td><td class="num">7</td><td class="num">26</td><td class="num">1.4</td><td class="num">6/24</td></tr>
+        <tr><td>31</td><td class="t">Equation of a circle &amp; tangents</td><td class="num">9</td><td class="num">25</td><td class="num">1.3</td><td class="num">8/24</td></tr>
+        <tr><td>32</td><td class="t">Standard form</td><td class="num">11</td><td class="num">22</td><td class="num">1.1</td><td class="num">11/24</td></tr>
+        <tr><td>33</td><td class="t">Algebraic proof</td><td class="num">5</td><td class="num">17</td><td class="num">0.9</td><td class="num">5/24</td></tr>
+        <tr><td>34</td><td class="t">Counting (product rule)</td><td class="num">6</td><td class="num">16</td><td class="num">0.8</td><td class="num">6/24</td></tr>
+        <tr><td>35</td><td class="t">Constructions, loci &amp; bearings</td><td class="num">6</td><td class="num">14</td><td class="num">0.7</td><td class="num">6/24</td></tr>
+        <tr><td>36</td><td class="t">Iteration</td><td class="num">5</td><td class="num">11</td><td class="num">0.6</td><td class="num">5/24</td></tr>
+      </tbody></table></div>
+  </details>
+</section>
+
+<section class="method" aria-labelledby="m-h">
+  <h2 id="m-h">How each topic is taught</h2>
+  <ol>
+    <li><b>3Blue1Brown method.</b> Start with a picture. Find the one key idea that makes the rule true. Then show the rule. Each video uses a shape or a moving diagram first and the formula second.</li>
+    <li><b>Karpathy method.</b> The explanation is written in about 80% ASD-STE100 (Simplified Technical English): short sentences, active voice, one instruction for each step, simple words. Each topic also has a diagram and a custom explainer video in the 3Blue1Brown style.</li>
+    <li><b>Exam practice.</b> Each worked question is new, but it uses the same style and mark weight as the AQA questions.</li>
+  </ol>
+</section>
+
+<article class="topic" id="probability">
+  <div class="topic-head"><span class="qnum">1</span><h2>Probability</h2><span class="meta">147 marks · 7.7% of all marks · in 24 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/01_probability.jpg" src="videos/01_probability.mp4" aria-label="Explainer video: Probability"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Probability is area. Draw all outcomes as one square of area 1. Each event cuts the square. The answer is the area of the pieces you need.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Probability is a number from 0 to 1. It shows how likely an event is. A probability of 0 means the event cannot occur. A probability of 1 means the event is certain.</p>
+<p>AQA uses tree diagrams, Venn diagrams, relative frequency and "without replacement" questions. To find the probability of two events, one after the other:</p>
+<ol><li>Draw a tree diagram. Draw one set of branches for each event.</li>
+<li>Write a probability on each branch. Branches from one point must add up to 1.</li>
+<li>If the first item is not put back, change the second probabilities. There is one item less in the bag.</li>
+<li>Multiply the probabilities along each path.</li>
+<li>Add the results of all the paths that you need.</li></ol>
+<p class="caution"><span>CAUTION</span>Do not add along a path. Multiply along a path. Add between paths.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Tree diagram for two counters taken without replacement">
+<path class="ln" d="M20 100 L110 50 M20 100 L110 150 M120 50 L205 25 M120 50 L205 75 M120 150 L205 125 M120 150 L205 175"/>
+<path class="la" d="M20 100 L110 50 L205 25 M20 100 L110 150 L205 175"/>
+<circle class="fr" cx="115" cy="50" r="7"/><circle cx="115" cy="150" r="7" style="fill:var(--blue)"/>
+<text x="52" y="66" font-size="12">5/8</text><text x="52" y="146" font-size="12">3/8</text>
+<text x="150" y="30" font-size="12">4/7</text><text x="150" y="74" font-size="12">3/7</text>
+<text x="150" y="130" font-size="12">5/7</text><text x="150" y="174" font-size="12">2/7</text>
+<text x="212" y="29" font-size="12" font-weight="700">RR  20/56</text><text x="212" y="79" font-size="12" class="m">RB  15/56</text>
+<text x="212" y="129" font-size="12" class="m">BR  15/56</text><text x="212" y="179" font-size="12" font-weight="700">BB  6/56</text>
+</svg></div><figcaption>The two highlighted paths give the same colour. 20/56 + 6/56 = 26/56.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A bag has 5 red counters and 3 blue counters. Ali takes a counter at random and does not put it back. He then takes a second counter. Work out the probability that both counters are the same colour.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>P(red, red) = <span class="frac"><span>5</span><span>8</span></span> × <span class="frac"><span>4</span><span>7</span></span> = <span class="frac"><span>20</span><span>56</span></span></li><li>P(blue, blue) = <span class="frac"><span>3</span><span>8</span></span> × <span class="frac"><span>2</span><span>7</span></span> = <span class="frac"><span>6</span><span>56</span></span></li><li>P(same colour) = <span class="frac"><span>20</span><span>56</span></span> + <span class="frac"><span>6</span><span>56</span></span> = <span class="frac"><span>26</span><span>56</span></span></li></ol>
+      <p class="ans">Answer: <mark><span class="frac"><span>13</span><span>28</span></span></mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="algebra">
+  <div class="topic-head"><span class="qnum">2</span><h2>Algebraic manipulation</h2><span class="meta">120 marks · 6.3% of all marks · in 22 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/02_algebra.jpg" src="videos/02_algebra.mp4" aria-label="Explainer video: Algebraic manipulation"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A factorised expression is a rectangle. x² + 5x + 6 is an area with sides (x + 2) and (x + 3). You can cancel a side length. You cannot cancel one piece of the area.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Algebraic manipulation means changing the form of an expression. The value stays the same. AQA tests expanding brackets, factorising, algebraic fractions and changing the subject of a formula.</p>
+<p>To simplify an algebraic fraction:</p>
+<ol><li>Factorise the numerator (the top).</li>
+<li>Factorise the denominator (the bottom).</li>
+<li>Find a factor that is in the top and in the bottom.</li>
+<li>Divide the top and the bottom by that factor.</li>
+<li>Check your answer. Put a number in for x in the start and in the answer. Both values must be the same.</li></ol>
+<p>Know these patterns: x² − a² = (x − a)(x + a). For x² + bx + c, find two numbers that multiply to c and add to b.</p>
+<p class="caution"><span>CAUTION</span>Cancel only factors. Do not cancel terms that are added or subtracted.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Area model showing x squared plus 5x plus 6 as a rectangle with sides x plus 2 and x plus 3">
+<rect class="fb" x="40" y="30" width="110" height="110"/>
+<rect class="ft" x="150" y="30" width="45" height="110"/>
+<rect class="ft" x="40" y="140" width="110" height="30"/>
+<rect class="fa" x="150" y="140" width="45" height="30"/>
+<text x="95" y="90" text-anchor="middle" font-size="18">x²</text>
+<text x="172" y="90" text-anchor="middle" font-size="14">3x</text>
+<text x="95" y="160" text-anchor="middle" font-size="14">2x</text>
+<text x="172" y="160" text-anchor="middle" font-size="14">6</text>
+<text x="95" y="22" text-anchor="middle" font-size="13" class="m">x</text><text x="172" y="22" text-anchor="middle" font-size="13" class="m">3</text>
+<text x="30" y="90" text-anchor="middle" font-size="13" class="m">x</text><text x="30" y="160" text-anchor="middle" font-size="13" class="m">2</text>
+<text x="210" y="95" font-size="13">= (x + 2)(x + 3)</text>
+</svg></div><figcaption>The area x² + 5x + 6 has sides x + 2 and x + 3.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Simplify fully <span class="frac"><span>x² − 9</span><span>x² + 5x + 6</span></span></p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Top: x² − 9 = (x − 3)(x + 3)  (difference of two squares)</li><li>Bottom: x² + 5x + 6 = (x + 2)(x + 3)  (2 × 3 = 6, 2 + 3 = 5)</li><li><span class="frac"><span>(x − 3)(x + 3)</span><span>(x + 2)(x + 3)</span></span>  →  divide top and bottom by (x + 3)</li><li>Check with x = 1: <span class="frac"><span>1 − 9</span><span>1 + 5 + 6</span></span> = −<span class="frac"><span>2</span><span>3</span></span> and <span class="frac"><span>1 − 3</span><span>1 + 2</span></span> = −<span class="frac"><span>2</span><span>3</span></span></li></ol>
+      <p class="ans">Answer: <mark><span class="frac"><span>x − 3</span><span>x + 2</span></span></mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="percentages">
+  <div class="topic-head"><span class="qnum">3</span><h2>Percentages, interest and growth</h2><span class="meta">91 marks · 4.7% of all marks · in 20 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/03_percentages.jpg" src="videos/03_percentages.mp4" aria-label="Explainer video: Percentages, interest and growth"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A percentage change is a multiplier. Growth is a chain of the same multiplier. Five years of 3% growth is ×1.03 five times, not 15% once.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A percentage is a number of parts in 100. AQA tests percentage change, reverse percentages, compound interest, depreciation and growth or decay.</p>
+<p>To find the value after a repeated percentage change:</p>
+<ol><li>Change the percentage to a multiplier. For an increase of r%, use 1 + r ÷ 100. For a decrease of r%, use 1 − r ÷ 100.</li>
+<li>Raise the multiplier to the power of the number of years.</li>
+<li>Multiply the start value by the result.</li></ol>
+<p>To find an original value (reverse percentage), divide the new value by the multiplier.</p>
+<p class="caution"><span>CAUTION</span>Do not find the percentage of the new value to go back. Divide by the multiplier.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Chain of five multiplications by 1.03 from 4000 to 4637.10">
+<g font-size="13">
+<text x="20" y="26">Start</text><text x="300" y="26" text-anchor="end" font-weight="700">£4000.00</text>
+<text x="20" y="56">Year 1</text><text x="300" y="56" text-anchor="end">£4120.00</text>
+<text x="20" y="86">Year 2</text><text x="300" y="86" text-anchor="end">£4243.60</text>
+<text x="20" y="116">Year 3</text><text x="300" y="116" text-anchor="end">£4370.91</text>
+<text x="20" y="146">Year 4</text><text x="300" y="146" text-anchor="end">£4502.04</text>
+<text x="20" y="176">Year 5</text><text x="300" y="176" text-anchor="end" font-weight="700" class="a">£4637.10</text>
+</g>
+<g font-size="11" class="t"><text x="130" y="42" class="t">× 1.03</text><text x="130" y="72" class="t">× 1.03</text><text x="130" y="102" class="t">× 1.03</text><text x="130" y="132" class="t">× 1.03</text><text x="130" y="162" class="t">× 1.03</text></g>
+<path class="lm" d="M118 30 L118 170"/>
+</svg></div><figcaption>Each year uses the new amount. This is why compound interest grows faster than simple interest.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Sam invests £4000 at 3% compound interest per year. Work out the value of the investment after 5 years.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Multiplier = 1 + 3 ÷ 100 = 1.03</li><li>Value = 4000 × 1.03<sup>5</sup></li><li>= 4637.0963… (simple interest gives only £4600)</li></ol>
+      <p class="ans">Answer: <mark>£4637.10</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="area">
+  <div class="topic-head"><span class="qnum">4</span><h2>Area, perimeter, arcs and sectors</h2><span class="meta">90 marks · 4.7% of all marks · in 18 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/04_sector.jpg" src="videos/04_sector.mp4" aria-label="Explainer video: Area, perimeter, arcs and sectors"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A sector is a fraction of a circle. The angle at the centre gives the fraction. Every sector formula is that fraction of a circle formula.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Area is the space inside a shape. Perimeter is the distance around the edge. AQA often uses circles, sectors, trapeziums and compound shapes.</p>
+<p>To find the arc length or area of a sector:</p>
+<ol><li>Find the fraction of the circle: angle ÷ 360.</li>
+<li>For the arc length, multiply the fraction by the circumference, 2πr.</li>
+<li>For the area, multiply the fraction by the circle area, πr².</li>
+<li>For the perimeter, add the two radii to the arc length.</li></ol>
+<p>Other key areas: triangle ½ × base × height; trapezium ½(a + b)h; any triangle ½ab sin C.</p>
+<p class="caution"><span>CAUTION</span>The perimeter of a sector includes the two straight edges. Many students forget them.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Sector of radius 9 cm with angle 80 degrees">
+<path class="ft" d="M60 175 L200 175 A140 140 0 0 0 84.3 37.1 Z"/>
+<path class="la" d="M200 175 A140 140 0 0 0 84.3 37.1"/>
+<path class="ln" d="M60 175 L200 175 M60 175 L84.3 37.1"/>
+<path class="lm" d="M85 175 A25 25 0 0 0 64.3 150.4"/>
+<text x="92" y="160" font-size="13">80°</text>
+<text x="130" y="192" font-size="13" text-anchor="middle">9 cm</text>
+<text x="190" y="80" font-size="13" class="a" font-weight="700">arc = 4π</text>
+<text x="225" y="130" font-size="12" class="m">80/360 = 2/9</text>
+<text x="225" y="148" font-size="12" class="m">of the circle</text>
+</svg></div><figcaption>The sector is 2/9 of the circle, so the arc is 2/9 of the circumference.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A sector has radius 9 cm and angle 80°. Work out the perimeter of the sector. Give your answer to 1 decimal place.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Fraction of circle = <span class="frac"><span>80</span><span>360</span></span> = <span class="frac"><span>2</span><span>9</span></span></li><li>Arc length = <span class="frac"><span>2</span><span>9</span></span> × 2 × π × 9 = 4π = 12.566… cm</li><li>Perimeter = 4π + 9 + 9 = 30.566… cm</li></ol>
+      <p class="ans">Answer: <mark>30.6 cm</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="statistics">
+  <div class="topic-head"><span class="qnum">5</span><h2>Histograms, box plots and cumulative frequency</h2><span class="meta">89 marks · 4.6% of all marks · in 18 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/05_histogram.jpg" src="videos/05_histogram.mp4" aria-label="Explainer video: Histograms, box plots and cumulative frequency"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>In a histogram, area is frequency. A tall bar can hold fewer people than a short wide bar.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>These diagrams show how data is spread. AQA uses all three. They often appear together with a median or interquartile range (IQR) question.</p>
+<ol><li>For a histogram, find the frequency density of each class. Frequency density = frequency ÷ class width.</li>
+<li>Draw each bar with height equal to the frequency density.</li>
+<li>To find a frequency from a histogram, find the area of the bar: width × height.</li>
+<li>For a cumulative frequency graph, plot each running total at the upper end of its class.</li>
+<li>Read the median at half the total. Read the quartiles at one quarter and three quarters.</li>
+<li>For a box plot, mark the lowest value, lower quartile, median, upper quartile and highest value.</li></ol>
+<p class="caution"><span>CAUTION</span>The vertical axis of a histogram is frequency density. It is not frequency.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 210" role="img" aria-label="Histogram with unequal class widths and the region above 12 minutes shaded">
+<path class="ln" d="M40 170 L305 170 M40 170 L40 20"/>
+<rect class="ft" x="40" y="125.2" width="86.7" height="44.8"/>
+<rect class="ft" x="126.7" y="35.6" width="43.3" height="134.4"/>
+<rect class="ft" x="170" y="102.8" width="130" height="67.2"/>
+<rect class="fa" x="144" y="35.6" width="26" height="134.4"/>
+<rect class="fa" x="170" y="102.8" width="130" height="67.2"/>
+<g font-size="11" class="m" text-anchor="middle"><text x="40" y="185" class="m">0</text><text x="126.7" y="185" class="m">10</text><text x="170" y="185" class="m">15</text><text x="300" y="185" class="m">30</text><text x="144" y="198" class="a">12</text></g>
+<g font-size="11" text-anchor="end"><text x="35" y="129" class="m">0.8</text><text x="35" y="107" class="m">1.2</text><text x="35" y="40" class="m">2.4</text></g>
+<text x="172" y="205" font-size="11" class="m" text-anchor="middle">time t (minutes)</text>
+<text x="235" y="95" font-size="12" text-anchor="middle">area 18</text>
+<text x="210" y="50" font-size="12" class="a">3 × 2.4 = 7.2</text>
+</svg></div><figcaption>Frequency density = frequency ÷ width. The shaded area estimates the number above 12 minutes.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The table shows the waiting times of 38 people. 0 &lt; t ≤ 10: 8 people. 10 &lt; t ≤ 15: 12 people. 15 &lt; t ≤ 30: 18 people. (a) Draw a histogram. (b) Estimate how many people waited more than 12 minutes.</p><span class="marks">[5 marks]</span></div>
+      <ol class="work"><li>(a) Frequency densities: 8 ÷ 10 = 0.8, 12 ÷ 5 = 2.4, 18 ÷ 15 = 1.2</li><li>(b) From 12 to 15: width 3 × height 2.4 = 7.2 people</li><li>From 15 to 30: all 18 people</li><li>7.2 + 18 = 25.2</li></ol>
+      <p class="ans">Answer: <mark>About 25 people</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="ratio">
+  <div class="topic-head"><span class="qnum">6</span><h2>Ratio</h2><span class="meta">82 marks · 4.3% of all marks · in 20 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/06_ratio.jpg" src="videos/06_ratio.mp4" aria-label="Explainer video: Ratio"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A ratio is a number of equal boxes. Find the value of one box. Then every other answer is a multiplication.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A ratio compares the sizes of two or more parts. AQA tests sharing in a ratio, ratio with fractions, combined ratios and ratio problems with a difference.</p>
+<ol><li>Draw a bar for each person. Draw one box for each part of the ratio.</li>
+<li>Find the boxes that match the number you know. This can be one person, the total, or the difference.</li>
+<li>Divide the number you know by those boxes. This gives the value of one box.</li>
+<li>Multiply to find each share or the total.</li>
+<li>Check that the shares match the ratio and the data in the question.</li></ol>
+<p class="caution"><span>CAUTION</span>A ratio of 3 : 5 does not mean 3/5. The first person gets 3/8 of the total.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Bar model: Amy 3 boxes, Ben 5 boxes, the 2 extra boxes equal 48 pounds">
+<text x="10" y="45" font-size="14" font-weight="700">Amy</text><text x="10" y="95" font-size="14" font-weight="700">Ben</text>
+<g><rect class="fb" x="60" y="25" width="40" height="30"/><rect class="fb" x="100" y="25" width="40" height="30"/><rect class="fb" x="140" y="25" width="40" height="30"/>
+<rect class="ft" x="60" y="75" width="40" height="30"/><rect class="ft" x="100" y="75" width="40" height="30"/><rect class="ft" x="140" y="75" width="40" height="30"/>
+<rect class="fa" x="180" y="75" width="40" height="30"/><rect class="fa" x="220" y="75" width="40" height="30"/></g>
+<g font-size="12" text-anchor="middle"><text x="80" y="45">24</text><text x="120" y="45">24</text><text x="160" y="45">24</text><text x="80" y="95">24</text><text x="120" y="95">24</text><text x="160" y="95">24</text><text x="200" y="95">24</text><text x="240" y="95">24</text></g>
+<path class="lm" d="M182 112 Q182 120 200 120 Q218 120 220 128 Q222 120 240 120 Q258 120 258 112"/>
+<text x="220" y="146" font-size="13" text-anchor="middle" class="a" font-weight="700">2 boxes = £48</text>
+</svg></div><figcaption>The difference is 2 boxes. So 1 box is £24, and the total is 8 boxes.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Amy and Ben share some money in the ratio 3 : 5. Ben gets £48 more than Amy. Work out the total amount of money.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Difference = 5 − 3 = 2 parts</li><li>2 parts = £48, so 1 part = £24</li><li>Total = 3 + 5 = 8 parts = 8 × 24</li><li>Check: Amy £72, Ben £120, difference £48</li></ol>
+      <p class="ans">Answer: <mark>£192</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="compound">
+  <div class="topic-head"><span class="qnum">7</span><h2>Compound measures</h2><span class="meta">73 marks · 3.8% of all marks · in 19 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/07_density.jpg" src="videos/07_density.mp4" aria-label="Explainer video: Compound measures"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The units are the formula. g/cm³ means grams divided by cubic centimetres. So density = mass ÷ volume.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A compound measure joins two measures. AQA tests speed, density, pressure and rates such as litres per minute. These questions are often worth 3 to 5 marks.</p>
+<ol><li>Read the units in the question. The units tell you the formula.</li>
+<li>Write the formula. Speed = distance ÷ time. Density = mass ÷ volume. Pressure = force ÷ area.</li>
+<li>Change all values to matching units. For example, change minutes to hours.</li>
+<li>Rearrange the formula if necessary. Use the triangle: cover the quantity that you want.</li>
+<li>Put in the numbers and calculate. Write the units with the answer.</li></ol>
+<p class="caution"><span>CAUTION</span>20 minutes is not 0.2 hours. It is 20 ÷ 60 = ⅓ hour.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 130" role="img" aria-label="Three formula triangles for speed, density and pressure">
+<g class="ln"><path d="M55 15 L100 100 L10 100 Z M32 60 L78 60 M55 60 L55 100"/><path d="M160 15 L205 100 L115 100 Z M137 60 L183 60 M160 60 L160 100"/><path d="M265 15 L310 100 L220 100 Z M242 60 L288 60 M265 60 L265 100"/></g>
+<g font-size="15" text-anchor="middle" font-weight="700"><text x="55" y="53">D</text><text x="42" y="88">S</text><text x="68" y="88">T</text>
+<text x="160" y="53" class="a">M</text><text x="147" y="88">D</text><text x="173" y="88">V</text>
+<text x="265" y="53">F</text><text x="252" y="88">P</text><text x="278" y="88">A</text></g>
+<g font-size="11" class="m" text-anchor="middle"><text x="55" y="120" class="m">speed</text><text x="160" y="120" class="m">density</text><text x="265" y="120" class="m">pressure</text></g>
+</svg></div><figcaption>Cover the value you want. Across the bottom means multiply. Top over bottom means divide.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A metal block is a cuboid. It measures 10 cm by 4 cm by 5 cm. The density of the metal is 7.8 g/cm³. Work out the mass of the block.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Volume = 10 × 4 × 5 = 200 cm³</li><li>Mass = density × volume</li><li>Mass = 7.8 × 200</li></ol>
+      <p class="ans">Answer: <mark>1560 g</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="quadratics">
+  <div class="topic-head"><span class="qnum">8</span><h2>Quadratics</h2><span class="meta">71 marks · 3.7% of all marks · in 16 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/08_quadratics.jpg" src="videos/08_quadratics.mp4" aria-label="Explainer video: Quadratics"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Completing the square is a real square. Split 6x into two strips of 3x around x². One 3 by 3 corner is missing.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A quadratic has an x² term. AQA tests factorising, the quadratic formula, completing the square, quadratic inequalities and turning points.</p>
+<p>To solve x² + bx + c = 0 by completing the square:</p>
+<ol><li>Halve b. Write (x + b/2)².</li>
+<li>Subtract (b/2)². This removes the extra corner.</li>
+<li>Add c. Simplify the number.</li>
+<li>Make the bracket the subject. Take the square root of both sides.</li>
+<li>Write ± in front of the square root. Then solve for x.</li></ol>
+<p>The completed square (x + p)² + q gives the turning point (−p, q).</p>
+<p class="caution"><span>CAUTION</span>A square root has two values, + and −. Give both solutions.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Completing the square: x squared plus two 3x strips and a missing 3 by 3 corner">
+<rect class="fb" x="30" y="25" width="110" height="110"/>
+<rect class="ft" x="140" y="25" width="40" height="110"/>
+<rect class="ft" x="30" y="135" width="110" height="40"/>
+<rect x="140" y="135" width="40" height="40" style="fill:var(--accent);fill-opacity:.15;stroke:var(--accent);stroke-width:2;stroke-dasharray:4 3"/>
+<text x="85" y="86" text-anchor="middle" font-size="18">x²</text><text x="160" y="84" text-anchor="middle" font-size="13">3x</text>
+<text x="85" y="160" text-anchor="middle" font-size="13">3x</text><text x="160" y="160" text-anchor="middle" font-size="13" class="a" font-weight="700">9</text>
+<text x="85" y="18" text-anchor="middle" font-size="12" class="m">x</text><text x="160" y="18" text-anchor="middle" font-size="12" class="m">3</text>
+<text x="195" y="70" font-size="13">x² + 6x</text><text x="195" y="92" font-size="13">= (x + 3)² − 9</text>
+<text x="195" y="160" font-size="11" class="a">missing corner</text>
+</svg></div><figcaption>The full square is (x + 3)². Take away the corner of 9 to get x² + 6x.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Solve x² + 6x − 4 = 0 by completing the square. Give your answers in the form a ± √b.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>x² + 6x = (x + 3)² − 9</li><li>x² + 6x − 4 = (x + 3)² − 13 = 0</li><li>(x + 3)² = 13, so x + 3 = ±√13</li><li>Decimal check: x = 0.606 or x = −6.606</li></ol>
+      <p class="ans">Answer: <mark>x = −3 ± √13</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="linear">
+  <div class="topic-head"><span class="qnum">9</span><h2>Linear equations and inequalities</h2><span class="meta">67 marks · 3.5% of all marks · in 16 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/09_inequalities.jpg" src="videos/09_inequalities.mp4" aria-label="Explainer video: Linear equations and inequalities"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>An equation is a balance. Do the same thing to both sides and it stays level. An inequality is a balance that is already tipped.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A linear equation has no powers of x above 1. AQA tests solving equations, forming equations from words or shapes, and inequalities on number lines.</p>
+<ol><li>Expand any brackets.</li>
+<li>Move the x terms to one side. Do the same operation to both sides.</li>
+<li>Move the numbers to the other side.</li>
+<li>Divide both sides by the number in front of x.</li>
+<li>For an inequality, show the answer on a number line. An open circle means "not included". A closed circle means "included".</li></ol>
+<p class="caution"><span>WARNING</span>If you multiply or divide an inequality by a negative number, reverse the sign.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 130" role="img" aria-label="Number line showing x less than 3 and x at least minus 1, with integers minus 1, 0, 1, 2 marked">
+<path class="ln" d="M20 90 L305 90"/>
+<g class="lm"><path d="M30 85 L30 95 M62.5 85 L62.5 95 M95 85 L95 95 M127.5 85 L127.5 95 M160 85 L160 95 M192.5 85 L192.5 95 M225 85 L225 95 M257.5 85 L257.5 95 M290 85 L290 95"/></g>
+<g font-size="12" text-anchor="middle"><text x="30" y="112">−3</text><text x="62.5" y="112">−2</text><text x="95" y="112">−1</text><text x="127.5" y="112">0</text><text x="160" y="112">1</text><text x="192.5" y="112">2</text><text x="225" y="112">3</text><text x="257.5" y="112">4</text><text x="290" y="112">5</text></g>
+<path class="la" d="M218 60 L35 60"/><path class="la" d="M35 60 L45 54 M35 60 L45 66"/><circle class="fp" cx="225" cy="60" r="6"/>
+<path class="lt" d="M95 35 L285 35 M285 35 L275 29 M285 35 L275 41"/><circle cx="95" cy="35" r="6" style="fill:var(--teal)"/>
+<circle class="fr" cx="95" cy="90" r="5"/><circle class="fr" cx="127.5" cy="90" r="5"/><circle class="fr" cx="160" cy="90" r="5"/><circle class="fr" cx="192.5" cy="90" r="5"/>
+<text x="240" y="64" font-size="12" class="a">x &lt; 3</text><text x="20" y="28" font-size="12" class="t">x ≥ −1</text>
+</svg></div><figcaption>Open circle at 3 (not included). Closed circle at −1 (included). The overlap holds 4 integers.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Solve 3(2x − 1) &lt; 2x + 9. Then list the integers that satisfy the inequality and x ≥ −1.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Expand: 6x − 3 &lt; 2x + 9</li><li>Subtract 2x: 4x − 3 &lt; 9</li><li>Add 3: 4x &lt; 12</li><li>Divide by 4: x &lt; 3. With x ≥ −1 the integers are −1, 0, 1, 2</li></ol>
+      <p class="ans">Answer: <mark>x &lt; 3;  −1, 0, 1, 2</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="lines">
+  <div class="topic-head"><span class="qnum">10</span><h2>Straight-line graphs</h2><span class="meta">65 marks · 3.4% of all marks · in 19 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/10_lines.jpg" src="videos/10_lines.mp4" aria-label="Explainer video: Straight-line graphs"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Turn a gradient triangle through 90°. 'Along 1, up 2' becomes 'back 2, up 1'. That is why perpendicular gradients are negative reciprocals.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A straight line has the equation y = mx + c. m is the gradient (the slope). c is the y-intercept (where the line crosses the y-axis). AQA tests gradients, parallel and perpendicular lines, and the line through given points.</p>
+<ol><li>Find the gradient. Gradient = change in y ÷ change in x.</li>
+<li>For a parallel line, use the same gradient.</li>
+<li>For a perpendicular line, use the negative reciprocal. Turn the fraction upside down and change the sign.</li>
+<li>Put the gradient and one point into y = mx + c.</li>
+<li>Solve to find c. Write the full equation.</li></ol>
+<p>Check: the two perpendicular gradients multiply to −1.</p>
+<p class="caution"><span>CAUTION</span>The gradient is change in y over change in x. Do not put x on top.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Line y equals 2x minus 5 and the perpendicular line through (1, 4)">
+<path class="lm" d="M30 145 L215 145 M75 10 L75 195"/>
+<g font-size="10" class="m" text-anchor="middle"><text x="120" y="158" class="m">2</text><text x="165" y="158" class="m">4</text><text x="66" y="104" class="m">2</text><text x="66" y="59" class="m">4</text></g>
+<path class="lb" d="M108.75 190 L198.75 10"/>
+<path class="la" d="M30 21.25 L210 111.25"/>
+<circle class="fr" cx="97.5" cy="55" r="5"/><text x="88" y="45" font-size="12" text-anchor="end">(1, 4)</text>
+<path class="lm" d="M164.5 78.5 L172.5 82.5 L168.5 90.5" style="stroke-width:1.5"/>
+<text x="225" y="40" font-size="13" style="fill:var(--blue)">m = 2</text>
+<text x="225" y="62" font-size="13" class="a">m = −½</text>
+<text x="225" y="90" font-size="12" class="m">2 × −½ = −1</text>
+</svg></div><figcaption>The yellow line is perpendicular to the blue line and passes through (1, 4).</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Find the equation of the line that passes through (1, 4) and is perpendicular to y = 2x − 5.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Gradient of y = 2x − 5 is 2</li><li>Perpendicular gradient = −½ (because 2 × −½ = −1)</li><li>y = −½x + c. Put in (1, 4): 4 = −½ + c, so c = 4.5</li></ol>
+      <p class="ans">Answer: <mark>y = −½x + 4.5</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="volume">
+  <div class="topic-head"><span class="qnum">11</span><h2>Volume, surface area and 3D shapes</h2><span class="meta">64 marks · 3.3% of all marks · in 16 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/11_volume.jpg" src="videos/11_volume.mp4" aria-label="Explainer video: Volume, surface area and 3D shapes"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A prism is a stack of identical slices. Its volume is the slice area times the length. A cylinder is a stack of circles.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Volume is the space inside a 3D shape. Surface area is the total area of all faces. AQA tests prisms, cylinders, cones, spheres, hemispheres and compound solids. The formulas for cones and spheres are given on the paper.</p>
+<ol><li>Split the solid into simple parts.</li>
+<li>For a prism or cylinder, find the area of the cross-section. Multiply it by the length.</li>
+<li>For a sphere, use ⁴⁄₃πr³. A hemisphere is half of this.</li>
+<li>For a cone, use ⅓πr²h.</li>
+<li>Add the volumes of the parts. Keep π in the working. Round only at the end.</li></ol>
+<p class="caution"><span>CAUTION</span>Use the radius, not the diameter. Halve the diameter first.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Cylinder of radius 3 cm and height 10 cm with a hemisphere on top">
+<path class="ft" d="M50 85 A60 60 0 0 1 170 85 Z"/>
+<path class="fb" d="M50 85 L50 175 A60 15 0 0 0 170 175 L170 85 A60 15 0 0 1 50 85 Z"/>
+<ellipse cx="110" cy="85" rx="60" ry="15" class="lm"/>
+<path class="lm" d="M110 85 L170 85" style="stroke-dasharray:4 3"/>
+<text x="140" y="80" font-size="12">3</text>
+<text x="178" y="135" font-size="12">10</text>
+<g font-size="13"><text x="200" y="60">cylinder: 9π × 10 = 90π</text><text x="200" y="85">hemisphere: ⅔π × 27 = 18π</text>
+<text x="200" y="120" class="a" font-weight="700">total = 108π</text><text x="200" y="140" class="a" font-weight="700">≈ 339.3 cm³</text></g>
+</svg></div><figcaption>Find each part, then add. Keep π until the last line.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A solid is a cylinder with a hemisphere on top. The cylinder has radius 3 cm and height 10 cm. The hemisphere has the same radius. Work out the total volume. Give your answer to 1 decimal place.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Cylinder: π × 3² × 10 = 90π</li><li>Hemisphere: <span class="frac"><span>1</span><span>2</span></span> × <span class="frac"><span>4</span><span>3</span></span> × π × 3³ = 18π</li><li>Total: 90π + 18π = 108π = 339.29… cm³</li></ol>
+      <p class="ans">Answer: <mark>339.3 cm³</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="averages">
+  <div class="topic-head"><span class="qnum">12</span><h2>Averages and grouped data</h2><span class="meta">62 marks · 3.2% of all marks · in 13 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/12_mean.jpg" src="videos/12_mean.mp4" aria-label="Explainer video: Averages and grouped data"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The mean is the balance point. Put each value on a number line as a weight. The mean is where a pivot holds the line level.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>An average is one value that represents a set of data. AQA tests the mean, median, mode and range, and estimates from grouped tables. Many questions ask you to compare two groups.</p>
+<p>To estimate the mean from a grouped table:</p>
+<ol><li>Find the midpoint of each class.</li>
+<li>Multiply each midpoint by its frequency.</li>
+<li>Add these results.</li>
+<li>Divide by the total frequency.</li></ol>
+<p>To compare two sets of data, compare an average and compare a spread (range or IQR). Write each comparison in the context of the question.</p>
+<p class="caution"><span>CAUTION</span>Divide by the total frequency. Do not divide by the number of classes.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Dot plot at midpoints 5, 15 and 25 balancing at 16">
+<path class="ln" d="M30 150 L290 150"/>
+<g class="lm"><path d="M30 145 L30 155 M116.7 145 L116.7 155 M203.3 145 L203.3 155 M290 145 L290 155"/></g>
+<g font-size="11" text-anchor="middle"><text x="30" y="190" class="m">0</text><text x="116.7" y="190" class="m">10</text><text x="203.3" y="190" class="m">20</text><text x="290" y="190" class="m">30</text></g>
+<g style="fill:var(--accent)">
+<circle cx="73.3" cy="140" r="4"/><circle cx="73.3" cy="130" r="4"/><circle cx="73.3" cy="120" r="4"/><circle cx="73.3" cy="110" r="4"/>
+<circle cx="160" cy="140" r="4"/><circle cx="160" cy="130" r="4"/><circle cx="160" cy="120" r="4"/><circle cx="160" cy="110" r="4"/><circle cx="160" cy="100" r="4"/><circle cx="160" cy="90" r="4"/><circle cx="160" cy="80" r="4"/><circle cx="160" cy="70" r="4"/><circle cx="160" cy="60" r="4"/><circle cx="160" cy="50" r="4"/>
+<circle cx="246.7" cy="140" r="4"/><circle cx="246.7" cy="130" r="4"/><circle cx="246.7" cy="120" r="4"/><circle cx="246.7" cy="110" r="4"/><circle cx="246.7" cy="100" r="4"/><circle cx="246.7" cy="90" r="4"/></g>
+<path class="fr" d="M168.7 152 L178 172 L159.4 172 Z"/>
+<text x="185" y="172" font-size="12" style="fill:var(--red)">mean ≈ 16</text>
+<g font-size="11" text-anchor="middle" class="m"><text x="73.3" y="100" class="m">4 at 5</text><text x="160" y="38" class="m">10 at 15</text><text x="246.7" y="80" class="m">6 at 25</text></g>
+</svg></div><figcaption>Each plant sits at the midpoint of its class. The data balances at 16.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The heights of 20 plants are grouped. 0 &lt; h ≤ 10: 4 plants. 10 &lt; h ≤ 20: 10 plants. 20 &lt; h ≤ 30: 6 plants. Work out an estimate for the mean height.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Midpoints: 5, 15, 25</li><li>Σfx = 4 × 5 + 10 × 15 + 6 × 25 = 20 + 150 + 150 = 320</li><li>Mean = 320 ÷ 20</li></ol>
+      <p class="ans">Answer: <mark>16 cm</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="indices">
+  <div class="topic-head"><span class="qnum">13</span><h2>Indices and surds</h2><span class="meta">61 marks · 3.2% of all marks · in 14 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/13_indices.jpg" src="videos/13_indices.mp4" aria-label="Explainer video: Indices and surds"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Walk down the powers of 2. Each step divides by 2. This forces 2⁰ = 1 and 2⁻¹ = ½. The rules are not magic; the pattern makes them.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>An index (power) shows how many times a number multiplies by itself. A surd is a root that is not a whole number, for example √2. AQA tests the index laws, negative and fractional powers, and simplifying surds. Many of these are on the non-calculator paper.</p>
+<ol><li>When you multiply powers of the same number, add the indices. When you divide, subtract them.</li>
+<li>For a negative index, write one over the positive power: a<sup>−n</sup> = 1 ÷ a<sup>n</sup>.</li>
+<li>For a fractional index, the bottom is the root and the top is the power. Find the root first.</li>
+<li>To simplify a surd, find the largest square factor. √50 = √25 × √2 = 5√2.</li>
+<li>To rationalise a denominator, multiply the top and bottom by the surd.</li></ol>
+<p class="caution"><span>CAUTION</span>A negative index does not make the answer negative. 2<sup>−2</sup> = ¼.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Powers of two from 2 cubed to 2 to the minus 2, each step dividing by 2">
+<g font-size="15"><text x="40" y="30">2³ = 8</text><text x="40" y="60">2² = 4</text><text x="40" y="90">2¹ = 2</text>
+<text x="40" y="120" class="a" font-weight="700">2⁰ = 1</text><text x="40" y="150">2⁻¹ = ½</text><text x="40" y="180">2⁻² = ¼</text></g>
+<g font-size="11"><text x="125" y="47" class="t">÷ 2</text><text x="125" y="77" class="t">÷ 2</text><text x="125" y="107" class="t">÷ 2</text><text x="125" y="137" class="t">÷ 2</text><text x="125" y="167" class="t">÷ 2</text></g>
+<path class="lm" d="M115 35 L115 175"/>
+<g font-size="12"><text x="175" y="60">8<tspan dy="-6" font-size="9">1/3</tspan><tspan dy="6"> = ∛8 = 2</tspan></text><text x="175" y="90">8<tspan dy="-6" font-size="9">2/3</tspan><tspan dy="6"> = 2² = 4</tspan></text><text x="175" y="120" class="a" font-weight="700">8<tspan dy="-6" font-size="9">−2/3</tspan><tspan dy="6"> = ¼</tspan></text></g>
+</svg></div><figcaption>Dividing by 2 on each step down gives 2⁰ = 1 and negative powers as fractions.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>(a) Work out the value of 8<sup>−⅔</sup>. (b) Simplify √50 + √18.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) 8<sup>−⅔</sup> = <span class="frac"><span>1</span><span>8<sup>⅔</sup></span></span> ; ∛8 = 2 ; 2² = 4</li><li>(b) √50 = √25 × √2 = 5√2 ; √18 = √9 × √2 = 3√2</li><li>5√2 + 3√2 = 8√2</li></ol>
+      <p class="ans">Answer: <mark>(a) ¼   (b) 8√2</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="fractions">
+  <div class="topic-head"><span class="qnum">14</span><h2>Fractions, decimals and recurring decimals</h2><span class="meta">59 marks · 3.1% of all marks · in 17 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/14_recurring.jpg" src="videos/14_recurring.mp4" aria-label="Explainer video: Fractions, decimals and recurring decimals"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A recurring tail never ends. Shift a copy so the two tails line up exactly. Then subtraction removes the whole infinite tail at once.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Fractions, decimals and percentages are three forms of the same value. AQA tests fraction arithmetic without a calculator, mixed numbers, and changing recurring decimals to fractions (often as a proof).</p>
+<p>To change a recurring decimal to a fraction:</p>
+<ol><li>Let x equal the decimal.</li>
+<li>Count the digits that repeat. Multiply x by 10 for one digit, 100 for two digits, 1000 for three digits.</li>
+<li>Write the two equations so the recurring parts line up.</li>
+<li>Subtract the smaller equation from the larger one. The recurring parts cancel.</li>
+<li>Divide to find x. Simplify the fraction.</li></ol>
+<p class="caution"><span>CAUTION</span>In a "show that" question, write every step. A calculator answer gets no marks.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Subtracting x from 100x so the recurring tails cancel">
+<g font-size="18" font-family="var(--f-mono)"><text x="20" y="45">100x = 45.</text><text x="20" y="90">   x =  0.</text></g>
+<rect x="128" y="27" width="120" height="26" style="fill:var(--teal);fill-opacity:.18;stroke:var(--teal)"/>
+<rect x="128" y="72" width="120" height="26" style="fill:var(--teal);fill-opacity:.18;stroke:var(--teal)"/>
+<g font-size="18"><text x="132" y="45">454545…</text><text x="132" y="90">454545…</text></g>
+<path class="ln" d="M20 108 L250 108"/>
+<text x="20" y="135" font-size="18" class="a" font-weight="700">99x = 45   →   x = 45/99 = 5/11</text>
+<text x="258" y="68" font-size="11" class="t">same tail</text>
+</svg></div><figcaption>The two tails match digit for digit, so they cancel.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Prove that 0.4̇5̇ (0.454545…) = 5/11.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Let x = 0.454545…</li><li>Two digits repeat, so 100x = 45.454545…</li><li>100x − x: 99x = 45</li><li>x = <span class="frac"><span>45</span><span>99</span></span> = <span class="frac"><span>5</span><span>11</span></span></li></ol>
+      <p class="ans">Answer: <mark>5/11 (shown)</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="sequences">
+  <div class="topic-head"><span class="qnum">15</span><h2>Sequences</h2><span class="meta">54 marks · 2.8% of all marks · in 17 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/15_sequences.jpg" src="videos/15_sequences.mp4" aria-label="Explainer video: Sequences"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Draw each term as dots. 3, 8, 15, 24 are squares with two extra lines of dots. The n² is a real square you can see.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A sequence is a list of numbers that follows a rule. The nth term is a formula for any term. AQA tests linear sequences, quadratic sequences, geometric sequences and Fibonacci-type sequences.</p>
+<p>To find the nth term of a quadratic sequence:</p>
+<ol><li>Find the first differences between terms.</li>
+<li>Find the second differences. They must be the same.</li>
+<li>Halve the second difference. This is the number in front of n².</li>
+<li>Subtract that n² part from each term.</li>
+<li>Find the nth term of what is left. It is linear. Add it to the n² part.</li>
+<li>Check your formula with n = 1 and n = 2.</li></ol>
+<p class="caution"><span>CAUTION</span>The coefficient of n² is half the second difference, not the full second difference.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Difference table for 3, 8, 15, 24, 35">
+<g font-size="16" text-anchor="middle"><text x="40" y="35">3</text><text x="100" y="35">8</text><text x="160" y="35">15</text><text x="220" y="35">24</text><text x="280" y="35">35</text></g>
+<g font-size="14" text-anchor="middle" class="t"><text x="70" y="75" class="t">5</text><text x="130" y="75" class="t">7</text><text x="190" y="75" class="t">9</text><text x="250" y="75" class="t">11</text></g>
+<g font-size="14" text-anchor="middle" font-weight="700"><text x="100" y="115" class="a">2</text><text x="160" y="115" class="a">2</text><text x="220" y="115" class="a">2</text></g>
+<g class="lm"><path d="M45 42 L65 62 M95 42 L75 62 M105 42 L125 62 M155 42 L135 62 M165 42 L185 62 M215 42 L195 62 M225 42 L245 62 M275 42 L255 62"/></g>
+<text x="160" y="155" font-size="13" text-anchor="middle">½ × 2 = 1  →  n² ;  remainder 2, 4, 6, 8 → 2n</text>
+</svg></div><figcaption>Constant second difference 2 means the sequence starts with 1n².</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Find an expression for the nth term of the sequence 3, 8, 15, 24, 35, …</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>First differences: 5, 7, 9, 11. Second difference: 2</li><li>½ × 2 = 1, so the sequence starts with n²</li><li>Terms − n²: 3 − 1, 8 − 4, 15 − 9, … = 2, 4, 6, 8, 10 → 2n</li><li>Check n = 5: 25 + 10 = 35 ✓</li></ol>
+      <p class="ans">Answer: <mark>n² + 2n</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="trigonometry">
+  <div class="topic-head"><span class="qnum">16</span><h2>Sine rule, cosine rule and trig graphs</h2><span class="meta">54 marks · 2.8% of all marks · in 14 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/16_cosine.jpg" src="videos/16_cosine.mp4" aria-label="Explainer video: Sine rule, cosine rule and trig graphs"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The cosine rule is Pythagoras with a correction. At 90°, cos C = 0 and the correction disappears. Close the angle and the third side shrinks.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>These rules work in any triangle, not only right-angled triangles. Label the sides a, b, c and the opposite angles A, B, C. AQA also tests the graphs of sin, cos and tan and exact values such as sin 30° = ½.</p>
+<ol><li>Look at what you know.</li>
+<li>If you know two sides and the angle between them, use the cosine rule: c² = a² + b² − 2ab cos C.</li>
+<li>If you know three sides and need an angle, rearrange the cosine rule: cos C = (a² + b² − c²) ÷ 2ab.</li>
+<li>If you know a side and its opposite angle, use the sine rule: a ÷ sin A = b ÷ sin B.</li>
+<li>For the area, use ½ab sin C.</li></ol>
+<p class="caution"><span>CAUTION</span>Set your calculator to degrees. Do the 2ab cos C part before you subtract.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Triangle with sides 7 and 9 and included angle 50 degrees">
+<path class="ln" d="M40 170 L265 170 M40 170 L152.5 35.9"/>
+<path class="la" d="M152.5 35.9 L265 170"/>
+<path class="lt" d="M75 170 A35 35 0 0 0 62.5 143.2" style="stroke-width:2"/>
+<text x="82" y="160" font-size="13" class="t">50°</text>
+<text x="150" y="190" font-size="14" text-anchor="middle">9 cm</text>
+<text x="78" y="95" font-size="14">7 cm</text>
+<text x="218" y="95" font-size="14" class="a" font-weight="700">c</text>
+<text x="235" y="40" font-size="12">c² = 7² + 9² − 2(7)(9)cos 50°</text>
+</svg></div><figcaption>Two sides and the angle between them: use the cosine rule.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>In triangle ABC, a = 7 cm, b = 9 cm and angle C = 50°. (a) Work out the length c. (b) Work out the area of the triangle.</p><span class="marks">[5 marks]</span></div>
+      <ol class="work"><li>(a) c² = 7² + 9² − 2 × 7 × 9 × cos 50° = 130 − 80.99 = 49.01</li><li>c = √49.01 = 7.0006…</li><li>(b) Area = <span class="frac"><span>1</span><span>2</span></span> × 7 × 9 × sin 50° = 24.13…</li></ol>
+      <p class="ans">Answer: <mark>(a) 7.00 cm   (b) 24.1 cm²</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="bounds">
+  <div class="topic-head"><span class="qnum">17</span><h2>Bounds, rounding and estimation</h2><span class="meta">52 marks · 2.7% of all marks · in 17 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/17_bounds.jpg" src="videos/17_bounds.mp4" aria-label="Explainer video: Bounds, rounding and estimation"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A rounded number is a range, not a point. Draw the band on a number line. It goes half a step each way.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A measurement that is rounded has an upper bound and a lower bound. AQA tests error intervals, upper and lower bounds in calculations, and estimates using numbers rounded to 1 significant figure.</p>
+<ol><li>Find the size of the rounding step. "To 1 dp" means a step of 0.1.</li>
+<li>Halve the step. Subtract it for the lower bound. Add it for the upper bound.</li>
+<li>Write the error interval: lower bound ≤ x &lt; upper bound.</li>
+<li>For an upper bound of a sum or product, use both upper bounds.</li>
+<li>For an upper bound of a division, use the upper bound on top and the lower bound on the bottom.</li></ol>
+<p class="caution"><span>CAUTION</span>For subtraction and division, do not use two upper bounds. Ask: which values make the answer biggest?</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Error interval from 12.25 to 12.35 on a number line">
+<path class="ln" d="M20 90 L300 90"/>
+<g class="lm"><path d="M30 84 L30 96 M95 84 L95 96 M160 84 L160 96 M225 84 L225 96 M290 84 L290 96"/></g>
+<rect x="95" y="80" width="130" height="20" style="fill:var(--teal);fill-opacity:.3"/>
+<circle cx="95" cy="90" r="6" style="fill:var(--teal)"/><circle class="fp" cx="225" cy="90" r="6" style="stroke:var(--teal)"/>
+<circle cx="160" cy="90" r="4" class="fi"/>
+<g font-size="12" text-anchor="middle"><text x="30" y="118">12.20</text><text x="95" y="118" font-weight="700">12.25</text><text x="160" y="118">12.30</text><text x="225" y="118" font-weight="700">12.35</text><text x="290" y="118">12.40</text></g>
+<text x="160" y="55" font-size="14" text-anchor="middle" class="t" font-weight="700">12.25 ≤ t &lt; 12.35</text>
+<text x="160" y="140" font-size="11" text-anchor="middle" class="m">closed: included · open: not included</text>
+</svg></div><figcaption>Every time in the shaded band rounds to 12.3 s.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A runner runs 100 m, correct to the nearest metre. The time is 12.3 s, correct to 1 decimal place. Work out the upper bound of the runner's average speed.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Distance: 99.5 ≤ d &lt; 100.5</li><li>Time: 12.25 ≤ t &lt; 12.35</li><li>Upper bound of speed = upper distance ÷ lower time = 100.5 ÷ 12.25 = 8.204…</li></ol>
+      <p class="ans">Answer: <mark>8.20 m/s (3 sf)</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="circles">
+  <div class="topic-head"><span class="qnum">18</span><h2>Circle theorems</h2><span class="meta">52 marks · 2.7% of all marks · in 14 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/18_circle.jpg" src="videos/18_circle.mp4" aria-label="Explainer video: Circle theorems"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Slide point C round the circle. The angle at C does not change. It is always half the angle at the centre.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Circle theorems are rules for angles and lines in circles. AQA asks you to find angles and to give reasons. Some questions ask for a full proof.</p>
+<ol><li>Mark all the given angles on the diagram.</li>
+<li>Look for radii. Two radii make an isosceles triangle.</li>
+<li>Look for the main theorems: the angle at the centre is twice the angle at the circumference; angles in the same segment are equal; the angle in a semicircle is 90°; opposite angles of a cyclic quadrilateral add to 180°; a tangent meets a radius at 90°; two tangents from a point are equal; the alternate segment theorem.</li>
+<li>Find one angle at a time. Write the reason next to each angle.</li></ol>
+<p class="caution"><span>CAUTION</span>Use the exact words of the theorem as your reason. "Because of the circle" gets no marks.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Circle centre O with angle AOB 124 degrees, angle ACB 62 degrees and angle ADB 118 degrees">
+<circle cx="100" cy="105" r="80" class="lm"/>
+<path class="lt" d="M100 105 L29.4 142.6 M100 105 L170.6 142.6"/>
+<path class="la" d="M93 25.3 L29.4 142.6 M93 25.3 L170.6 142.6" style="stroke-width:2"/>
+<path d="M100 185 L29.4 142.6 M100 185 L170.6 142.6" style="stroke:var(--red);stroke-width:2;fill:none"/>
+<circle cx="100" cy="105" r="3" class="fi"/>
+<g font-size="12"><text x="104" y="100">O</text><text x="14" y="148">A</text><text x="175" y="148">B</text><text x="86" y="18">C</text><text x="96" y="198">D</text>
+<text x="88" y="132" class="t">124°</text><text x="85" y="55" class="a">62°</text><text x="88" y="172" style="fill:var(--red)">118°</text></g>
+<g font-size="12"><text x="200" y="50">centre = 2 × circumference</text><text x="200" y="68" class="a">124 ÷ 2 = 62°</text>
+<text x="200" y="110">cyclic quadrilateral:</text><text x="200" y="128">opposite angles = 180°</text><text x="200" y="146" style="fill:var(--red)">180 − 62 = 118°</text></g>
+</svg></div><figcaption>Angle ACB is half of angle AOB. ACBD is cyclic, so angle ADB = 180° − 62°.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A, B, C and D are points on a circle, centre O. C is on the major arc and D is on the minor arc. Angle AOB = 124°. Work out angle ACB and angle ADB. Give reasons.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Angle ACB = 124 ÷ 2 = 62°</li><li>Reason: the angle at the centre is twice the angle at the circumference</li><li>Angle ADB = 180 − 62 = 118°</li><li>Reason: opposite angles of a cyclic quadrilateral add up to 180°</li></ol>
+      <p class="ans">Answer: <mark>ACB = 62°, ADB = 118°</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="rates">
+  <div class="topic-head"><span class="qnum">19</span><h2>Real-life graphs, rates and area under graphs</h2><span class="meta">51 marks · 2.7% of all marks · in 12 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/19_speedtime.jpg" src="videos/19_speedtime.mp4" aria-label="Explainer video: Real-life graphs, rates and area under graphs"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Cut the time into thin strips. In each strip, distance = speed × time, which is the strip's area. Add all strips and you get the area under the graph.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A real-life graph shows how one quantity changes with another. AQA tests distance-time graphs, speed-time graphs, conversion graphs and rates of change, often with a tangent or an area estimate.</p>
+<ol><li>Read the units on both axes.</li>
+<li>The gradient is the rate of change. On a speed-time graph, the gradient is the acceleration.</li>
+<li>For a curve, draw a tangent at the point. Find the gradient of the tangent.</li>
+<li>On a speed-time graph, the area under the graph is the distance.</li>
+<li>Split the area into triangles, rectangles and trapeziums. Add the areas.</li></ol>
+<p class="caution"><span>CAUTION</span>On a distance-time graph the gradient is speed. On a speed-time graph the gradient is acceleration. Check the axes first.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Speed-time graph split into a triangle, rectangle and triangle">
+<path class="ln" d="M40 170 L295 170 M40 170 L40 30"/>
+<path class="fb" d="M40 170 L104 50 L104 170 Z"/><path class="ft" d="M104 50 L200 50 L200 170 L104 170 Z"/><path class="fb" d="M200 50 L280 170 L200 170 Z"/>
+<path class="la" d="M40 170 L104 50 L200 50 L280 170"/>
+<g font-size="13" text-anchor="middle" font-weight="700"><text x="84" y="140">24</text><text x="152" y="115">72</text><text x="222" y="140">30</text></g>
+<g font-size="11" class="m" text-anchor="middle"><text x="104" y="185" class="m">4</text><text x="200" y="185" class="m">10</text><text x="280" y="185" class="m">15</text><text x="167" y="198" class="m">time (s)</text></g>
+<text x="32" y="54" font-size="11" text-anchor="end" class="m">12</text>
+<text x="52" y="25" font-size="11" class="m">speed (m/s)</text>
+<text x="215" y="35" font-size="12" class="a" font-weight="700">area = 126 m</text>
+</svg></div><figcaption>The area under a speed-time graph is the distance travelled.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A car accelerates from rest to 12 m/s in 4 seconds. It travels at 12 m/s for 6 seconds. It then slows down steadily and stops 5 seconds later. (a) Work out the acceleration in the first 4 seconds. (b) Work out the total distance.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) Gradient = 12 ÷ 4 = 3 m/s²</li><li>(b) Triangle: <span class="frac"><span>1</span><span>2</span></span> × 4 × 12 = 24</li><li>Rectangle: 6 × 12 = 72</li><li>Triangle: <span class="frac"><span>1</span><span>2</span></span> × 5 × 12 = 30 ; total 24 + 72 + 30 = 126</li></ol>
+      <p class="ans">Answer: <mark>(a) 3 m/s²   (b) 126 m</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="transformations">
+  <div class="topic-head"><span class="qnum">20</span><h2>Non-linear graphs and graph transformations</h2><span class="meta">50 marks · 2.6% of all marks · in 17 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/20_transform.jpg" src="videos/20_transform.mp4" aria-label="Explainer video: Non-linear graphs and graph transformations"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Outside the bracket changes y, the way you expect. Inside the bracket changes x, the opposite way. f(x + 4) reaches each value 4 units early, so it moves left.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Non-linear graphs include quadratics, cubics, reciprocals (y = 1/x), exponentials and trig graphs. AQA asks you to recognise their shapes, read solutions from them and transform them.</p>
+<ol><li>Find a key point on y = f(x), for example the turning point.</li>
+<li>For y = f(x) + a, move the graph up by a. Add a to each y-coordinate.</li>
+<li>For y = f(x + a), move the graph left by a. Subtract a from each x-coordinate.</li>
+<li>For y = −f(x), reflect in the x-axis. Change the sign of each y-coordinate.</li>
+<li>For y = f(−x), reflect in the y-axis. Change the sign of each x-coordinate.</li></ol>
+<p class="caution"><span>CAUTION</span>f(x + 4) moves left, not right. f(x − 4) moves right.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 400 200" role="img" aria-label="Parabola with turning point (2, -3) and three transformations">
+<path class="lm" d="M30 105 L272 105 M140 12 L140 198"/>
+<path class="lb" d="M135.6 73.7 L138.0 81.7 L140.4 89.4 L142.9 96.6 L145.3 103.3 L147.7 109.7 L150.1 115.7 L152.5 121.2 L155.0 126.4 L157.4 131.1 L159.8 135.4 L162.2 139.3 L164.6 142.8 L167.1 145.9 L169.5 148.6 L171.9 150.9 L174.3 152.7 L176.7 154.1 L179.2 155.2 L181.6 155.8 L184.0 156.0 L186.4 155.8 L188.8 155.2 L191.3 154.1 L193.7 152.7 L196.1 150.9 L198.5 148.6 L200.9 145.9 L203.4 142.8 L205.8 139.3 L208.2 135.4 L210.6 131.1 L213.0 126.4 L215.5 121.2 L217.9 115.7 L220.3 109.7 L222.7 103.3 L225.1 96.6 L227.6 89.4 L230.0 81.7 L232.4 73.7"/><path class="lt" d="M144.4 15.9 L146.4 21.3 L148.4 26.4 L150.3 31.2 L152.3 35.7 L154.3 40.0 L156.3 44.0 L158.3 47.7 L160.2 51.2 L162.2 54.3 L164.2 57.2 L166.2 59.8 L168.2 62.2 L170.1 64.3 L172.1 66.0 L174.1 67.6 L176.1 68.8 L178.1 69.8 L180.0 70.4 L182.0 70.9 L184.0 71.0 L186.0 70.9 L188.0 70.4 L189.9 69.8 L191.9 68.8 L193.9 67.6 L195.9 66.0 L197.9 64.3 L199.8 62.2 L201.8 59.8 L203.8 57.2 L205.8 54.3 L207.8 51.2 L209.7 47.7 L211.7 44.0 L213.7 40.0 L215.7 35.7 L217.7 31.2 L219.6 26.4 L221.6 21.3 L223.6 15.9"/><path class="la" d="M47.6 73.7 L50.0 81.7 L52.4 89.4 L54.9 96.6 L57.3 103.3 L59.7 109.7 L62.1 115.7 L64.5 121.2 L67.0 126.4 L69.4 131.1 L71.8 135.4 L74.2 139.3 L76.6 142.8 L79.1 145.9 L81.5 148.6 L83.9 150.9 L86.3 152.7 L88.7 154.1 L91.2 155.2 L93.6 155.8 L96.0 156.0 L98.4 155.8 L100.8 155.2 L103.3 154.1 L105.7 152.7 L108.1 150.9 L110.5 148.6 L112.9 145.9 L115.4 142.8 L117.8 139.3 L120.2 135.4 L122.6 131.1 L125.0 126.4 L127.5 121.2 L129.9 115.7 L132.3 109.7 L134.7 103.3 L137.1 96.6 L139.6 89.4 L142.0 81.7 L144.4 73.7"/><path d="M135.6 136.3 L138.0 128.3 L140.4 120.6 L142.9 113.4 L145.3 106.7 L147.7 100.3 L150.1 94.3 L152.5 88.8 L155.0 83.6 L157.4 78.9 L159.8 74.6 L162.2 70.7 L164.6 67.2 L167.1 64.1 L169.5 61.4 L171.9 59.1 L174.3 57.3 L176.7 55.9 L179.2 54.8 L181.6 54.2 L184.0 54.0 L186.4 54.2 L188.8 54.8 L191.3 55.9 L193.7 57.3 L196.1 59.1 L198.5 61.4 L200.9 64.1 L203.4 67.2 L205.8 70.7 L208.2 74.6 L210.6 78.9 L213.0 83.6 L215.5 88.8 L217.9 94.3 L220.3 100.3 L222.7 106.7 L225.1 113.4 L227.6 120.6 L230.0 128.3 L232.4 136.3" style="stroke:var(--red);stroke-width:2.5;fill:none"/>
+<circle cx="184.0" cy="156.0" r="4" style="fill:var(--blue)"/><circle cx="184.0" cy="71.0" r="4" style="fill:var(--teal)"/>
+<circle cx="96.0" cy="156.0" r="4" style="fill:var(--accent)"/><circle cx="184.0" cy="54.0" r="4" style="fill:var(--red)"/>
+<g font-size="11"><text x="290" y="60" style="fill:var(--blue)">f(x): (2, −3)</text><text x="290" y="80" class="t">f(x)+5: (2, 2)</text>
+<text x="290" y="100" class="a">f(x+4): (−2, −3)</text><text x="290" y="120" style="fill:var(--red)">−f(x): (2, 3)</text></g>
+</svg></div><figcaption>Track the turning point. Each transformation moves it in a predictable way.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The graph of y = f(x) has a turning point at (2, −3). Write down the turning point of (a) y = f(x) + 5, (b) y = f(x + 4), (c) y = −f(x).</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) Up 5: (2, −3 + 5)</li><li>(b) Left 4: (2 − 4, −3)</li><li>(c) Reflect in the x-axis: (2, 3)</li></ol>
+      <p class="ans">Answer: <mark>(a) (2, 2)  (b) (−2, −3)  (c) (2, 3)</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="functions">
+  <div class="topic-head"><span class="qnum">21</span><h2>Functions (composite and inverse)</h2><span class="meta">45 marks · 2.3% of all marks · in 11 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/21_functions.jpg" src="videos/21_functions.mp4" aria-label="Explainer video: Functions (composite and inverse)"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A function is a machine: one number in, one number out. fg(x) is two machines in a row, g first. The inverse runs the machine backwards.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A function is a rule that changes an input into an output. AQA tests f(x) notation, composite functions such as fg(x), and inverse functions f⁻¹(x).</p>
+<ol><li>For f(a), put a in place of x and calculate.</li>
+<li>For fg(x), do g first. Then put the result into f.</li>
+<li>For the inverse, write y = f(x). Swap x and y. Make y the subject again.</li>
+<li>Check the inverse. f⁻¹(f(a)) must give a.</li></ol>
+<p class="caution"><span>CAUTION</span>fg(x) is not f(x) × g(x). It means f of g of x.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Function machines g then f, with 3 going to 9 going to 21">
+<rect class="ft" x="70" y="30" width="70" height="40" rx="6"/><rect class="fb" x="190" y="30" width="80" height="40" rx="6"/>
+<g font-size="14" text-anchor="middle"><text x="105" y="55">g: x²</text><text x="230" y="55">f: 2x + 3</text></g>
+<path class="ln" d="M30 50 L66 50 M140 50 L186 50 M270 50 L305 50"/>
+<g font-size="15" text-anchor="middle" font-weight="700"><text x="40" y="40" class="a">3</text><text x="163" y="40" class="a">9</text><text x="292" y="40" class="a">21</text></g>
+<path class="la" d="M270 110 L40 110" style="stroke-width:2"/><path class="la" d="M40 110 L50 104 M40 110 L50 116" style="stroke-width:2"/>
+<text x="160" y="100" font-size="12" text-anchor="middle" class="a">inverse of f: −3, then ÷2</text>
+<text x="160" y="135" font-size="12" text-anchor="middle" class="m">f⁻¹(x) = (x − 3) ÷ 2</text>
+</svg></div><figcaption>fg(3): g acts first, then f. The inverse undoes the steps in reverse order.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>f(x) = 2x + 3 and g(x) = x². (a) Work out fg(3). (b) Find f⁻¹(x). (c) Solve gf(x) = 25.</p><span class="marks">[6 marks]</span></div>
+      <ol class="work"><li>(a) g(3) = 9, then f(9) = 2 × 9 + 3 = 21</li><li>(b) y = 2x + 3 → swap: x = 2y + 3 → y = <span class="frac"><span>x − 3</span><span>2</span></span></li><li>(c) gf(x) = (2x + 3)² = 25, so 2x + 3 = 5 or 2x + 3 = −5</li></ol>
+      <p class="ans">Answer: <mark>(a) 21  (b) <span class="frac"><span>x − 3</span><span>2</span></span>  (c) x = 1 or x = −4</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="transformations-shapes">
+  <div class="topic-head"><span class="qnum">22</span><h2>Transformations</h2><span class="meta">41 marks · 2.1% of all marks · in 11 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/22_enlarge.jpg" src="videos/22_enlarge.mp4" aria-label="Explainer video: Transformations"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>An enlargement pushes every point along a ray from the centre. Scale factor 2 means twice as far from the centre. Negative means the other side of the centre.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A transformation moves or changes a shape. The four types are translation, reflection, rotation and enlargement. AQA asks you to draw them and to describe them fully.</p>
+<ol><li>Translation: move by a column vector. Top number is across, bottom number is up.</li>
+<li>Reflection: give the equation of the mirror line, for example y = x.</li>
+<li>Rotation: give the angle, the direction and the centre.</li>
+<li>Enlargement: give the scale factor and the centre. Draw rays from the centre through each corner.</li>
+<li>For a fractional scale factor, the shape gets smaller. For a negative scale factor, go through the centre to the other side.</li></ol>
+<p class="caution"><span>CAUTION</span>"Describe fully" means name the transformation and give every detail. One transformation only.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Triangle enlarged by scale factor 2 from centre (1,1)">
+<g class="lm" style="stroke-opacity:.35"><path d="M60 180 L60 20 M90 180 L90 20 M120 180 L120 20 M150 180 L150 20 M180 180 L180 20 M210 180 L210 20 M240 180 L240 20 M30 150 L270 150 M30 120 L270 120 M30 90 L270 90 M30 60 L270 60 M30 30 L270 30"/></g>
+<path class="ln" d="M30 180 L275 180 M30 180 L30 15"/>
+<path class="lm" d="M60 150 L240 90 M60 150 L120 30 M60 150 L120 90" style="stroke-dasharray:4 3"/>
+<path class="fb" d="M90 120 L150 120 L90 90 Z"/>
+<path class="fa" d="M120 90 L240 90 L120 30 Z"/>
+<circle class="fr" cx="60" cy="150" r="5"/>
+<g font-size="11"><text x="44" y="166" style="fill:var(--red)">C (1,1)</text><text x="96" y="114">A</text><text x="246" y="94" class="a">(7,3)</text><text x="126" y="28" class="a">(3,5)</text><text x="94" y="86" class="a">(3,3)</text></g>
+<g font-size="10" class="m" text-anchor="middle"><text x="60" y="194" class="m">1</text><text x="120" y="194" class="m">3</text><text x="180" y="194" class="m">5</text><text x="240" y="194" class="m">7</text></g>
+</svg></div><figcaption>Each new corner is twice as far from C along its ray.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Triangle A has vertices (2, 2), (4, 2) and (2, 3). Enlarge triangle A by scale factor 2, centre (1, 1). Write down the vertices of the image.</p><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>(2, 2): from C go 1 right, 1 up. Double it: 2 right, 2 up → (3, 3)</li><li>(4, 2): 3 right, 1 up → 6 right, 2 up → (7, 3)</li><li>(2, 3): 1 right, 2 up → 2 right, 4 up → (3, 5)</li></ol>
+      <p class="ans">Answer: <mark>(3, 3), (7, 3), (3, 5)</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="polygons">
+  <div class="topic-head"><span class="qnum">23</span><h2>Angles and polygons</h2><span class="meta">40 marks · 2.1% of all marks · in 11 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/23_polygons.jpg" src="videos/23_polygons.mp4" aria-label="Explainer video: Angles and polygons"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Walk round any polygon. You turn at each corner and finish facing the way you started. So the turns (exterior angles) add up to one full turn, 360°.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>AQA tests angle facts with reasons: angles on a straight line, around a point, in a triangle, and with parallel lines. It also tests interior and exterior angles of polygons.</p>
+<ol><li>Exterior angles of any polygon add up to 360°.</li>
+<li>For a regular polygon, each exterior angle = 360° ÷ number of sides.</li>
+<li>Interior angle + exterior angle = 180°.</li>
+<li>The interior angles of an n-sided polygon add up to (n − 2) × 180°.</li>
+<li>With parallel lines, look for alternate angles (Z shape) and corresponding angles (F shape).</li></ol>
+<p class="caution"><span>CAUTION</span>Write "alternate angles", not "Z angles". Exam reasons must use the correct names.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Regular hexagon with exterior angles marked at each corner">
+<path class="fb" d="M150 20 L215 57.5 L215 132.5 L150 170 L85 132.5 L85 57.5 Z"/>
+<g class="lm" style="stroke-dasharray:4 3"><path d="M215 57.5 L250 77.7 M215 132.5 L215 172 M150 170 L115 190 M85 132.5 L50 112.3 M85 57.5 L85 18 M150 20 L185 0"/></g>
+<path class="la" d="M235 69 A23 23 0 0 1 233 105" style="stroke-width:2"/>
+<text x="245" y="100" font-size="12" class="a">60°</text>
+<g font-size="12"><text x="250" y="140">6 × 60° = 360°</text><text x="250" y="160" class="m">one full turn</text></g>
+<text x="150" y="100" font-size="13" text-anchor="middle">120°</text>
+</svg></div><figcaption>Each turn is 60°. Six turns make a full circle.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Each interior angle of a regular polygon is 156°. Work out the number of sides.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Exterior angle = 180° − 156° = 24°</li><li>Exterior angles add up to 360°</li><li>Number of sides = 360 ÷ 24</li></ol>
+      <p class="ans">Answer: <mark>15 sides</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="pythagoras">
+  <div class="topic-head"><span class="qnum">24</span><h2>Pythagoras and right-angled trigonometry</h2><span class="meta">39 marks · 2.0% of all marks · in 9 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/24_pythag.jpg" src="videos/24_pythag.mp4" aria-label="Explainer video: Pythagoras and right-angled trigonometry"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Draw a square on each side of a right-angled triangle. The two small squares together have the same area as the big square.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>These methods work only in right-angled triangles. Use Pythagoras when you know two sides and need the third side. Use SOH CAH TOA when an angle is involved. AQA often puts them inside 3D shapes.</p>
+<ol><li>Find the hypotenuse. It is the longest side, opposite the right angle.</li>
+<li>To find the hypotenuse, add the squares of the two shorter sides. Then take the square root.</li>
+<li>To find a shorter side, subtract the squares. Then take the square root.</li>
+<li>For angles, label the sides opposite (O), adjacent (A) and hypotenuse (H).</li>
+<li>Choose sin = O/H, cos = A/H or tan = O/A. Use the inverse function to find the angle.</li></ol>
+<p class="caution"><span>CAUTION</span>Set the calculator to degrees (D on the screen).</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Ladder of 6.5 m against a wall, 6 m high, foot 2.5 m from wall">
+<path class="ln" d="M60 20 L60 170 L290 170"/>
+<path class="la" d="M60 20 L122.5 170"/>
+<path class="lm" d="M60 158 L72 158 L72 170"/>
+<path class="lt" d="M100 170 A22 22 0 0 0 108 151" style="stroke-width:2"/>
+<g font-size="13"><text x="34" y="100">6 m</text><text x="100" y="90" class="a" font-weight="700">6.5 m</text><text x="78" y="186">2.5 m</text><text x="112" y="160" class="t">θ</text></g>
+<g font-size="12"><text x="165" y="60">d² = 6.5² − 6² = 6.25</text><text x="165" y="80">d = 2.5 m</text><text x="165" y="110">sin θ = 6 ÷ 6.5</text><text x="165" y="130" class="a" font-weight="700">θ = 67.4°</text></g>
+</svg></div><figcaption>The ladder is the hypotenuse. The wall is opposite the angle θ.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A ladder 6.5 m long leans against a vertical wall. The top of the ladder is 6 m above the ground. (a) How far is the foot of the ladder from the wall? (b) Work out the angle between the ladder and the ground.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) d² = 6.5² − 6² = 42.25 − 36 = 6.25, so d = √6.25</li><li>(b) Opposite = 6, hypotenuse = 6.5, so use sin</li><li>sin θ = 6 ÷ 6.5 = 0.923…  →  θ = sin⁻¹(0.923…) = 67.38…°</li></ol>
+      <p class="ans">Answer: <mark>(a) 2.5 m  (b) 67.4°</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="proportion">
+  <div class="topic-head"><span class="qnum">25</span><h2>Direct and inverse proportion</h2><span class="meta">39 marks · 2.0% of all marks · in 10 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/25_proportion.jpg" src="videos/25_proportion.mp4" aria-label="Explainer video: Direct and inverse proportion"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>If y ∝ x², doubling x makes y four times bigger. Picture a square: double its side and four copies fit inside.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Two quantities are in proportion when one is a fixed multiple of the other. AQA tests direct proportion (y ∝ x, y ∝ x², y ∝ √x), inverse proportion (y ∝ 1/x, y ∝ 1/x²) and matching graphs to each type.</p>
+<ol><li>Change ∝ to "= k ×". For example, y ∝ x² becomes y = kx².</li>
+<li>Put in the pair of values that you know. Solve to find k.</li>
+<li>Write the formula with the value of k.</li>
+<li>Use the formula to find the missing value.</li></ol>
+<p>For inverse proportion, divide: y ∝ 1/x becomes y = k/x.</p>
+<p class="caution"><span>CAUTION</span>Read the power carefully. "Proportional to the square of x" means x², not x.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Graph of y = 4x squared with points (3,36) and (5,100)">
+<path class="ln" d="M40 170 L300 170 M40 170 L40 15"/>
+<path class="lb" d="M40 170 Q140 170 240 20"/>
+<circle class="fr" cx="160" cy="114" r="5"/><circle cx="240" cy="20" r="5" style="fill:var(--accent)"/>
+<g font-size="12"><text x="168" y="118">(3, 36)</text><text x="196" y="40" class="a" font-weight="700">(5, 100)</text></g>
+<g font-size="11" class="m" text-anchor="middle"><text x="160" y="185" class="m">3</text><text x="240" y="185" class="m">5</text><text x="290" y="185" class="m">x</text></g>
+<text x="60" y="40" font-size="13">y = 4x²</text>
+<text x="60" y="60" font-size="11" class="m">36 = k × 9 → k = 4</text>
+</svg></div><figcaption>Find k from one known pair, then use the formula.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>y is directly proportional to x². When x = 3, y = 36. (a) Find a formula for y in terms of x. (b) Work out y when x = 5. (c) Work out the positive value of x when y = 64.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) y = kx²; 36 = k × 9, so k = 4; y = 4x²</li><li>(b) y = 4 × 5² = 4 × 25</li><li>(c) 64 = 4x² → x² = 16 → x = 4</li></ol>
+      <p class="ans">Answer: <mark>(a) y = 4x²  (b) 100  (c) 4</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="similarity">
+  <div class="topic-head"><span class="qnum">26</span><h2>Similarity and congruence</h2><span class="meta">36 marks · 1.9% of all marks · in 15 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/26_similar.jpg" src="videos/26_similar.mp4" aria-label="Explainer video: Similarity and congruence"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Double every length of a cube and 8 small cubes fit inside. Lengths scale by k, areas by k², volumes by k³.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Similar shapes have the same shape but different sizes. All lengths change by the same scale factor k. Congruent shapes are identical (k = 1). AQA tests similar triangles, area and volume factors, and congruence proofs (SSS, SAS, ASA, RHS).</p>
+<ol><li>Find two matching lengths. Divide them to get k.</li>
+<li>For areas, use k². For volumes, use k³.</li>
+<li>Multiply or divide by the correct factor.</li>
+<li>To find k from areas, take the square root. From volumes, take the cube root.</li></ol>
+<p class="caution"><span>CAUTION</span>Do not use k for an area or a volume. Square it or cube it first.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Two similar cylinders with heights 6 and 9">
+<g><path class="fb" d="M40 70 L40 130 A30 9 0 0 0 100 130 L100 70 A30 9 0 0 1 40 70 Z"/><ellipse cx="70" cy="70" rx="30" ry="9" class="lm"/></g>
+<g><path class="ft" d="M150 40 L150 130 A45 13 0 0 0 240 130 L240 40 A45 13 0 0 1 150 40 Z"/><ellipse cx="195" cy="40" rx="45" ry="13" class="lm"/></g>
+<g font-size="12"><text x="104" y="104">6</text><text x="244" y="90">9</text><text x="46" y="160">160 cm³</text><text x="166" y="160" class="a" font-weight="700">540 cm³</text></g>
+<g font-size="11" class="m"><text x="256" y="40" class="m">k = 1.5</text><text x="256" y="58" class="m">k² = 2.25</text><text x="256" y="76" class="m">k³ = 3.375</text></g>
+</svg></div><figcaption>Length factor 1.5, so the volume factor is 1.5³.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Two cylinders are mathematically similar. Their heights are 6 cm and 9 cm. The smaller cylinder has volume 160 cm³. Work out the volume of the larger cylinder.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Length scale factor k = 9 ÷ 6 = 1.5</li><li>Volume scale factor = 1.5³ = 3.375</li><li>Volume = 160 × 3.375</li></ol>
+      <p class="ans">Answer: <mark>540 cm³</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="primes">
+  <div class="topic-head"><span class="qnum">27</span><h2>Factors, multiples and primes</h2><span class="meta">35 marks · 1.8% of all marks · in 12 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/27_primes.jpg" src="videos/27_primes.mp4" aria-label="Explainer video: Factors, multiples and primes"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Primes are the building blocks of whole numbers. Put both numbers' primes in a Venn diagram: the overlap is the HCF, and everything together is the LCM.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A prime number has exactly two factors: 1 and itself. AQA tests prime factor decomposition, highest common factor (HCF) and lowest common multiple (LCM), often in a word problem.</p>
+<ol><li>Write each number as a product of primes. Use a factor tree.</li>
+<li>Write the answer in index form, for example 2³ × 3² × 5.</li>
+<li>Draw a Venn diagram. Put the shared primes in the middle.</li>
+<li>The HCF is the product of the primes in the middle.</li>
+<li>The LCM is the product of all the primes in the diagram.</li></ol>
+<p class="caution"><span>CAUTION</span>1 is not a prime number. Do not put it in a factor tree.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Venn diagram of prime factors of 360 and 84">
+<circle cx="125" cy="90" r="65" style="fill:var(--blue);fill-opacity:.15;stroke:var(--blue);stroke-width:1.5"/>
+<circle cx="195" cy="90" r="65" style="fill:var(--teal);fill-opacity:.15;stroke:var(--teal);stroke-width:1.5"/>
+<g font-size="15" text-anchor="middle"><text x="95" y="75">2</text><text x="95" y="97">3</text><text x="95" y="119">5</text>
+<text x="160" y="75" class="a" font-weight="700">2</text><text x="160" y="97" class="a" font-weight="700">2</text><text x="160" y="119" class="a" font-weight="700">3</text><text x="225" y="97">7</text></g>
+<g font-size="12"><text x="70" y="20" style="fill:var(--blue)">360 = 2³ × 3² × 5</text><text x="190" y="20" class="t">84 = 2² × 3 × 7</text></g>
+<g font-size="12"><text x="160" y="168" text-anchor="middle">HCF = 12 · LCM = 2520</text></g>
+</svg></div><figcaption>Middle: the shared primes (HCF). All of them: the LCM.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>(a) Write 360 and 84 as products of prime factors. (b) Find the highest common factor of 360 and 84. (c) Find the lowest common multiple of 360 and 84.</p><span class="marks">[5 marks]</span></div>
+      <ol class="work"><li>(a) 360 = 2³ × 3² × 5 ;  84 = 2² × 3 × 7</li><li>(b) Shared primes: 2 × 2 × 3</li><li>(c) All primes: 2³ × 3² × 5 × 7 = 8 × 9 × 5 × 7</li></ol>
+      <p class="ans">Answer: <mark>(b) 12  (c) 2520</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="vectors">
+  <div class="topic-head"><span class="qnum">28</span><h2>Vectors</h2><span class="meta">33 marks · 1.7% of all marks · in 10 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/28_vectors.jpg" src="videos/28_vectors.mp4" aria-label="Explainer video: Vectors"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A vector is a journey. To get from one point to another, follow any route made of vectors you know, and add the steps.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A vector has a size and a direction. AQA tests column vectors, vector paths in shapes, and proofs that points are on a straight line or that lines are parallel.</p>
+<ol><li>Write the vectors you know on the diagram.</li>
+<li>To find a new vector, choose a route through known points.</li>
+<li>Going against an arrow changes the sign: AO = −a.</li>
+<li>For a point that divides a line in a ratio, find the fraction of the line. A ratio of 1 : 2 means one third of the way.</li>
+<li>Simplify. Collect the a terms and the b terms.</li>
+<li>To show lines are parallel, show that one vector is a multiple of the other.</li></ol>
+<p class="caution"><span>CAUTION</span>AB = b − a, not a − b. Go back along a, then forward along b.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Vectors a and b from O with P one third of the way from A to B">
+<path class="lb" d="M30 165 L70 30"/><path class="lt" d="M30 165 L250 130"/><path class="lm" d="M70 30 L250 130"/>
+<path class="la" d="M30 165 L130 63" style="stroke-dasharray:6 4"/>
+<circle cx="130" cy="63.3" r="5" style="fill:var(--accent)"/>
+<g font-size="13"><text x="18" y="178">O</text><text x="60" y="24">A</text><text x="254" y="135">B</text><text x="134" y="58" class="a">P</text>
+<text x="34" y="95" style="fill:var(--blue)" font-weight="700">a</text><text x="140" y="165" class="t" font-weight="700">b</text></g>
+<g font-size="12"><text x="170" y="40">AB = b − a</text><text x="170" y="60" class="a" font-weight="700">OP = ⅔a + ⅓b</text></g>
+</svg></div><figcaption>Route O → A → P: a, then one third of AB.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>OA = a and OB = b. P is on AB so that AP : PB = 1 : 2. Find OP in terms of a and b. Give your answer in its simplest form.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>AB = −a + b = b − a</li><li>AP = <span class="frac"><span>1</span><span>3</span></span>AB = <span class="frac"><span>1</span><span>3</span></span>(b − a)</li><li>OP = OA + AP = a + <span class="frac"><span>1</span><span>3</span></span>b − <span class="frac"><span>1</span><span>3</span></span>a</li></ol>
+      <p class="ans">Answer: <mark>OP = ⅔a + ⅓b</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="scatter">
+  <div class="topic-head"><span class="qnum">29</span><h2>Scatter graphs, charts and sampling</h2><span class="meta">26 marks · 1.4% of all marks · in 9 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/29_scatter.jpg" src="videos/29_scatter.mp4" aria-label="Explainer video: Scatter graphs, charts and sampling"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A line of best fit turns a cloud of points into a rule you can read from. It is only trustworthy inside the range of the data.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A scatter graph shows two sets of data for the same items. AQA tests correlation, lines of best fit, outliers, and also pie charts, time-series graphs and sampling.</p>
+<ol><li>Describe the correlation: positive, negative or none.</li>
+<li>Draw a line of best fit. Use a ruler. Put roughly equal points on each side.</li>
+<li>To estimate, go from one axis to the line, then across to the other axis.</li>
+<li>Estimate only inside the range of the data (interpolation).</li>
+<li>Ignore an outlier when you draw the line of best fit.</li></ol>
+<p class="caution"><span>CAUTION</span>An estimate outside the data (extrapolation) is not reliable. Correlation does not prove that one thing causes the other.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Scatter graph of hours revised against test score with a line of best fit">
+<path class="ln" d="M40 165 L300 165 M40 165 L40 15"/>
+<g style="fill:var(--blue)"><circle cx="60" cy="108" r="4"/><circle cx="80" cy="94" r="4"/><circle cx="100" cy="93" r="4"/><circle cx="100" cy="85" r="4"/><circle cx="120" cy="78" r="4"/><circle cx="140" cy="79" r="4"/><circle cx="160" cy="60" r="4"/><circle cx="160" cy="72" r="4"/><circle cx="180" cy="66" r="4"/><circle cx="200" cy="51" r="4"/><circle cx="220" cy="42" r="4"/></g>
+<path class="la" d="M40 112.5 L230 37.5" style="stroke-width:2.5"/>
+<path class="lt" d="M140 165 L140 75 L40 75" style="stroke-dasharray:4 3;stroke-width:1.5"/>
+<rect x="240" y="15" width="60" height="150" style="fill:var(--red);fill-opacity:.1"/>
+<g font-size="11"><text x="44" y="70" class="t">≈ 60</text><text x="132" y="180" class="t">5</text><text x="243" y="30" style="fill:var(--red)">no data:</text><text x="243" y="44" style="fill:var(--red)">unreliable</text></g>
+<text x="170" y="185" font-size="10" class="m" text-anchor="middle">hours revised</text>
+</svg></div><figcaption>Read up to the line and across. Do not read outside the data.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The scatter graph shows hours of revision and test scores for 11 students. The line of best fit passes through (2, 45) and (8, 75). (a) Estimate the score for 5 hours of revision. (b) Why is it not sensible to use the line for 20 hours?</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) Gradient = (75 − 45) ÷ (8 − 2) = 5 points per hour</li><li>At 5 hours: 45 + 3 × 5 = 60</li><li>(b) 20 hours is outside the data. The line would predict 135, which is more than the maximum score</li></ol>
+      <p class="ans">Answer: <mark>(a) about 60  (b) extrapolation is not reliable</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="simultaneous">
+  <div class="topic-head"><span class="qnum">30</span><h2>Simultaneous equations</h2><span class="meta">26 marks · 1.4% of all marks · in 6 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/30_simultaneous.jpg" src="videos/30_simultaneous.mp4" aria-label="Explainer video: Simultaneous equations"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Each equation is a straight line. The solution is the one point that is on both lines: where they cross.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Simultaneous equations are two equations with two unknowns. The answer must be true for both. AQA tests linear pairs, linear-and-quadratic pairs, and forming the equations from a word problem.</p>
+<ol><li>Multiply one or both equations so that one letter has the same number in front.</li>
+<li>If the signs are different, add the equations. If the signs are the same, subtract.</li>
+<li>Solve the new equation for one letter.</li>
+<li>Put that value into one of the first equations. Find the other letter.</li>
+<li>Check both values in the other equation.</li></ol>
+<p>For a linear and a quadratic equation, substitute the linear one into the quadratic. Solve the quadratic. You usually get two pairs of answers.</p>
+<p class="caution"><span>CAUTION</span>Multiply every term in the equation, including the number on the right.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Lines 2x + 3y = 12 and 5x − 2y = 11 crossing at (3, 2)">
+<path class="lm" d="M30 150 L230 150 M60 185 L60 10"/>
+<path class="lb" d="M30 10 L225 140"/>
+<path class="lt" d="M114 180 L180 15"/>
+<circle cx="150" cy="90" r="5" style="fill:var(--accent)"/>
+<g font-size="12"><text x="158" y="94" class="a" font-weight="700">(3, 2)</text><text x="64" y="24" style="fill:var(--blue)">2x + 3y = 12</text><text x="150" y="182" class="t">5x − 2y = 11</text></g>
+<g font-size="11"><text x="240" y="80">× 2: 4x + 6y = 24</text><text x="240" y="98">× 3: 15x − 6y = 33</text><text x="240" y="116" class="a">add: 19x = 57</text></g>
+</svg></div><figcaption>The algebra finds the crossing point of the two lines.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Solve the simultaneous equations 2x + 3y = 12 and 5x − 2y = 11.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>× 2: 4x + 6y = 24 ;  × 3: 15x − 6y = 33</li><li>Add: 19x = 57, so x = 3</li><li>2(3) + 3y = 12 → 3y = 6 → y = 2</li><li>Check: 5(3) − 2(2) = 11 ✓</li></ol>
+      <p class="ans">Answer: <mark>x = 3, y = 2</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="circle-equation">
+  <div class="topic-head"><span class="qnum">31</span><h2>Equation of a circle and tangents</h2><span class="meta">25 marks · 1.3% of all marks · in 8 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/31_circle_eq.jpg" src="videos/31_circle_eq.mp4" aria-label="Explainer video: Equation of a circle and tangents"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Every point on a circle is the same distance r from the centre. Pythagoras on that distance gives x² + y² = r².</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>At GCSE, the circle has its centre at the origin. Its equation is x² + y² = r². AQA tests reading the radius, checking if a point is on the circle, and finding the equation of a tangent.</p>
+<ol><li>The radius is the square root of the number on the right. x² + y² = 25 has radius 5.</li>
+<li>Find the gradient of the radius to the point: y ÷ x.</li>
+<li>The tangent is perpendicular to the radius. Its gradient is the negative reciprocal.</li>
+<li>Put the gradient and the point into y − y₁ = m(x − x₁), or into y = mx + c.</li>
+<li>Simplify to the form the question asks for.</li></ol>
+<p class="caution"><span>CAUTION</span>x² + y² = 25 has radius 5, not 25.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 200" role="img" aria-label="Circle radius 5 with tangent at (3,4)">
+<path class="lm" d="M10 110 L230 110 M110 195 L110 10"/>
+<circle cx="110" cy="110" r="75" class="lb"/>
+<path class="la" d="M110 110 L155 50" style="stroke-width:2"/>
+<path d="M95 5 L250 121" style="stroke:var(--red);stroke-width:2.5;fill:none"/>
+<path class="lm" d="M150.2 56.4 L156.6 61.2 L161.4 54.8" style="stroke-width:1.2"/>
+<circle class="fr" cx="155" cy="50" r="5"/>
+<g font-size="12"><text x="160" y="44">(3, 4)</text><text x="120" y="92" class="a">r = 5</text></g>
+<g font-size="12"><text x="200" y="140">radius: m = 4/3</text><text x="200" y="158" style="fill:var(--red)">tangent: m = −3/4</text><text x="200" y="180" class="a" font-weight="700">3x + 4y = 25</text></g>
+</svg></div><figcaption>The tangent meets the radius at 90°.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The circle x² + y² = 25 passes through P(3, 4). Find the equation of the tangent to the circle at P.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Gradient of radius OP = 4 ÷ 3</li><li>Gradient of tangent = −<span class="frac"><span>3</span><span>4</span></span> (negative reciprocal)</li><li>y − 4 = −<span class="frac"><span>3</span><span>4</span></span>(x − 3)</li><li>y = −<span class="frac"><span>3</span><span>4</span></span>x + <span class="frac"><span>9</span><span>4</span></span> + 4 = −<span class="frac"><span>3</span><span>4</span></span>x + <span class="frac"><span>25</span><span>4</span></span></li></ol>
+      <p class="ans">Answer: <mark>y = −¾x + 25/4  (or 3x + 4y = 25)</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="standard-form">
+  <div class="topic-head"><span class="qnum">32</span><h2>Standard form</h2><span class="meta">22 marks · 1.1% of all marks · in 11 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/32_standard.jpg" src="videos/32_standard.mp4" aria-label="Explainer video: Standard form"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Each power of ten is one place on a ladder. Multiplying by 10ⁿ moves the decimal point n places. Multiplying powers of ten just adds the steps.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Standard form writes a number as A × 10ⁿ, where 1 ≤ A &lt; 10 and n is a whole number. AQA tests converting, ordering and calculating with standard form, often without a calculator.</p>
+<ol><li>Multiply or divide the front numbers.</li>
+<li>For multiplication, add the powers of ten. For division, subtract them.</li>
+<li>Check the front number. It must be at least 1 and less than 10.</li>
+<li>If it is too big, divide it by 10 and add 1 to the power. If it is too small, multiply it by 10 and subtract 1 from the power.</li></ol>
+<p class="caution"><span>CAUTION</span>15 × 10⁻³ is not in standard form. Write it as 1.5 × 10⁻².</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 140" role="img" aria-label="Powers of ten ladder from 10 to the minus 2 to 10 to the 4">
+<path class="ln" d="M20 60 L300 60"/>
+<g class="lm"><path d="M30 55 L30 65 M75 55 L75 65 M120 55 L120 65 M165 55 L165 65 M210 55 L210 65 M255 55 L255 65 M300 55 L300 65"/></g>
+<g font-size="12" text-anchor="middle"><text x="30" y="45">10⁻²</text><text x="75" y="45">10⁻¹</text><text x="120" y="45">10⁰</text><text x="165" y="45">10¹</text><text x="210" y="45">10²</text><text x="255" y="45">10³</text><text x="295" y="45">10⁴</text></g>
+<g font-size="10" class="m" text-anchor="middle"><text x="30" y="82" class="m">0.01</text><text x="75" y="82" class="m">0.1</text><text x="120" y="82" class="m">1</text><text x="165" y="82" class="m">10</text><text x="210" y="82" class="m">100</text><text x="255" y="82" class="m">1000</text><text x="295" y="82" class="m">10000</text></g>
+<text x="160" y="115" font-size="13" text-anchor="middle">10⁴ × 10⁻⁷ = 10⁴⁺⁽⁻⁷⁾ = 10⁻³</text>
+</svg></div><figcaption>Each step right is × 10. Adding powers means adding steps.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Work out (a) (3 × 10⁴) × (5 × 10⁻⁷) (b) (6 × 10⁵) ÷ (4 × 10⁻²). Give your answers in standard form.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) 3 × 5 = 15 ; 10⁴ × 10⁻⁷ = 10⁻³ → 15 × 10⁻³ = 1.5 × 10⁻²</li><li>(b) 6 ÷ 4 = 1.5 ; 10⁵ ÷ 10⁻² = 10⁵⁻⁽⁻²⁾ = 10⁷</li></ol>
+      <p class="ans">Answer: <mark>(a) 1.5 × 10⁻²  (b) 1.5 × 10⁷</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="proof">
+  <div class="topic-head"><span class="qnum">33</span><h2>Algebraic proof</h2><span class="meta">17 marks · 0.9% of all marks · in 5 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/33_proof.jpg" src="videos/33_proof.mp4" aria-label="Explainer video: Algebraic proof"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>5² − 3² is a 5 × 5 square with a 3 × 3 square removed. The ring left over has 4 sides of 4: sixteen, a multiple of 8.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>An algebraic proof shows that a statement is true for every number, not only for examples. AQA usually asks about odd, even or consecutive numbers.</p>
+<ol><li>Write the numbers in algebra. Let n be any integer.</li>
+<li>Even number: 2n. Odd number: 2n + 1. Consecutive numbers: n, n + 1, n + 2. Consecutive odd numbers: 2n − 1, 2n + 1.</li>
+<li>Write the expression the question describes.</li>
+<li>Expand and simplify.</li>
+<li>Factorise to show the result. For example, 8n = 8 × n.</li>
+<li>Write a final sentence: "8n is a multiple of 8, so the statement is true."</li></ol>
+<p class="caution"><span>CAUTION</span>Examples with numbers do not prove anything. You must use n.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Five by five grid with the inner three by three removed, leaving a ring of 16">
+<g style="fill:var(--accent);fill-opacity:.55;stroke:var(--card);stroke-width:2">
+<rect x="30" y="20" width="26" height="26"/><rect x="56" y="20" width="26" height="26"/><rect x="82" y="20" width="26" height="26"/><rect x="108" y="20" width="26" height="26"/><rect x="134" y="20" width="26" height="26"/>
+<rect x="30" y="124" width="26" height="26"/><rect x="56" y="124" width="26" height="26"/><rect x="82" y="124" width="26" height="26"/><rect x="108" y="124" width="26" height="26"/><rect x="134" y="124" width="26" height="26"/>
+<rect x="30" y="46" width="26" height="26"/><rect x="30" y="72" width="26" height="26"/><rect x="30" y="98" width="26" height="26"/>
+<rect x="134" y="46" width="26" height="26"/><rect x="134" y="72" width="26" height="26"/><rect x="134" y="98" width="26" height="26"/></g>
+<rect x="56" y="46" width="78" height="78" style="fill:var(--blue);fill-opacity:.12;stroke:var(--blue);stroke-dasharray:4 3"/>
+<text x="95" y="90" font-size="12" text-anchor="middle" style="fill:var(--blue)">3²</text>
+<g font-size="12"><text x="180" y="50">5² − 3² = 16 = 8 × 2</text><text x="180" y="80">(2n+1)² − (2n−1)²</text><text x="180" y="100" class="a" font-weight="700">= 8n</text></g>
+</svg></div><figcaption>The ring is the difference of the two squares.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Prove that the difference between the squares of any two consecutive odd numbers is a multiple of 8.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Let the odd numbers be 2n − 1 and 2n + 1</li><li>(2n + 1)² − (2n − 1)² = (4n² + 4n + 1) − (4n² − 4n + 1)</li><li>= 8n</li><li>8n = 8 × n, and n is an integer, so the result is a multiple of 8</li></ol>
+      <p class="ans">Answer: <mark>8n, a multiple of 8 (proved)</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="counting">
+  <div class="topic-head"><span class="qnum">34</span><h2>Counting (the product rule)</h2><span class="meta">16 marks · 0.8% of all marks · in 6 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/34_counting.jpg" src="videos/34_counting.mp4" aria-label="Explainer video: Counting (the product rule)"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Fill the places one by one. Every choice for the first place pairs with every choice for the next, so the choices multiply, like branches on a tree.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The product rule counts the number of ways to make several choices. AQA tests codes, passwords, menus and arrangements, sometimes with restrictions.</p>
+<ol><li>Draw one box for each place.</li>
+<li>Fill the box with the most restrictions first.</li>
+<li>Write the number of choices in each box. If items cannot repeat, reduce the number by one each time.</li>
+<li>Multiply the numbers in the boxes.</li></ol>
+<p class="caution"><span>CAUTION</span>Multiply the choices. Do not add them.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 130" role="img" aria-label="Four boxes with 9, 9, 8, 7 choices multiplied">
+<g class="ln"><rect x="20" y="30" width="50" height="50"/><rect x="95" y="30" width="50" height="50"/><rect x="170" y="30" width="50" height="50"/><rect x="245" y="30" width="50" height="50"/></g>
+<g font-size="24" text-anchor="middle" font-weight="700" class="a"><text x="45" y="64" class="a">9</text><text x="120" y="64" class="a">9</text><text x="195" y="64" class="a">8</text><text x="270" y="64" class="a">7</text></g>
+<g font-size="18" text-anchor="middle"><text x="82" y="62">×</text><text x="157" y="62">×</text><text x="232" y="62">×</text></g>
+<g font-size="10" class="m" text-anchor="middle"><text x="45" y="96" class="m">1–9</text><text x="120" y="96" class="m">any but 1</text><text x="195" y="96" class="m">any but 2</text><text x="270" y="96" class="m">any but 3</text></g>
+<text x="160" y="122" font-size="13" text-anchor="middle">9 × 9 × 8 × 7 = 4536</text>
+</svg></div><figcaption>The first digit cannot be 0. After that, one fewer digit is free each time.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A PIN has 4 digits. The first digit cannot be 0. No digit can be used more than once. How many different PINs are possible?</p><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>1st digit: 1 to 9 → 9 choices</li><li>2nd digit: 10 digits minus the one used → 9 choices</li><li>3rd: 8 choices ; 4th: 7 choices</li><li>9 × 9 × 8 × 7</li></ol>
+      <p class="ans">Answer: <mark>4536</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="bearings">
+  <div class="topic-head"><span class="qnum">35</span><h2>Constructions, loci and bearings</h2><span class="meta">14 marks · 0.7% of all marks · in 6 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/35_bearings.jpg" src="videos/35_bearings.mp4" aria-label="Explainer video: Constructions, loci and bearings"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A bearing is a compass turn: start facing north and turn clockwise. To come back, turn round: add or subtract 180°.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A bearing gives a direction as an angle clockwise from north, with three figures. AQA also tests scale drawings, perpendicular bisectors, angle bisectors and loci.</p>
+<ol><li>Draw a north line at the point where you start.</li>
+<li>Measure the angle clockwise from north.</li>
+<li>Write the bearing with three figures, for example 060°.</li>
+<li>For the back bearing, add 180°. If the result is more than 360°, subtract 180° instead.</li>
+<li>For constructions, use compasses. Do not rub out the construction arcs.</li></ol>
+<p class="caution"><span>CAUTION</span>"The bearing of A from B" means stand at B and look at A.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Bearing of 060 degrees from A to B and back bearing of 240 degrees">
+<path class="lm" d="M50 170 L50 50 M152 110 L152 30"/>
+<path class="la" d="M50 170 L152 110"/>
+<path class="lt" d="M50 140 A30 30 0 0 1 76 155" style="stroke-width:2"/>
+<path d="M152 90 A20 20 0 1 1 135 120" style="stroke:var(--red);stroke-width:2;fill:none"/>
+<path class="lt" d="M50 170 L152 170 L152 110" style="stroke-dasharray:4 3;stroke-width:1.5"/>
+<g font-size="12"><text x="46" y="44">N</text><text x="148" y="24">N</text><text x="36" y="182">A</text><text x="160" y="106">B</text>
+<text x="58" y="132" class="t">060°</text><text x="170" y="86" style="fill:var(--red)">240°</text><text x="88" y="132" class="a">8 km</text><text x="82" y="186" class="t">8 sin 60°</text></g>
+<g font-size="12"><text x="205" y="140">back bearing</text><text x="205" y="158">60 + 180 = 240°</text></g>
+</svg></div><figcaption>Each point has its own north line. North lines are parallel.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A ship sails 8 km from A to B on a bearing of 060°. (a) Write down the bearing of A from B. (b) Work out how far east of A the ship is.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) Back bearing = 60° + 180°</li><li>(b) East distance = 8 × sin 60°</li><li>= 6.928… km</li></ol>
+      <p class="ans">Answer: <mark>(a) 240°  (b) 6.93 km</mark></p>
+    </div>
+  </div>
+</article>
+
+<article class="topic" id="iteration">
+  <div class="topic-head"><span class="qnum">36</span><h2>Iteration</h2><span class="meta">11 marks · 0.6% of all marks · in 5 of 24 papers</span></div>
+  <video controls preload="none" playsinline poster="videos/36_iteration.jpg" src="videos/36_iteration.mp4" aria-label="Explainer video: Iteration"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Feed each answer back into the formula. On a graph, the steps make a staircase between y = x and the curve that closes in on the solution.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Iteration finds an approximate solution by repeating a formula. AQA tests the sign-change check, rearranging an equation into an iteration formula, and working out x₁, x₂, x₃.</p>
+<ol><li>To show a solution is between a and b, work out f(a) and f(b). One must be negative and one positive.</li>
+<li>Put x₀ into the formula. The result is x₁.</li>
+<li>Put x₁ into the formula. The result is x₂. Continue.</li>
+<li>On a calculator, type x₀ and press =. Type the formula with ANS in place of xₙ. Press = for each new value.</li>
+<li>Stop when the values agree to the accuracy that you need.</li></ol>
+<p class="caution"><span>CAUTION</span>Write down each value to at least 4 decimal places. Do not round until the end.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 190" role="img" aria-label="Cobweb diagram converging to x about 2.28">
+<path class="ln" d="M30 170 L230 170 M30 170 L30 15"/>
+<path class="lm" d="M30 170 L210 15"/>
+<path class="lb" d="M30 120 Q120 60 230 50"/>
+<path class="la" d="M60 170 L60 95 L120 95 L120 72 L150 72 L150 66 L160 66 L160 64" style="stroke-width:2"/>
+<g font-size="11" class="m" text-anchor="middle"><text x="60" y="184" class="m">2</text><text x="160" y="184" class="m">2.28</text></g>
+<g font-size="12"><text x="238" y="40">x₀ = 2</text><text x="238" y="60">x₁ = 2.2240</text><text x="238" y="80">x₂ = 2.2684</text><text x="238" y="100">x₃ = 2.2770</text><text x="238" y="125" class="a" font-weight="700">x ≈ 2.28</text></g>
+</svg></div><figcaption>Each step goes up to the curve and across to y = x.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>(a) Show that x³ − 3x − 5 = 0 has a solution between 2 and 3. (b) Use x<sub>n+1</sub> = ∛(3x<sub>n</sub> + 5) with x₀ = 2 to find x₁, x₂ and x₃.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) f(2) = 8 − 6 − 5 = −3 ; f(3) = 27 − 9 − 5 = 13</li><li>Sign change, so there is a solution between 2 and 3</li><li>(b) x₁ = ∛11 = 2.2240 ; x₂ = ∛(3 × 2.2240 + 5) = 2.2684</li><li>x₃ = ∛(3 × 2.2684 + 5) = 2.2770</li></ol>
+      <p class="ans">Answer: <mark>x₁ = 2.2240, x₂ = 2.2684, x₃ = 2.2770</mark></p>
+    </div>
+  </div>
+</article>
+
+<footer>
+  <h3>How the data was collected</h3>
+  <p>All question papers came from AQA's own file store. The papers are 8300/1H, 2H and 3H for June 2017, June 2018, June 2019, November 2020, November 2021, June 2022, November 2022 and June 2023. There was no June exam in 2020 or 2021, so the November papers are used for those years. AQA has not released the 2024 and 2025 papers to the public yet, so they are not included. One question in June 2022 Paper 2 (1 mark) was not tagged.</p>
+  <p>Each question went into one main topic. Questions that test two topics count only for the main topic, so the real share of topics like algebra is a little higher.</p>
+  <details><summary>Sources</summary>
+    <ul class="mono" style="display:grid;gap:4px;padding-left:1.2rem;overflow-wrap:anywhere">
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2017/june/AQA-83001H-QP-JUN17.PDF" rel="noopener">AQA 8300/1H June 2017</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2017/june/AQA-83002H-QP-JUN17.PDF" rel="noopener">AQA 8300/2H June 2017</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2017/june/AQA-83003H-QP-JUN17.PDF" rel="noopener">AQA 8300/3H June 2017</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-83001H-QP-JUN18.PDF" rel="noopener">AQA 8300/1H June 2018</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-83002H-QP-JUN18.PDF" rel="noopener">AQA 8300/2H June 2018</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-83003H-QP-JUN18.PDF" rel="noopener">AQA 8300/3H June 2018</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2019/june/AQA-83001H-QP-JUN19.PDF" rel="noopener">AQA 8300/1H June 2019</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2019/june/AQA-83002H-QP-JUN19.PDF" rel="noopener">AQA 8300/2H June 2019</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2019/june/AQA-83003H-QP-JUN19.PDF" rel="noopener">AQA 8300/3H June 2019</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-83001H-QP-NOV20.PDF" rel="noopener">AQA 8300/1H November 2020</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-83002H-QP-NOV20.PDF" rel="noopener">AQA 8300/2H November 2020</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-83003H-QP-NOV20.PDF" rel="noopener">AQA 8300/3H November 2020</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-83001H-QP-NOV21.PDF" rel="noopener">AQA 8300/1H November 2021</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-83002H-QP-NOV21.PDF" rel="noopener">AQA 8300/2H November 2021</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-83003H-QP-NOV21.PDF" rel="noopener">AQA 8300/3H November 2021</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-83001H-QP-JUN22.PDF" rel="noopener">AQA 8300/1H June 2022</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-83002H-QP-JUN22.PDF" rel="noopener">AQA 8300/2H June 2022</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-83003H-QP-JUN22.PDF" rel="noopener">AQA 8300/3H June 2022</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/november/AQA-83001H-QP-NOV22.PDF" rel="noopener">AQA 8300/1H November 2022</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/november/AQA-83002H-QP-NOV22.PDF" rel="noopener">AQA 8300/2H November 2022</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/november/AQA-83003H-QP-NOV22.PDF" rel="noopener">AQA 8300/3H November 2022</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-83001H-QP-JUN23.PDF" rel="noopener">AQA 8300/1H June 2023</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-83002H-QP-JUN23.PDF" rel="noopener">AQA 8300/2H June 2023</a></li>
+      <li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-83003H-QP-JUN23.PDF" rel="noopener">AQA 8300/3H June 2023</a></li>
+    </ul>
+  </details>
+  <p>Videos: made with Manim (the animation library from 3Blue1Brown) and an offline voice. The worked questions are original and were checked by calculation.</p>
+</footer>
+</div>
+
+</body>
+</html>

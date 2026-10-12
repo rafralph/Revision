@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: menu bar, short intro, then one card per subject in a grid on graph paper. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+
+*{box-sizing:border-box}
+html{color-scheme:light}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:36px 64px;display:grid;gap:28px}
+h1{font-family:var(--f-display);font-stretch:85%;font-weight:800;font-size:clamp(2.2rem,7vw,3.2rem);line-height:1.05;margin:0;text-wrap:balance}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em;margin:0}
+.lede{color:var(--muted);margin:0;max-width:36rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;align-content:start;gap:6px;text-decoration:none;color:var(--ink);min-width:0}
+a.card{border-color:var(--ink);border-width:1.5px;grid-column:1/-1}
+a.card:hover{background:var(--accent-soft)}
+a.card:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card h2{font-family:var(--f-display);font-stretch:85%;font-weight:750;font-size:1.5rem;margin:0}
+.card p{margin:0;font-size:.92rem;color:var(--muted)}
+.tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.live{color:var(--teal)} .soon{color:var(--muted)}
+.go{font-weight:700;color:var(--accent)}
+.card.off{opacity:.7}
+footer{font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="./" aria-current="page">Home</a></li><li><a href="./maths/">Maths</a></li><li><a href="./combined-science/">Combined Science</a></li><li><a href="./computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<header style="display:grid;gap:12px">
+  <p class="code">GCSE REVISION</p>
+  <h1>Pick a subject</h1>
+  <p class="lede">Each guide ranks every topic by how many marks it gets in real past papers. Each topic has a short video, a plain-English explanation, a diagram and a worked exam question.</p>
+</header>
+<section class="grid" aria-label="Subjects">
+  <a class="card" href="maths/">
+    <span class="tag live">Ready</span>
+    <h2>Maths</h2>
+    <p>AQA 8300 · 36 topics from 24 papers (2017–2023)</p>
+    <span class="go">Open the guide →</span>
+  </a>
+  <a class="card" href="combined-science/" style="grid-column:auto"><span class="tag live">Biology ready</span><h2>Combined Science</h2><p>AQA Trilogy 8464 · 59 topics from 35 papers</p><span class="go">Open the guide →</span></a>
+  <a class="card" href="computer-science/" style="grid-column:auto"><span class="tag live">Ready</span><h2>Computer Science</h2><p>AQA 8525 (Python) · 27 topics from 4 papers</p><span class="go">Open the guide →</span></a>
+</section>
+<footer>Use the menu at the top of any page to switch subject.</footer>
+</div>
+</body>
+</html>
