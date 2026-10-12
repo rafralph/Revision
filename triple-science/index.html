@@ -1,0 +1,966 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Triple Science · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.subnav .soon{opacity:.6}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.rp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent);margin-top:4px}
+.tonly{display:inline-block;font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.pending{border:1px dashed var(--rule);border-radius:6px;padding:16px;color:var(--muted);background:var(--card)}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../triple-science/" aria-current="page">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<header>
+  <p class="code">AQA GCSE BIOLOGY 8461 · CHEMISTRY 8462 · PHYSICS 8463 · HIGHER TIER</p>
+  <h1>Triple Science: every topic, ranked by marks</h1>
+  <p class="lede">Triple Science gives three separate GCSEs. Every sub-question from 30 AQA Higher papers is sorted into a topic, and each science is ranked separately. Each topic has a short video, a plain-English explanation, a diagram and a worked exam question.</p>
+  <div class="facts"><span><b>30</b> papers</span><span><b>2,982</b> marks</span><span><b>85</b> topics</span><span>June 2018 to June 2023</span></div>
+  <nav class="subnav" aria-label="Sciences"><a href="#biology">Biology</a><a href="#chemistry" class="soon">Chemistry (ranking only)</a><a href="#physics" class="soon">Physics (ranking only)</a></nav>
+</header>
+<section class="rank" aria-labelledby="biology-h" id="biology"><div class="sci-h"><h2 id="biology-h">Biology</h2><span class="meta">9 papers · 882 marks · 31 topics</span></div><p class="lede">Topics ranked by total marks in the Higher papers. "Triple only" topics are not in Combined Science. Click a topic to jump to its guide.</p><ol class="rows"><li class="row"><span class="n">1</span><div><a href="#genetics">DNA, meiosis and genetic crosses</a><div class="bar"><i style="width:100%"></i></div><span class="sub">70 marks · in 4 of 9 Biology papers</span></div><span class="pct">7.9%</span></li><li class="row"><span class="n">2</span><div><a href="#ecosystems">Ecosystems, adaptations and sampling</a><div class="bar"><i style="width:82%"></i></div><span class="sub">57 marks · in 4 of 9 Biology papers</span></div><span class="pct">6.5%</span></li><li class="row"><span class="n">3</span><div><a href="#heart">Heart, blood, vessels and lungs</a><div class="bar"><i style="width:80%"></i></div><span class="sub">56 marks · in 4 of 9 Biology papers</span></div><span class="pct">6.3%</span></li><li class="row"><span class="n">4</span><div><a href="#enzymes">Digestion and enzymes</a><div class="bar"><i style="width:73%"></i></div><span class="sub">51 marks · in 4 of 9 Biology papers</span></div><span class="pct">5.8%</span></li><li class="row"><span class="n">5</span><div><a href="#osmosis">Diffusion, osmosis and active transport</a><div class="bar"><i style="width:68%"></i></div><span class="sub">48 marks · in 6 of 9 Biology papers</span></div><span class="pct">5.4%</span></li><li class="row"><span class="n">6</span><div><a href="#cells">Cell structure and microscopy</a><div class="bar"><i style="width:61%"></i></div><span class="sub">42 marks · in 4 of 9 Biology papers</span></div><span class="pct">4.8%</span></li><li class="row"><span class="n">7</span><div><a href="#non-communicable">Non-communicable disease</a><div class="bar"><i style="width:56%"></i></div><span class="sub">39 marks · in 5 of 9 Biology papers</span></div><span class="pct">4.4%</span></li><li class="row"><span class="n">8</span><div><a href="#decomposition">Decomposition</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:54%"></i></div><span class="sub">38 marks · in 3 of 9 Biology papers</span></div><span class="pct">4.3%</span></li><li class="row"><span class="n">9</span><div><a href="#photosynthesis">Photosynthesis</a><div class="bar"><i style="width:53%"></i></div><span class="sub">37 marks · in 2 of 9 Biology papers</span></div><span class="pct">4.2%</span></li><li class="row"><span class="n">10</span><div><a href="#transpiration">Plant tissues and transpiration</a><div class="bar"><i style="width:51%"></i></div><span class="sub">35 marks · in 3 of 9 Biology papers</span></div><span class="pct">4.0%</span></li><li class="row"><span class="n">11</span><div><a href="#respiration">Respiration and metabolism</a><div class="bar"><i style="width:49%"></i></div><span class="sub">34 marks · in 4 of 9 Biology papers</span></div><span class="pct">3.9%</span></li><li class="row"><span class="n">12</span><div><a href="#homeostasis">Body temperature and the kidneys</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:49%"></i></div><span class="sub">34 marks · in 3 of 9 Biology papers</span></div><span class="pct">3.9%</span></li><li class="row"><span class="n">13</span><div><a href="#food-security">Biomass, food chains and food security</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:44%"></i></div><span class="sub">31 marks · in 3 of 9 Biology papers</span></div><span class="pct">3.5%</span></li><li class="row"><span class="n">14</span><div><a href="#classification">Classification, fossils and extinction</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:39%"></i></div><span class="sub">27 marks · in 3 of 9 Biology papers</span></div><span class="pct">3.1%</span></li><li class="row"><span class="n">15</span><div><a href="#evolution">Variation, evolution and selective breeding</a><div class="bar"><i style="width:34%"></i></div><span class="sub">24 marks · in 5 of 9 Biology papers</span></div><span class="pct">2.7%</span></li><li class="row"><span class="n">16</span><div><a href="#monoclonal-antibodies">Monoclonal antibodies</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:34%"></i></div><span class="sub">24 marks · in 4 of 9 Biology papers</span></div><span class="pct">2.7%</span></li><li class="row"><span class="n">17</span><div><a href="#biodiversity">Biodiversity and human impact</a><div class="bar"><i style="width:34%"></i></div><span class="sub">24 marks · in 3 of 9 Biology papers</span></div><span class="pct">2.7%</span></li><li class="row"><span class="n">18</span><div><a href="#culturing">Culturing microorganisms</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:32%"></i></div><span class="sub">22 marks · in 4 of 9 Biology papers</span></div><span class="pct">2.5%</span></li><li class="row"><span class="n">19</span><div><a href="#pathogens">Communicable disease and pathogens</a><div class="bar"><i style="width:30%"></i></div><span class="sub">21 marks · in 3 of 9 Biology papers</span></div><span class="pct">2.4%</span></li><li class="row"><span class="n">20</span><div><a href="#plant-hormones">Plant hormones</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:29%"></i></div><span class="sub">20 marks · in 2 of 9 Biology papers</span></div><span class="pct">2.3%</span></li><li class="row"><span class="n">21</span><div><a href="#cell-division">Cell division and stem cells</a><div class="bar"><i style="width:28%"></i></div><span class="sub">19 marks · in 4 of 9 Biology papers</span></div><span class="pct">2.2%</span></li><li class="row"><span class="n">22</span><div><a href="#drugs">Antibiotics and drug development</a><div class="bar"><i style="width:28%"></i></div><span class="sub">19 marks · in 3 of 9 Biology papers</span></div><span class="pct">2.2%</span></li><li class="row"><span class="n">23</span><div><a href="#plant-disease">Plant diseases and defences</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:25%"></i></div><span class="sub">18 marks · in 4 of 9 Biology papers</span></div><span class="pct">2.0%</span></li><li class="row"><span class="n">24</span><div><a href="#immunity">Defences, immunity and vaccination</a><div class="bar"><i style="width:22%"></i></div><span class="sub">15 marks · in 4 of 9 Biology papers</span></div><span class="pct">1.7%</span></li><li class="row"><span class="n">25</span><div><a href="#hormones">Hormones and blood glucose</a><div class="bar"><i style="width:22%"></i></div><span class="sub">15 marks · in 3 of 9 Biology papers</span></div><span class="pct">1.7%</span></li><li class="row"><span class="n">26</span><div><a href="#nervous-system">Nervous system and reflexes</a><div class="bar"><i style="width:22%"></i></div><span class="sub">15 marks · in 2 of 9 Biology papers</span></div><span class="pct">1.7%</span></li><li class="row"><span class="n">27</span><div><a href="#brain-eye">The brain and the eye</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:20%"></i></div><span class="sub">14 marks · in 2 of 9 Biology papers</span></div><span class="pct">1.6%</span></li><li class="row"><span class="n">28</span><div><a href="#menstrual-cycle">Reproductive hormones and contraception</a><div class="bar"><i style="width:19%"></i></div><span class="sub">13 marks · in 2 of 9 Biology papers</span></div><span class="pct">1.5%</span></li><li class="row"><span class="n">29</span><div><a href="#carbon-cycle">Carbon and water cycles</a><div class="bar"><i style="width:13%"></i></div><span class="sub">9 marks · in 2 of 9 Biology papers</span></div><span class="pct">1.0%</span></li><li class="row"><span class="n">30</span><div><a href="#reproduction">Sexual and asexual reproduction</a><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:11%"></i></div><span class="sub">8 marks · in 3 of 9 Biology papers</span></div><span class="pct">0.9%</span></li><li class="row"><span class="n">31</span><div><a href="#genetic-engineering">Genetic engineering and cloning</a><div class="bar"><i style="width:4%"></i></div><span class="sub">3 marks · in 2 of 9 Biology papers</span></div><span class="pct">0.3%</span></li></ol></section><article class="topic" id="genetics">
+  <div class="topic-head"><span class="qnum">1</span><h2>DNA, meiosis and genetic crosses</h2><span class="meta">Biology · 70 marks · 7.9% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b03genetics.jpg" src="videos/b03genetics.mp4" aria-label="Explainer video: DNA, meiosis and genetic crosses"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Each parent gives one allele to each child, by chance. A Punnett square lists every equally likely combination.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>DNA is a polymer made of two strands in a double helix. A gene is a small section of DNA that codes for a protein. Meiosis makes gametes (eggs and sperm) with half the number of chromosomes. AQA tests genetic crosses, inherited disorders and sex determination.</p>
+<ol><li>Write the genotype of each parent, for example Ff.</li>
+<li>Draw a 2 × 2 Punnett square. Put one parent's alleles across the top and the other's down the side.</li>
+<li>Fill each box with one allele from the top and one from the side.</li>
+<li>Count the boxes with each phenotype.</li>
+<li>Give the answer as a ratio, a fraction, a percentage or a probability, as the question asks.</li></ol>
+<p>Dominant alleles (capital letter) show with one copy. Recessive alleles show only with two copies.</p>
+<p class="caution"><span>CAUTION</span>A probability of 1 in 4 is for each child. It does not mean exactly one of four children.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Punnett square of Ff crossed with Ff">
+<g class="ln"><rect x="70" y="40" width="60" height="50"/><rect x="130" y="40" width="60" height="50"/><rect x="70" y="90" width="60" height="50"/><rect x="130" y="90" width="60" height="50" style="fill:var(--red);fill-opacity:.25"/></g>
+<g font-size="18" text-anchor="middle"><text x="100" y="32" style="fill:var(--blue)">F</text><text x="160" y="32" style="fill:var(--red)">f</text><text x="55" y="70" style="fill:var(--blue)">F</text><text x="55" y="120" style="fill:var(--red)">f</text>
+<text x="100" y="70">FF</text><text x="160" y="70">Ff</text><text x="100" y="120">Ff</text><text x="160" y="120" font-weight="700">ff</text></g>
+<g font-size="12"><text x="210" y="60">1 FF : 2 Ff : 1 ff</text><text x="210" y="85">ff has cystic fibrosis</text><text x="210" y="110" class="a" font-weight="700">P = 1/4 = 0.25</text></g>
+</svg></div><figcaption>Only the ff box has two recessive alleles.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Cystic fibrosis is caused by a recessive allele, f. Both parents are carriers (Ff). Use a Punnett square to find the probability that their child has cystic fibrosis.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Gametes from each parent: F or f</li><li>Offspring: FF, Ff, Ff, ff</li><li>Only ff has cystic fibrosis: 1 out of 4</li></ol>
+      <p class="ans">Answer: <mark>0.25 (1 in 4, or 25%)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="ecosystems">
+  <div class="topic-head"><span class="qnum">2</span><h2>Ecosystems, adaptations and sampling</h2><span class="meta">Biology · 57 marks · 6.5% of Biology marks · in 4 of 9 papers <span class="rp">Required practical: Field investigation (quadrats)</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b02sampling.jpg" src="videos/b02sampling.mp4" aria-label="Explainer video: Ecosystems, adaptations and sampling"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>You cannot count every plant in a field. Count a few random samples, find the mean, then scale up to the whole area.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>An ecosystem is all the organisms in an area and the non-living parts. AQA tests adaptations, food chains, competition, biotic and abiotic factors, and the quadrat practical.</p>
+<p>To estimate a population with quadrats:</p>
+<ol><li>Place quadrats at random. Use random numbers for coordinates.</li>
+<li>Count the organisms in each quadrat.</li>
+<li>Find the mean number per quadrat.</li>
+<li>Find the number per m²: mean ÷ area of one quadrat.</li>
+<li>Multiply by the total area.</li></ol>
+<p>To show how a population changes across a habitat, use a transect line. Put a quadrat at regular intervals along it.</p>
+<p class="caution"><span>CAUTION</span>A 0.5 m × 0.5 m quadrat has an area of 0.25 m², not 0.5 m².</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Field with randomly placed quadrats">
+<rect x="20" y="20" width="200" height="100" class="ft"/>
+<g class="la" style="stroke-width:2"><rect x="40" y="35" width="14" height="14"/><rect x="95" y="80" width="14" height="14"/><rect x="150" y="40" width="14" height="14"/><rect x="185" y="95" width="14" height="14"/><rect x="60" y="95" width="14" height="14"/><rect x="125" y="60" width="14" height="14"/></g>
+<text x="120" y="138" font-size="12" text-anchor="middle">20 m × 10 m = 200 m²</text>
+<g font-size="12"><text x="232" y="40">mean 3 per</text><text x="232" y="56">0.25 m²</text><text x="232" y="80">= 12 per m²</text><text x="232" y="110" class="a" font-weight="700">× 200 m²</text><text x="232" y="128" class="a" font-weight="700">= 2400</text></g>
+</svg></div><figcaption>Random quadrats avoid choosing places that look interesting.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A field measures 20 m by 10 m. A student placed 10 quadrats, each 0.5 m × 0.5 m, at random. The mean number of daisies per quadrat was 3. Estimate the number of daisies in the field.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Area of one quadrat = 0.5 × 0.5 = 0.25 m²</li><li>Daisies per m² = 3 ÷ 0.25 = 12</li><li>Area of field = 20 × 10 = 200 m² ; 12 × 200</li></ol>
+      <p class="ans">Answer: <mark>2400 daisies</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="heart">
+  <div class="topic-head"><span class="qnum">3</span><h2>Heart, blood, vessels and lungs</h2><span class="meta">Biology · 56 marks · 6.3% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b11heart.jpg" src="videos/b11heart.mp4" aria-label="Explainer video: Heart, blood, vessels and lungs"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Blood goes through the heart twice on each full lap: once to the lungs to collect oxygen, and once to the body to deliver it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The heart pumps blood around the body in a double circulation. AQA tests the route through the heart, blood vessels, blood components and the lungs.</p>
+<ol><li>Deoxygenated blood enters the right atrium from the vena cava.</li>
+<li>The right ventricle pumps it to the lungs in the pulmonary artery.</li>
+<li>Oxygenated blood returns to the left atrium in the pulmonary vein.</li>
+<li>The left ventricle pumps it to the body in the aorta. Its wall is thicker because it pumps blood further.</li>
+<li>Valves stop blood flowing backwards.</li></ol>
+<p>Arteries have thick, elastic walls for high pressure. Veins have valves. Capillaries are one cell thick for exchange.</p>
+<p class="caution"><span>CAUTION</span>Arteries carry blood away from the heart. The pulmonary artery carries deoxygenated blood.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Double circulation: right side to lungs, left side to body">
+<rect x="110" y="5" width="100" height="30" rx="6" class="ft"/><text x="160" y="25" text-anchor="middle" font-size="12">Lungs</text>
+<rect x="110" y="145" width="100" height="30" rx="6" class="fa"/><text x="160" y="165" text-anchor="middle" font-size="12">Body</text>
+<rect x="30" y="70" width="100" height="40" rx="6" class="fb"/><text x="80" y="88" text-anchor="middle" font-size="11">Right side</text><text x="80" y="101" text-anchor="middle" font-size="10">deoxygenated</text>
+<rect x="190" y="70" width="100" height="40" rx="6" style="fill:var(--red);fill-opacity:.3;stroke:var(--ink)"/><text x="240" y="88" text-anchor="middle" font-size="11">Left side</text><text x="240" y="101" text-anchor="middle" font-size="10">oxygenated</text>
+<path class="lb" d="M80 70 Q80 25 110 20"/><path d="M210 20 Q240 25 240 70" style="stroke:var(--red);stroke-width:2.5;fill:none"/>
+<path d="M240 110 Q240 155 210 160" style="stroke:var(--red);stroke-width:2.5;fill:none"/><path class="lb" d="M110 160 Q80 155 80 110"/>
+<g font-size="9" class="m"><text x="40" y="45" class="m">pulmonary artery</text><text x="245" y="45" class="m">pulmonary vein</text><text x="248" y="138" class="m">aorta</text><text x="30" y="138" class="m">vena cava</text></g>
+</svg></div><figcaption>Two loops: right side to the lungs, left side to the body.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Describe the route taken by blood from the vena cava to the aorta.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Vena cava → right atrium → right ventricle</li><li>→ pulmonary artery → lungs (blood is oxygenated)</li><li>→ pulmonary vein → left atrium → left ventricle</li><li>→ aorta</li></ol>
+      <p class="ans">Answer: <mark>Right atrium → right ventricle → lungs → left atrium → left ventricle → aorta</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="enzymes">
+  <div class="topic-head"><span class="qnum">4</span><h2>Digestion and enzymes</h2><span class="meta">Biology · 51 marks · 5.8% of Biology marks · in 4 of 9 papers <span class="rp">Required practical: Effect of pH on amylase; food tests</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b10enzymes.jpg" src="videos/b10enzymes.mp4" aria-label="Explainer video: Digestion and enzymes"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>An enzyme works like a lock and key. Its active site fits one substrate. Heat or the wrong pH changes the shape, so the key no longer fits.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Enzymes are biological catalysts. Digestive enzymes break large molecules into small ones that can be absorbed. AQA tests the lock and key model, temperature and pH, the amylase practical and food tests.</p>
+<ol><li>Carbohydrase (amylase) breaks starch into sugars.</li>
+<li>Protease breaks proteins into amino acids.</li>
+<li>Lipase breaks lipids into fatty acids and glycerol.</li>
+<li>Above the optimum temperature, the active site changes shape. The enzyme is denatured.</li>
+<li>In the amylase practical, test samples with iodine. Rate = 1 ÷ time for the starch to disappear.</li></ol>
+<p>Food tests: iodine turns blue-black with starch; Benedict's turns brick red with sugar (heat it); biuret turns purple with protein.</p>
+<p class="caution"><span>CAUTION</span>Do not say enzymes are "killed". They are proteins, not living things. Say "denatured".</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Enzyme activity against temperature with optimum at 37 degrees">
+<path class="ln" d="M40 150 L300 150 M40 150 L40 15"/>
+<path class="la" d="M40 140 Q120 120 150 30 Q175 20 205 150"/>
+<path class="lm" d="M158 25 L158 150" style="stroke-dasharray:4 3"/>
+<g font-size="11"><text x="160" y="20" class="a">optimum ≈ 37 °C</text><text x="208" y="100">denatured</text></g>
+<text x="170" y="167" font-size="10" class="m" text-anchor="middle">temperature</text>
+</svg></div><figcaption>The rate rises to the optimum, then drops sharply.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>In a practical, amylase is mixed with starch at pH 7. Samples are tested with iodine every 10 seconds. The iodine stops turning blue-black after 40 seconds. Calculate the rate of reaction.</p><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>Rate = 1 ÷ time</li><li>= 1 ÷ 40</li></ol>
+      <p class="ans">Answer: <mark>0.025 per second (s⁻¹)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="osmosis">
+  <div class="topic-head"><span class="qnum">5</span><h2>Diffusion, osmosis and active transport</h2><span class="meta">Biology · 48 marks · 5.4% of Biology marks · in 6 of 9 papers <span class="rp">Required practical: Osmosis in potato</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b08osmosis.jpg" src="videos/b08osmosis.mp4" aria-label="Explainer video: Diffusion, osmosis and active transport"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>In the potato practical, the line crosses zero where water stops moving overall. That concentration matches the inside of the potato cells.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Diffusion is the net movement of particles from high to low concentration. Osmosis is the diffusion of water through a partially permeable membrane. Active transport moves substances from low to high concentration and needs energy from respiration.</p>
+<ol><li>Weigh each potato cylinder. Put them in sugar solutions of different concentrations.</li>
+<li>After a set time, blot dry and weigh again.</li>
+<li>Percentage change = (final − start) ÷ start × 100.</li>
+<li>Plot % change against concentration. Draw a line of best fit.</li>
+<li>Where the line crosses zero, the solution matches the cell sap.</li></ol>
+<p class="caution"><span>CAUTION</span>Use percentage change, not just change in mass. The cylinders start at different masses.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Percentage change in mass against concentration crossing zero">
+<path class="ln" d="M40 90 L300 90 M40 165 L40 15"/>
+<path class="la" d="M40 30 L290 155"/>
+<g style="fill:var(--blue)"><circle cx="40" cy="33" r="4"/><circle cx="90" cy="52" r="4"/><circle cx="140" cy="84" r="4"/><circle cx="190" cy="102" r="4"/><circle cx="240" cy="133" r="4"/><circle cx="290" cy="150" r="4"/></g>
+<circle class="fr" cx="160" cy="90" r="5"/>
+<g font-size="11"><text x="165" y="80" style="fill:var(--red)">≈ 0.48 mol/dm³</text><text x="45" y="25" class="m">gain</text><text x="250" y="175" class="m">loss</text></g>
+<text x="170" y="178" font-size="10" class="m" text-anchor="middle">sugar concentration</text>
+</svg></div><figcaption>Above the line: water moved in. Below: water moved out.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A potato cylinder has a mass of 2.50 g. After 30 minutes in water, its mass is 2.80 g. Calculate the percentage change in mass, and explain the change.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Change = 2.80 − 2.50 = 0.30 g</li><li>% change = 0.30 ÷ 2.50 × 100 = 12%</li><li>Water moved into the cells by osmosis, from a dilute solution to a more concentrated one</li></ol>
+      <p class="ans">Answer: <mark>+12% (water entered by osmosis)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="cells">
+  <div class="topic-head"><span class="qnum">6</span><h2>Cell structure and microscopy</h2><span class="meta">Biology · 42 marks · 4.8% of Biology marks · in 4 of 9 papers <span class="rp">Required practical: Using a light microscope</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b12microscopy.jpg" src="videos/b12microscopy.mp4" aria-label="Explainer video: Cell structure and microscopy"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Magnification just scales size. The image is the real object multiplied up, so divide to get back to the real size.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Animal and plant cells have a nucleus, cytoplasm, cell membrane, mitochondria and ribosomes. Plant cells also have a cell wall, chloroplasts and a permanent vacuole. Bacteria (prokaryotes) have no nucleus. AQA tests cell parts, microscopes and magnification.</p>
+<ol><li>Use: magnification = image size ÷ real size.</li>
+<li>To find the real size: real size = image size ÷ magnification.</li>
+<li>Make the units the same before you divide.</li>
+<li>1 mm = 1000 µm (micrometres).</li>
+<li>Give the answer in the unit the question asks for.</li></ol>
+<p>Electron microscopes have higher magnification and resolution than light microscopes, so they show smaller parts such as ribosomes.</p>
+<p class="caution"><span>CAUTION</span>Magnification has no units. Write ×400, not 400 mm.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 160" role="img" aria-label="Magnification triangle with I on top and A and M below">
+<path class="lt" d="M80 15 L140 125 L20 125 Z M50 75 L110 75 M80 75 L80 125"/>
+<g font-size="20" text-anchor="middle" font-weight="700"><text x="80" y="62">I</text><text x="62" y="110" class="a">A</text><text x="98" y="110">M</text></g>
+<g font-size="12"><text x="170" y="40">Image = Actual × Magnification</text><text x="170" y="70">A = 24 mm ÷ 400</text><text x="170" y="90">= 0.06 mm</text><text x="170" y="115" class="a" font-weight="700">= 60 µm</text></g>
+</svg></div><figcaption>Cover the quantity you want. The other two show the operation.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The image of a cell is 24 mm wide. The magnification is ×400. Calculate the real width of the cell in micrometres (µm).</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Real size = image size ÷ magnification</li><li>= 24 ÷ 400 = 0.06 mm</li><li>0.06 × 1000 = 60 µm</li></ol>
+      <p class="ans">Answer: <mark>60 µm</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="non-communicable">
+  <div class="topic-head"><span class="qnum">7</span><h2>Non-communicable disease</h2><span class="meta">Biology · 39 marks · 4.4% of Biology marks · in 5 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b07ncd.jpg" src="videos/b07ncd.mp4" aria-label="Explainer video: Non-communicable disease"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>In coronary heart disease, fat builds up inside the arteries that feed the heart. A narrower pipe carries less blood, so the heart muscle gets less oxygen.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A non-communicable disease is not passed from person to person. Examples are coronary heart disease, cancer and type 2 diabetes. AQA tests risk factors, treatments and interpreting data.</p>
+<ol><li>Fatty material builds up in the coronary arteries.</li>
+<li>The arteries become narrower.</li>
+<li>Less blood flows to the heart muscle, so it gets less oxygen.</li>
+<li>Treatments: stents hold the artery open; statins lower blood cholesterol; a transplant replaces the heart.</li>
+<li>Risk factors include poor diet, smoking, obesity and lack of exercise.</li></ol>
+<p>Cancer is uncontrolled cell division. Benign tumours stay in one place. Malignant tumours spread in the blood.</p>
+<p class="caution"><span>CAUTION</span>A correlation in data does not prove cause. Say "is linked to" unless the question says it causes.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Healthy artery compared with artery narrowed by fatty deposits">
+<circle cx="80" cy="70" r="45" style="fill:var(--red);fill-opacity:.35;stroke:var(--red);stroke-width:8"/>
+<circle cx="230" cy="70" r="45" style="fill:var(--accent);fill-opacity:.7;stroke:var(--red);stroke-width:8"/>
+<circle cx="230" cy="70" r="17" style="fill:var(--red);fill-opacity:.35"/>
+<g font-size="12" text-anchor="middle"><text x="80" y="135">healthy</text><text x="230" y="135">fatty deposits</text></g>
+</svg></div><figcaption>The narrower opening lets less blood through to the heart muscle.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A patient has coronary heart disease. Explain how a stent helps the patient.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>The stent holds the narrowed coronary artery open</li><li>More blood can flow to the heart muscle</li><li>The heart muscle gets more oxygen for respiration</li></ol>
+      <p class="ans">Answer: <mark>Keeps the artery open → more blood and oxygen to the heart muscle</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="decomposition">
+  <div class="topic-head"><span class="qnum">8</span><h2>Decomposition<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 38 marks · 4.3% of Biology marks · in 3 of 9 papers <span class="rp">Required practical: Effect of temperature on decay</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b22decay.jpg" src="videos/b22decay.mp4" aria-label="Explainer video: Decomposition"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Decay is digestion by microorganisms. Like any enzyme reaction, it goes faster when it is warm, wet and has oxygen, until it gets too hot.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Decomposers are bacteria and fungi. They break down dead plants, dead animals and waste. This returns carbon dioxide to the air and mineral ions to the soil.</p>
+<p>The rate of decay depends on three conditions:</p>
+<ol><li>Temperature. Warm conditions make the enzymes work faster. Very hot conditions denature them.</li>
+<li>Water. Microorganisms need water to grow.</li>
+<li>Oxygen. Most decomposers use aerobic respiration.</li></ol>
+<p>Gardeners make compost quickly, so they keep it warm, moist and aerated. Anaerobic decay makes methane gas, which can be used as a fuel (biogas).</p>
+<p>In the required practical, lipase breaks down the fat in milk into fatty acids. The fatty acids lower the pH. Measure the time for an indicator to change colour at different temperatures.</p>
+<p class="caution"><span>CAUTION</span>The pH falls because of fatty acids, not because of carbon dioxide. Write "fatty acids" for the mark.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Graph of rate of decay against temperature, rising to a peak then falling">
+<line x1="40" y1="140" x2="300" y2="140" class="ln"/><line x1="40" y1="140" x2="40" y2="15" class="ln"/>
+<path d="M45 132 C120 120 170 60 205 35 C222 25 235 40 250 85 L262 132" class="la"/>
+<g font-size="12"><text x="170" y="160" text-anchor="middle">Temperature</text><text x="14" y="80" transform="rotate(-90 14 80)" text-anchor="middle">Rate of decay</text>
+<text x="50" y="60" class="m">enzymes speed up</text><text x="230" y="20" class="m">denatured</text></g>
+</svg></div><figcaption>Decay speeds up with temperature until the decomposers' enzymes denature.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A student mixed milk, lipase and an indicator at 30 °C. The pH fell from 8.4 to 7.0 in 280 seconds.<br>(a) Explain why the pH fell. (b) Calculate the mean rate of pH change in pH units per minute.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) Lipase breaks down fat (lipids) in the milk</li><li>This makes fatty acids, which lower the pH</li><li>(b) Change in pH = 8.4 − 7.0 = 1.4 ; time = 280 ÷ 60 = 4.67 minutes</li><li>Rate = 1.4 ÷ 4.67</li></ol>
+      <p class="ans">Answer: <mark>(a) Lipase makes fatty acids; (b) 0.3 pH units per minute</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="photosynthesis">
+  <div class="topic-head"><span class="qnum">9</span><h2>Photosynthesis</h2><span class="meta">Biology · 37 marks · 4.2% of Biology marks · in 2 of 9 papers <span class="rp">Required practical: Light intensity and rate of photosynthesis</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b05photosynthesis.jpg" src="videos/b05photosynthesis.mp4" aria-label="Explainer video: Photosynthesis"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The rate is held back by whichever factor is in shortest supply. Increase that factor and the rate rises, until something else becomes the limit.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Photosynthesis is an endothermic reaction. It happens in chloroplasts. The equation is: carbon dioxide + water → glucose + oxygen. AQA tests limiting factors, the inverse square law and the pondweed practical.</p>
+<ol><li>Name the limiting factor: light intensity, carbon dioxide concentration or temperature.</li>
+<li>On a rate graph, where the line goes up, the factor on the x-axis is limiting.</li>
+<li>Where the line is flat, another factor is limiting.</li>
+<li>(Higher) Light intensity ∝ 1 ÷ distance². Double the distance gives ¼ of the light.</li>
+<li>In the practical, count oxygen bubbles per minute at different lamp distances.</li></ol>
+<p class="caution"><span>CAUTION</span>Do not say temperature is "used up". Temperature limits the rate because enzymes work slowly when it is cold.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Rate of photosynthesis against light intensity, rising then levelling off">
+<path class="ln" d="M40 150 L300 150 M40 150 L40 20"/>
+<path class="la" d="M40 150 Q110 40 180 52 L295 52"/>
+<g font-size="11"><text x="70" y="90" class="t">light limits</text><text x="190" y="40" style="fill:var(--red)">CO₂ or temperature limits</text></g>
+<g font-size="11" class="m"><text x="170" y="170" text-anchor="middle" class="m">light intensity</text><text x="14" y="90" class="m" transform="rotate(-90 14 90)">rate</text></g>
+</svg></div><figcaption>Rising part: light is the limiting factor. Flat part: something else is.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A student moves a lamp from 10 cm to 20 cm away from some pondweed. (a) By what fraction does the light intensity change? (b) Explain why the rate of photosynthesis falls.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Light intensity ∝ 1 ÷ distance²</li><li>Distance × 2, so intensity × 1/2² = 1/4</li><li>Light is the limiting factor, so less light energy means a slower rate</li></ol>
+      <p class="ans">Answer: <mark>(a) ¼ of the original  (b) light is limiting</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="transpiration">
+  <div class="topic-head"><span class="qnum">10</span><h2>Plant tissues and transpiration</h2><span class="meta">Biology · 35 marks · 4.0% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b14transpiration.jpg" src="videos/b14transpiration.mp4" aria-label="Explainer video: Plant tissues and transpiration"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Water evaporating from the leaves pulls a continuous column of water up the stem, like drinking through a straw.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Plant organs include roots, stems and leaves. Xylem carries water and mineral ions up the plant. Phloem carries dissolved sugars up and down (translocation). AQA tests leaf structure, stomata, transpiration and the potometer.</p>
+<ol><li>Water enters root hair cells by osmosis.</li>
+<li>Water moves up the xylem.</li>
+<li>Water evaporates from leaf cells and diffuses out through the stomata.</li>
+<li>Transpiration is faster when it is warmer, drier, windier or brighter.</li>
+<li>Potometer: rate = distance the bubble moves ÷ time.</li></ol>
+<p>Guard cells open and close the stomata.</p>
+<p class="caution"><span>CAUTION</span>A potometer measures water uptake, not exactly water loss. Some water is used in photosynthesis.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Water moving up the xylem and evaporating from a leaf">
+<rect x="70" y="40" width="16" height="120" class="ft"/>
+<ellipse cx="135" cy="35" rx="55" ry="18" class="ft"/>
+<path class="lb" d="M78 150 L78 50 Q100 35 150 32" style="stroke-dasharray:5 4"/>
+<g style="fill:var(--blue)"><circle cx="200" cy="25" r="3"/><circle cx="212" cy="18" r="3"/><circle cx="222" cy="28" r="3"/></g>
+<g font-size="11"><text x="95" y="110">xylem: water up</text><text x="195" y="50">evaporation from</text><text x="195" y="63">the stomata</text><text x="195" y="100" class="m">faster when warm,</text><text x="195" y="113" class="m">dry, windy, bright</text></g>
+</svg></div><figcaption>Evaporation at the top pulls water up from the roots.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>In a potometer, the air bubble moves 15 mm in 5 minutes. (a) Calculate the rate of water uptake in mm per minute. (b) Give one change that would increase the rate.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) Rate = distance ÷ time = 15 ÷ 5</li><li>= 3 mm per minute</li><li>(b) Use a fan / raise the temperature / increase light intensity / lower humidity</li></ol>
+      <p class="ans">Answer: <mark>(a) 3 mm/min  (b) e.g. a fan to increase air movement</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="respiration">
+  <div class="topic-head"><span class="qnum">11</span><h2>Respiration and metabolism</h2><span class="meta">Biology · 34 marks · 3.9% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b18respiration.jpg" src="videos/b18respiration.mp4" aria-label="Explainer video: Respiration and metabolism"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Respiration releases energy from glucose. Without enough oxygen, muscles take a short cut that releases less energy and leaves lactic acid behind.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Respiration is an exothermic reaction that happens continuously in all living cells. AQA tests aerobic and anaerobic respiration, the effects of exercise and metabolism.</p>
+<ol><li>Aerobic: glucose + oxygen → carbon dioxide + water. It releases a lot of energy.</li>
+<li>Anaerobic in muscles: glucose → lactic acid. It releases less energy.</li>
+<li>Anaerobic in yeast and plants: glucose → ethanol + carbon dioxide (fermentation).</li>
+<li>During exercise, heart rate and breathing rate increase to supply more oxygen.</li>
+<li>Oxygen debt: the extra oxygen needed after exercise to break down lactic acid.</li></ol>
+<p class="caution"><span>CAUTION</span>Respiration releases energy; it does not "make" or "produce" energy.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 130" role="img" aria-label="Aerobic and anaerobic respiration compared">
+<rect x="10" y="10" width="300" height="45" rx="6" class="ft"/><text x="160" y="30" text-anchor="middle" font-size="12">Aerobic: glucose + oxygen → CO₂ + water</text><text x="160" y="46" text-anchor="middle" font-size="11" class="m">lots of energy</text>
+<rect x="10" y="70" width="300" height="45" rx="6" style="fill:var(--red);fill-opacity:.2;stroke:var(--ink)"/><text x="160" y="90" text-anchor="middle" font-size="12">Anaerobic (muscle): glucose → lactic acid</text><text x="160" y="106" text-anchor="middle" font-size="11" class="m">less energy, oxygen debt</text>
+</svg></div><figcaption>Anaerobic respiration is fast but inefficient.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Compare aerobic and anaerobic respiration in human muscle cells.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Aerobic uses oxygen; anaerobic does not</li><li>Aerobic produces carbon dioxide and water; anaerobic produces lactic acid</li><li>Aerobic releases much more energy per glucose molecule</li><li>Anaerobic causes an oxygen debt</li></ol>
+      <p class="ans">Answer: <mark>Oxygen use, products, energy released and oxygen debt all differ</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="homeostasis">
+  <div class="topic-head"><span class="qnum">12</span><h2>Body temperature and the kidneys<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 34 marks · 3.9% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b23kidney.jpg" src="videos/b23kidney.mp4" aria-label="Explainer video: Body temperature and the kidneys"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Homeostasis works like a thermostat. A receptor detects a change, a control centre compares it with the set point, and an effector reverses the change.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Homeostasis keeps internal conditions constant. AQA Triple tests body temperature and water balance.</p>
+<p><b>Body temperature.</b> The thermoregulatory centre in the brain monitors blood temperature. Receptors in the skin also send impulses to it.</p>
+<ul><li>Too hot: sweat glands release more sweat. Blood vessels near the skin dilate (vasodilation), so more heat is lost by radiation.</li>
+<li>Too cold: blood vessels constrict (vasoconstriction). Muscles shiver, and respiration releases heat.</li></ul>
+<p><b>The kidneys.</b> The liver breaks down excess amino acids to make urea (deamination). The kidneys:</p>
+<ol><li>Filter the blood.</li><li>Reabsorb all glucose, some ions and the water the body needs (selective reabsorption).</li><li>Release urea, excess ions and excess water as urine.</li></ol>
+<p>ADH comes from the pituitary gland. More ADH makes the tubules reabsorb more water, so the urine is smaller in volume and more concentrated.</p>
+<p class="caution"><span>CAUTION</span>Blood vessels do not move up or down in the skin. They dilate or constrict.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Negative feedback loop for water balance with ADH">
+<g font-size="11" text-anchor="middle">
+<rect x="10" y="15" width="110" height="40" rx="5" class="fb"/><text x="65" y="32">Blood water</text><text x="65" y="46">too low</text>
+<rect x="200" y="15" width="110" height="40" rx="5" class="fb"/><text x="255" y="32">Pituitary releases</text><text x="255" y="46">more ADH</text>
+<rect x="200" y="95" width="110" height="40" rx="5" class="fb"/><text x="255" y="112">Kidney reabsorbs</text><text x="255" y="126">more water</text>
+<rect x="10" y="95" width="110" height="40" rx="5" class="ft"/><text x="65" y="112">Water level back</text><text x="65" y="126">to normal</text>
+</g>
+<g class="la"><path d="M122 35 H192"/><path d="M255 57 V87"/><path d="M198 115 H128"/><path d="M65 93 V63"/></g><g style="fill:var(--accent)"><path d="M190 29 L199 35 L190 41Z"/><path d="M249 85 L255 94 L261 85Z"/><path d="M130 109 L121 115 L130 121Z"/><path d="M59 65 L65 56 L71 65Z"/></g>
+<text x="160" y="80" font-size="11" text-anchor="middle" class="m">negative feedback</text>
+</svg></div><figcaption>Every homeostasis answer follows this loop: change, detect, respond, return to normal.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A runner has lost a lot of water by sweating. Explain how the body reduces the volume of water lost in urine.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>The water concentration of the blood falls; this is detected by receptors in the brain</li><li>The pituitary gland releases more ADH into the blood</li><li>ADH makes the kidney tubules more permeable, so more water is reabsorbed into the blood</li><li>The runner makes a small volume of concentrated urine</li></ol>
+      <p class="ans">Answer: <mark>More ADH → more water reabsorbed → small volume of concentrated urine</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="food-security">
+  <div class="topic-head"><span class="qnum">13</span><h2>Biomass, food chains and food security<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 31 marks · 3.5% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b24biomass.jpg" src="videos/b24biomass.mp4" aria-label="Explainer video: Biomass, food chains and food security"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Each step up a food chain keeps only about one tenth of the biomass. Most of it is lost before the next animal can eat it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>A pyramid of biomass shows the mass of living material at each trophic level. Producers are at the bottom. Each level is smaller than the one below.</p>
+<p>Biomass is lost between levels because:</p>
+<ul><li>Some parts are not eaten, for example bones and roots.</li><li>Some food is not absorbed and is lost as faeces.</li><li>Much glucose is used in respiration, and the energy goes to the surroundings.</li><li>Some is lost as urea and carbon dioxide (waste).</li></ul>
+<p>Efficiency = biomass at higher level ÷ biomass at lower level × 100.</p>
+<p><b>Food security</b> means enough food for everyone. Threats include population growth, new pests and diseases, drought and the cost of farming. Solutions include fishing quotas and larger net mesh, factory farming (less movement, so less energy lost), and mycoprotein from the fungus <i>Fusarium</i>.</p>
+<p class="caution"><span>CAUTION</span>Energy is not "used up". It is transferred to the surroundings, mostly as heat from respiration.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Pyramid of biomass with three levels">
+<g text-anchor="middle" font-size="12">
+<rect x="40" y="105" width="240" height="32" class="ft"/><text x="160" y="126">Producers 5000 g/m²</text>
+<rect x="95" y="70" width="130" height="32" class="fb"/><text x="160" y="91">Herbivores 450 g/m²</text>
+<rect x="130" y="35" width="60" height="32" class="fb"/><text x="160" y="56">40</text>
+<text x="160" y="22" class="m">Carnivores 40 g/m²</text>
+<text x="270" y="88" class="a" font-weight="700">9%</text><text x="230" y="52" class="a" font-weight="700">8.9%</text>
+</g></svg></div><figcaption>Only about one tenth of the biomass passes to the next trophic level.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The biomass of producers in a field is 5000 g/m². The biomass of herbivores is 450 g/m².<br>(a) Calculate the efficiency of biomass transfer. (b) Give two reasons why not all the biomass is transferred.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) Efficiency = 450 ÷ 5000 × 100</li><li>= 9%</li><li>(b) Some parts of the plants, such as roots, are not eaten</li><li>Glucose is used in respiration and the energy is transferred to the surroundings</li></ol>
+      <p class="ans">Answer: <mark>(a) 9%; (b) e.g. not all eaten; lost in respiration (or faeces, waste)</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="classification">
+  <div class="topic-head"><span class="qnum">14</span><h2>Classification, fossils and extinction<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 27 marks · 3.1% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b25fossils.jpg" src="videos/b25fossils.mp4" aria-label="Explainer video: Classification, fossils and extinction"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Classification is a family tree. Species that share a recent ancestor sit on nearby branches.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Linnaeus put organisms into groups: kingdom, phylum, class, order, family, genus, species. Use the phrase "King Philip Came Over For Good Soup" to remember the order.</p>
+<p>The binomial name has two parts: genus then species. For example, the lion is <i>Panthera leo</i>.</p>
+<p>Carl Woese made the three-domain system from chemical analysis: Archaea, Bacteria and Eukaryota. Evolutionary trees show how closely species are related.</p>
+<p><b>Fossils</b> form in three ways:</p>
+<ol><li>Parts do not decay, because the conditions for decay are absent (no oxygen, too cold or too acidic).</li>
+<li>Parts are replaced by minerals as they decay.</li>
+<li>Traces are preserved, such as footprints and burrows.</li></ol>
+<p>There are few fossils of early life. Early life forms were soft-bodied, and geological activity destroyed many fossils.</p>
+<p><b>Extinction</b> causes: new predators, new diseases, more successful competitors, and changes to the environment, such as climate change or a catastrophic event.</p>
+<p class="caution"><span>CAUTION</span>Write the genus with a capital letter and the species with a small letter.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 160" role="img" aria-label="Evolutionary tree with four species">
+<g class="ln"><path d="M20 100 H60"/><path d="M60 125 V75"/><path d="M60 125 H240"/><path d="M60 75 H110"/><path d="M110 95 V50"/><path d="M110 95 H240"/><path d="M110 50 H170"/><path d="M170 35 V65"/><path d="M170 35 H240"/><path d="M170 65 H240"/></g>
+<g font-size="12"><text x="246" y="129">Species A</text><text x="246" y="99">Species B</text><text x="246" y="39">Species C</text><text x="246" y="69">Species D</text>
+<text x="4" y="93" class="m">ancestor</text><text x="128" y="20" class="a" font-weight="700">most recent split</text></g>
+</svg></div><figcaption>C and D split most recently, so they are the most closely related.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>The tiger is <i>Panthera tigris</i>.<br>(a) Give the genus of the tiger. (b) Explain why there are very few fossils of the first life forms on Earth.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) The genus is the first word of the binomial name</li><li>(b) Early life forms were soft-bodied, so they decayed and left few traces</li><li>Geological activity has destroyed many of the fossils that did form</li></ol>
+      <p class="ans">Answer: <mark>(a) <i>Panthera</i>; (b) soft bodies decayed; fossils destroyed by geological activity</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="evolution">
+  <div class="topic-head"><span class="qnum">15</span><h2>Variation, evolution and selective breeding</h2><span class="meta">Biology · 24 marks · 2.7% of Biology marks · in 5 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b01evolution.jpg" src="videos/b01evolution.mp4" aria-label="Explainer video: Variation, evolution and selective breeding"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Natural selection is a filter on a population. The individuals that fit the environment best survive more often, so their alleles become more common in each new generation.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Evolution is a change in the inherited characteristics of a population over time. It happens by natural selection. AQA also tests selective breeding, fossils, extinction, classification and antibiotic resistance.</p>
+<p>To explain natural selection, use these steps:</p>
+<ol><li>State the variation. Some individuals have a different allele, often from a mutation.</li>
+<li>Name the selection pressure, for example predators, disease or an antibiotic.</li>
+<li>Say which individuals are better adapted, and that they survive.</li>
+<li>Say that they reproduce and pass on the allele.</li>
+<li>Say that over many generations the allele becomes more common.</li></ol>
+<p>Selective breeding is the same idea, but humans choose the parents.</p>
+<p class="caution"><span>CAUTION</span>Do not write that organisms "choose" to change or "try" to adapt. The mutation happens by chance first.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Three generations of moths on dark bark: dark moths become more common">
+<g font-size="12" text-anchor="middle"><text x="55" y="20">Generation 1</text><text x="160" y="20">Selection</text><text x="265" y="20">Many generations</text></g>
+<rect x="10" y="30" width="90" height="110" style="fill:#3b3128"/><rect x="115" y="30" width="90" height="110" style="fill:#3b3128"/><rect x="220" y="30" width="90" height="110" style="fill:#3b3128"/>
+<g style="fill:#e8e2d0"><ellipse cx="30" cy="50" rx="9" ry="5"/><ellipse cx="60" cy="55" rx="9" ry="5"/><ellipse cx="85" cy="70" rx="9" ry="5"/><ellipse cx="30" cy="90" rx="9" ry="5"/><ellipse cx="60" cy="100" rx="9" ry="5"/><ellipse cx="85" cy="120" rx="9" ry="5"/><ellipse cx="40" cy="125" rx="9" ry="5"/>
+<ellipse cx="150" cy="70" rx="9" ry="5" opacity=".15"/><ellipse cx="185" cy="100" rx="9" ry="5" opacity=".15"/><ellipse cx="135" cy="120" rx="9" ry="5"/>
+<ellipse cx="290" cy="60" rx="9" ry="5"/></g>
+<g style="fill:#151515;stroke:#999;stroke-width:.8"><ellipse cx="70" cy="85" rx="9" ry="5"/><ellipse cx="160" cy="50" rx="9" ry="5"/><ellipse cx="180" cy="125" rx="9" ry="5"/>
+<ellipse cx="240" cy="50" rx="9" ry="5"/><ellipse cx="265" cy="75" rx="9" ry="5"/><ellipse cx="240" cy="100" rx="9" ry="5"/><ellipse cx="290" cy="105" rx="9" ry="5"/><ellipse cx="260" cy="125" rx="9" ry="5"/><ellipse cx="290" cy="130" rx="9" ry="5"/></g>
+<g font-size="11" class="m" text-anchor="middle"><text x="55" y="158" class="m">1 dark : 7 pale</text><text x="160" y="158" class="m">birds eat pale moths</text><text x="265" y="158" class="m">6 dark : 1 pale</text></g>
+</svg></div><figcaption>Pale moths are easier to see on dark bark, so dark moths survive and breed more.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Some bacteria are resistant to an antibiotic. Explain how a population of antibiotic-resistant bacteria develops.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>A mutation gives some bacteria resistance to the antibiotic</li><li>The antibiotic kills the non-resistant bacteria</li><li>The resistant bacteria survive and reproduce</li><li>They pass on the resistance allele, so the resistant population grows</li></ol>
+      <p class="ans">Answer: <mark>Mutation → selection by antibiotic → survive → reproduce and pass on the allele</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="monoclonal-antibodies">
+  <div class="topic-head"><span class="qnum">16</span><h2>Monoclonal antibodies<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 24 marks · 2.7% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b26monoclonal.jpg" src="videos/b26monoclonal.mp4" aria-label="Explainer video: Monoclonal antibodies"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A lymphocyte makes the right antibody but does not divide. A tumour cell divides forever. Fuse them, and you get a cell that does both.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Monoclonal antibodies come from one clone of cells. They all bind to one specific antigen.</p>
+<p>To make them:</p>
+<ol><li>Inject a mouse with the antigen.</li>
+<li>The mouse lymphocytes make the specific antibody. Collect these lymphocytes.</li>
+<li>Fuse the lymphocytes with tumour (myeloma) cells. This makes hybridoma cells.</li>
+<li>The hybridoma cells divide quickly and make the antibody.</li>
+<li>Clone one hybridoma cell. Collect and purify the antibodies.</li></ol>
+<p>Uses: pregnancy tests (they bind to the hormone HCG in urine), diagnosis of disease, measuring hormone levels, finding pathogens in research, and treating cancer. For cancer, a drug or radioactive substance is attached, so it goes only to the cancer cells.</p>
+<p>Problem: they caused more side effects than scientists expected.</p>
+<p class="caution"><span>CAUTION</span>The tumour cell does not make the antibody. It gives the hybridoma the ability to divide.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 120" role="img" aria-label="Lymphocyte plus tumour cell makes hybridoma which clones">
+<g font-size="11" text-anchor="middle">
+<circle cx="40" cy="45" r="22" class="fb"/><text x="40" y="49">B</text><text x="40" y="85">Lymphocyte</text><text x="40" y="99" class="m">makes antibody</text>
+<text x="85" y="50" font-size="20">+</text>
+<circle cx="130" cy="45" r="22" class="ft"/><text x="130" y="49">T</text><text x="130" y="85">Tumour cell</text><text x="130" y="99" class="m">divides fast</text>
+<path d="M160 45 H186" class="la"/><path d="M184 39 L193 45 L184 51Z" style="fill:var(--accent)"/>
+<circle cx="220" cy="45" r="24" class="fb"/><circle cx="220" cy="45" r="14" class="ft"/><text x="220" y="85">Hybridoma</text>
+<g opacity=".8"><circle cx="275" cy="25" r="10" class="fb"/><circle cx="298" cy="25" r="10" class="fb"/><circle cx="275" cy="52" r="10" class="fb"/><circle cx="298" cy="52" r="10" class="fb"/></g><text x="287" y="85">Clones</text>
+</g></svg></div><figcaption>The hybridoma cell makes the antibody and divides, so it gives a large supply.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Describe how monoclonal antibodies are produced.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Inject a mouse with the antigen; the mouse lymphocytes make specific antibodies</li><li>Collect the lymphocytes and fuse them with tumour cells to make hybridoma cells</li><li>The hybridoma cells divide and make the antibody; clone a single hybridoma cell</li><li>Collect and purify the antibodies</li></ol>
+      <p class="ans">Answer: <mark>Mouse + antigen → lymphocytes → fuse with tumour cell → hybridoma → clone → collect antibodies</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="biodiversity">
+  <div class="topic-head"><span class="qnum">17</span><h2>Biodiversity and human impact</h2><span class="meta">Biology · 24 marks · 2.7% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b06biodiversity.jpg" src="videos/b06biodiversity.mp4" aria-label="Explainer video: Biodiversity and human impact"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Many human activities do two kinds of damage at once: they add carbon dioxide to the air, and they destroy habitats.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Biodiversity is the variety of all the different species in an ecosystem or on Earth. High biodiversity makes ecosystems more stable. AQA tests pollution, deforestation, peat bogs, global warming and ways to protect biodiversity.</p>
+<ol><li>Deforestation and burning peat release carbon dioxide.</li>
+<li>Fewer trees means less carbon dioxide is taken in by photosynthesis.</li>
+<li>More carbon dioxide adds to global warming.</li>
+<li>Habitats are destroyed, so biodiversity falls.</li>
+<li>To protect biodiversity: breeding programmes, protecting rare habitats, hedgerows and field margins, less deforestation, recycling.</li></ol>
+<p class="caution"><span>CAUTION</span>In 6-mark questions, give both sides: why the activity is done (for example, land for food) and the harm it causes.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Deforestation leads to more carbon dioxide and fewer habitats">
+<rect x="10" y="55" width="90" height="40" rx="6" class="fr" style="fill-opacity:.25;stroke:var(--red)"/><text x="55" y="72" text-anchor="middle" font-size="12">Deforestation</text><text x="55" y="86" text-anchor="middle" font-size="12">or peat burning</text>
+<path class="ln" d="M100 70 L160 35 M100 80 L160 115"/>
+<rect x="160" y="15" width="150" height="40" rx="6" class="fa"/><text x="235" y="32" text-anchor="middle" font-size="11">More CO₂ released, less</text><text x="235" y="46" text-anchor="middle" font-size="11">taken in → global warming</text>
+<rect x="160" y="95" width="150" height="40" rx="6" class="ft"/><text x="235" y="112" text-anchor="middle" font-size="11">Habitats destroyed →</text><text x="235" y="126" text-anchor="middle" font-size="11">biodiversity falls</text>
+</svg></div><figcaption>One action, two effects. Mention both in an answer.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Large areas of tropical forest are cut down and burned to grow crops. Explain two ways this increases the carbon dioxide concentration in the atmosphere.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Burning the trees releases carbon dioxide (combustion)</li><li>Fewer trees, so less carbon dioxide is removed by photosynthesis</li><li>Microorganisms decay the remaining dead wood and release carbon dioxide by respiration</li></ol>
+      <p class="ans">Answer: <mark>Combustion releases CO₂; less photosynthesis removes CO₂</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="culturing">
+  <div class="topic-head"><span class="qnum">18</span><h2>Culturing microorganisms<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 22 marks · 2.5% of Biology marks · in 4 of 9 papers <span class="rp">Required practical: Effect of antiseptics or antibiotics on bacterial growth</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b27culture.jpg" src="videos/b27culture.mp4" aria-label="Explainer video: Culturing microorganisms"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Bacteria double at each division. After n divisions you have 2ⁿ times as many, so numbers grow very fast.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Bacteria divide by binary fission. In good conditions this can happen every 20 minutes.</p>
+<p>Number of bacteria = number at start × 2<sup>number of divisions</sup>. Number of divisions = total time ÷ time for one division.</p>
+<p>Aseptic technique stops contamination:</p>
+<ul><li>Sterilise Petri dishes and agar before use.</li><li>Pass the inoculating loop through a flame.</li><li>Tape the lid on, but do not seal it fully, so oxygen can get in and anaerobic pathogens do not grow.</li><li>Incubate at a maximum of 25 °C in school labs. This reduces the chance of growing human pathogens.</li></ul>
+<p>In the required practical, paper discs with antibiotic go on a bacterial lawn. A clear zone (inhibition zone) shows where bacteria were killed. A larger zone means a more effective antibiotic. Area = πr².</p>
+<p class="caution"><span>CAUTION</span>Use the radius in πr². If you measure the diameter, halve it first.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Petri dish with antibiotic discs and clear zones">
+<circle cx="90" cy="75" r="62" class="ft"/>
+<g style="fill:var(--card,#fff)"><circle cx="65" cy="55" r="22"/><circle cx="118" cy="62" r="12"/><circle cx="85" cy="105" r="17"/></g>
+<g style="fill:var(--accent)"><circle cx="65" cy="55" r="5"/><circle cx="118" cy="62" r="5"/><circle cx="85" cy="105" r="5"/></g>
+<g font-size="12"><text x="175" y="45">A: large clear zone</text><text x="175" y="62" class="m">most effective</text><text x="175" y="90">clear zone area</text><text x="175" y="108" class="a" font-weight="700">= π × r²</text></g>
+</svg></div><figcaption>The clear zone is where the antibiotic killed the bacteria.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A bacterium divides every 20 minutes. (a) Calculate the number of bacteria after 4 hours, starting from one cell. (b) A clear zone has a diameter of 14 mm. Calculate its area.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>(a) 4 hours = 240 minutes; 240 ÷ 20 = 12 divisions</li><li>Number = 1 × 2¹² = 4096</li><li>(b) Radius = 14 ÷ 2 = 7 mm</li><li>Area = π × 7² = 153.9…</li></ol>
+      <p class="ans">Answer: <mark>(a) 4096 bacteria; (b) 154 mm²</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="pathogens">
+  <div class="topic-head"><span class="qnum">19</span><h2>Communicable disease and pathogens</h2><span class="meta">Biology · 21 marks · 2.4% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b16pathogens.jpg" src="videos/b16pathogens.mp4" aria-label="Explainer video: Communicable disease and pathogens"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Bacteria divide in two, again and again, so their number doubles each time. Doubling grows astonishingly fast.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Pathogens are microorganisms that cause communicable disease. They spread by air, water, direct contact or vectors. AQA tests the four types of pathogen, named diseases, prevention and bacterial growth.</p>
+<ol><li>Viruses live and reproduce inside cells: measles, HIV, tobacco mosaic virus.</li>
+<li>Bacteria may produce toxins: salmonella, gonorrhoea.</li>
+<li>Fungi: rose black spot.</li>
+<li>Protists: malaria, spread by mosquitoes.</li>
+<li>Number of bacteria = start number × 2<sup>number of divisions</sup>.</li></ol>
+<p>Reduce spread with hygiene, isolating infected individuals, destroying vectors and vaccination.</p>
+<p class="caution"><span>CAUTION</span>Antibiotics do not kill viruses. Do not suggest antibiotics for measles or HIV.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Bacteria doubling every 20 minutes">
+<g style="fill:var(--blue);fill-opacity:.7"><circle cx="30" cy="75" r="6"/>
+<circle cx="80" cy="68" r="6"/><circle cx="80" cy="82" r="6"/>
+<circle cx="130" cy="60" r="5"/><circle cx="130" cy="72" r="5"/><circle cx="130" cy="84" r="5"/><circle cx="130" cy="96" r="5"/></g>
+<g style="fill:var(--accent);fill-opacity:.8"><circle cx="190" cy="45" r="4"/><circle cx="200" cy="45" r="4"/><circle cx="190" cy="55" r="4"/><circle cx="200" cy="55" r="4"/><circle cx="190" cy="65" r="4"/><circle cx="200" cy="65" r="4"/><circle cx="190" cy="75" r="4"/><circle cx="200" cy="75" r="4"/></g>
+<g font-size="11" text-anchor="middle" class="m"><text x="30" y="120" class="m">0 min</text><text x="80" y="120" class="m">20</text><text x="130" y="120" class="m">40</text><text x="195" y="120" class="m">60</text></g>
+<g font-size="12"><text x="225" y="60">1, 2, 4, 8 …</text><text x="225" y="85" class="a" font-weight="700">2 h: 2⁶ = 64</text></g>
+</svg></div><figcaption>Each division doubles the number.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A bacterium divides every 20 minutes. Starting with one bacterium, how many will there be after 2 hours?</p><span class="marks">[2 marks]</span></div>
+      <ol class="work"><li>Number of divisions = 120 ÷ 20 = 6</li><li>Number = 1 × 2⁶</li></ol>
+      <p class="ans">Answer: <mark>64 bacteria</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="plant-hormones">
+  <div class="topic-head"><span class="qnum">20</span><h2>Plant hormones<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 20 marks · 2.3% of Biology marks · in 2 of 9 papers <span class="rp">Required practical: Effect of light or gravity on seedling growth</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b28auxin.jpg" src="videos/b28auxin.mp4" aria-label="Explainer video: Plant hormones"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Auxin moves away from light. Where there is more auxin, shoot cells grow longer, so the shoot bends towards the light.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Plants respond to light (phototropism) and to gravity (gravitropism). The hormone auxin controls both.</p>
+<ol><li>Light comes from one side.</li><li>Auxin moves to the shaded side of the shoot.</li><li>Auxin makes shoot cells on the shaded side grow longer (elongate).</li><li>The shoot bends towards the light.</li></ol>
+<p>In roots, auxin collects on the lower side. In roots, auxin stops cells growing, so the root bends down.</p>
+<p>Uses of plant hormones:</p>
+<ul><li>Auxins: weed killers, rooting powders, tissue culture.</li><li>Ethene: controls fruit ripening during storage and transport.</li><li>Gibberellins: end seed dormancy, start flowering, make bigger fruit.</li></ul>
+<p class="caution"><span>CAUTION</span>Auxin has opposite effects in shoots and roots. In shoots it increases growth. In roots it decreases growth.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 160" role="img" aria-label="Shoot bending towards light with auxin on the shaded side">
+<circle cx="30" cy="40" r="16" style="fill:var(--accent);fill-opacity:.6"/><g class="la"><path d="M50 40 H86"/><path d="M50 55 H86"/></g><g style="fill:var(--accent)"><path d="M84 34 L93 40 L84 46Z"/><path d="M84 49 L93 55 L84 61Z"/></g><text x="22" y="72" font-size="11">light</text>
+<path d="M170 150 C170 110 165 80 140 45" class="ln" style="stroke-width:16;stroke-opacity:.25"/>
+<path d="M170 150 C170 110 165 80 140 45" class="ln"/>
+<g style="fill:var(--accent)"><circle cx="180" cy="100" r="3"/><circle cx="182" cy="88" r="3"/><circle cx="176" cy="76" r="3"/><circle cx="168" cy="64" r="3"/></g>
+<g font-size="12"><text x="195" y="80">auxin on</text><text x="195" y="95">shaded side</text><text x="195" y="120" class="m">cells elongate more</text></g>
+</svg></div><figcaption>Cells on the shaded side grow longer, so the shoot curves towards the light.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A seedling is lit from one side. Explain why the shoot grows towards the light.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Auxin moves to the shaded side of the shoot</li><li>Auxin causes cells on the shaded side to elongate (grow longer)</li><li>The shaded side grows more, so the shoot bends towards the light</li></ol>
+      <p class="ans">Answer: <mark>Auxin on shaded side → cells elongate more → shoot bends towards light</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="cell-division">
+  <div class="topic-head"><span class="qnum">21</span><h2>Cell division and stem cells</h2><span class="meta">Biology · 19 marks · 2.2% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b15mitosis.jpg" src="videos/b15mitosis.mp4" aria-label="Explainer video: Cell division and stem cells"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>If 5% of the cells you see are dividing, the cell spends 5% of its cycle dividing. The snapshot gives the timing.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Mitosis makes two genetically identical cells for growth and repair. Stem cells are unspecialised cells that can become other types of cell. AQA tests the cell cycle, stem cells and their uses.</p>
+<ol><li>The cell grows, makes more organelles and copies its DNA.</li>
+<li>One set of chromosomes is pulled to each end of the cell.</li>
+<li>The cytoplasm and cell membrane divide.</li>
+<li>Two identical cells form.</li>
+<li>To find time in mitosis: (cells in mitosis ÷ total cells) × length of cycle.</li></ol>
+<p>Embryonic stem cells can become any cell. Adult bone marrow stem cells form some types of cell. Meristems in plants can form any plant cell.</p>
+<p class="caution"><span>CAUTION</span>Mitosis gives identical cells. Meiosis gives gametes that are all different.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 120" role="img" aria-label="Mitosis: one cell becomes two identical cells">
+<circle cx="50" cy="60" r="35" class="ft"/><g class="ln"><path d="M40 50 L45 70 M55 48 L60 68"/></g>
+<path class="ln" d="M90 60 L120 60"/>
+<ellipse cx="170" cy="60" rx="45" ry="30" class="ft"/><g class="ln"><path d="M140 52 L140 68 M150 52 L150 68 M190 52 L190 68 M200 52 L200 68"/></g>
+<path class="ln" d="M220 60 L240 60"/>
+<circle cx="265" cy="35" r="22" class="ft"/><circle cx="265" cy="88" r="22" class="ft"/>
+<g font-size="10" class="m" text-anchor="middle"><text x="50" y="112" class="m">DNA copied</text><text x="170" y="112" class="m">chromosomes pulled apart</text><text x="295" y="65" class="m">2 identical</text></g>
+</svg></div><figcaption>One cell copies its DNA, then splits into two identical cells.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>In a root tip, 20 out of 400 cells are in mitosis. The cell cycle takes 24 hours. Estimate the time spent in mitosis, in minutes.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Fraction in mitosis = 20 ÷ 400 = 0.05</li><li>Time = 0.05 × 24 = 1.2 hours</li><li>1.2 × 60</li></ol>
+      <p class="ans">Answer: <mark>72 minutes</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="drugs">
+  <div class="topic-head"><span class="qnum">22</span><h2>Antibiotics and drug development</h2><span class="meta">Biology · 19 marks · 2.2% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b17drugs.jpg" src="videos/b17drugs.mp4" aria-label="Explainer video: Antibiotics and drug development"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A new drug is tested in stages, each with more people, so that any danger shows up before many people take it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Antibiotics kill bacteria inside the body. Painkillers only relieve symptoms. New drugs are tested for toxicity, efficacy (does it work?) and dose. AQA tests the stages of drug trials and placebos.</p>
+<ol><li>Preclinical testing: on cells and tissues, then on live animals.</li>
+<li>Clinical trials: first on healthy volunteers, at very low doses, to check safety.</li>
+<li>Then on patients, to find the optimum dose.</li>
+<li>Use a placebo: a substance that looks like the drug but has no effect.</li>
+<li>Double-blind: neither the patients nor the doctors know who has the drug. This removes bias.</li></ol>
+<p class="caution"><span>CAUTION</span>Over-use of antibiotics leads to resistant bacteria. Complete the course and only use antibiotics for bacterial infections.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Four stages of drug testing">
+<g font-size="10" text-anchor="middle">
+<rect x="5" y="30" width="70" height="44" rx="5" class="fb"/><text x="40" y="48">Cells and</text><text x="40" y="61">tissues</text>
+<rect x="85" y="30" width="70" height="44" rx="5" class="fb"/><text x="120" y="55">Animals</text>
+<rect x="165" y="30" width="70" height="44" rx="5" class="ft"/><text x="200" y="48">Healthy</text><text x="200" y="61">volunteers</text>
+<rect x="245" y="30" width="70" height="44" rx="5" class="ft"/><text x="280" y="55">Patients</text></g>
+<path class="ln" d="M75 52 L85 52 M155 52 L165 52 M235 52 L245 52"/>
+<g font-size="10" class="m" text-anchor="middle"><text x="80" y="95" class="m">preclinical</text><text x="240" y="95" class="m">clinical (double-blind)</text></g>
+</svg></div><figcaption>Safety is checked at each stage before the next.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>(a) Why is a new drug first given to healthy volunteers at a low dose? (b) Explain what a double-blind trial is.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) To check that the drug is safe / has no serious side effects</li><li>(b) Some patients get the drug and some get a placebo</li><li>Neither the patients nor the doctors know who gets which</li></ol>
+      <p class="ans">Answer: <mark>(a) to test safety  (b) drug vs placebo; nobody knows who has which</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="plant-disease">
+  <div class="topic-head"><span class="qnum">23</span><h2>Plant diseases and defences<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 18 marks · 2.0% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b29plantdisease.jpg" src="videos/b29plantdisease.mp4" aria-label="Explainer video: Plant diseases and defences"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A sick plant photosynthesises less. Follow the chain: less chlorophyll or less leaf area, then less glucose, then less growth.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Plant diseases and problems that AQA tests:</p>
+<ul><li>Tobacco mosaic virus (TMV): a mosaic pattern on leaves. Less chlorophyll, so less photosynthesis.</li>
+<li>Rose black spot (fungus): black spots, leaves fall off. Spread by water and wind.</li>
+<li>Aphids (insect pests): suck sap from phloem.</li>
+<li>Nitrate deficiency: stunted growth, because nitrate is needed to make protein.</li>
+<li>Magnesium deficiency: chlorosis (yellow leaves), because magnesium is needed to make chlorophyll.</li></ul>
+<p>To identify a disease, look at the symptoms, use a gardening manual or website, send a sample to a lab, or use a testing kit with monoclonal antibodies.</p>
+<p>Plant defences:</p>
+<ul><li>Physical: cellulose cell walls, waxy cuticle, layers of dead cells (bark).</li>
+<li>Chemical: antibacterial chemicals, poisons that stop herbivores.</li>
+<li>Mechanical: thorns and hairs, leaves that droop when touched, mimicry.</li></ul>
+<p class="caution"><span>CAUTION</span>Chlorosis means yellow leaves from too little chlorophyll. Link it to magnesium, not nitrate.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Lack of magnesium to Less chlorophyll to Less photo- synthesis to Less glucose, slow growth"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">Lack of</text><text x="35.5" y="55">magnesium</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Less</text><text x="118.5" y="55">chlorophyll</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Less photo-</text><text x="201.5" y="55">synthesis</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Less glucose,</text><text x="284.5" y="55">slow growth</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">yellow leaves (chlorosis)</text></svg></div><figcaption>Always follow the chain through to glucose and growth.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A farmer sees that his crop has yellow leaves and grows slowly. A soil test shows a lack of magnesium ions. Explain why the crop grows slowly.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Magnesium is needed to make chlorophyll, so the plant has less chlorophyll</li><li>Less light is absorbed, so the rate of photosynthesis falls</li><li>Less glucose is made for respiration and for making new cells (proteins, cellulose)</li></ol>
+      <p class="ans">Answer: <mark>No magnesium → less chlorophyll → less photosynthesis → less glucose for growth</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="immunity">
+  <div class="topic-head"><span class="qnum">24</span><h2>Defences, immunity and vaccination</h2><span class="meta">Biology · 15 marks · 1.7% of Biology marks · in 4 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b20immunity.jpg" src="videos/b20immunity.mp4" aria-label="Explainer video: Defences, immunity and vaccination"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A vaccine is a practice run. The body learns the pathogen safely, keeps memory cells, and responds much faster to the real thing.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The body's first defences are the skin, nose hairs, mucus, cilia and stomach acid. White blood cells are the second defence. AQA tests white blood cells and vaccination.</p>
+<ol><li>Phagocytosis: white blood cells engulf and digest pathogens.</li>
+<li>White blood cells make antibodies, which target a specific pathogen.</li>
+<li>White blood cells make antitoxins, which neutralise toxins.</li>
+<li>A vaccine contains a dead or inactive form of the pathogen. White blood cells make antibodies and memory cells.</li>
+<li>If the real pathogen enters, antibodies are made quickly, in large amounts, so the person does not become ill.</li></ol>
+<p>If most people are vaccinated, the pathogen cannot spread easily (herd immunity).</p>
+<p class="caution"><span>CAUTION</span>Antibodies are specific. Antibodies against measles do not protect against flu.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Antibody levels: small response to vaccine, large fast response to real infection">
+<path class="ln" d="M30 150 L305 150 M30 150 L30 15"/>
+<path class="lb" d="M30 148 Q75 90 120 148"/>
+<path class="la" d="M180 148 Q205 10 280 140"/>
+<g font-size="11"><text x="45" y="85" style="fill:var(--blue)">vaccine</text><text x="210" y="25" class="a">real pathogen</text><text x="215" y="40" class="a">fast, large</text></g>
+<text x="160" y="167" font-size="10" class="m" text-anchor="middle">time</text>
+</svg></div><figcaption>Memory cells make the second response faster and bigger.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Explain how a vaccination prevents a person from becoming ill with measles.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>The vaccine contains a dead or inactive measles virus</li><li>White blood cells produce antibodies and memory cells</li><li>If the live virus enters later, antibodies are made rapidly and in large numbers</li><li>The virus is destroyed before it can cause illness</li></ol>
+      <p class="ans">Answer: <mark>Memory cells → fast, large antibody response → no illness</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="hormones">
+  <div class="topic-head"><span class="qnum">25</span><h2>Hormones and blood glucose</h2><span class="meta">Biology · 15 marks · 1.7% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b04glucose.jpg" src="videos/b04glucose.mp4" aria-label="Explainer video: Hormones and blood glucose"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Blood glucose control is negative feedback, like a thermostat: a change away from normal triggers a response that brings it back.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Hormones are chemicals made by endocrine glands. The blood carries them to target organs. AQA tests blood glucose control, diabetes, adrenaline, thyroxine and negative feedback.</p>
+<ol><li>Blood glucose rises after a meal.</li>
+<li>The pancreas detects the rise and releases insulin.</li>
+<li>Insulin makes liver and muscle cells take in glucose and store it as glycogen.</li>
+<li>Blood glucose falls back to normal.</li>
+<li>(Higher) If glucose falls too low, the pancreas releases glucagon. Glucagon changes glycogen back to glucose.</li></ol>
+<p>Type 1 diabetes: the pancreas makes too little insulin. Treat with insulin injections. Type 2 diabetes: cells stop responding to insulin. Treat with diet and exercise.</p>
+<p class="caution"><span>CAUTION</span>Glucagon and glycogen are different. Glucagon is the hormone. Glycogen is the stored carbohydrate.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Negative feedback loop for blood glucose">
+<rect x="110" y="10" width="100" height="30" rx="6" class="fb"/><text x="160" y="30" text-anchor="middle" font-size="12">Normal glucose</text>
+<rect x="215" y="70" width="100" height="40" rx="6" class="fa"/><text x="265" y="88" text-anchor="middle" font-size="11">High → insulin</text><text x="265" y="102" text-anchor="middle" font-size="11">glucose → glycogen</text>
+<rect x="5" y="70" width="100" height="40" rx="6" class="ft"/><text x="55" y="88" text-anchor="middle" font-size="11">Low → glucagon</text><text x="55" y="102" text-anchor="middle" font-size="11">glycogen → glucose</text>
+<path class="ln" d="M205 40 Q250 45 260 66 M255 112 Q200 160 160 165 Q120 160 60 112 M55 66 Q70 45 115 40"/>
+<text x="160" y="155" text-anchor="middle" font-size="11" class="m">pancreas detects the change</text>
+</svg></div><figcaption>Either change triggers a response that returns glucose to normal.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>After a meal, a person's blood glucose concentration rises. Describe how the body brings the concentration back to normal.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>The pancreas detects the high blood glucose</li><li>The pancreas releases insulin into the blood</li><li>Insulin causes glucose to move from the blood into cells</li><li>In liver and muscle cells, glucose is converted to glycogen for storage</li></ol>
+      <p class="ans">Answer: <mark>Pancreas → insulin → glucose into cells → stored as glycogen</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="nervous-system">
+  <div class="topic-head"><span class="qnum">26</span><h2>Nervous system and reflexes</h2><span class="meta">Biology · 15 marks · 1.7% of Biology marks · in 2 of 9 papers <span class="rp">Required practical: Reaction time</span></span></div>
+  <video controls preload="none" playsinline poster="videos/b09reflex.jpg" src="videos/b09reflex.mp4" aria-label="Explainer video: Nervous system and reflexes"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A reflex skips the thinking part of the brain. The impulse goes straight through the spinal cord and back, which makes it fast and automatic.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The nervous system lets you react to your surroundings. AQA tests the reflex arc, synapses, the reaction time practical and the structure of the brain.</p>
+<ol><li>A stimulus is detected by a receptor.</li>
+<li>A sensory neurone carries the impulse to the spinal cord.</li>
+<li>A relay neurone passes the impulse on.</li>
+<li>A motor neurone carries the impulse to the effector.</li>
+<li>The effector (a muscle or gland) responds.</li></ol>
+<p>At a synapse, a chemical diffuses across the gap to the next neurone. In the ruler-drop practical, repeat the test and calculate a mean.</p>
+<p class="caution"><span>CAUTION</span>Neurones carry electrical impulses. Do not write that they carry "messages" or "signals" in a 2-mark answer; use "impulse".</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Reflex arc from stimulus to effector">
+<g font-size="10" text-anchor="middle">
+<rect x="2" y="35" width="46" height="34" rx="5" class="fb"/><text x="25" y="56">Stimulus</text>
+<rect x="56" y="35" width="46" height="34" rx="5" class="fb"/><text x="79" y="56">Receptor</text>
+<rect x="110" y="35" width="46" height="34" rx="5" class="ft"/><text x="133" y="50">Sensory</text><text x="133" y="62">neurone</text>
+<rect x="164" y="35" width="46" height="34" rx="5" class="ft"/><text x="187" y="50">Relay</text><text x="187" y="62">neurone</text>
+<rect x="218" y="35" width="46" height="34" rx="5" class="ft"/><text x="241" y="50">Motor</text><text x="241" y="62">neurone</text>
+<rect x="272" y="35" width="46" height="34" rx="5" class="fa"/><text x="295" y="56">Effector</text></g>
+<path class="ln" d="M48 52 L56 52 M102 52 L110 52 M156 52 L164 52 M210 52 L218 52 M264 52 L272 52"/>
+<text x="187" y="90" font-size="10" text-anchor="middle" class="m">in the spinal cord</text>
+</svg></div><figcaption>Five links in order. Learn them as a chain.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>A student drops a ruler for a partner to catch. The reaction times are 0.21 s, 0.19 s and 0.23 s. (a) Calculate the mean. (b) Why is catching a ruler not a reflex?</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) (0.21 + 0.19 + 0.23) ÷ 3 = 0.63 ÷ 3</li><li>= 0.21 s</li><li>(b) It is a conscious decision that uses the brain, so it is not automatic</li></ol>
+      <p class="ans">Answer: <mark>(a) 0.21 s  (b) it involves conscious thought</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="brain-eye">
+  <div class="topic-head"><span class="qnum">27</span><h2>The brain and the eye<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 14 marks · 1.6% of Biology marks · in 2 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b30eye.jpg" src="videos/b30eye.mp4" aria-label="Explainer video: The brain and the eye"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>The eye lens is like a camera's focus ring. For a near object it must bend light more, so it becomes thicker.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p><b>The brain.</b> Learn three regions:</p>
+<ul><li>Cerebral cortex: memory, language, consciousness.</li><li>Cerebellum: balance and muscle coordination.</li><li>Medulla: unconscious actions, such as heart rate and breathing.</li></ul>
+<p>Scientists study the brain with patients who have brain damage, electrical stimulation and MRI scans. Brain treatment is difficult, because the brain is complex and easily damaged.</p>
+<p><b>Accommodation</b> is how the eye focuses.</p>
+<ul><li>Near object: ciliary muscles contract. Suspensory ligaments slacken. The lens becomes thicker and refracts light more.</li>
+<li>Far object: ciliary muscles relax. Suspensory ligaments tighten. The lens becomes thinner and refracts light less.</li></ul>
+<p>Myopia (short sight) is corrected with a concave lens. Hyperopia (long sight) is corrected with a convex lens. In bright light, the circular muscles of the iris contract, so the pupil gets smaller.</p>
+<p class="caution"><span>CAUTION</span>For a near object the muscles contract but the ligaments go slack. Students often mix these up.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 162" role="img" aria-label="Eye lens shape for near and far objects">
+<g font-size="12" text-anchor="middle"><text x="80" y="18">Near object</text><text x="240" y="18">Far object</text></g>
+<ellipse cx="80" cy="75" rx="22" ry="40" class="fb"/><ellipse cx="240" cy="75" rx="9" ry="40" class="fb"/>
+<g class="lm"><path d="M80 35 L80 25"/><path d="M80 115 L80 125"/><path d="M240 35 L240 22"/><path d="M240 115 L240 128"/></g>
+<g font-size="11" text-anchor="middle"><text x="80" y="140">thick lens</text><text x="80" y="153" class="m">ligaments slack</text><text x="240" y="140">thin lens</text><text x="240" y="153" class="m">ligaments tight</text></g>
+</svg></div><figcaption>A thicker lens refracts light more, so near objects focus on the retina.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Describe how the eye focuses on a near object.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>The ciliary muscles contract</li><li>The suspensory ligaments slacken (loosen)</li><li>The lens becomes thicker, so it refracts light more onto the retina</li></ol>
+      <p class="ans">Answer: <mark>Ciliary muscles contract → ligaments slacken → lens thicker → more refraction</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="menstrual-cycle">
+  <div class="topic-head"><span class="qnum">28</span><h2>Reproductive hormones and contraception</h2><span class="meta">Biology · 13 marks · 1.5% of Biology marks · in 2 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b13menstrual.jpg" src="videos/b13menstrual.mp4" aria-label="Explainer video: Reproductive hormones and contraception"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Four hormones run the cycle in sequence. Each one switches the next on or off, a little like a relay race.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>The menstrual cycle lasts about 28 days. Four hormones control it. AQA tests what each hormone does, hormonal and non-hormonal contraception, and IVF.</p>
+<ol><li>FSH (from the pituitary gland) makes an egg mature in the ovary. It also stimulates the ovary to make oestrogen.</li>
+<li>Oestrogen builds up the uterus lining. (Higher) It inhibits FSH and stimulates LH.</li>
+<li>LH (from the pituitary) causes ovulation, the release of an egg, at about day 14.</li>
+<li>Progesterone keeps the uterus lining in place. (Higher) It inhibits FSH and LH.</li>
+<li>When progesterone falls, the lining breaks down. This is the period.</li></ol>
+<p>The contraceptive pill contains oestrogen and/or progesterone. They stop FSH, so no egg matures. Barrier methods, such as condoms, stop sperm reaching the egg.</p>
+<p class="caution"><span>CAUTION</span>LH causes ovulation, not FSH. FSH makes the egg mature.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 170" role="img" aria-label="Hormone levels over a 28-day menstrual cycle">
+<path class="ln" d="M30 140 L300 140"/>
+<path d="M30 120 Q80 100 120 125 Q150 70 160 125 Q200 130 300 125" style="stroke:var(--blue);stroke-width:2;fill:none"/>
+<path d="M30 130 Q110 40 150 120 Q220 90 300 130" style="stroke:var(--teal);stroke-width:2;fill:none"/>
+<path d="M30 132 L145 130 Q160 20 175 130 L300 132" style="stroke:var(--red);stroke-width:2;fill:none"/>
+<path d="M30 136 L150 135 Q220 50 290 135" style="stroke:var(--accent);stroke-width:2;fill:none"/>
+<g font-size="10" class="m" text-anchor="middle"><text x="30" y="155" class="m">0</text><text x="160" y="155" class="m">14</text><text x="298" y="155" class="m">28 days</text></g>
+<g font-size="10"><text x="35" y="15" style="fill:var(--blue)">FSH</text><text x="70" y="15" class="t">oestrogen</text><text x="130" y="15" style="fill:var(--red)">LH (ovulation)</text><text x="215" y="15" class="a">progesterone</text></g>
+</svg></div><figcaption>The LH surge in the middle of the cycle triggers ovulation.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>(a) Which hormone causes ovulation? (b) Explain how a contraceptive pill containing oestrogen prevents pregnancy.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>(a) LH</li><li>(b) Oestrogen inhibits the release of FSH</li><li>so no egg matures (and none is released)</li></ol>
+      <p class="ans">Answer: <mark>(a) LH  (b) oestrogen inhibits FSH, so no egg matures</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="carbon-cycle">
+  <div class="topic-head"><span class="qnum">29</span><h2>Carbon and water cycles</h2><span class="meta">Biology · 9 marks · 1.0% of Biology marks · in 2 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b19carbon.jpg" src="videos/b19carbon.mp4" aria-label="Explainer video: Carbon and water cycles"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Carbon moves in a loop. One process takes carbon dioxide out of the air; three processes put it back.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Materials such as carbon and water cycle through living things and the environment. AQA tests the carbon cycle, the water cycle and decay.</p>
+<ol><li>Photosynthesis removes carbon dioxide from the air.</li>
+<li>Feeding passes carbon along food chains.</li>
+<li>Respiration by plants, animals and microorganisms returns carbon dioxide.</li>
+<li>Decomposers (bacteria and fungi) break down dead matter and release carbon dioxide.</li>
+<li>Combustion of fossil fuels and wood releases carbon dioxide.</li></ol>
+<p>Decay is faster when it is warm, moist and has oxygen.</p>
+<p class="caution"><span>CAUTION</span>Decomposers release carbon dioxide by respiration. Say "respiration" in your answer.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 180" role="img" aria-label="Carbon cycle">
+<rect x="110" y="5" width="100" height="28" rx="6" class="fb"/><text x="160" y="24" text-anchor="middle" font-size="12">CO₂ in air</text>
+<rect x="5" y="90" width="80" height="28" rx="6" class="ft"/><text x="45" y="109" text-anchor="middle" font-size="12">Plants</text>
+<rect x="120" y="90" width="80" height="28" rx="6" class="fa"/><text x="160" y="109" text-anchor="middle" font-size="12">Animals</text>
+<rect x="235" y="90" width="80" height="28" rx="6" style="fill:var(--muted);fill-opacity:.2;stroke:var(--ink)"/><text x="275" y="103" text-anchor="middle" font-size="10">Dead matter</text><text x="275" y="114" text-anchor="middle" font-size="10">decomposers</text>
+<rect x="110" y="150" width="100" height="26" rx="6" style="fill:var(--red);fill-opacity:.2;stroke:var(--ink)"/><text x="160" y="168" text-anchor="middle" font-size="11">Fossil fuels</text>
+<g class="ln"><path d="M115 25 L50 88"/><path d="M85 104 L120 104"/><path d="M160 90 L160 33"/><path d="M200 104 L235 104"/><path d="M270 90 L205 25"/><path d="M210 162 Q300 150 210 28"/></g>
+<g font-size="9"><text x="40" y="55" class="t">photosynthesis</text><text x="165" y="65" class="a">respiration</text><text x="245" y="55">decay</text><text x="262" y="150" style="fill:var(--red)">combustion</text></g>
+</svg></div><figcaption>One way in to living things, three ways back to the air.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Describe the role of microorganisms in the carbon cycle.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Microorganisms (decomposers) break down dead plants and animals and waste</li><li>They respire</li><li>This releases carbon dioxide back into the atmosphere</li></ol>
+      <p class="ans">Answer: <mark>They decay dead matter and release CO₂ by respiration</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="reproduction">
+  <div class="topic-head"><span class="qnum">30</span><h2>Sexual and asexual reproduction<span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span></h2><span class="meta">Biology · 8 marks · 0.9% of Biology marks · in 3 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b31reproduction.jpg" src="videos/b31reproduction.mp4" aria-label="Explainer video: Sexual and asexual reproduction"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Sexual reproduction shuffles the cards each time. Asexual reproduction photocopies the same hand.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p><b>Sexual reproduction</b> joins two gametes (sperm and egg, or pollen and egg cell). Gametes are made by meiosis. The offspring show variation.</p>
+<p><b>Asexual reproduction</b> needs one parent. Cells divide by mitosis. The offspring are clones, so there is no variation.</p>
+<p>Advantages of sexual reproduction: variation, so a population can survive a change in the environment. Humans can use it for selective breeding.</p>
+<p>Advantages of asexual reproduction: only one parent is needed, it is faster, and it uses less energy. Many identical offspring grow when conditions are good.</p>
+<p>Some organisms use both:</p>
+<ul><li>The malaria parasite: asexual in humans, sexual in mosquitoes.</li><li>Many fungi: asexual spores, and sexual spores for variation.</li><li>Many plants: seeds (sexual), and runners or bulbs (asexual).</li></ul>
+<p class="caution"><span>CAUTION</span>Gametes have half the number of chromosomes. Fertilisation restores the full number.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 130" role="img" aria-label="Comparison of sexual and asexual reproduction">
+<g font-size="12" text-anchor="middle"><text x="80" y="16">Sexual</text><text x="240" y="16">Asexual</text></g>
+<circle cx="50" cy="45" r="14" class="fb"/><circle cx="110" cy="45" r="14" class="ft"/><path d="M60 58 L76 80 M100 58 L84 80" class="lm"/>
+<circle cx="80" cy="92" r="14" style="fill:var(--accent);fill-opacity:.45;stroke:var(--ink)"/>
+<circle cx="240" cy="45" r="14" class="fb"/><path d="M232 58 L215 80 M248 58 L265 80" class="lm"/><circle cx="210" cy="92" r="14" class="fb"/><circle cx="270" cy="92" r="14" class="fb"/>
+<g font-size="11" text-anchor="middle"><text x="80" y="122" class="m">meiosis · variation</text><text x="240" y="122" class="m">mitosis · clones</text></g>
+</svg></div><figcaption>Two parents give a mixed offspring. One parent gives identical copies.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Give three differences between sexual and asexual reproduction.</p><span class="marks">[3 marks]</span></div>
+      <ol class="work"><li>Sexual needs two parents; asexual needs one parent</li><li>Sexual uses gametes made by meiosis; asexual uses mitosis</li><li>Sexual gives variation in the offspring; asexual gives identical clones</li></ol>
+      <p class="ans">Answer: <mark>Parents (2 v 1); meiosis/gametes v mitosis; variation v clones</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="genetic-engineering">
+  <div class="topic-head"><span class="qnum">31</span><h2>Genetic engineering and cloning</h2><span class="meta">Biology · 3 marks · 0.3% of Biology marks · in 2 of 9 papers </span></div>
+  <video controls preload="none" playsinline poster="videos/b21geneng.jpg" src="videos/b21geneng.mp4" aria-label="Explainer video: Genetic engineering and cloning"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>All living things use the same genetic code, so a bacterium can read a human gene and make a human protein.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Genetic engineering changes the genome of an organism by adding a gene from another organism. AQA tests the steps, uses such as insulin and GM crops, and the benefits and concerns.</p>
+<ol><li>Enzymes cut out the required gene.</li>
+<li>The gene is inserted into a vector, usually a bacterial plasmid or a virus.</li>
+<li>The vector inserts the gene into the target cells.</li>
+<li>The cells make the protein, for example human insulin.</li>
+<li>(Higher) For plants and animals, genes are put into cells at an early stage, so all cells get the gene.</li></ol>
+<p>(Triple) Cloning makes genetically identical organisms. Use cuttings or tissue culture for plants. Use embryo transplants or adult cell cloning for animals. In adult cell cloning, put the nucleus from a body cell into an egg cell that has no nucleus. Then use an electric shock to start cell division.</p>
+<p>GM crops may resist pests or herbicides, or give bigger yields. Concerns include effects on wild plants and insects, and long-term effects on health.</p>
+<p class="caution"><span>CAUTION</span>Do not confuse genetic engineering with selective breeding. Selective breeding only uses genes already in the species.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Steps of genetic engineering for insulin">
+<g font-size="10" text-anchor="middle">
+<rect x="5" y="30" width="70" height="44" rx="5" class="fb"/><text x="40" y="48">Cut out</text><text x="40" y="61">gene</text>
+<rect x="85" y="30" width="70" height="44" rx="5" class="ft"/><text x="120" y="48">Insert into</text><text x="120" y="61">plasmid</text>
+<rect x="165" y="30" width="70" height="44" rx="5" class="ft"/><text x="200" y="48">Into</text><text x="200" y="61">bacterium</text>
+<rect x="245" y="30" width="70" height="44" rx="5" class="fa"/><text x="280" y="48">Makes</text><text x="280" y="61">insulin</text></g>
+<path class="ln" d="M75 52 L85 52 M155 52 L165 52 M235 52 L245 52"/>
+</svg></div><figcaption>Cut, insert, transfer, express.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><p>Describe how bacteria can be genetically engineered to produce human insulin.</p><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>Enzymes are used to cut the insulin gene out of human DNA</li><li>The gene is inserted into a plasmid (vector)</li><li>The plasmid is put into a bacterium</li><li>The bacteria multiply and produce human insulin</li></ol>
+      <p class="ans">Answer: <mark>Cut gene → plasmid → bacterium → insulin</mark></p>
+    </div>
+  </div>
+</article><section class="rank" aria-labelledby="chemistry-h" id="chemistry"><div class="sci-h"><h2 id="chemistry-h">Chemistry</h2><span class="meta">11 papers · 1100 marks · 25 topics</span></div><p class="lede">Topics ranked by total marks in the Higher papers. "Triple only" topics are not in Combined Science. Click a topic to jump to its guide.</p><ol class="rows"><li class="row"><span class="n">1</span><div><b>Energy changes and bond energies</b><div class="bar"><i style="width:100%"></i></div><span class="sub">82 marks · in 8 of 11 Chemistry papers</span></div><span class="pct">7.5%</span></li><li class="row"><span class="n">2</span><div><b>Rates of reaction</b><div class="bar"><i style="width:88%"></i></div><span class="sub">73 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">6.6%</span></li><li class="row"><span class="n">3</span><div><b>Moles, masses and conservation of mass</b><div class="bar"><i style="width:87%"></i></div><span class="sub">72 marks · in 11 of 11 Chemistry papers</span></div><span class="pct">6.5%</span></li><li class="row"><span class="n">4</span><div><b>Water, life cycles and resources</b><div class="bar"><i style="width:85%"></i></div><span class="sub">70 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">6.4%</span></li><li class="row"><span class="n">5</span><div><b>The periodic table and groups</b><div class="bar"><i style="width:77%"></i></div><span class="sub">64 marks · in 7 of 11 Chemistry papers</span></div><span class="pct">5.8%</span></li><li class="row"><span class="n">6</span><div><b>Acids, salts and pH</b><div class="bar"><i style="width:68%"></i></div><span class="sub">56 marks · in 7 of 11 Chemistry papers</span></div><span class="pct">5.1%</span></li><li class="row"><span class="n">7</span><div><b>Concentration and titrations</b><div class="bar"><i style="width:67%"></i></div><span class="sub">55 marks · in 6 of 11 Chemistry papers</span></div><span class="pct">5.0%</span></li><li class="row"><span class="n">8</span><div><b>Electrolysis</b><div class="bar"><i style="width:67%"></i></div><span class="sub">55 marks · in 6 of 11 Chemistry papers</span></div><span class="pct">5.0%</span></li><li class="row"><span class="n">9</span><div><b>The atmosphere and climate change</b><div class="bar"><i style="width:60%"></i></div><span class="sub">50 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">4.5%</span></li><li class="row"><span class="n">10</span><div><b>Crude oil, alkanes and alkenes</b><div class="bar"><i style="width:60%"></i></div><span class="sub">49 marks · in 4 of 11 Chemistry papers</span></div><span class="pct">4.5%</span></li><li class="row"><span class="n">11</span><div><b>Reactivity, extraction and redox</b><div class="bar"><i style="width:57%"></i></div><span class="sub">47 marks · in 6 of 11 Chemistry papers</span></div><span class="pct">4.3%</span></li><li class="row"><span class="n">12</span><div><b>Alcohols, carboxylic acids and polymers</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:56%"></i></div><span class="sub">46 marks · in 4 of 11 Chemistry papers</span></div><span class="pct">4.2%</span></li><li class="row"><span class="n">13</span><div><b>Atoms, isotopes and atomic models</b><div class="bar"><i style="width:55%"></i></div><span class="sub">45 marks · in 6 of 11 Chemistry papers</span></div><span class="pct">4.1%</span></li><li class="row"><span class="n">14</span><div><b>Giant structures, metals and carbon</b><div class="bar"><i style="width:52%"></i></div><span class="sub">43 marks · in 6 of 11 Chemistry papers</span></div><span class="pct">3.9%</span></li><li class="row"><span class="n">15</span><div><b>Purity, formulations, chromatography and gas tests</b><div class="bar"><i style="width:52%"></i></div><span class="sub">43 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">3.9%</span></li><li class="row"><span class="n">16</span><div><b>Identifying ions</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:51%"></i></div><span class="sub">42 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">3.8%</span></li><li class="row"><span class="n">17</span><div><b>Yield, atom economy and gas volumes</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:48%"></i></div><span class="sub">40 marks · in 7 of 11 Chemistry papers</span></div><span class="pct">3.6%</span></li><li class="row"><span class="n">18</span><div><b>The Haber process and NPK fertilisers</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:47%"></i></div><span class="sub">38 marks · in 4 of 11 Chemistry papers</span></div><span class="pct">3.5%</span></li><li class="row"><span class="n">19</span><div><b>Reversible reactions and equilibrium</b><div class="bar"><i style="width:36%"></i></div><span class="sub">30 marks · in 4 of 11 Chemistry papers</span></div><span class="pct">2.7%</span></li><li class="row"><span class="n">20</span><div><b>Chemical cells and fuel cells</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:33%"></i></div><span class="sub">28 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">2.5%</span></li><li class="row"><span class="n">21</span><div><b>Covalent bonding and simple molecules</b><div class="bar"><i style="width:29%"></i></div><span class="sub">24 marks · in 6 of 11 Chemistry papers</span></div><span class="pct">2.2%</span></li><li class="row"><span class="n">22</span><div><b>Materials: alloys, ceramics, composites, corrosion</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:27%"></i></div><span class="sub">22 marks · in 5 of 11 Chemistry papers</span></div><span class="pct">2.0%</span></li><li class="row"><span class="n">23</span><div><b>Ionic bonding</b><div class="bar"><i style="width:19%"></i></div><span class="sub">15 marks · in 3 of 11 Chemistry papers</span></div><span class="pct">1.4%</span></li><li class="row"><span class="n">24</span><div><b>Nanoparticles</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:7%"></i></div><span class="sub">6 marks · in 2 of 11 Chemistry papers</span></div><span class="pct">0.5%</span></li><li class="row"><span class="n">25</span><div><b>States of matter</b><div class="bar"><i style="width:7%"></i></div><span class="sub">5 marks · in 2 of 11 Chemistry papers</span></div><span class="pct">0.5%</span></li></ol></section><p class="pending">The Chemistry guides (videos, explanations, diagrams and worked questions) are coming next. The ranking above shows which topics to revise first.</p><section class="rank" aria-labelledby="physics-h" id="physics"><div class="sci-h"><h2 id="physics-h">Physics</h2><span class="meta">10 papers · 1000 marks · 29 topics</span></div><p class="lede">Topics ranked by total marks in the Higher papers. "Triple only" topics are not in Combined Science. Click a topic to jump to its guide.</p><ol class="rows"><li class="row"><span class="n">1</span><div><b>Forces, work and springs</b><div class="bar"><i style="width:100%"></i></div><span class="sub">78 marks · in 7 of 10 Physics papers</span></div><span class="pct">7.8%</span></li><li class="row"><span class="n">2</span><div><b>Reflection, refraction, lenses and colour</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:96%"></i></div><span class="sub">75 marks · in 6 of 10 Physics papers</span></div><span class="pct">7.5%</span></li><li class="row"><span class="n">3</span><div><b>Generators, transformers and induction</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:72%"></i></div><span class="sub">56 marks · in 5 of 10 Physics papers</span></div><span class="pct">5.6%</span></li><li class="row"><span class="n">4</span><div><b>Space physics</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:69%"></i></div><span class="sub">54 marks · in 6 of 10 Physics papers</span></div><span class="pct">5.4%</span></li><li class="row"><span class="n">5</span><div><b>Newton&#x27;s laws and terminal velocity</b><div class="bar"><i style="width:67%"></i></div><span class="sub">52 marks · in 6 of 10 Physics papers</span></div><span class="pct">5.2%</span></li><li class="row"><span class="n">6</span><div><b>Energy stores and transfers</b><div class="bar"><i style="width:63%"></i></div><span class="sub">49 marks · in 6 of 10 Physics papers</span></div><span class="pct">4.9%</span></li><li class="row"><span class="n">7</span><div><b>Magnetism and the motor effect</b><div class="bar"><i style="width:62%"></i></div><span class="sub">48 marks · in 6 of 10 Physics papers</span></div><span class="pct">4.8%</span></li><li class="row"><span class="n">8</span><div><b>Wave properties</b><div class="bar"><i style="width:58%"></i></div><span class="sub">45 marks · in 5 of 10 Physics papers</span></div><span class="pct">4.5%</span></li><li class="row"><span class="n">9</span><div><b>Power and efficiency</b><div class="bar"><i style="width:56%"></i></div><span class="sub">44 marks · in 4 of 10 Physics papers</span></div><span class="pct">4.4%</span></li><li class="row"><span class="n">10</span><div><b>Circuits, current, p.d. and resistance</b><div class="bar"><i style="width:55%"></i></div><span class="sub">43 marks · in 4 of 10 Physics papers</span></div><span class="pct">4.3%</span></li><li class="row"><span class="n">11</span><div><b>Mains electricity and electrical power</b><div class="bar"><i style="width:51%"></i></div><span class="sub">40 marks · in 4 of 10 Physics papers</span></div><span class="pct">4.0%</span></li><li class="row"><span class="n">12</span><div><b>Speed, acceleration and motion graphs</b><div class="bar"><i style="width:51%"></i></div><span class="sub">40 marks · in 6 of 10 Physics papers</span></div><span class="pct">4.0%</span></li><li class="row"><span class="n">13</span><div><b>Pressure in fluids</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:47%"></i></div><span class="sub">37 marks · in 4 of 10 Physics papers</span></div><span class="pct">3.7%</span></li><li class="row"><span class="n">14</span><div><b>I–V characteristics and components</b><div class="bar"><i style="width:45%"></i></div><span class="sub">35 marks · in 3 of 10 Physics papers</span></div><span class="pct">3.5%</span></li><li class="row"><span class="n">15</span><div><b>Radioactive decay and half-life</b><div class="bar"><i style="width:40%"></i></div><span class="sub">31 marks · in 4 of 10 Physics papers</span></div><span class="pct">3.1%</span></li><li class="row"><span class="n">16</span><div><b>Internal energy and latent heat</b><div class="bar"><i style="width:37%"></i></div><span class="sub">29 marks · in 3 of 10 Physics papers</span></div><span class="pct">2.9%</span></li><li class="row"><span class="n">17</span><div><b>Specific heat capacity</b><div class="bar"><i style="width:36%"></i></div><span class="sub">28 marks · in 4 of 10 Physics papers</span></div><span class="pct">2.8%</span></li><li class="row"><span class="n">18</span><div><b>Stopping distances</b><div class="bar"><i style="width:36%"></i></div><span class="sub">28 marks · in 4 of 10 Physics papers</span></div><span class="pct">2.8%</span></li><li class="row"><span class="n">19</span><div><b>Momentum</b><div class="bar"><i style="width:35%"></i></div><span class="sub">27 marks · in 4 of 10 Physics papers</span></div><span class="pct">2.7%</span></li><li class="row"><span class="n">20</span><div><b>Gas pressure and temperature</b><div class="bar"><i style="width:33%"></i></div><span class="sub">26 marks · in 3 of 10 Physics papers</span></div><span class="pct">2.6%</span></li><li class="row"><span class="n">21</span><div><b>Infrared and black body radiation</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:28%"></i></div><span class="sub">22 marks · in 4 of 10 Physics papers</span></div><span class="pct">2.2%</span></li><li class="row"><span class="n">22</span><div><b>Density</b><div class="bar"><i style="width:27%"></i></div><span class="sub">21 marks · in 3 of 10 Physics papers</span></div><span class="pct">2.1%</span></li><li class="row"><span class="n">23</span><div><b>Sound, ultrasound and seismic waves</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:24%"></i></div><span class="sub">19 marks · in 4 of 10 Physics papers</span></div><span class="pct">1.9%</span></li><li class="row"><span class="n">24</span><div><b>Energy resources</b><div class="bar"><i style="width:21%"></i></div><span class="sub">16 marks · in 4 of 10 Physics papers</span></div><span class="pct">1.6%</span></li><li class="row"><span class="n">25</span><div><b>Atomic structure and isotopes</b><div class="bar"><i style="width:19%"></i></div><span class="sub">15 marks · in 2 of 10 Physics papers</span></div><span class="pct">1.5%</span></li><li class="row"><span class="n">26</span><div><b>Static electricity</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:19%"></i></div><span class="sub">15 marks · in 2 of 10 Physics papers</span></div><span class="pct">1.5%</span></li><li class="row"><span class="n">27</span><div><b>Nuclear fission and fusion</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:14%"></i></div><span class="sub">11 marks · in 2 of 10 Physics papers</span></div><span class="pct">1.1%</span></li><li class="row"><span class="n">28</span><div><b>Electromagnetic spectrum</b><div class="bar"><i style="width:14%"></i></div><span class="sub">11 marks · in 3 of 10 Physics papers</span></div><span class="pct">1.1%</span></li><li class="row"><span class="n">29</span><div><b>Moments, levers and gears</b><span class="tonly" title="Only in Triple Science, not in Combined Science">Triple only</span><div class="bar"><i style="width:6%"></i></div><span class="sub">5 marks · in 3 of 10 Physics papers</span></div><span class="pct">0.5%</span></li></ol></section><p class="pending">The Physics guides (videos, explanations, diagrams and worked questions) are coming next. The ranking above shows which topics to revise first.</p>
+<footer>
+  <h3>How the data was collected</h3>
+  <p>All question papers came from AQA's own file store: Biology 8461, Chemistry 8462 and Physics 8463, papers 1H and 2H, from June 2018 to June 2023. Some papers could not be opened, and one Biology question (June 2018, question 6) was withdrawn by AQA, so it is not counted. AQA has not released the 2024 and 2025 papers to the public yet.</p>
+  <p>Each sub-question went into one topic. Science questions often mix topics, so treat the percentages as a guide to priority, not exact figures.</p>
+  <details><summary>Sources</summary><ul class="mono" style="display:grid;gap:4px;padding-left:1.2rem;overflow-wrap:anywhere"><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-84611H-QP-JUN18.PDF" rel="noopener">AQA 8461/1H Biology June 2018</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-84611H-QP-NOV20.PDF" rel="noopener">AQA 8461/1H Biology November 2020</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-84612H-QP-NOV20.PDF" rel="noopener">AQA 8461/2H Biology November 2020</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-84611H-QP-NOV21.PDF" rel="noopener">AQA 8461/1H Biology November 2021</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-84612H-QP-NOV21.PDF" rel="noopener">AQA 8461/2H Biology November 2021</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-84611H-QP-JUN22.PDF" rel="noopener">AQA 8461/1H Biology June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-84612H-QP-JUN22.PDF" rel="noopener">AQA 8461/2H Biology June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-84611H-QP-JUN23.PDF" rel="noopener">AQA 8461/1H Biology June 2023</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-84612H-QP-JUN23.PDF" rel="noopener">AQA 8461/2H Biology June 2023</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-84621H-QP-JUN18.PDF" rel="noopener">AQA 8462/1H Chemistry June 2018</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-84622H-QP-JUN18.PDF" rel="noopener">AQA 8462/2H Chemistry June 2018</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2019/june/AQA-84621H-QP-JUN19.PDF" rel="noopener">AQA 8462/1H Chemistry June 2019</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-84621H-QP-NOV20.PDF" rel="noopener">AQA 8462/1H Chemistry November 2020</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-84622H-QP-NOV20.PDF" rel="noopener">AQA 8462/2H Chemistry November 2020</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-84621H-QP-NOV21.PDF" rel="noopener">AQA 8462/1H Chemistry November 2021</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-84622H-QP-NOV21.PDF" rel="noopener">AQA 8462/2H Chemistry November 2021</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-84621H-QP-JUN22.PDF" rel="noopener">AQA 8462/1H Chemistry June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-84622H-QP-JUN22.PDF" rel="noopener">AQA 8462/2H Chemistry June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-84621H-QP-JUN23.PDF" rel="noopener">AQA 8462/1H Chemistry June 2023</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-84622H-QP-JUN23.PDF" rel="noopener">AQA 8462/2H Chemistry June 2023</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2018/june/AQA-84632H-QP-JUN18.PDF" rel="noopener">AQA 8463/2H Physics June 2018</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2019/june/AQA-84632H-QP-JUN19.PDF" rel="noopener">AQA 8463/2H Physics June 2019</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-84631H-QP-NOV20.PDF" rel="noopener">AQA 8463/1H Physics November 2020</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2020/november/AQA-84632H-QP-NOV20.PDF" rel="noopener">AQA 8463/2H Physics November 2020</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-84631H-QP-NOV21.PDF" rel="noopener">AQA 8463/1H Physics November 2021</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2021/november/AQA-84632H-QP-NOV21.PDF" rel="noopener">AQA 8463/2H Physics November 2021</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-84631H-QP-JUN22.PDF" rel="noopener">AQA 8463/1H Physics June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2022/june/AQA-84632H-QP-JUN22.PDF" rel="noopener">AQA 8463/2H Physics June 2022</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-84631H-QP-JUN23.PDF" rel="noopener">AQA 8463/1H Physics June 2023</a></li><li><a href="https://filestore.aqa.org.uk/sample-papers-and-mark-schemes/2023/june/AQA-84632H-QP-JUN23.PDF" rel="noopener">AQA 8463/2H Physics June 2023</a></li></ul></details>
+  <p>Videos: made with Manim (the animation library from 3Blue1Brown) and an offline voice. The worked questions are original, and every calculation was checked.</p>
+</footer>
+</div>
+</body>
+</html>
