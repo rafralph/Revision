@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.paper{font-family:var(--f-mono);font-size:.72rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+.q > div.qtext{flex:1 1 18rem;min-width:0}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+table.came{width:100%;border-collapse:collapse;font-size:.9rem}
+table.came th,table.came td{border:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+table.came th{background:var(--accent-soft)}
+.tablewrap{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/" aria-current="page">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<header>
+  <p class="code">AQA GCSE ENGLISH LANGUAGE 8700 · ENGLISH LITERATURE 8702</p>
+  <h1>English: every question, ranked by marks</h1>
+  <p class="lede">English has no Higher tier. Everyone sits the same papers, and the questions follow the same pattern every year. So each guide covers one exam question, ranked by how many marks it is worth. Each guide has a short video, a plain-English method, a diagram and a worked example with a model answer.</p>
+  <div class="facts"><span><b>16</b> guides</span><span><b>50%</b> of Language is writing</span><span>Language 160 marks · Literature 160 marks</span></div>
+  <nav class="subnav" aria-label="Sections"><a href="#language">English Language</a><a href="#literature">English Literature</a></nav>
+</header>
+<section class="rank" aria-labelledby="language-h" id="language"><div class="sci-h"><h2 id="language-h">English Language</h2><span class="meta">2 papers · 160 marks · 1 h 45 min each</span></div>
+  <p class="lede">The two writing questions are half of the GCSE. Practise them most.</p>
+  <ol class="rows"><li class="row"><span class="n">1</span><div><a href="#creative-writing">Descriptive or narrative writing</a><span class="paper">Paper 1 Q5</span><div class="bar"><i style="width:100%"></i></div><span class="sub">40 marks</span></div><span class="pct">25%</span></li><li class="row"><span class="n">2</span><div><a href="#viewpoint-writing">Writing to present a viewpoint</a><span class="paper">Paper 2 Q5</span><div class="bar"><i style="width:100%"></i></div><span class="sub">40 marks</span></div><span class="pct">25%</span></li><li class="row"><span class="n">3</span><div><a href="#evaluation">Evaluating a statement about a text</a><span class="paper">Paper 1 Q4</span><div class="bar"><i style="width:50%"></i></div><span class="sub">20 marks</span></div><span class="pct">12%</span></li><li class="row"><span class="n">4</span><div><a href="#compare-perspectives">Comparing writers&#x27; perspectives</a><span class="paper">Paper 2 Q4</span><div class="bar"><i style="width:40%"></i></div><span class="sub">16 marks</span></div><span class="pct">10%</span></li><li class="row"><span class="n">5</span><div><a href="#language-nonfiction">Language analysis in non-fiction</a><span class="paper">Paper 2 Q3</span><div class="bar"><i style="width:30%"></i></div><span class="sub">12 marks</span></div><span class="pct">8%</span></li><li class="row"><span class="n">6</span><div><a href="#language-fiction">Language analysis in fiction</a><span class="paper">Paper 1 Q2</span><div class="bar"><i style="width:20%"></i></div><span class="sub">8 marks</span></div><span class="pct">5%</span></li><li class="row"><span class="n">7</span><div><a href="#structure">Structure: how the text is built</a><span class="paper">Paper 1 Q3</span><div class="bar"><i style="width:20%"></i></div><span class="sub">8 marks</span></div><span class="pct">5%</span></li><li class="row"><span class="n">8</span><div><a href="#summary">Summary of differences</a><span class="paper">Paper 2 Q2</span><div class="bar"><i style="width:20%"></i></div><span class="sub">8 marks</span></div><span class="pct">5%</span></li><li class="row"><span class="n">9</span><div><a href="#retrieval">Retrieval and true statements</a><span class="paper">Paper 1 Q1 + Paper 2 Q1</span><div class="bar"><i style="width:20%"></i></div><span class="sub">8 marks</span></div><span class="pct">5%</span></li><li class="row"><span class="n">10</span><div><a href="#technical-accuracy">Technical accuracy (spelling, punctuation, grammar)</a><span class="paper">Q5 on both papers</span><div class="bar"><i style="width:80%"></i></div><span class="sub">32 marks (inside Q5)</span></div><span class="pct">20%</span></li></ol>
+  <h3>What the writing questions asked</h3>
+  <div class="tablewrap"><table class="came"><thead><tr><th>Series</th><th>Paper 1 Q5 (creative)</th><th>Paper 2 Q5 (viewpoint)</th></tr></thead><tbody><tr><td>Nov 2020</td><td>Describe a mysterious place (picture) <i>or</i> a story about an event that cannot be explained</td><td>Article for a news website: travelling ever further and faster is expensive, dangerous and a waste of time</td></tr><tr><td>Nov 2021</td><td>Describe a place at sunset (picture) <i>or</i> a story about a new beginning</td><td>Article for a magazine or website: cheap fast fashion harms young workers in poorer countries</td></tr><tr><td>June 2022</td><td>(paper not available)</td><td>Magazine article: holidays don't need to be faraway and expensive</td></tr><tr><td>June 2023</td><td>(paper not available)</td><td>Speech to a local council: public transport should be cheaper and more reliable than cars</td></tr></tbody></table></div>
+</section>
+<article class="topic" id="creative-writing">
+  <div class="topic-head"><span class="qnum">1</span><h2>Descriptive or narrative writing</h2><span class="meta">English Language · Paper 1 Q5 · 40 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e01creative.jpg" src="videos/e01creative.mp4" aria-label="Explainer video: Descriptive or narrative writing"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A great description is a camera that moves slowly. Zoom in on one place, then shift time, weather or mood, and let small details carry the feeling.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 1 Question 5 is worth 40 marks: 24 for content and organisation, 16 for technical accuracy. It is the biggest question in English Language. Spend 45 minutes on it: 5 minutes to plan, 35 to write, 5 to check.</p>
+<p>You choose one task. Usually it is a description based on a picture, or a story with a given title or idea.</p>
+<p>To plan a description, use five "camera shots":</p>
+<ol><li>Wide shot: the whole place, the weather and the light.</li><li>Zoom in on one small detail.</li><li>Bring in a person or a movement.</li><li>Shift: change the time, the weather or the mood.</li><li>End by returning to the first image, but changed (a circular ending).</li></ol>
+<p>For a story, use only one or two characters and one main event. Start close to the action. Do not try to tell a whole life.</p>
+<p>To get the top marks:</p>
+<ul><li>Vary your sentence openings (an adverb, a verb, a prepositional phrase).</li><li>Use a one-word or very short sentence for impact.</li><li>Choose precise verbs and nouns, not many adjectives.</li><li>Use paragraphs of different lengths on purpose.</li></ul>
+<p class="caution"><span>CAUTION</span>Do not write a list of five senses. Choose details that build one mood.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Wide shot to Zoom on a detail to Person or movement to Shift: time or mood to Return, changed"><g font-size="9.5" text-anchor="middle"><rect x="2.0" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="27.2" y="41">Wide</text><text x="27.2" y="55">shot</text><rect x="68.4" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="93.6" y="41">Zoom on</text><text x="93.6" y="55">a detail</text><rect x="134.8" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="160.0" y="41">Person or</text><text x="160.0" y="55">movement</text><rect x="201.2" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="226.4" y="41">Shift: time</text><text x="226.4" y="55">or mood</text><rect x="267.6" y="20" width="50.4" height="48" rx="5" class="ft"/><text x="292.8" y="41">Return,</text><text x="292.8" y="55">changed</text></g><g class="la" style="stroke-width:2"><path d="M53.4 44 H63.4"/><path d="M119.8 44 H129.8"/><path d="M186.2 44 H196.2"/><path d="M252.6 44 H262.6"/></g><g style="fill:var(--accent)"><path d="M62.4 39 L67.4 44 L62.4 49 Z"/><path d="M128.8 39 L133.8 44 L128.8 49 Z"/><path d="M195.2 39 L200.2 44 L195.2 49 Z"/><path d="M261.6 39 L266.6 44 L261.6 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">five camera shots: one paragraph each</text></svg></div><figcaption>Plan five paragraphs before you write. Each one is a different camera shot.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Write a description of a busy market as it closes for the night, as suggested by a picture. (24 marks for content and organisation, 16 for technical accuracy)</p></div><span class="marks">[40 marks]</span></div>
+      <ol class="work"><li>Plan five shots: market at dusk → a single stall → the trader packing up → rain and darkness arrive → the empty square</li><li>Open with a short, striking sentence, not 'One day…'</li><li>Use precise verbs and a mix of sentence lengths and openings</li><li>End with a circular image that shows the change in mood</li><li>Leave 5 minutes to check spelling, full stops and capital letters</li></ol>
+      <p class="ans">Answer: <mark>Model opening (invented): <i>Dusk. The market sagged like a tired animal. Under a single swinging bulb, the fishmonger scraped silver scales into a bucket, and the last light slid off the cobbles and into the drains.</i></mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="viewpoint-writing">
+  <div class="topic-head"><span class="qnum">2</span><h2>Writing to present a viewpoint</h2><span class="meta">English Language · Paper 2 Q5 · 40 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e02viewpoint.jpg" src="videos/e02viewpoint.mp4" aria-label="Explainer video: Writing to present a viewpoint"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A persuasive piece is a staircase. Each paragraph is one step: a point, evidence for it, and a reason the reader should care.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 2 Question 5 is worth 40 marks: 24 for content and organisation, 16 for technical accuracy. You get a statement and a form, such as an article, a letter or a speech.</p>
+<p>Recent statements were about holidays close to home, public transport, fast fashion, and the risks of travel. Forms were articles and a speech.</p>
+<p>Plan in this order:</p>
+<ol><li>Decide your view. You can agree, disagree, or take a balanced view, but be clear.</li><li>Choose 3 or 4 main points. Put the strongest last.</li><li>Add one counter-argument and answer it.</li><li>Plan an opening hook and a final call to action.</li></ol>
+<p>Match the form: a letter needs "Dear…" and a sign-off; an article needs a headline; a speech speaks directly to the audience ("you", "we").</p>
+<p>Useful methods: direct address, rhetorical questions, facts and statistics (you can invent realistic ones), anecdote, a list of three, and emotive language. Use them with purpose, not as a checklist.</p>
+<p class="caution"><span>CAUTION</span>Do not write a list of DAFOREST techniques. Examiners reward a clear, controlled argument.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Hook anecdote to Point 1 to Counter- argument to Point 2 strongest to Call to action"><g font-size="9.5" text-anchor="middle"><rect x="2.0" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="27.2" y="41">Hook</text><text x="27.2" y="55">anecdote</text><rect x="68.4" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="93.6" y="48">Point 1</text><rect x="134.8" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="160.0" y="41">Counter-</text><text x="160.0" y="55">argument</text><rect x="201.2" y="20" width="50.4" height="48" rx="5" class="fb"/><text x="226.4" y="41">Point 2</text><text x="226.4" y="55">strongest</text><rect x="267.6" y="20" width="50.4" height="48" rx="5" class="ft"/><text x="292.8" y="41">Call to</text><text x="292.8" y="55">action</text></g><g class="la" style="stroke-width:2"><path d="M53.4 44 H63.4"/><path d="M119.8 44 H129.8"/><path d="M186.2 44 H196.2"/><path d="M252.6 44 H262.6"/></g><g style="fill:var(--accent)"><path d="M62.4 39 L67.4 44 L62.4 49 Z"/><path d="M128.8 39 L133.8 44 L128.8 49 Z"/><path d="M195.2 39 L200.2 44 L195.2 49 Z"/><path d="M261.6 39 L266.6 44 L261.6 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">each paragraph: point → evidence → why it matters</text></svg></div><figcaption>Put the counter-argument in the middle, and finish with your strongest point.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>'Holidays don't need to be faraway and expensive. They just need to give people a break.' Write an article for a magazine in which you argue your point of view on this statement.</p></div><span class="marks">[40 marks]</span></div>
+      <ol class="work"><li>Headline and hook: a short anecdote about a rainy day trip that was still the best holiday</li><li>Point 1: rest comes from a change of routine, not distance</li><li>Counter-argument: 'travel broadens the mind' — answer it: so can a new town an hour away</li><li>Point 2 (strongest): cost and climate — cheaper, greener breaks are open to everyone</li><li>Call to action: 'This summer, look closer to home.'</li></ol>
+      <p class="ans">Answer: <mark>Model hook (invented): <i>Last August, my family's 'holiday' was a tent, a field forty minutes from home and six days of rain. It was the best week of my year. So why do we believe that a break only counts if it needs a passport?</i></mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="evaluation">
+  <div class="topic-head"><span class="qnum">3</span><h2>Evaluating a statement about a text</h2><span class="meta">English Language · Paper 1 Q4 · 20 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e03evaluate.jpg" src="videos/e03evaluate.mp4" aria-label="Explainer video: Evaluating a statement about a text"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Q4 is a debate with a student. You are the judge: decide how far you agree, then prove it with evidence and the writer's methods.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 1 Question 4 is worth 20 marks. A student makes a statement about the second half of the source. You evaluate how far you agree.</p>
+<p>Use the "View – Evidence – Method – Effect" pattern in each paragraph:</p>
+<ol><li>View: say how far you agree with one part of the statement.</li><li>Evidence: a short quotation.</li><li>Method: name what the writer does (word choice, image, sentence form, structure).</li><li>Effect: explain what it makes the reader think or feel. Link back to the statement.</li></ol>
+<p>Write 3 or 4 paragraphs in 20 minutes. Respond to both parts of the statement. You can partly agree.</p>
+<p class="caution"><span>CAUTION</span>Only use the lines the question gives. Quotations from outside them get no marks.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="View: how far? to Evidence: quotation to Method: what the writer does to Effect: on reader"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">View:</text><text x="35.5" y="55">how far?</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Evidence:</text><text x="118.5" y="55">quotation</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Method: what</text><text x="201.5" y="55">the writer does</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Effect:</text><text x="284.5" y="55">on reader</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">repeat for each part of the statement</text></svg></div><figcaption>Each paragraph judges one part of the statement.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><blockquote class="extract"><b>Invented extract:</b> The kitchen was a furnace. Steam crawled up the windows and hung there, heavy and grey, while pans hissed like angry cats. Mrs Hale moved through it all without a sound, her sleeves rolled, her face set like stone. Only when the boy dropped the plate did she stop. She knelt, picked up the pieces one by one, and said nothing at all.</blockquote><p>A student said: 'In this part of the story, the writer makes Mrs Hale seem cold, but the reader can tell she cares.' To what extent do you agree?</p></div><span class="marks">[20 marks]</span></div>
+      <ol class="work"><li>View: I agree that she first seems cold</li><li>Evidence and method: the simile 'her face set like stone' suggests she is hard and shows no feeling</li><li>View: but I agree more with the second part</li><li>Evidence and method: she 'knelt' and picked up the pieces 'one by one' — slow, gentle verbs show patience, not anger</li><li>Effect: her silence protects the boy; the writer lets actions, not words, show care</li></ol>
+      <p class="ans">Answer: <mark>Mostly agree: the stone simile makes her seem cold, but her slow, gentle actions show quiet care.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="compare-perspectives">
+  <div class="topic-head"><span class="qnum">4</span><h2>Comparing writers' perspectives</h2><span class="meta">English Language · Paper 2 Q4 · 16 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e04compare.jpg" src="videos/e04compare.mp4" aria-label="Explainer video: Comparing writers&#x27; perspectives"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Q4 is two people talking about the same thing. Find what each one feels, then show how each makes you feel it.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 2 Question 4 is worth 16 marks. You compare how two writers convey their different feelings and perspectives on the same topic. One source is usually from the 19th century, and one is modern.</p>
+<p>Write 3 comparative paragraphs. In each paragraph:</p>
+<ol><li>State the difference (or similarity) in their views.</li><li>Writer A: quotation, method, effect.</li><li>Use a comparative connective: "whereas", "in contrast", "similarly".</li><li>Writer B: quotation, method, effect.</li></ol>
+<p>Talk about perspective: why might each writer feel this way? Think about their time, their purpose and their situation.</p>
+<p class="caution"><span>CAUTION</span>Compare in every paragraph. Two separate essays score low.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 150" role="img" aria-label="Two overlapping circles comparing two writers">
+<circle cx="120" cy="75" r="62" class="fb" style="fill-opacity:.5"/><circle cx="200" cy="75" r="62" class="ft" style="fill-opacity:.5"/>
+<g font-size="11" text-anchor="middle"><text x="95" y="60">Writer A</text><text x="95" y="76">(1850s)</text><text x="100" y="96" class="m">fear, awe</text>
+<text x="225" y="60">Writer B</text><text x="225" y="76">(today)</text><text x="225" y="96" class="m">boredom</text><text x="160" y="72" font-weight="700">same</text><text x="160" y="86" font-weight="700">topic</text></g>
+</svg></div><figcaption>Same topic, different feelings. Your answer lives in the gap between them.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><blockquote class="extract"><b>Invented Source A (1850s letter):</b> The engine shrieked like a thing alive, and we were flung into the dark at a speed no horse could dream of. I confess I gripped the seat and prayed.</blockquote><blockquote class="extract"><b>Invented Source B (modern blog):</b> Another Monday, another 7.42. I press my forehead to the window and count the stations like sheep.</blockquote><p>Compare how the writers convey their different feelings about train travel.</p></div><span class="marks">[16 marks]</span></div>
+      <ol class="work"><li>Difference: Writer A finds the train frightening and amazing; Writer B finds it dull</li><li>A: the simile 'like a thing alive' makes the engine a monster; 'flung' shows lack of control</li><li>Whereas B: 'Another Monday, another 7.42' — repetition shows routine and boredom</li><li>Perspective: in the 1850s train speed was new and shocking; today it is ordinary</li></ol>
+      <p class="ans">Answer: <mark>A is thrilled and scared (monster simile, 'flung'); whereas B is bored (repetition, counting 'like sheep'), because trains are now routine.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="language-nonfiction">
+  <div class="topic-head"><span class="qnum">5</span><h2>Language analysis in non-fiction</h2><span class="meta">English Language · Paper 2 Q3 · 12 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e05language.jpg" src="videos/e05language.mp4" aria-label="Explainer video: Language analysis in non-fiction"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Zoom in on a single word. Ask what it suggests, what it makes you picture, and why the writer chose it over a plainer word.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 2 Question 3 is worth 12 marks. It asks how the writer uses language in one section of Source A or B. Spend 12–15 minutes.</p>
+<p>Use the "What – How – Why" method:</p>
+<ol><li>What: the idea the writer gives (for example, the storm is violent).</li><li>How: a short quotation and the method — word class, simile, metaphor, personification, sentence form, tone.</li><li>Why: the effect on the reader. Zoom in on one word and explore its connotations.</li></ol>
+<p>Higher-level answers explore more than one meaning, and link several methods together.</p>
+<p class="caution"><span>CAUTION</span>"It makes the reader want to read on" is too general. Say exactly what the reader imagines or feels.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="What: the idea to How: quote + method to Why: effect on reader to Zoom: one word"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">What: the</text><text x="35.5" y="55">idea</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">How: quote</text><text x="118.5" y="55">+ method</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Why: effect</text><text x="201.5" y="55">on reader</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Zoom: one</text><text x="284.5" y="55">word</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">What – How – Why, then zoom in</text></svg></div><figcaption>Always finish by zooming in on a single word.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><blockquote class="extract"><b>Invented extract:</b> The storm arrived without manners. It slammed the shutters, clawed at the roof tiles and hurled the rain sideways, as if the sky itself were furious with us.</blockquote><p>How does the writer use language to describe the storm?</p></div><span class="marks">[12 marks]</span></div>
+      <ol class="work"><li>What: the storm is violent and deliberate, like an angry person</li><li>How: personification — 'without manners', 'slammed', 'clawed'</li><li>Why: 'clawed' suggests an animal attacking, so the house seems under siege</li><li>Zoom: 'furious' makes the sky a judge punishing them, so the reader feels small and powerless</li></ol>
+      <p class="ans">Answer: <mark>Personification ('slammed', 'clawed', 'furious') turns the storm into a violent attacker, so the reader feels the family is helpless.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="language-fiction">
+  <div class="topic-head"><span class="qnum">6</span><h2>Language analysis in fiction</h2><span class="meta">English Language · Paper 1 Q2 · 8 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e06fiction.jpg" src="videos/e06fiction.mp4" aria-label="Explainer video: Language analysis in fiction"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Same tools as Paper 2 Q3, in a smaller box: about two developed points in 10 minutes.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 1 Question 2 is worth 8 marks. It asks how the writer uses language to describe something in a short section of the fiction source. Spend about 10 minutes.</p>
+<p>Make 2 or 3 developed points. In each one:</p>
+<ol><li>Give a short quotation.</li><li>Name the method if you can (simile, verb, adjective, sentence form). The name alone gets no marks.</li><li>Explain the effect, and zoom in on one word.</li></ol>
+<p>You can use subject terminology such as noun, verb, adverb, metaphor and simile. Use it accurately.</p>
+<p class="caution"><span>CAUTION</span>Do not write about structure here. That is Question 3.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 114" role="img" aria-label="Language methods with examples"><g font-size="11"><rect x="2.0" y="2" width="86.0" height="22" class="fb"/><text x="8.0" y="17" font-weight="700">Method</text><rect x="88.0" y="2" width="128.0" height="22" class="fb"/><text x="94.0" y="17" font-weight="700">Example (invented)</text><rect x="216.0" y="2" width="102.0" height="22" class="fb"/><text x="222.0" y="17" font-weight="700">Effect</text><rect x="2.0" y="24" width="86.0" height="22" class="lm"/><text x="8.0" y="39">Simile</text><rect x="88.0" y="24" width="128.0" height="22" class="lm"/><text x="94.0" y="39">hissed like angry cats</text><rect x="216.0" y="24" width="102.0" height="22" class="lm"/><text x="222.0" y="39">noise feels hostile</text><rect x="2.0" y="46" width="86.0" height="22" class="lm"/><text x="8.0" y="61">Metaphor</text><rect x="88.0" y="46" width="128.0" height="22" class="lm"/><text x="94.0" y="61">was a furnace</text><rect x="216.0" y="46" width="102.0" height="22" class="lm"/><text x="222.0" y="61">unbearable heat</text><rect x="2.0" y="68" width="86.0" height="22" class="lm"/><text x="8.0" y="83">Verb</text><rect x="88.0" y="68" width="128.0" height="22" class="lm"/><text x="94.0" y="83">steam crawled</text><rect x="216.0" y="68" width="102.0" height="22" class="lm"/><text x="222.0" y="83">slow, creeping</text><rect x="2.0" y="90" width="86.0" height="22" class="lm"/><text x="8.0" y="105">Short sentence</text><rect x="88.0" y="90" width="128.0" height="22" class="lm"/><text x="94.0" y="105">Silence.</text><rect x="216.0" y="90" width="102.0" height="22" class="lm"/><text x="222.0" y="105">sudden tension</text></g></svg></div><figcaption>Name the method, then explain its effect.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><blockquote class="extract"><b>Invented extract:</b> The kitchen was a furnace. Steam crawled up the windows and hung there, heavy and grey, while pans hissed like angry cats.</blockquote><p>How does the writer use language to describe the kitchen?</p></div><span class="marks">[8 marks]</span></div>
+      <ol class="work"><li>Metaphor 'The kitchen was a furnace' — not just hot but unbearable, almost dangerous</li><li>Verb 'crawled' personifies the steam as a slow creature; it feels oppressive</li><li>Simile 'hissed like angry cats' makes the pans aggressive; the kitchen feels hostile</li></ol>
+      <p class="ans">Answer: <mark>Metaphor, personified verb and animal simile make the kitchen hot, oppressive and hostile.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="structure">
+  <div class="topic-head"><span class="qnum">7</span><h2>Structure: how the text is built</h2><span class="meta">English Language · Paper 1 Q3 · 8 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e07structure.jpg" src="videos/e07structure.mp4" aria-label="Explainer video: Structure: how the text is built"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Structure is where the camera points and when it moves. Track the focus from the beginning, through the middle, to the end.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 1 Question 3 is worth 8 marks. It asks how the writer structures the whole source to interest the reader.</p>
+<p>Structure is not about single words. It is about order and focus:</p>
+<ul><li>What does the writer focus on at the start? Why?</li><li>How and where does the focus shift (from place to person, outside to inside, present to past)?</li><li>What happens at the end? Is it a cliffhanger, a circle, or a change in mood?</li></ul>
+<p>Write 3 paragraphs: beginning, middle (shift), end. Use terms such as opening, shift in focus, flashback, dialogue, one-line paragraph, foreshadowing and cyclical structure.</p>
+<p class="caution"><span>CAUTION</span>Always say why the writer does it: to create mystery, build tension or make us sympathise.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Start: wide setting to Shift: one character to Middle: flashback to End: short dialogue"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">Start: wide</text><text x="35.5" y="55">setting</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Shift: one</text><text x="118.5" y="55">character</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Middle:</text><text x="201.5" y="55">flashback</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">End: short</text><text x="284.5" y="55">dialogue</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">track the focus through the whole text</text></svg></div><figcaption>Follow the 'camera' from the beginning to the end.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>An invented story opens with a description of a stormy harbour, then focuses on one old fisherman, then flashes back to his youth, and ends with a single line of dialogue: 'He's not coming back.' How has the writer structured the text to interest the reader?</p></div><span class="marks">[8 marks]</span></div>
+      <ol class="work"><li>Beginning: a wide view of the stormy harbour sets a tense, threatening atmosphere</li><li>Shift: the focus narrows to one fisherman, so we care about a person, not just a place</li><li>Middle: the flashback to his youth creates sympathy and hints at a lost son</li><li>End: the one-line dialogue is a shock and leaves an unanswered question</li></ol>
+      <p class="ans">Answer: <mark>Wide setting → narrow focus → flashback → shock line: builds tension, sympathy and mystery.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="summary">
+  <div class="topic-head"><span class="qnum">8</span><h2>Summary of differences</h2><span class="meta">English Language · Paper 2 Q2 · 8 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e08summary.jpg" src="videos/e08summary.mp4" aria-label="Explainer video: Summary of differences"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>A summary is a spot-the-difference game. Find a fact in each source, then explain what each one suggests.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 2 Question 2 is worth 8 marks. You write a summary of the differences (or similarities) between two things in Source A and Source B.</p>
+<p>This question tests understanding, not language analysis. Do not analyse methods.</p>
+<p>Write 2 or 3 paragraphs:</p>
+<ol><li>Make a clear point about Source A, with a short quotation.</li><li>Infer: say what it suggests ("This implies…").</li><li>Use "whereas" and do the same for Source B.</li></ol>
+<p>The top marks are for perceptive inferences: reading between the lines.</p>
+<p class="caution"><span>CAUTION</span>Do not write about language techniques here. That gets no marks in Q2.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 70" role="img" aria-label="Summary table of differences"><g font-size="11"><rect x="2.0" y="2" width="86.0" height="22" class="fb"/><text x="8.0" y="17" font-weight="700"></text><rect x="88.0" y="2" width="115.0" height="22" class="fb"/><text x="94.0" y="17" font-weight="700">Source A (1850s)</text><rect x="203.0" y="2" width="115.0" height="22" class="fb"/><text x="209.0" y="17" font-weight="700">Source B (today)</text><rect x="2.0" y="24" width="86.0" height="22" class="lm"/><text x="8.0" y="39">The journey</text><rect x="88.0" y="24" width="115.0" height="22" class="lm"/><text x="94.0" y="39">fast, frightening</text><rect x="203.0" y="24" width="115.0" height="22" class="lm"/><text x="209.0" y="39">slow, routine</text><rect x="2.0" y="46" width="86.0" height="22" class="lm"/><text x="8.0" y="61">Inference</text><rect x="88.0" y="46" width="115.0" height="22" class="lm"/><text x="94.0" y="61">trains were new</text><rect x="203.0" y="46" width="115.0" height="22" class="lm"/><text x="209.0" y="61">trains are ordinary</text></g></svg></div><figcaption>Point, quotation, inference, for each source.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Using the two invented train sources in the 'Comparing perspectives' guide, write a summary of the differences between the journeys.</p></div><span class="marks">[8 marks]</span></div>
+      <ol class="work"><li>A: the train goes 'at a speed no horse could dream of' — this implies rail travel was new and astonishing</li><li>Whereas B: 'Another Monday, another 7.42' suggests the journey is a dull daily routine</li><li>A is frightening ('gripped the seat'), whereas B is so calm the writer 'counts the stations like sheep', implying boredom</li></ol>
+      <p class="ans">Answer: <mark>A: new, fast and frightening; B: routine and boring — with inferences for each.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="retrieval">
+  <div class="topic-head"><span class="qnum">9</span><h2>Retrieval and true statements</h2><span class="meta">English Language · Paper 1 Q1 + Paper 2 Q1 · 8 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e09retrieval.jpg" src="videos/e09retrieval.mp4" aria-label="Explainer video: Retrieval and true statements"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>These are the easiest 8 marks in the exam. Read only the lines given, and copy facts exactly.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Paper 1 Question 1 (4 marks) asks you to list four things from a few lines. Paper 2 Question 1 (4 marks) asks you to shade four true statements from a list of eight.</p>
+<ol><li>Draw a box around the lines in the question.</li><li>Only use those lines.</li><li>For P1 Q1, write short facts. You can quote or paraphrase.</li><li>For P2 Q1, shade exactly four boxes. If you shade more than four, you lose marks.</li></ol>
+<p>Spend only about 5 minutes on each. Save time for the big questions.</p>
+<p class="caution"><span>CAUTION</span>Do not infer. Q1 wants facts that are stated.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Box the lines to Read carefully to Pick stated facts only to Exactly four"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">Box the</text><text x="35.5" y="55">lines</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Read</text><text x="118.5" y="55">carefully</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Pick stated</text><text x="201.5" y="55">facts only</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Exactly</text><text x="284.5" y="55">four</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">about 5 minutes per question</text></svg></div><figcaption>Four clear facts from the given lines only.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><blockquote class="extract"><b>Invented extract:</b> The kitchen was a furnace. Steam crawled up the windows and hung there, heavy and grey, while pans hissed like angry cats. Mrs Hale moved through it all without a sound, her sleeves rolled.</blockquote><p>List four things about the kitchen or Mrs Hale from this extract.</p></div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>The kitchen is very hot</li><li>There is steam on the windows</li><li>The pans are hissing</li><li>Mrs Hale has her sleeves rolled up</li></ol>
+      <p class="ans">Answer: <mark>Four stated facts, e.g. hot kitchen; steam on windows; pans hissing; sleeves rolled.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="technical-accuracy">
+  <div class="topic-head"><span class="qnum">10</span><h2>Technical accuracy (spelling, punctuation, grammar)</h2><span class="meta">English Language · Q5 on both papers · 32 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e10spag.jpg" src="videos/e10spag.mp4" aria-label="Explainer video: Technical accuracy (spelling, punctuation, grammar)"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Technical accuracy is 32 marks you can practise like a sport: a few drills, done every time, until they are automatic.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>In each Question 5, 16 of the 40 marks are for technical accuracy. That is 32 marks across English Language — 20% of the whole GCSE.</p>
+<p>Check these every time:</p>
+<ol><li>Full stops, not commas, between sentences (no comma splices).</li><li>Capital letters for names, places and "I".</li><li>Apostrophes: it's = it is; its = belonging to it.</li><li>Homophones: there / their / they're; your / you're; to / too.</li><li>A range of punctuation, used correctly: colon, semi-colon, dash, question mark.</li><li>A range of sentence types: simple, compound and complex.</li></ol>
+<p>Leave 5 minutes at the end to proofread. Read each sentence slowly, as if aloud.</p>
+<p class="caution"><span>CAUTION</span>A semi-colon joins two full sentences that are closely linked. Do not use it before a list of words.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 114" role="img" aria-label="Common errors and corrections"><g font-size="11"><rect x="2.0" y="2" width="158.0" height="22" class="fb"/><text x="8.0" y="17" font-weight="700">Wrong</text><rect x="160.0" y="2" width="158.0" height="22" class="fb"/><text x="166.0" y="17" font-weight="700">Right</text><rect x="2.0" y="24" width="158.0" height="22" class="lm"/><text x="8.0" y="39">The rain fell, it was cold.</text><rect x="160.0" y="24" width="158.0" height="22" class="lm"/><text x="166.0" y="39">The rain fell. It was cold.</text><rect x="2.0" y="46" width="158.0" height="22" class="lm"/><text x="8.0" y="61">Its raining.</text><rect x="160.0" y="46" width="158.0" height="22" class="lm"/><text x="166.0" y="61">It's raining.</text><rect x="2.0" y="68" width="158.0" height="22" class="lm"/><text x="8.0" y="83">Their going home.</text><rect x="160.0" y="68" width="158.0" height="22" class="lm"/><text x="166.0" y="83">They're going home.</text><rect x="2.0" y="90" width="158.0" height="22" class="lm"/><text x="8.0" y="105">i saw paris</text><rect x="160.0" y="90" width="158.0" height="22" class="lm"/><text x="166.0" y="105">I saw Paris.</text></g></svg></div><figcaption>Most lost marks come from a few repeated errors.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Correct the errors: <i>its late, the market is closing, there packing away there stalls and i can hear the rain</i></p></div><span class="marks">[4 marks]</span></div>
+      <ol class="work"><li>'its' → 'It's' (it is) and capital at the start</li><li>Comma splice: 'late. The market is closing.'</li><li>'there packing away there stalls' → 'They're packing away their stalls'</li><li>'i' → 'I', and a full stop at the end</li></ol>
+      <p class="ans">Answer: <mark>It's late. The market is closing. They're packing away their stalls, and I can hear the rain.</mark></p>
+    </div>
+  </div>
+</article>
+<section class="rank" aria-labelledby="literature-h" id="literature"><div class="sci-h"><h2 id="literature-h">English Literature</h2><span class="meta">2 papers · 160 marks (including 12 for spelling and grammar)</span></div>
+  <p class="lede">Schools choose the set texts. These guides teach the method for each section, with examples from common texts. Ask for guides for Raf's own texts when you know them.</p>
+  <ol class="rows"><li class="row"><span class="n">1</span><div><a href="#shakespeare">Shakespeare essay (e.g. Macbeth)</a><span class="paper">Lit Paper 1 Section A</span><div class="bar"><i style="width:100%"></i></div><span class="sub">34 marks</span></div><span class="pct">21%</span></li><li class="row"><span class="n">2</span><div><a href="#modern-text">Modern text essay (e.g. An Inspector Calls)</a><span class="paper">Lit Paper 2 Section A</span><div class="bar"><i style="width:100%"></i></div><span class="sub">34 marks</span></div><span class="pct">21%</span></li><li class="row"><span class="n">3</span><div><a href="#anthology-poetry">Comparing anthology poems</a><span class="paper">Lit Paper 2 Section B</span><div class="bar"><i style="width:88%"></i></div><span class="sub">30 marks</span></div><span class="pct">19%</span></li><li class="row"><span class="n">4</span><div><a href="#nineteenth-century-novel">19th-century novel essay (e.g. A Christmas Carol)</a><span class="paper">Lit Paper 1 Section B</span><div class="bar"><i style="width:88%"></i></div><span class="sub">30 marks</span></div><span class="pct">19%</span></li><li class="row"><span class="n">5</span><div><a href="#unseen-poetry">Unseen poetry analysis</a><span class="paper">Lit Paper 2 Section C (27.1)</span><div class="bar"><i style="width:71%"></i></div><span class="sub">24 marks</span></div><span class="pct">15%</span></li><li class="row"><span class="n">6</span><div><a href="#unseen-comparison">Unseen poetry comparison</a><span class="paper">Lit Paper 2 Section C (27.2)</span><div class="bar"><i style="width:24%"></i></div><span class="sub">8 marks</span></div><span class="pct">5%</span></li></ol>
+</section>
+<article class="topic" id="shakespeare">
+  <div class="topic-head"><span class="qnum">1</span><h2>Shakespeare essay (e.g. Macbeth)</h2><span class="meta">English Literature · Lit Paper 1 Section A · 34 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e11shakespeare.jpg" src="videos/e11shakespeare.mp4" aria-label="Explainer video: Shakespeare essay (e.g. Macbeth)"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Start with the extract, then zoom out to the whole play. The examiner wants a journey: how the character or theme changes.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Literature Paper 1 Section A is worth 34 marks (30 plus 4 for spelling, punctuation and grammar). You get an extract and a question about a character or theme. You must write about the extract and the whole play.</p>
+<p>The question can be about a character, such as Macbeth or Lady Macbeth, or a theme, such as ambition, guilt or the supernatural.</p>
+<p>Plan 4 paragraphs in 50 minutes:</p>
+<ol><li>The extract: two or three close points on language.</li><li>Earlier in the play.</li><li>Later in the play: how it changes.</li><li>Shakespeare's message, with context (for Macbeth: King James, the divine right of kings, belief in witches).</li></ol>
+<p>Use short, embedded quotations. Write about Shakespeare as a writer: "Shakespeare presents…", "the audience would…".</p>
+<p class="caution"><span>CAUTION</span>Context must explain the play. Do not write a history lesson.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Extract: close reading to Earlier in the play to Later: change to Message + context"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">Extract:</text><text x="35.5" y="55">close reading</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Earlier</text><text x="118.5" y="55">in the play</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Later:</text><text x="201.5" y="55">change</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Message +</text><text x="284.5" y="55">context</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">extract → whole play → why Shakespeare wrote it</text></svg></div><figcaption>Move from the extract out to the whole play.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Starting with Macbeth's soliloquy in Act 1 Scene 7, explain how Shakespeare presents Macbeth's ambition.</p></div><span class="marks">[34 marks]</span></div>
+      <ol class="work"><li>Extract: Macbeth admits he has 'no spur' except 'Vaulting ambition, which o'erleaps itself' — the horse-riding image shows ambition that jumps too high and falls</li><li>Earlier: after the witches' prophecy his 'black and deep desires' show ambition hidden in darkness</li><li>Later: ambition becomes tyranny; he kills Banquo and Macduff's family to keep power</li><li>Context: a Jacobean audience believed killing a king broke God's order (divine right of kings); Shakespeare warns that unchecked ambition destroys</li></ol>
+      <p class="ans">Answer: <mark>Ambition grows from a private temptation ('Vaulting ambition') into tyranny, and Shakespeare shows it leads to self-destruction.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="modern-text">
+  <div class="topic-head"><span class="qnum">2</span><h2>Modern text essay (e.g. An Inspector Calls)</h2><span class="meta">English Literature · Lit Paper 2 Section A · 34 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e12modern.jpg" src="videos/e12modern.mp4" aria-label="Explainer video: Modern text essay (e.g. An Inspector Calls)"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>There is no extract, so you build the essay from memory. Learn 10 short quotations per theme and the writer's big message.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Literature Paper 2 Section A is worth 34 marks (30 plus 4 for spelling, punctuation and grammar). You choose one of two questions on your modern text. There is no extract.</p>
+<p>Plan 4 paragraphs in 45 minutes:</p>
+<ol><li>Introduction: the writer's message in one sentence.</li><li>The beginning of the text.</li><li>The middle: a turning point.</li><li>The end, and what the writer wants the audience to learn.</li></ol>
+<p>For a play, write about stagecraft: entrances and exits, lighting, stage directions, dramatic irony and the audience.</p>
+<p>For example, in An Inspector Calls, Priestley uses the Inspector as his mouthpiece for socialism and collective responsibility. The play is set in 1912 but written in 1945. The audience knows the Titanic sinks and that war is coming, so Mr Birling's confident claims show he cannot be trusted.</p>
+<p class="caution"><span>CAUTION</span>Write about the writer's choices ("Priestley uses…"), not the characters as if they were real people.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Message in one line to Beginning to Turning point to Ending + lesson"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">Message</text><text x="35.5" y="55">in one line</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="48">Beginning</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Turning</text><text x="201.5" y="55">point</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Ending +</text><text x="284.5" y="55">lesson</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">build the essay as a journey through the text</text></svg></div><figcaption>With no extract, follow the text from beginning to end.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>How does Priestley use the Inspector to present ideas about responsibility in An Inspector Calls?</p></div><span class="marks">[34 marks]</span></div>
+      <ol class="work"><li>Message: Priestley uses the Inspector to argue that we are all responsible for each other</li><li>Beginning: his arrival interrupts Birling's speech about every man looking after himself — a deliberate contrast</li><li>Middle: he questions each character in turn; the lighting changes from soft to harsh, exposing the truth</li><li>End: his final speech warns of terrible suffering if people do not learn; for a 1945 audience this recalls two world wars</li><li>Lesson: the younger characters change, the older ones do not — Priestley puts his hope in the young</li></ol>
+      <p class="ans">Answer: <mark>The Inspector is Priestley's mouthpiece: he exposes each character and warns that society must take shared responsibility.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="anthology-poetry">
+  <div class="topic-head"><span class="qnum">3</span><h2>Comparing anthology poems</h2><span class="meta">English Literature · Lit Paper 2 Section B · 30 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e13poetry.jpg" src="videos/e13poetry.mp4" aria-label="Explainer video: Comparing anthology poems"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>You get one poem printed. You bring the second from memory. Pick the partner poem that gives you the most to compare.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Literature Paper 2 Section B is worth 30 marks. One named poem from your anthology cluster is printed. You compare it with another poem of your choice from the same cluster. Spend 45 minutes.</p>
+<p>Learn 3 or 4 key quotations for every poem in your cluster, and one context point for each.</p>
+<p>Plan 3 or 4 comparative paragraphs. Compare in every paragraph:</p>
+<ul><li>The poets' ideas and attitudes.</li><li>Language: imagery, word choice.</li><li>Form and structure: sonnet, free verse, enjambment, caesura, volta, rhyme.</li><li>Context: why each poet wrote it.</li></ul>
+<p>Example pair (Power and Conflict): Shelley's "Ozymandias" and Blake's "London" both present power. Shelley shows that human power does not last. Blake shows power that oppresses ordinary people.</p>
+<p class="caution"><span>CAUTION</span>Choose your second poem before the exam for each likely theme: power, conflict, memory, nature, identity.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 114" role="img" aria-label="Comparison grid for two poems"><g font-size="11"><rect x="2.0" y="2" width="70.0" height="22" class="fb"/><text x="8.0" y="17" font-weight="700"></text><rect x="72.0" y="2" width="112.0" height="22" class="fb"/><text x="78.0" y="17" font-weight="700">Ozymandias</text><rect x="184.0" y="2" width="134.0" height="22" class="fb"/><text x="190.0" y="17" font-weight="700">London</text><rect x="2.0" y="24" width="70.0" height="22" class="lm"/><text x="8.0" y="39">Power of…</text><rect x="72.0" y="24" width="112.0" height="22" class="lm"/><text x="78.0" y="39">a ruined king</text><rect x="184.0" y="24" width="134.0" height="22" class="lm"/><text x="190.0" y="39">church, state, rich</text><rect x="2.0" y="46" width="70.0" height="22" class="lm"/><text x="8.0" y="61">Key image</text><rect x="72.0" y="46" width="112.0" height="22" class="lm"/><text x="78.0" y="61">'cold command'</text><rect x="184.0" y="46" width="134.0" height="22" class="lm"/><text x="190.0" y="61">'mind-forged manacles'</text><rect x="2.0" y="68" width="70.0" height="22" class="lm"/><text x="8.0" y="83">Form</text><rect x="72.0" y="68" width="112.0" height="22" class="lm"/><text x="78.0" y="83">sonnet, broken rules</text><rect x="184.0" y="68" width="134.0" height="22" class="lm"/><text x="190.0" y="83">regular quatrains</text><rect x="2.0" y="90" width="70.0" height="22" class="lm"/><text x="8.0" y="105">Message</text><rect x="72.0" y="90" width="112.0" height="22" class="lm"/><text x="78.0" y="105">power does not last</text><rect x="184.0" y="90" width="134.0" height="22" class="lm"/><text x="190.0" y="105">power traps people</text></g></svg></div><figcaption>A grid makes it easy to compare in every paragraph.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Compare how poets present the effects of power in 'Ozymandias' and one other poem from 'Power and conflict'.</p></div><span class="marks">[30 marks]</span></div>
+      <ol class="work"><li>Ideas: Shelley shows a king's power crumbling; Blake shows power still crushing the poor</li><li>Language: Shelley's 'sneer of cold command' shows arrogance, whereas Blake's 'mind-forged manacles' suggests people are mentally imprisoned</li><li>Form: Shelley's sonnet breaks its rhyme pattern, mirroring the broken statue; Blake's regular quatrains feel like the trapped, repetitive streets</li><li>Context: Shelley, a Romantic, attacked tyranny; Blake attacked the church and state in 1790s London</li></ol>
+      <p class="ans">Answer: <mark>Both present harmful power; Shelley shows it fades, whereas Blake shows it endures — supported by imagery and form.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="nineteenth-century-novel">
+  <div class="topic-head"><span class="qnum">4</span><h2>19th-century novel essay (e.g. A Christmas Carol)</h2><span class="meta">English Literature · Lit Paper 1 Section B · 30 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e14novel.jpg" src="videos/e14novel.mp4" aria-label="Explainer video: 19th-century novel essay (e.g. A Christmas Carol)"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Same shape as the Shakespeare essay: extract first, then the whole novel, then the writer's purpose in its time.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Literature Paper 1 Section B is worth 30 marks. You get an extract and a question. You write about the extract and the whole novel. Spend 50 minutes.</p>
+<p>For A Christmas Carol, the June 2023 question was about the effects of greed. Other likely focuses are Scrooge's change, poverty, family and Christmas.</p>
+<p>Plan 4 paragraphs:</p>
+<ol><li>The extract: close analysis of two or three quotations.</li><li>Earlier or later in the novel.</li><li>How the character or theme changes.</li><li>The writer's purpose and context (for Dickens: Victorian poverty, the Poor Law, workhouses).</li></ol>
+<p>Example: Dickens describes Scrooge as "solitary as an oyster". The simile suggests he is closed and hard on the outside, but there may be a pearl inside — he can change.</p>
+<p class="caution"><span>CAUTION</span>Keep quotations short and embedded in your sentence.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Extract to Whole novel to Change to Dickens's purpose"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="48">Extract</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Whole</text><text x="118.5" y="55">novel</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="48">Change</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Dickens's</text><text x="284.5" y="55">purpose</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">extract → whole novel → context</text></svg></div><figcaption>Same four-step shape as the Shakespeare essay.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Starting with the opening of Stave 1, explain how Dickens presents Scrooge as a cold and isolated character.</p></div><span class="marks">[30 marks]</span></div>
+      <ol class="work"><li>Extract: 'solitary as an oyster' — hard outside, closed off, but with the hint of a pearl inside</li><li>Cold imagery: 'The cold within him froze his old features' — pathetic fallacy links his body to winter</li><li>Whole novel: by Stave 5 he is 'as light as a feather', showing complete change</li><li>Context: Dickens attacks wealthy Victorians who ignored the poor; Scrooge's change shows that anyone can choose generosity</li></ol>
+      <p class="ans">Answer: <mark>Cold and oyster imagery present Scrooge as isolated, but Dickens shows he can change, to teach readers social responsibility.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="unseen-poetry">
+  <div class="topic-head"><span class="qnum">5</span><h2>Unseen poetry analysis</h2><span class="meta">English Literature · Lit Paper 2 Section C (27.1) · 24 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e15unseen.jpg" src="videos/e15unseen.mp4" aria-label="Explainer video: Unseen poetry analysis"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>You have never seen the poem, so read it three times: once for meaning, once for feeling, once for methods.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Literature Paper 2 Question 27.1 is worth 24 marks. You write about one poem you have not seen before. Spend about 30 minutes.</p>
+<ol><li>First read: what is the poem about? Who is speaking?</li><li>Second read: how does the speaker feel? Does it change?</li><li>Third read: underline 4 or 5 methods: imagery, word choice, rhyme, line length, stanza breaks, the final line.</li></ol>
+<p>Write 4 paragraphs, in order through the poem. Always link the method to the poet's idea.</p>
+<p class="caution"><span>CAUTION</span>Do not use context. You do not know the poet. Focus on language, form and structure.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 110" role="img" aria-label="Read 1: meaning to Read 2: feeling to Read 3: methods to Write in order"><g font-size="10" text-anchor="middle"><rect x="2.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="35.5" y="41">Read 1:</text><text x="35.5" y="55">meaning</text><rect x="85.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="118.5" y="41">Read 2:</text><text x="118.5" y="55">feeling</text><rect x="168.0" y="20" width="67.0" height="48" rx="5" class="fb"/><text x="201.5" y="41">Read 3:</text><text x="201.5" y="55">methods</text><rect x="251.0" y="20" width="67.0" height="48" rx="5" class="ft"/><text x="284.5" y="41">Write in</text><text x="284.5" y="55">order</text></g><g class="la" style="stroke-width:2"><path d="M70.0 44 H80.0"/><path d="M153.0 44 H163.0"/><path d="M236.0 44 H246.0"/></g><g style="fill:var(--accent)"><path d="M79.0 39 L84.0 44 L79.0 49 Z"/><path d="M162.0 39 L167.0 44 L162.0 49 Z"/><path d="M245.0 39 L250.0 44 L245.0 49 Z"/></g><text x="160" y="96" font-size="11" text-anchor="middle" class="m">three readings before you write</text></svg></div><figcaption>Three quick readings give you a full plan.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><blockquote class="extract"><b>Invented poem, 'Lighthouse':</b><br>All night it turns its single eye<br>across the black and heaving bay,<br>and asks for nothing — not a word —<br>from ships that pass and slip away.<br><br>My mother kept a lamp like this:<br>a kitchen window, late, aglow.<br>I never thanked her. Ships don't stop.<br>The light was there. I didn't know.</blockquote><p>In 'Lighthouse', how does the poet present ideas about care?</p></div><span class="marks">[24 marks]</span></div>
+      <ol class="work"><li>Meaning: a lighthouse is compared to the speaker's mother, who waited up for them</li><li>Personification 'its single eye' makes the lighthouse a patient watcher that 'asks for nothing'</li><li>Structure: the volta at stanza 2 turns from the sea to the mother, revealing the real subject</li><li>Short sentences 'I never thanked her. Ships don't stop.' create regret; the final line shows care is often unseen until later</li></ol>
+      <p class="ans">Answer: <mark>Through an extended metaphor and a volta, the poet presents care as quiet, constant and unnoticed until it is too late.</mark></p>
+    </div>
+  </div>
+</article><article class="topic" id="unseen-comparison">
+  <div class="topic-head"><span class="qnum">6</span><h2>Unseen poetry comparison</h2><span class="meta">English Literature · Lit Paper 2 Section C (27.2) · 8 marks</span></div>
+  <video controls preload="none" playsinline poster="videos/e16unseencompare.jpg" src="videos/e16unseencompare.mp4" aria-label="Explainer video: Unseen poetry comparison"></video>
+  <div class="body">
+    <p class="idea"><b>The picture idea</b>Only 8 marks, so be quick: two or three sharp comparisons of methods, not ideas.</p>
+    <div class="ste"><h3>Explanation (ASD-STE100 style)</h3><p>Literature Paper 2 Question 27.2 is worth 8 marks. You compare the methods the poets use in two unseen poems. Spend about 15 minutes.</p>
+<p>This question rewards comparing methods, not meanings. Write 2 or 3 short paragraphs:</p>
+<ol><li>Name one similarity or difference in method (imagery, form, structure, tone).</li><li>Give a quotation from each poem.</li><li>Explain the different effects.</li></ol>
+<p class="caution"><span>CAUTION</span>Do not re-analyse the first poem in detail. Compare.</p></div>
+    <figure><h3>Diagram</h3><div class="svgbox"><svg viewBox="0 0 320 92" role="img" aria-label="Method comparison grid"><g font-size="11"><rect x="2.0" y="2" width="96.0" height="22" class="fb"/><text x="8.0" y="17" font-weight="700">Method</text><rect x="98.0" y="2" width="110.0" height="22" class="fb"/><text x="104.0" y="17" font-weight="700">Poem 1</text><rect x="208.0" y="2" width="110.0" height="22" class="fb"/><text x="214.0" y="17" font-weight="700">Poem 2</text><rect x="2.0" y="24" width="96.0" height="22" class="lm"/><text x="8.0" y="39">Imagery</text><rect x="98.0" y="24" width="110.0" height="22" class="lm"/><text x="104.0" y="39">extended metaphor</text><rect x="208.0" y="24" width="110.0" height="22" class="lm"/><text x="214.0" y="39">list of objects</text><rect x="2.0" y="46" width="96.0" height="22" class="lm"/><text x="8.0" y="61">Structure</text><rect x="98.0" y="46" width="110.0" height="22" class="lm"/><text x="104.0" y="61">volta, two stanzas</text><rect x="208.0" y="46" width="110.0" height="22" class="lm"/><text x="214.0" y="61">one stanza</text><rect x="2.0" y="68" width="96.0" height="22" class="lm"/><text x="8.0" y="83">Ending</text><rect x="98.0" y="68" width="110.0" height="22" class="lm"/><text x="104.0" y="83">regret</text><rect x="208.0" y="68" width="110.0" height="22" class="lm"/><text x="214.0" y="83">hope</text></g></svg></div><figcaption>Compare how the poems are built, not just what they say.</figcaption></figure>
+    <div class="exam"><h3>Example exam question</h3>
+      <div class="q"><div class="qtext"><p>Imagine a second invented poem about a father's packed lunches, written as one stanza that lists objects and ends hopefully. Compare the methods the poets use to present care.</p></div><span class="marks">[8 marks]</span></div>
+      <ol class="work"><li>Both use everyday objects as symbols of care (a lamp; a lunchbox)</li><li>'Lighthouse' uses one extended metaphor, whereas the second poem uses a list, which shows care as many small daily acts</li><li>'Lighthouse' ends with regret ('I didn't know'), whereas the second ends with hope, so the tone is different</li></ol>
+      <p class="ans">Answer: <mark>Both use objects; one extended metaphor v a list; regretful v hopeful ending.</mark></p>
+    </div>
+  </div>
+</article>
+<footer>
+  <h3>How this was made</h3>
+  <p>The question structure comes from AQA's specifications and past papers in the AQA file store (English Language 8700 Paper 1 and Paper 2, November 2020 to June 2023). Some papers are not public because of copyright in the source texts.</p>
+  <p>All extracts marked "invented" and the poem "Lighthouse" were written for this site. Quotations from Macbeth, A Christmas Carol, Ozymandias and London are from public-domain texts.</p>
+  <p>Videos: made with Manim (the animation library from 3Blue1Brown) and an offline voice.</p>
+</footer>
+</div>
+</body>
+</html>
