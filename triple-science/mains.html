@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mains electricity and electrical power · Physics · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.subnav .soon{opacity:.6}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.rp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent);margin-top:4px}
+.tonly{display:inline-block;font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.pending{border:1px dashed var(--rule);border-radius:6px;padding:16px;color:var(--muted);background:var(--card)}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/" aria-current="page">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html#physics">← All Physics topics</a><span>Topic 11 of 29</span></div>
+<h1 class="tp-h1">Mains electricity and electrical power</h1>
+<p class="tp-meta">Physics · rank 11 of 29 · 40 marks · 4.0% of Physics marks · in 4 of 10 papers</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/ph11mains.jpg" src="videos/ph11mains.mp4" aria-label="Explainer video: Mains electricity and electrical power"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>Power is energy per second. A kettle's power tells you how many joules it moves every second.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>UK mains electricity is a.c. at 230 V and 50 Hz.</p>
+<ul><li>Live wire (brown): at 230 V. It carries the alternating p.d.</li><li>Neutral wire (blue): near 0 V. It completes the circuit.</li><li>Earth wire (green and yellow): a safety wire. It carries current only if there is a fault.</li></ul>
+<p>The live wire is dangerous even when a switch is off, because your body is at 0 V.</p>
+<p>Power: P = VI and P = I²R. Energy transferred: E = Pt and E = QV.</p>
+<p>The National Grid uses step-up transformers to make the p.d. very high. Then the current is low, so less energy is lost by heating the cables. Step-down transformers make it safe for homes.</p>
+<p class="caution"><span>CAUTION</span>Change kW to W and minutes to seconds before you use E = Pt.</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p>Mains electricity in the UK is <b>AC</b> (alternating current): it changes direction 50 times a second (50 Hz) at about <b>230 V</b>. A battery gives <b>DC</b>: one direction only.</p>
+<p>The three wires: <b>live</b> (brown) carries the high p.d.; <b>neutral</b> (blue) completes the circuit at about 0 V; <b>earth</b> (green and yellow) is a safety wire. If a fault makes a metal case live, current flows down the earth wire instead of through you.</p>
+<p>Power: P = V I or P = I² R. Energy: E = P t or E = Q V.</p></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Mixing up the wire colours. Live = brown, neutral = blue, earth = green/yellow.</li><li>Saying the live wire is safe if the switch is off. It can still be dangerous.</li><li>Forgetting to change kW to W and minutes or hours to seconds.</li><li>Using P = VI when you only know I and R. Use P = I²R.</li><li>Saying the earth wire normally carries current. It only does when there is a fault.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>3</small></h2><div class="figs"><figure><svg viewBox="0 0 320 92" role="img" aria-label="Table of the three wires in a mains cable"><g font-size="11"><rect x="2.0" y="2" width="90.0" height="22" class="fb"/><text x="8.0" y="17" font-weight="700">Wire</text><rect x="92.0" y="2" width="120.0" height="22" class="fb"/><text x="98.0" y="17" font-weight="700">Colour</text><rect x="212.0" y="2" width="106.0" height="22" class="fb"/><text x="218.0" y="17" font-weight="700">p.d.</text><rect x="2.0" y="24" width="90.0" height="22" class="lm"/><text x="8.0" y="39">Live</text><rect x="92.0" y="24" width="120.0" height="22" class="lm"/><text x="98.0" y="39">brown</text><rect x="212.0" y="24" width="106.0" height="22" class="lm"/><text x="218.0" y="39">230 V</text><rect x="2.0" y="46" width="90.0" height="22" class="lm"/><text x="8.0" y="61">Neutral</text><rect x="92.0" y="46" width="120.0" height="22" class="lm"/><text x="98.0" y="61">blue</text><rect x="212.0" y="46" width="106.0" height="22" class="lm"/><text x="218.0" y="61">about 0 V</text><rect x="2.0" y="68" width="90.0" height="22" class="lm"/><text x="8.0" y="83">Earth</text><rect x="92.0" y="68" width="120.0" height="22" class="lm"/><text x="98.0" y="83">green & yellow</text><rect x="212.0" y="68" width="106.0" height="22" class="lm"/><text x="218.0" y="83">0 V (safety)</text></g></svg><figcaption>Only the live wire is at a high p.d.</figcaption></figure><figure><svg viewBox="0 0 320 76" role="img" aria-label="AC and DC"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700"></text><text x="70.52504854368932" y="18" font-weight="700">AC</text><text x="205.6380582524272" y="18" font-weight="700">DC</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Direction</text><text x="70.52504854368932" y="42">changes back and forth</text><text x="205.6380582524272" y="42">one way only</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Source</text><text x="70.52504854368932" y="66">mains (230 V, 50 Hz)</text><text x="205.6380582524272" y="66">cells and batteries</text><rect x="2" y="2" width="316.0" height="72" class="ln" style="fill:none"/><path d="M64.52504854368932 2 V74" class="lm"/><path d="M199.6380582524272 2 V74" class="lm"/></g></svg><figcaption>Alternating and direct current.</figcaption></figure><figure><svg viewBox="0 0 320 124" role="img" aria-label="Electrical power and energy equations"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Quantity</text><text x="166.0" y="18" font-weight="700">Equation</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Power</text><text x="166.0" y="42">P = V I</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Power</text><text x="166.0" y="66">P = I² R</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Energy</text><text x="166.0" y="90">E = P t</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">Energy</text><text x="166.0" y="114">E = Q V</text><rect x="2" y="2" width="316.0" height="120" class="ln" style="fill:none"/><path d="M160.0 2 V122" class="lm"/></g></svg><figcaption>Four equations to know.</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">Give the p.d. and frequency of UK mains electricity.</p><ol class="steps"></ol><p class="ansx">Answer: <mark>About 230 V and 50 Hz</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">A heater takes 4.0 A from the 230 V mains. Calculate its power.</p><ol class="steps"><li>P = VI = 230 × 4.0</li></ol><p class="ansx">Answer: <mark>920 W</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[4 marks]</span></h3><p class="qx">A kettle has a power of 2.3 kW. It is connected to the 230 V mains.<br>(a) Calculate the current. (b) Calculate the energy transferred in 3.0 minutes.</p><ol class="steps"><li>(a) P = 2.3 kW = 2300 W; I = P ÷ V = 2300 ÷ 230</li><li>= 10 A</li><li>(b) t = 3.0 × 60 = 180 s; E = P × t = 2300 × 180</li><li>= 414 000 J</li></ol><p class="ansx">Answer: <mark>(a) 10 A; (b) 414 000 J (414 kJ)</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">What colour is the earth wire?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Green and yellow stripes</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Why is touching the live wire dangerous?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>There is a large p.d. between it and your body (at 0 V), so a current flows through you</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">A current of 3.0 A flows through an 8.0 Ω resistor. Calculate the power.</p><details><summary>Show answer</summary><ol><li>P = I²R = 3.0² × 8.0</li></ol><p class="pa">Answer: <mark>72 W</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">A 60 W lamp is on for 2.0 hours. Calculate the energy transferred in joules.</p><details><summary>Show answer</summary><ol><li>t = 7200 s</li><li>E = 60 × 7200</li></ol><p class="pa">Answer: <mark>432 000 J</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">10 C of charge passes through a 12 V supply. Calculate the energy transferred.</p><details><summary>Show answer</summary><ol><li>E = QV = 10 × 12</li></ol><p class="pa">Answer: <mark>120 J</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">Explain how the earth wire protects someone if a toaster's metal case becomes live.</p><details><summary>Show answer</summary><ol><li>Current flows from the case through the earth wire to the ground (low resistance).</li><li>This large current usually blows the fuse or trips the circuit breaker.</li></ol><p class="pa">Answer: <mark>Current goes through the earth wire, not the person, and the circuit is cut off</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://www.savemyexams.com/gcse/physics/aqa/18/revision-notes/2-electricity/2-2-series-and-parallel-circuits/2-2-5-mains-electricity/" rel="noopener" target="_blank">Save My Exams: mains electricity (AQA)</a></li><li><a href="https://www.savemyexams.com/gcse/physics/aqa/18/revision-notes/" rel="noopener" target="_blank">Save My Exams: AQA GCSE Physics revision notes</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="circuits.html">← Circuits, current, p.d. and resistance</a><a href="motion.html" style="text-align:right">Speed, acceleration and motion graphs →</a></nav>
+</div>
+</body>
+</html>

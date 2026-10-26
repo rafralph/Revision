@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Forces, work and springs · Physics · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.subnav .soon{opacity:.6}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.rp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent);margin-top:4px}
+.tonly{display:inline-block;font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.pending{border:1px dashed var(--rule);border-radius:6px;padding:16px;color:var(--muted);background:var(--card)}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/" aria-current="page">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html#physics">← All Physics topics</a><span>Topic 1 of 29</span></div>
+<h1 class="tp-h1">Forces, work and springs</h1>
+<p class="tp-meta">Physics · rank 1 of 29 · 78 marks · 7.8% of Physics marks · in 7 of 10 papers · Required practical: Force and extension</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/ph01springs.jpg" src="videos/ph01springs.mp4" aria-label="Explainer video: Forces, work and springs"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>A spring is a fair trade: each extra newton gives the same extra stretch, until you pass the limit of proportionality.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>A force is a push or a pull. Forces are vectors: they have size and direction. Weight = mass × gravitational field strength (W = mg, g = 9.8 N/kg).</p>
+<p>The resultant force is the single force with the same effect as all the forces together. Resolve forces with a scale drawing (Higher).</p>
+<p>Work done = force × distance (W = Fs). One joule is one newton metre.</p>
+<p>Springs: force = spring constant × extension (F = ke). This is true up to the limit of proportionality. The spring stores elastic potential energy: Eₑ = ½ke².</p>
+<p>In the required practical, hang masses on a spring. Measure the extension with a ruler at eye level. Plot force against extension. The gradient is the spring constant.</p>
+<p class="caution"><span>CAUTION</span>Extension is the increase in length, not the total length. Change cm to m before you calculate.</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p>A spring is like a rubber band that follows a rule: <b>double the force, double the stretch</b>. This is <b>Hooke's law</b>: F = k × e, where k (the spring constant) tells you how stiff the spring is. The rule works only up to the <b>limit of proportionality</b>; after that the graph curves.</p>
+<p>A stretched spring stores <b>elastic potential energy</b>: E = ½ k e².</p>
+<p><b>Work done</b> means energy transferred by a force: W = F × s (force × distance moved in the direction of the force). Pushing a box 3 m with 20 N transfers 60 J.</p>
+<p><b>Weight</b> is the force of gravity on a mass: W = m × g (g = 9.8 N/kg on Earth).</p></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Using the total length instead of the <b>extension</b> (new length − original length).</li><li>Forgetting to change cm to m before using F = ke.</li><li>Forgetting to square e in E = ½ke².</li><li>Mixing up mass (kg) and weight (N).</li><li>Saying work is done when nothing moves. The force must move something.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>3</small></h2><div class="figs"><figure><svg viewBox="0 0 320 174" role="img" aria-label="Graph of Force (N) against Extension (m)">
+<line x1="40" y1="145" x2="300" y2="145" class="ln"/><line x1="40" y1="145" x2="40" y2="10" class="ln"/>
+<path d="M40 145 L210 45 Q250 25 290 20" class="la"/>
+<g font-size="11"><text x="170" y="170" text-anchor="middle">Extension (m)</text><text x="16" y="80" transform="rotate(-90 16 80)" text-anchor="middle">Force (N)</text></g><g font-size="11"><text x="150" y="118">straight line:</text><text x="150" y="132">F = ke</text><text x="205" y="58" class="a">limit of proportionality</text></g><circle cx="210" cy="45" r="4" style="fill:var(--accent)"/>
+</svg><figcaption>The gradient of the straight part is the spring constant.</figcaption></figure><figure><svg viewBox="0 0 320 124" role="img" aria-label="Force equations"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Quantity</text><text x="125.4146710360474" y="18" font-weight="700">Equation</text><text x="213.83413158558105" y="18" font-weight="700">Units</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Weight</text><text x="125.4146710360474" y="42">W = m g</text><text x="213.83413158558105" y="42">N = kg × N/kg</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Spring force</text><text x="125.4146710360474" y="66">F = k e</text><text x="213.83413158558105" y="66">N = N/m × m</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Elastic energy</text><text x="125.4146710360474" y="90">E = ½ k e²</text><text x="213.83413158558105" y="90">J</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">Work done</text><text x="125.4146710360474" y="114">W = F s</text><text x="213.83413158558105" y="114">J = N × m</text><rect x="2" y="2" width="316.0" height="120" class="ln" style="fill:none"/><path d="M119.4146710360474 2 V122" class="lm"/><path d="M207.83413158558105 2 V122" class="lm"/></g></svg><figcaption>The four equations for this topic.</figcaption></figure><figure><svg viewBox="0 0 320 100" role="img" aria-label="Resultant force: 12 N right and 5 N left give 7 N right">
+<rect x="130" y="30" width="60" height="40" rx="4" class="fb"/>
+<path d="M190 50 H300" class="la" style="stroke-width:3"/><path d="M292 44 L302 50 L292 56" class="la" style="fill:none;stroke-width:3"/>
+<path d="M130 50 H75" class="lt" style="stroke-width:3"/><path d="M83 44 L73 50 L83 56" class="lt" style="fill:none;stroke-width:3"/>
+<g font-size="11" text-anchor="middle"><text x="245" y="40" class="a">12 N</text><text x="100" y="40" class="t">5 N</text><text x="160" y="92">resultant = 12 − 5 = 7 N to the right</text></g>
+</svg><figcaption>Forces in opposite directions: subtract to find the resultant.</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">Calculate the weight of a 5.0 kg mass. (g = 9.8 N/kg)</p><ol class="steps"><li>W = mg = 5.0 × 9.8</li></ol><p class="ansx">Answer: <mark>49 N</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">A 20 N force pushes a box 3.0 m. Calculate the work done.</p><ol class="steps"><li>W = Fs = 20 × 3.0</li></ol><p class="ansx">Answer: <mark>60 J</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[4 marks]</span></h3><p class="qx">A force of 4.0 N stretches a spring by 8.0 cm.<br>(a) Calculate the spring constant. (b) Calculate the elastic potential energy stored.</p><ol class="steps"><li>(a) e = 8.0 cm = 0.080 m</li><li>k = F ÷ e = 4.0 ÷ 0.080 = 50 N/m</li><li>(b) Eₑ = ½ × k × e² = 0.5 × 50 × 0.080²</li><li>= 0.16 J</li></ol><p class="ansx">Answer: <mark>(a) 50 N/m; (b) 0.16 J</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">Give one scalar and one vector quantity.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Scalar: e.g. speed, mass, energy. Vector: e.g. velocity, force, displacement</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">What is the unit of the spring constant?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>N/m</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">A force of 12 N acts to the right and 5 N to the left. Give the resultant force.</p><details><summary>Show answer</summary><ol><li>12 − 5</li></ol><p class="pa">Answer: <mark>7 N to the right</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">A spring (k = 40 N/m) is stretched by 0.15 m. Calculate the force.</p><details><summary>Show answer</summary><ol><li>F = 40 × 0.15</li></ol><p class="pa">Answer: <mark>6.0 N</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">A spring with k = 200 N/m is stretched by 5.0 cm. Calculate the elastic potential energy stored.</p><details><summary>Show answer</summary><ol><li>e = 0.050 m</li><li>E = ½ × 200 × 0.050²</li></ol><p class="pa">Answer: <mark>0.25 J</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">A 0.20 kg mass hangs on a spring (k = 25 N/m). Calculate the extension in cm. (g = 9.8 N/kg)</p><details><summary>Show answer</summary><ol><li>F = mg = 0.20 × 9.8 = 1.96 N</li><li>e = F ÷ k = 1.96 ÷ 25 = 0.0784 m</li></ol><p class="pa">Answer: <mark>7.8 cm</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://www.savemyexams.com/gcse/physics/aqa/18/revision-notes/5-forces/5-3-forces-and-elasticity/5-3-2-hookes-law/" rel="noopener" target="_blank">Save My Exams: Hooke&#x27;s law (AQA)</a></li><li><a href="https://www.savemyexams.com/gcse/physics/aqa/18/revision-notes/" rel="noopener" target="_blank">Save My Exams: AQA GCSE Physics revision notes</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><span></span><a href="light.html" style="text-align:right">Reflection, refraction, lenses and colour →</a></nav>
+</div>
+</body>
+</html>

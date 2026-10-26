@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Genetic engineering and cloning · Biology · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.subnav .soon{opacity:.6}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.rp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent);margin-top:4px}
+.tonly{display:inline-block;font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.pending{border:1px dashed var(--rule);border-radius:6px;padding:16px;color:var(--muted);background:var(--card)}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/" aria-current="page">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html#biology">← All Biology topics</a><span>Topic 31 of 31</span></div>
+<h1 class="tp-h1">Genetic engineering and cloning</h1>
+<p class="tp-meta">Biology · rank 31 of 31 · 3 marks · 0.3% of Biology marks · in 2 of 9 papers</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/b21geneng.jpg" src="videos/b21geneng.mp4" aria-label="Explainer video: Genetic engineering and cloning"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>All living things use the same genetic code, so a bacterium can read a human gene and make a human protein.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>Genetic engineering changes the genome of an organism by adding a gene from another organism. AQA tests the steps, uses such as insulin and GM crops, and the benefits and concerns.</p>
+<ol><li>Enzymes cut out the required gene.</li>
+<li>The gene is inserted into a vector, usually a bacterial plasmid or a virus.</li>
+<li>The vector inserts the gene into the target cells.</li>
+<li>The cells make the protein, for example human insulin.</li>
+<li>(Higher) For plants and animals, genes are put into cells at an early stage, so all cells get the gene.</li></ol>
+<p>(Triple) Cloning makes genetically identical organisms. Use cuttings or tissue culture for plants. Use embryo transplants or adult cell cloning for animals. In adult cell cloning, put the nucleus from a body cell into an egg cell that has no nucleus. Then use an electric shock to start cell division.</p>
+<p>GM crops may resist pests or herbicides, or give bigger yields. Concerns include effects on wild plants and insects, and long-term effects on health.</p>
+<p class="caution"><span>CAUTION</span>Do not confuse genetic engineering with selective breeding. Selective breeding only uses genes already in the species.</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p>Genetic engineering is <b>cut and paste</b> for DNA. Enzymes act as scissors (to cut out a useful gene) and glue (to stick it into a <b>vector</b>, such as a bacterial plasmid). The new organism then makes the protein, for example human insulin.</p>
+<p><b>Cloning</b> makes genetically identical copies:</p>
+<ul><li>Plants: <b>cuttings</b> and <b>tissue culture</b> (tiny groups of cells grown on gel).</li><li>Animals: <b>embryo transplants</b> (split an embryo) and <b>adult cell cloning</b> (Dolly the sheep).</li></ul></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Saying the whole human DNA is put into the bacterium. Only the one gene is inserted.</li><li>Forgetting the vector (plasmid or virus) in the method.</li><li>Saying GM crops are always dangerous. Give balanced benefits and concerns.</li><li>Mixing up embryo transplants (split an embryo) and adult cell cloning (nucleus moved into an egg).</li><li>Saying clones have different genes. Clones are genetically identical.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>3</small></h2><div class="figs"><figure><svg viewBox="0 0 320 110" role="img" aria-label="Steps of genetic engineering for insulin">
+<g font-size="10" text-anchor="middle">
+<rect x="5" y="30" width="70" height="44" rx="5" class="fb"/><text x="40" y="48">Cut out</text><text x="40" y="61">gene</text>
+<rect x="85" y="30" width="70" height="44" rx="5" class="ft"/><text x="120" y="48">Insert into</text><text x="120" y="61">plasmid</text>
+<rect x="165" y="30" width="70" height="44" rx="5" class="ft"/><text x="200" y="48">Into</text><text x="200" y="61">bacterium</text>
+<rect x="245" y="30" width="70" height="44" rx="5" class="fa"/><text x="280" y="48">Makes</text><text x="280" y="61">insulin</text></g>
+<path class="ln" d="M75 52 L85 52 M155 52 L165 52 M235 52 L245 52"/>
+</svg><figcaption>Cut, insert, transfer, express.</figcaption></figure><figure><svg viewBox="0 0 320 100" role="img" aria-label="Benefits and concerns of GM crops"><g font-size="9.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">GM crops: benefits</text><text x="156.54717209640305" y="18" font-weight="700">GM crops: concerns</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Resist pests, so bigger yield</text><text x="156.54717209640305" y="42">Genes may spread to wild plants</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Resist herbicides</text><text x="156.54717209640305" y="66">Effect on insects and food chains</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Extra vitamins (golden rice)</text><text x="156.54717209640305" y="90">Long-term health effects unknown</text><rect x="2" y="2" width="316.0" height="96" class="ln" style="fill:none"/><path d="M150.54717209640305 2 V98" class="lm"/></g></svg><figcaption>Exam answers on GM crops need both sides.</figcaption></figure><figure><svg viewBox="0 0 320 214" role="img" aria-label="Adult cell cloning steps"><g font-size="11" text-anchor="middle"><rect x="10.0" y="4" width="300" height="30" rx="5" class="fb"/><text x="160" y="23">Remove nucleus from an egg cell</text><path d="M160 35 v11" class="ln"/><path d="M156 42 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="48" width="300" height="30" rx="5" class="fb"/><text x="160" y="67">Take nucleus from an adult body cell</text><path d="M160 79 v11" class="ln"/><path d="M156 86 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="92" width="300" height="30" rx="5" class="fb"/><text x="160" y="111">Put it into the empty egg</text><path d="M160 123 v11" class="ln"/><path d="M156 130 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="136" width="300" height="30" rx="5" class="fb"/><text x="160" y="155">Electric shock: egg divides into an embryo</text><path d="M160 167 v11" class="ln"/><path d="M156 174 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="180" width="300" height="30" rx="5" class="ft"/><text x="160" y="199">Embryo put into a surrogate mother</text></g></svg><figcaption>Adult cell cloning (how Dolly the sheep was made).</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">What is a genetically modified (GM) crop?</p><ol class="steps"></ol><p class="ansx">Answer: <mark>A crop whose genes have been changed, e.g. to resist pests or herbicides</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">Give one advantage and one disadvantage of taking cuttings to grow plants.</p><ol class="steps"></ol><p class="ansx">Answer: <mark>Advantage: quick, cheap, and every plant has the good features. Disadvantage: no variation, so one disease could kill them all</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[4 marks]</span></h3><p class="qx">Describe how bacteria can be genetically engineered to produce human insulin.</p><ol class="steps"><li>Enzymes are used to cut the insulin gene out of human DNA</li><li>The gene is inserted into a plasmid (vector)</li><li>The plasmid is put into a bacterium</li><li>The bacteria multiply and produce human insulin</li></ol><p class="ansx">Answer: <mark>Cut gene → plasmid → bacterium → insulin</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">Which type of enzyme cuts a gene out of DNA?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Restriction enzyme</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Give one benefit of GM crops.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>e.g. bigger yields, pest resistance, herbicide resistance, more nutrients</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">What is a vector in genetic engineering?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Something that carries the gene into the new cell, e.g. a plasmid or a virus</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">Describe tissue culture.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Small groups of cells are taken from a plant and grown on a sterile nutrient gel (with hormones) into new plants</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">Give three concerns about growing GM crops.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Genes could spread to wild plants; effects on wild flowers and insects; long-term effects on health of eating them are not fully known</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">Describe how embryo transplants are used to clone farm animals.</p><details><summary>Show answer</summary><ol><li>Cells from a developing embryo are split apart before they specialise.</li><li>Each group of cells grows into an identical embryo.</li><li>The embryos are put into host mothers.</li></ol><p class="pa">Answer: <mark>Split an early embryo → put the identical embryos into host mothers</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://www.savemyexams.com/gcse/biology/aqa/18/revision-notes/6-inheritance-variation-and-evolution/6-2-variation-and-evolution/6-2-4-genetic-engineering/" rel="noopener" target="_blank">Save My Exams: genetic engineering (AQA)</a></li><li><a href="https://myedspace.co.uk/myresources/gcse/biology/aqa/revision-notes/Genetic-engineering-bacterial-cells-to-produce-insulin" rel="noopener" target="_blank">MyEdSpace: bacteria that make insulin</a></li><li><a href="https://www.savemyexams.com/gcse/biology/aqa/18/revision-notes/" rel="noopener" target="_blank">Save My Exams: AQA GCSE Biology revision notes</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="reproduction.html">← Sexual and asexual reproduction</a><span></span></nav>
+</div>
+</body>
+</html>

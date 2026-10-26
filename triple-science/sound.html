@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sound, ultrasound and seismic waves · Physics · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.subnav .soon{opacity:.6}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.rp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent);margin-top:4px}
+.tonly{display:inline-block;font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.pending{border:1px dashed var(--rule);border-radius:6px;padding:16px;color:var(--muted);background:var(--card)}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/" aria-current="page">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html#physics">← All Physics topics</a><span>Topic 23 of 29</span></div>
+<h1 class="tp-h1">Sound, ultrasound and seismic waves</h1>
+<p class="tp-meta">Physics · rank 23 of 29 · 19 marks · 1.9% of Physics marks · in 4 of 10 papers</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/ph23sound.jpg" src="videos/ph23sound.mp4" aria-label="Explainer video: Sound, ultrasound and seismic waves"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>An echo is a there-and-back trip. Halve the time to find the one-way distance.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>Sound is a longitudinal wave. It travels faster in solids than in gases. Humans hear 20 Hz to 20 kHz. Sound makes the eardrum vibrate.</p>
+<p>Ultrasound has a frequency above 20 kHz. It partly reflects at a boundary between two materials. The time of the echo gives the distance. Uses: medical scans and industrial imaging (finding cracks).</p>
+<p>Echo sounding (sonar) uses high-frequency sound to find the depth of water.</p>
+<p><b>Seismic waves</b> from earthquakes:</p>
+<ul><li>P-waves: longitudinal. They travel through solids and liquids.</li><li>S-waves: transverse. They cannot travel through liquids.</li></ul>
+<p>S-waves do not reach the other side of the Earth (a shadow zone), so the outer core must be liquid.</p>
+<p class="caution"><span>CAUTION</span>The echo time is for the wave to go there and back. Divide the distance by 2.</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p>Sound is a <b>longitudinal</b> wave of squashed and stretched particles. Humans hear from about <b>20 Hz to 20 000 Hz</b>. Above that is <b>ultrasound</b>.</p>
+<p>When a wave hits a boundary, some of it reflects as an <b>echo</b>. Measure the echo time to find a distance: distance = speed × time ÷ 2 (÷ 2 because the sound goes there and back). This is used in sonar and in ultrasound scans of babies.</p>
+<p>Earthquakes send <b>seismic waves</b> through the Earth. <b>P-waves</b> (longitudinal) pass through solids and liquids. <b>S-waves</b> (transverse) pass through solids only. S-waves do not reach the far side of the Earth, which shows the outer core is <b>liquid</b>.</p></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Forgetting to halve the echo time.</li><li>Saying ultrasound is very loud. It is very high frequency (above 20 kHz).</li><li>Saying S-waves travel through liquids.</li><li>Saying sound travels in a vacuum. It needs particles.</li><li>Mixing up kHz and Hz.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>3</small></h2><div class="figs"><figure><svg viewBox="0 0 320 130" role="img" aria-label="Ship sending a sonar pulse to the seabed">
+<path d="M20 30 H300" class="lm"/><path d="M110 30 L120 15 H170 L180 30 Z" class="fb"/>
+<path d="M20 120 H300" class="ln" style="stroke-width:3"/>
+<g class="la" style="stroke-width:2"><path d="M135 35 V112"/><path d="M155 112 V35"/><path d="M129 104 L135 114 L141 104"/><path d="M149 43 L155 33 L161 43"/></g>
+<g font-size="11"><text x="190" y="70">echo time 0.40 s</text><text x="190" y="86" class="a">depth = v × t ÷ 2</text><text x="20" y="114">seabed</text></g>
+</svg><figcaption>The pulse travels down and back, so halve the total distance.</figcaption></figure><figure><svg viewBox="0 0 320 124" role="img" aria-label="P-waves and S-waves"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700"></text><text x="96.06246246246246" y="18" font-weight="700">P-waves</text><text x="218.66666666666669" y="18" font-weight="700">S-waves</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Type</text><text x="96.06246246246246" y="42">longitudinal</text><text x="218.66666666666669" y="42">transverse</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Solids?</text><text x="96.06246246246246" y="66">yes</text><text x="218.66666666666669" y="66">yes</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Liquids?</text><text x="96.06246246246246" y="90">yes</text><text x="218.66666666666669" y="90">no</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">Speed</text><text x="96.06246246246246" y="114">faster</text><text x="218.66666666666669" y="114">slower</text><rect x="2" y="2" width="316.0" height="120" class="ln" style="fill:none"/><path d="M90.06246246246246 2 V122" class="lm"/><path d="M212.66666666666669 2 V122" class="lm"/></g></svg><figcaption>S-waves cannot pass through liquids.</figcaption></figure><figure><svg viewBox="0 0 320 100" role="img" aria-label="Uses of ultrasound"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Use of ultrasound</text><text x="149.19017926734216" y="18" font-weight="700">How</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Pre-natal scans</text><text x="149.19017926734216" y="42">Echoes from tissue boundaries</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Finding cracks in metal</text><text x="149.19017926734216" y="66">Echo from the crack</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Sonar (depth)</text><text x="149.19017926734216" y="90">Echo from the seabed</text><rect x="2" y="2" width="316.0" height="96" class="ln" style="fill:none"/><path d="M143.19017926734216 2 V98" class="lm"/></g></svg><figcaption>Ultrasound is used for images and measuring distance.</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">What is the range of human hearing?</p><ol class="steps"></ol><p class="ansx">Answer: <mark>About 20 Hz to 20 000 Hz</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">An ultrasound pulse returns 0.20 s after leaving a ship. Sound travels at 1500 m/s in water. How deep is the sea?</p><ol class="steps"><li>Total distance = 1500 × 0.20 = 300 m</li><li>Depth = 300 ÷ 2</li></ol><p class="ansx">Answer: <mark>150 m</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[5 marks]</span></h3><p class="qx">(a) A ship sends a sound pulse to the seabed. The echo returns after 0.40 s. Speed of sound in water = 1500 m/s. Calculate the depth. (b) Explain how S-waves show that the Earth's outer core is liquid.</p><ol class="steps"><li>(a) Total distance = 1500 × 0.40 = 600 m</li><li>Depth = 600 ÷ 2 = 300 m</li><li>(b) S-waves are transverse and cannot travel through liquids</li><li>S-waves are not detected on the opposite side of the Earth (shadow zone)</li><li>So part of the core (the outer core) must be liquid</li></ol><p class="ansx">Answer: <mark>(a) 300 m; (b) S-waves cannot pass through the liquid outer core</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">What is ultrasound?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Sound with a frequency above 20 000 Hz (too high for humans to hear)</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Are P-waves longitudinal or transverse?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Longitudinal</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">Explain how S-waves show that the Earth's outer core is liquid.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>S-waves cannot travel through liquids; they are not detected on the opposite side of the Earth (the shadow zone)</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">A clap echoes off a wall after 1.2 s. Sound travels at 330 m/s. How far away is the wall?</p><details><summary>Show answer</summary><ol><li>330 × 1.2 = 396 m there and back</li><li>÷ 2</li></ol><p class="pa">Answer: <mark>198 m</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">Explain why ultrasound is used for scanning unborn babies instead of X-rays.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Ultrasound is not ionising, so it does not damage cells; it partly reflects at tissue boundaries to build an image</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">A 2000 Hz sound travels through water at 1500 m/s. Calculate its wavelength.</p><details><summary>Show answer</summary><ol><li>λ = v ÷ f = 1500 ÷ 2000</li></ol><p class="pa">Answer: <mark>0.75 m</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://www.savemyexams.com/gcse/physics/aqa/18/revision-notes/6-waves/6-1-waves-in-air-fluids-and-solids/6-1-12-echo-sounding/" rel="noopener" target="_blank">Save My Exams: echo sounding (AQA)</a></li><li><a href="https://myedspace.co.uk/myresources/gcse/physics/aqa/revision-notes/ultrasound-and-seismic-waves-triple-only" rel="noopener" target="_blank">MyEdSpace: ultrasound and seismic waves</a></li><li><a href="https://www.savemyexams.com/gcse/physics/aqa/18/revision-notes/" rel="noopener" target="_blank">Save My Exams: AQA GCSE Physics revision notes</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="density.html">← Density</a><a href="energy-resources.html" style="text-align:right">Energy resources →</a></nav>
+</div>
+</body>
+</html>

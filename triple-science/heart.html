@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Heart, blood, vessels and lungs · Biology · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.subnav{display:flex;flex-wrap:wrap;gap:8px}
+.subnav a{font-family:var(--f-mono);font-size:.8rem;padding:6px 10px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink);background:var(--card)}
+.subnav a:hover{border-color:var(--ink)}
+.subnav .soon{opacity:.6}
+.sci-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;scroll-margin-top:60px}
+.sci-h h2{font-size:2rem}
+.sci-h .meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.rp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:3px;background:var(--accent-soft);color:var(--ink);border:1px solid var(--accent);margin-top:4px}
+.tonly{display:inline-block;font-family:var(--f-mono);font-size:.68rem;padding:2px 6px;border-radius:3px;border:1px solid var(--rule);margin-left:6px;vertical-align:middle}
+.pending{border:1px dashed var(--rule);border-radius:6px;padding:16px;color:var(--muted);background:var(--card)}
+.topic{scroll-margin-top:60px}
+figure svg{max-width:34rem;margin:0 auto}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/" aria-current="page">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html#biology">← All Biology topics</a><span>Topic 3 of 31</span></div>
+<h1 class="tp-h1">Heart, blood, vessels and lungs</h1>
+<p class="tp-meta">Biology · rank 3 of 31 · 56 marks · 6.3% of Biology marks · in 4 of 9 papers</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/b11heart.jpg" src="videos/b11heart.mp4" aria-label="Explainer video: Heart, blood, vessels and lungs"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>Blood goes through the heart twice on each full lap: once to the lungs to collect oxygen, and once to the body to deliver it.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>The heart pumps blood around the body in a double circulation. AQA tests the route through the heart, blood vessels, blood components and the lungs.</p>
+<ol><li>Deoxygenated blood enters the right atrium from the vena cava.</li>
+<li>The right ventricle pumps it to the lungs in the pulmonary artery.</li>
+<li>Oxygenated blood returns to the left atrium in the pulmonary vein.</li>
+<li>The left ventricle pumps it to the body in the aorta. Its wall is thicker because it pumps blood further.</li>
+<li>Valves stop blood flowing backwards.</li></ol>
+<p>Arteries have thick, elastic walls for high pressure. Veins have valves. Capillaries are one cell thick for exchange.</p>
+<p class="caution"><span>CAUTION</span>Arteries carry blood away from the heart. The pulmonary artery carries deoxygenated blood.</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p>The heart is <b>two pumps side by side</b>. The <b>right</b> side pumps blood to the lungs to pick up oxygen. The <b>left</b> side pumps it to the rest of the body. This is a <b>double circulation</b>: blood goes through the heart twice on each trip.</p>
+<p>The left ventricle has a thicker wall because it pushes blood all round the body.</p>
+<ul><li><b>Arteries</b> carry blood <b>away</b> from the heart: thick, stretchy walls for high pressure.</li><li><b>Veins</b> bring blood back: thinner walls and <b>valves</b> to stop backflow.</li><li><b>Capillaries</b>: walls one cell thick, so substances diffuse in and out quickly.</li></ul></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Swapping left and right. On a diagram, the heart's left is on <b>your</b> right.</li><li>Saying arteries always carry oxygenated blood. The pulmonary artery carries deoxygenated blood to the lungs.</li><li>Saying arteries have valves. Veins (and the heart) have valves.</li><li>Saying red blood cells have a nucleus. They do not: more room for haemoglobin.</li><li>Saying capillaries carry blood to the heart.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>3</small></h2><div class="figs"><figure><svg viewBox="0 0 320 180" role="img" aria-label="Double circulation: right side to lungs, left side to body">
+<rect x="110" y="5" width="100" height="30" rx="6" class="ft"/><text x="160" y="25" text-anchor="middle" font-size="12">Lungs</text>
+<rect x="110" y="145" width="100" height="30" rx="6" class="fa"/><text x="160" y="165" text-anchor="middle" font-size="12">Body</text>
+<rect x="30" y="70" width="100" height="40" rx="6" class="fb"/><text x="80" y="88" text-anchor="middle" font-size="11">Right side</text><text x="80" y="101" text-anchor="middle" font-size="10">deoxygenated</text>
+<rect x="190" y="70" width="100" height="40" rx="6" style="fill:var(--red);fill-opacity:.3;stroke:var(--ink)"/><text x="240" y="88" text-anchor="middle" font-size="11">Left side</text><text x="240" y="101" text-anchor="middle" font-size="10">oxygenated</text>
+<path class="lb" d="M80 70 Q80 25 110 20"/><path d="M210 20 Q240 25 240 70" style="stroke:var(--red);stroke-width:2.5;fill:none"/>
+<path d="M240 110 Q240 155 210 160" style="stroke:var(--red);stroke-width:2.5;fill:none"/><path class="lb" d="M110 160 Q80 155 80 110"/>
+<g font-size="9" class="m"><text x="18" y="45" class="m">pulmonary artery</text><text x="245" y="45" class="m">pulmonary vein</text><text x="248" y="138" class="m">aorta</text><text x="30" y="138" class="m">vena cava</text></g>
+</svg><figcaption>Two loops: right side to the lungs, left side to the body.</figcaption></figure><figure><svg viewBox="0 0 320 124" role="img" aria-label="Parts of the blood"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Part of blood</text><text x="130.81468298109007" y="18" font-weight="700">Job</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Red blood cells</text><text x="130.81468298109007" y="42">Carry oxygen</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">White blood cells</text><text x="130.81468298109007" y="66">Fight pathogens</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Platelets</text><text x="130.81468298109007" y="90">Help blood clot</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">Plasma</text><text x="130.81468298109007" y="114">Carries dissolved substances</text><rect x="2" y="2" width="316.0" height="120" class="ln" style="fill:none"/><path d="M124.81468298109009 2 V122" class="lm"/></g></svg><figcaption>The four parts of the blood and their jobs.</figcaption></figure><figure><svg viewBox="0 0 320 124" role="img" aria-label="Arteries, veins and capillaries compared"><g font-size="9.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700"></text><text x="83.33787926180794" y="18" font-weight="700">Artery</text><text x="168.44141382546138" y="18" font-weight="700">Vein</text><text x="238.8964654363466" y="18" font-weight="700">Capillary</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Carries blood</text><text x="83.33787926180794" y="42">away from heart</text><text x="168.44141382546138" y="42">to the heart</text><text x="238.8964654363466" y="42">through tissues</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Wall</text><text x="83.33787926180794" y="66">thick, elastic</text><text x="168.44141382546138" y="66">thin</text><text x="238.8964654363466" y="66">one cell thick</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">Pressure</text><text x="83.33787926180794" y="90">high</text><text x="168.44141382546138" y="90">low</text><text x="238.8964654363466" y="90">low</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">Valves?</text><text x="83.33787926180794" y="114">no</text><text x="168.44141382546138" y="114">yes</text><text x="238.8964654363466" y="114">no</text><rect x="2" y="2" width="316.0" height="120" class="ln" style="fill:none"/><path d="M77.33787926180794 2 V122" class="lm"/><path d="M162.44141382546138 2 V122" class="lm"/><path d="M232.8964654363466 2 V122" class="lm"/></g></svg><figcaption>The three types of blood vessel.</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">Which type of blood vessel carries blood away from the heart?</p><ol class="steps"></ol><p class="ansx">Answer: <mark>Arteries</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">Explain why the wall of the left ventricle is thicker than the right.</p><ol class="steps"><li>The left ventricle pumps blood all around the body.</li><li>This needs a higher pressure than pumping to the lungs.</li></ol><p class="ansx">Answer: <mark>It must pump blood at high pressure all round the body</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[4 marks]</span></h3><p class="qx">Describe the route taken by blood from the vena cava to the aorta.</p><ol class="steps"><li>Vena cava → right atrium → right ventricle</li><li>→ pulmonary artery → lungs (blood is oxygenated)</li><li>→ pulmonary vein → left atrium → left ventricle</li><li>→ aorta</li></ol><p class="ansx">Answer: <mark>Right atrium → right ventricle → lungs → left atrium → left ventricle → aorta</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">What does haemoglobin carry?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Oxygen</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Where is the heart's natural pacemaker?</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>In the wall of the right atrium</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">Give two ways capillaries are adapted for exchange.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Walls one cell thick (short diffusion distance); very many of them (large surface area); narrow, so blood flows slowly</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">2700 cm³ of blood flows through an organ in 3 minutes. Calculate the rate of blood flow.</p><details><summary>Show answer</summary><ol><li>2700 ÷ 3</li></ol><p class="pa">Answer: <mark>900 cm³ per minute</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">Explain why a double circulation is an advantage to mammals.</p><details><summary>Show answer</summary><ol><li>Blood returns to the heart after the lungs.</li><li>It is pumped again at high pressure.</li><li>So oxygen reaches the body cells quickly.</li></ol><p class="pa">Answer: <mark>Blood is re-pumped after the lungs, so it reaches the body at high pressure and fast</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">Describe how the alveoli are adapted for gas exchange.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>Huge surface area; walls one cell thick (short diffusion distance); good blood supply from capillaries; ventilation keeps a steep concentration gradient</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://www.savemyexams.com/gcse/biology/aqa/18/revision-notes/2-organisation/2-2-organisation-the-cardiovascular-and-respiratory-system/2-2-2-the-heart/" rel="noopener" target="_blank">Save My Exams: the heart (AQA)</a></li><li><a href="https://myedspace.co.uk/myresources/gcse/biology/aqa/revision-notes/the-circulatory-system" rel="noopener" target="_blank">MyEdSpace: the circulatory system</a></li><li><a href="https://www.savemyexams.com/gcse/biology/aqa/18/revision-notes/" rel="noopener" target="_blank">Save My Exams: AQA GCSE Biology revision notes</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="ecosystems.html">← Ecosystems, adaptations and sampling</a><a href="enzymes.html" style="text-align:right">Digestion and enzymes →</a></nav>
+</div>
+</body>
+</html>
