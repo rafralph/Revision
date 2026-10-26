@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Scatter graphs, charts and sampling · Maths · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/" aria-current="page">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html">← All Maths topics</a><span>Topic 29 of 36</span></div>
+<h1 class="tp-h1">Scatter graphs, charts and sampling</h1>
+<p class="tp-meta">Rank 29 of 36 · 26 marks · 1.4% of all marks · in 9 of 24 papers</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/29_scatter.jpg" src="videos/29_scatter.mp4" aria-label="Explainer video: Scatter graphs, charts and sampling"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>A line of best fit turns a cloud of points into a rule you can read from. It is only trustworthy inside the range of the data.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>A scatter graph shows two sets of data for the same items. AQA tests correlation, lines of best fit, outliers, and also pie charts, time-series graphs and sampling.</p>
+<ol><li>Describe the correlation: positive, negative or none.</li>
+<li>Draw a line of best fit. Use a ruler. Put roughly equal points on each side.</li>
+<li>To estimate, go from one axis to the line, then across to the other axis.</li>
+<li>Estimate only inside the range of the data (interpolation).</li>
+<li>Ignore an outlier when you draw the line of best fit.</li></ol>
+<p class="caution"><span>CAUTION</span>An estimate outside the data (extrapolation) is not reliable. Correlation does not prove that one thing causes the other.</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p>Each dot is one person (or thing) with two facts, like hours of revision and test score.</p>
+<ul><li>Dots go uphill → <b>positive</b> correlation. Downhill → <b>negative</b>. No pattern → <b>no</b> correlation.</li><li>A <b>line of best fit</b> goes through the middle, with about the same number of dots each side.</li><li>Estimating <b>inside</b> the data is fine (interpolation). <b>Outside</b> it is risky (extrapolation): the pattern may not continue.</li></ul>
+<p>Correlation does not mean one thing <b>causes</b> the other. Ice-cream sales and sunburn both rise in summer, but ice cream does not cause sunburn.</p></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Forcing the line of best fit through the origin or through the first and last dots.</li><li>Trusting an estimate far outside the data (extrapolation).</li><li>Saying one variable causes the other just because they correlate.</li><li>Including an obvious outlier when drawing the line.</li><li>Describing 'positive correlation' without saying what it means in context.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>2</small></h2><div class="figs"><figure><svg viewBox="0 0 320 190" role="img" aria-label="Scatter graph of hours revised against test score with a line of best fit">
+<path class="ln" d="M40 165 L300 165 M40 165 L40 15"/>
+<g style="fill:var(--blue)"><circle cx="60" cy="108" r="4"/><circle cx="80" cy="94" r="4"/><circle cx="100" cy="93" r="4"/><circle cx="100" cy="85" r="4"/><circle cx="120" cy="78" r="4"/><circle cx="140" cy="79" r="4"/><circle cx="160" cy="60" r="4"/><circle cx="160" cy="72" r="4"/><circle cx="180" cy="66" r="4"/><circle cx="200" cy="51" r="4"/><circle cx="220" cy="42" r="4"/></g>
+<path class="la" d="M40 112.5 L230 37.5" style="stroke-width:2.5"/>
+<path class="lt" d="M140 165 L140 75 L40 75" style="stroke-dasharray:4 3;stroke-width:1.5"/>
+<rect x="240" y="15" width="60" height="150" style="fill:var(--red);fill-opacity:.1"/>
+<g font-size="11"><text x="44" y="70" class="t">≈ 60</text><text x="132" y="180" class="t">5</text><text x="243" y="30" style="fill:var(--red)">no data:</text><text x="243" y="44" style="fill:var(--red)">unreliable</text></g>
+<text x="170" y="185" font-size="10" class="m" text-anchor="middle">hours revised</text>
+</svg><figcaption>Read up to the line and across. Do not read outside the data.</figcaption></figure><figure><svg viewBox="0 0 320 110" role="img" aria-label="Three scatter graphs: positive, negative and no correlation">
+<g class="ln"><path d="M10 90 H95 M10 90 V10"/><path d="M115 90 H200 M115 90 V10"/><path d="M220 90 H305 M220 90 V10"/></g>
+<g style="fill:var(--accent)"><circle cx="18" cy="79" r="3"/><circle cx="27" cy="78" r="3"/><circle cx="36" cy="65" r="3"/><circle cx="45" cy="64" r="3"/><circle cx="54" cy="51" r="3"/><circle cx="63" cy="50" r="3"/><circle cx="72" cy="37" r="3"/><circle cx="81" cy="36" r="3"/><circle cx="90" cy="23" r="3"/><circle cx="123" cy="17" r="3"/><circle cx="132" cy="30" r="3"/><circle cx="141" cy="31" r="3"/><circle cx="150" cy="44" r="3"/><circle cx="159" cy="45" r="3"/><circle cx="168" cy="58" r="3"/><circle cx="177" cy="59" r="3"/><circle cx="186" cy="72" r="3"/><circle cx="195" cy="73" r="3"/><circle cx="230" cy="30" r="3"/><circle cx="245" cy="70" r="3"/><circle cx="260" cy="45" r="3"/><circle cx="275" cy="80" r="3"/><circle cx="290" cy="25" r="3"/><circle cx="238" cy="55" r="3"/><circle cx="283" cy="55" r="3"/><circle cx="252" cy="20" r="3"/><circle cx="268" cy="65" r="3"/></g>
+<g font-size="11" text-anchor="middle"><text x="52" y="105">positive</text><text x="157" y="105">negative</text><text x="262" y="105">none</text></g>
+</svg><figcaption>Uphill, downhill, or no pattern.</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">As hours of revision increase, test scores increase. Describe the correlation.</p><ol class="steps"><li>Both go up together</li></ol><p class="ansx">Answer: <mark>Positive correlation</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">A school has 600 students; 240 are in Year 10. A stratified sample of 50 is taken. How many Year 10 students should be in it?</p><ol class="steps"><li>Year 10 fraction = 240/600 = 0.4</li><li>0.4 × 50</li></ol><p class="ansx">Answer: <mark>20</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[3 marks]</span></h3><p class="qx">The scatter graph shows hours of revision and test scores for 11 students. The line of best fit passes through (2, 45) and (8, 75). (a) Estimate the score for 5 hours of revision. (b) Why is it not sensible to use the line for 20 hours?</p><ol class="steps"><li>(a) Gradient = (75 − 45) ÷ (8 − 2) = 5 points per hour</li><li>At 5 hours: 45 + 3 × 5 = 60</li><li>(b) 20 hours is outside the data. The line would predict 135, which is more than the maximum score</li></ol><p class="ansx">Answer: <mark>(a) about 60  (b) extrapolation is not reliable</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">As the temperature goes up, fewer coats are sold. Describe the correlation.</p><details><summary>Show answer</summary><ol><li>One goes up, the other goes down</li></ol><p class="pa">Answer: <mark>Negative correlation</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">What is a point that does not fit the pattern called?</p><details><summary>Show answer</summary><ol><li>It sits far away from the other points</li></ol><p class="pa">Answer: <mark>An outlier</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">A line of best fit passes through (2, 40) and (8, 85). Estimate y when x = 6.</p><details><summary>Show answer</summary><ol><li>Gradient = 45 ÷ 6 = 7.5</li><li>40 + 7.5 × 4</li></ol><p class="pa">Answer: <mark>70</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">The data goes from x = 1 to x = 10. Why is an estimate at x = 20 unreliable?</p><details><summary>Show answer</summary><ol><li>It is outside the range of the data</li></ol><p class="pa">Answer: <mark>Extrapolation: the pattern may not continue</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">A club has 400 boys and 350 girls. A stratified sample of 60 is taken. How many boys and girls?</p><details><summary>Show answer</summary><ol><li>Total 750</li><li>Boys = 400/750 × 60 = 32</li><li>Girls = 350/750 × 60 = 28</li></ol><p class="pa">Answer: <mark>32 boys and 28 girls</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">40 fish are caught, marked and released. Later 50 fish are caught and 8 are marked. Estimate the number of fish in the lake.</p><details><summary>Show answer</summary><ol><li>Fraction marked in the sample = 8/50</li><li>40 ÷ (8/50) = 40 × 50 ÷ 8</li></ol><p class="pa">Answer: <mark>250 fish</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://thirdspacelearning.com/gcse-maths/statistics/scatter-graphs/" rel="noopener" target="_blank">Third Space Learning: scatter graphs</a></li><li><a href="https://thirdspacelearning.com/secondary-resources/gcse-maths-worksheet-scatter-graphs/" rel="noopener" target="_blank">Third Space Learning: scatter graphs worksheet</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="vectors.html">← Vectors</a><a href="simultaneous.html" style="text-align:right">Simultaneous equations →</a></nav>
+</div>
+</body>
+</html>

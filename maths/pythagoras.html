@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pythagoras and right-angled trigonometry · Maths · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/" aria-current="page">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li></ul></nav>
+<div class="wrap">
+<div class="crumb"><a href="index.html">← All Maths topics</a><span>Topic 24 of 36</span></div>
+<h1 class="tp-h1">Pythagoras and right-angled trigonometry</h1>
+<p class="tp-meta">Rank 24 of 36 · 39 marks · 2.0% of all marks · in 9 of 24 papers</p>
+<nav class="chips" aria-label="On this page"><a href="#video">Video</a><a href="#explain">Explanations</a><a href="#diagrams">Diagrams</a><a href="#examples">Worked examples</a><a href="#practice">Practice</a></nav>
+<section class="tp-sec" id="video"><video controls preload="none" playsinline poster="videos/24_pythag.jpg" src="videos/24_pythag.mp4" aria-label="Explainer video: Pythagoras and right-angled trigonometry"></video></section>
+<section class="tp-sec" id="explain"><h2>Explanations <small>4 ways</small></h2><div class="ways"><div class="way"><h3><span class="wn">1</span>The picture idea</h3><p>Draw a square on each side of a right-angled triangle. The two small squares together have the same area as the big square.</p></div><div class="way"><h3><span class="wn">2</span>Step by step</h3><p>These methods work only in right-angled triangles. Use Pythagoras when you know two sides and need the third side. Use SOH CAH TOA when an angle is involved. AQA often puts them inside 3D shapes.</p>
+<ol><li>Find the hypotenuse. It is the longest side, opposite the right angle.</li>
+<li>To find the hypotenuse, add the squares of the two shorter sides. Then take the square root.</li>
+<li>To find a shorter side, subtract the squares. Then take the square root.</li>
+<li>For angles, label the sides opposite (O), adjacent (A) and hypotenuse (H).</li>
+<li>Choose sin = O/H, cos = A/H or tan = O/A. Use the inverse function to find the angle.</li></ol>
+<p class="caution"><span>CAUTION</span>Set the calculator to degrees (D on the screen).</p></div><div class="way"><h3><span class="wn">3</span>Another way to see it</h3><p><b>Pythagoras</b> is about squares built on the sides. The big square on the longest side (the hypotenuse) has the same area as the two smaller squares added together: a² + b² = c².</p>
+<ul><li>Finding the <b>longest</b> side? Square, <b>add</b>, square-root.</li><li>Finding a <b>shorter</b> side? Square, <b>subtract</b>, square-root.</li></ul>
+<p><b>SOHCAHTOA</b>: label the sides from the angle you are using. H is the longest. O is opposite the angle. A is next to it. Choose the ratio that uses the two sides in the question: O and H → sin, A and H → cos, O and A → tan.</p></div><div class="way warn"><h3><span class="wn">4</span>Watch out for</h3><ul><li>Adding when finding a shorter side. Subtract instead.</li><li>Labelling O and A from the wrong angle.</li><li>Calculator in radians instead of degrees.</li><li>Using Pythagoras when an angle is involved (use SOHCAHTOA).</li><li>Forgetting the inverse (sin⁻¹) when finding an angle.</li></ul></div></div></section>
+<section class="tp-sec" id="diagrams"><h2>Diagrams <small>3</small></h2><div class="figs"><figure><svg viewBox="0 0 320 190" role="img" aria-label="Ladder of 6.5 m against a wall, 6 m high, foot 2.5 m from wall">
+<path class="ln" d="M60 20 L60 170 L290 170"/>
+<path class="la" d="M60 20 L122.5 170"/>
+<path class="lm" d="M60 158 L72 158 L72 170"/>
+<path class="lt" d="M100 170 A22 22 0 0 0 108 151" style="stroke-width:2"/>
+<g font-size="13"><text x="34" y="100">6 m</text><text x="100" y="90" class="a" font-weight="700">6.5 m</text><text x="78" y="186">2.5 m</text><text x="112" y="160" class="t">θ</text></g>
+<g font-size="12"><text x="165" y="60">d² = 6.5² − 6² = 6.25</text><text x="165" y="80">d = 2.5 m</text><text x="165" y="110">sin θ = 6 ÷ 6.5</text><text x="165" y="130" class="a" font-weight="700">θ = 67.4°</text></g>
+</svg><figcaption>The ladder is the hypotenuse. The wall is opposite the angle θ.</figcaption></figure><figure><svg viewBox="0 0 320 170" role="img" aria-label="Squares on the sides of a 3-4-5 right triangle">
+<path d="M100 110 L148 110 L100 74 Z" class="ln" style="fill:none"/><rect x="100" y="110" width="48" height="48" class="fb"/><rect x="64" y="74" width="36" height="36" class="ft"/><path d="M100 74 L148 110 L184 62 L136 26 Z" style="fill:var(--accent);fill-opacity:.35;stroke:var(--ink)"/>
+<g font-size="12"><text x="118" y="139">16</text><text x="77" y="96">9</text><text x="136" y="72">25</text><text x="205" y="110" class="a">9 + 16 = 25</text></g>
+</svg><figcaption>The two small squares together fill the big one.</figcaption></figure><figure><svg viewBox="0 0 320 140" role="img" aria-label="Right triangle labelled opposite adjacent hypotenuse">
+<path d="M40 120 L260 120 L260 30 Z" class="fb"/><rect x="250" y="110" width="10" height="10" class="ln" style="fill:none"/>
+<path d="M75 120 A35 35 0 0 0 72 107" class="ln"/><text x="80" y="114" font-size="12">θ</text>
+<g font-size="13" font-weight="700"><text x="130" y="65">H</text><text x="268" y="80">O</text><text x="145" y="136">A</text></g>
+<text x="20" y="20" font-size="11" class="a">S = O/H   C = A/H   T = O/A</text>
+</svg><figcaption>Label from the angle θ: Opposite, Adjacent, Hypotenuse.</figcaption></figure></div></section>
+<section class="tp-sec" id="examples"><h2>Worked examples <small>3</small></h2><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">The two shorter sides of a right-angled triangle are 6 cm and 8 cm. Work out the hypotenuse.</p><ol class="steps"><li>6² + 8² = 36 + 64 = 100</li><li>√100</li></ol><p class="ansx">Answer: <mark>10 cm</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">In a right-angled triangle the opposite side is 5 cm and the hypotenuse is 13 cm. Work out the angle.</p><ol class="steps"><li>O and H → sin</li><li>θ = sin⁻¹(5 ÷ 13) = 22.6…</li></ol><p class="ansx">Answer: <mark>22.6°</mark></p></div><div class="ex"><h3>Example 3 <span class="lvl l3">Exam-style</span> <span class="lvl">[4 marks]</span></h3><p class="qx">A ladder 6.5 m long leans against a vertical wall. The top of the ladder is 6 m above the ground. (a) How far is the foot of the ladder from the wall? (b) Work out the angle between the ladder and the ground.</p><ol class="steps"><li>(a) d² = 6.5² − 6² = 42.25 − 36 = 6.25, so d = √6.25</li><li>(b) Opposite = 6, hypotenuse = 6.5, so use sin</li><li>sin θ = 6 ÷ 6.5 = 0.923…  →  θ = sin⁻¹(0.923…) = 67.38…°</li></ol><p class="ansx">Answer: <mark>(a) 2.5 m  (b) 67.4°</mark></p></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>6 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">The hypotenuse is 13 cm and another side is 12 cm. Work out the third side.</p><details><summary>Show answer</summary><ol><li>13² − 12² = 169 − 144 = 25</li></ol><p class="pa">Answer: <mark>5 cm</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">You know the opposite and adjacent sides. Which ratio do you use?</p><details><summary>Show answer</summary><ol><li>O and A → TOA</li></ol><p class="pa">Answer: <mark>tan</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l2">Standard</span></div><p class="qx">The hypotenuse is 10 cm and the angle is 35°. Work out the opposite side to 2 d.p.</p><details><summary>Show answer</summary><ol><li>O = 10 × sin 35° = 5.735…</li></ol><p class="pa">Answer: <mark>5.74 cm</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">The adjacent side is 7 cm and the hypotenuse is 9 cm. Work out the angle to 1 d.p.</p><details><summary>Show answer</summary><ol><li>cos⁻¹(7 ÷ 9) = 38.94…</li></ol><p class="pa">Answer: <mark>38.9°</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l3">Exam-style</span></div><p class="qx">Work out the distance between (1, 2) and (7, 10).</p><details><summary>Show answer</summary><ol><li>Across 6, up 8</li><li>√(36 + 64)</li></ol><p class="pa">Answer: <mark>10 units</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l3">Exam-style</span></div><p class="qx">A cuboid measures 3 cm by 4 cm by 12 cm. Work out the length of the longest diagonal.</p><details><summary>Show answer</summary><ol><li>√(3² + 4² + 12²) = √(9 + 16 + 144) = √169</li></ol><p class="pa">Answer: <mark>13 cm</mark></p></details></div></div></section>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://thirdspacelearning.com/gcse-maths/geometry-and-measure/sohcahtoa/" rel="noopener" target="_blank">Third Space Learning: SOHCAHTOA</a></li><li><a href="https://thirdspacelearning.com/gcse-maths/geometry-and-measure/pythagoras-theorem/" rel="noopener" target="_blank">Third Space Learning: Pythagoras&#x27; theorem</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="polygons.html">← Angles and polygons</a><a href="proportion.html" style="text-align:right">Direct and inverse proportion →</a></nav>
+</div>
+</body>
+</html>
