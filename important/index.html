@@ -178,7 +178,7 @@ pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius
 .keyfacts{background:var(--accent-soft);border:1px solid var(--rule);border-radius:8px;padding:12px 16px}
 .keyfacts ul{margin:.3em 0;padding-left:1.2rem;line-height:1.8}
 .part{border-top:2px solid var(--ink);padding-top:10px;margin-top:34px}
-.part>h2{font-size:1.45rem;margin:0 0 4px}
+.part>h2{display:block;font-size:1.45rem;margin:0 0 4px}
 .part>h2 .pn{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;margin-bottom:2px}
 .part h3.sub{font-size:1.05rem;margin:18px 0 8px}
 .donebox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:14px 16px;margin:30px 0}
@@ -195,6 +195,13 @@ pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius
 .testbox textarea{width:100%;min-height:15rem;font:400 .85rem/1.5 var(--f-mono);padding:10px;border:1px solid var(--rule);border-radius:6px;box-sizing:border-box;background:#fff;color:#141a24}
 .testbox .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
 .ilprog{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+
+.qcheck{margin-top:14px}
+.qcheck h3{font-size:1rem;margin:0 0 8px}
+.tips{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--blue,#2b6cb0);border-radius:8px;padding:12px 16px}
+.tips ul{margin:.3em 0;padding-left:1.2rem;line-height:1.65}
+.way h4{margin:12px 0 4px;font-size:.95rem}
+.way .method{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin:8px 0}
 </style>
 </head>
 <body>
@@ -213,7 +220,7 @@ window.ilDone={load:load,save:save};
 <p style="max-width:42rem;line-height:1.6">The topics you are learning right now, in depth. Each page splits the topic into parts, with a full explanation, diagrams and worked examples for every part, then a set of practice questions from warm-up to exam-style. There are no videos here.</p>
 <p style="max-width:42rem;line-height:1.6"><b>How to use it:</b> work through a topic, try all the practice questions, then tick it off. When you have ticked some topics, copy the test request at the bottom and paste it into Claude to get a short test.</p>
 <p class="ilprog" id="prog"></p>
-<div class="ilgrid"><label class="ilcard" data-id="negative-indices"><input type="checkbox" data-id="negative-indices" aria-label="Done: Negative indices"><span><a href="negative-indices.html">1. Negative indices</a><p>What a negative power means, negative powers of fractions and decimals, index laws with negatives, and solving equations.</p></span></label><label class="ilcard" data-id="fractional-indices"><input type="checkbox" data-id="fractional-indices" aria-label="Done: Fractional indices"><span><a href="fractional-indices.html">2. Fractional indices</a><p>Powers like ½ and ⅔: roots, root-then-power, negative fractional powers, algebra and equations.</p></span></label><label class="ilcard" data-id="surds-brackets"><input type="checkbox" data-id="surds-brackets" aria-label="Done: Expanding brackets with surds"><span><a href="surds-brackets.html">3. Expanding brackets with surds</a><p>Surd rules, single and double brackets, squaring, the difference of two squares, and rationalising.</p></span></label><label class="ilcard" data-id="quadratic-sequences"><input type="checkbox" data-id="quadratic-sequences" aria-label="Done: Quadratic sequences: nth term and proof"><span><a href="quadratic-sequences.html">4. Quadratic sequences: nth term and proof</a><p>Spotting quadratic sequences, finding an² + bn + c, using the nth term, and algebraic proof.</p></span></label></div>
+<div class="ilgrid"><label class="ilcard" data-id="negative-indices"><input type="checkbox" data-id="negative-indices" aria-label="Done: Negative indices"><span><a href="negative-indices.html">1. Negative indices</a><p>What a negative power means, fractions and decimals, calculating, index laws in algebra, the form axⁿ, standard form and solving equations.</p></span></label><label class="ilcard" data-id="fractional-indices"><input type="checkbox" data-id="fractional-indices" aria-label="Done: Fractional indices"><span><a href="fractional-indices.html">2. Fractional indices</a><p>Roots as powers, root-then-power, fractions and decimals as bases, negative fractional powers, algebra, surds and equations.</p></span></label><label class="ilcard" data-id="surds-brackets"><input type="checkbox" data-id="surds-brackets" aria-label="Done: Expanding brackets with surds"><span><a href="surds-brackets.html">3. Expanding brackets with surds</a><p>Surd rules, simplifying, adding, single and double brackets, squaring, the difference of two squares, rationalising and exam problems.</p></span></label><label class="ilcard" data-id="quadratic-sequences"><input type="checkbox" data-id="quadratic-sequences" aria-label="Done: Quadratic sequences: nth term and proof"><span><a href="quadratic-sequences.html">4. Quadratic sequences: nth term and proof</a><p>Spotting them, two methods for an² + bn + c, sequences from patterns, using the nth term, and algebraic proof.</p></span></label></div>
 <section class="testbox" id="test"><h2 style="margin:0 0 6px;font-size:1.3rem">Get a test on what you have ticked off</h2>
 <p class="ilprog" id="testmsg">Tick at least one topic to build your test request.</p>
 <textarea id="req" readonly aria-label="Test request to paste into Claude"></textarea>
