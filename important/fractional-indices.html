@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fractional indices · Important learning · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.92em;line-height:1.1;margin:0 2px}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 3px}
+.fr>span:last-child{padding:0 3px}
+.keyfacts{background:var(--accent-soft);border:1px solid var(--rule);border-radius:8px;padding:12px 16px}
+.keyfacts ul{margin:.3em 0;padding-left:1.2rem;line-height:1.8}
+.part{border-top:2px solid var(--ink);padding-top:10px;margin-top:34px}
+.part>h2{font-size:1.45rem;margin:0 0 4px}
+.part>h2 .pn{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;margin-bottom:2px}
+.part h3.sub{font-size:1.05rem;margin:18px 0 8px}
+.donebox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:14px 16px;margin:30px 0}
+.donebox button,.ilbtn{font:600 .9rem var(--f-mono);padding:9px 14px;border-radius:8px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.donebox button[aria-pressed="true"]{background:#1d6b3c;border-color:#1d6b3c;color:#fff}
+.ilbtn.primary{background:var(--ink);color:var(--card)}
+.ilcard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px}
+.ilcard input{width:22px;height:22px;margin-top:2px;accent-color:#1d6b3c;flex:none}
+.ilcard a{color:var(--ink);font-weight:700;font-size:1.05rem}
+.ilcard p{margin:4px 0 0;color:var(--muted);font-size:.9rem;line-height:1.45}
+.ilcard.done{border-color:#1d6b3c;background:#eef8f1}
+.ilgrid{display:grid;gap:10px}
+.testbox{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:16px;margin-top:26px}
+.testbox textarea{width:100%;min-height:15rem;font:400 .85rem/1.5 var(--f-mono);padding:10px;border:1px solid var(--rule);border-radius:6px;box-sizing:border-box;background:#fff;color:#141a24}
+.testbox .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.ilprog{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li><li><a href="../important/" aria-current="page">Important learning</a></li></ul></nav>
+<script>
+(function(){
+var KEY='il-done-v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return {}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+window.ilDone={load:load,save:save};
+})();
+</script><div class="wrap">
+<div class="crumb"><a href="index.html">← All Important learning topics</a><span>Topic 2 of 4</span></div>
+<h1 class="tp-h1">Fractional indices</h1>
+<p class="tp-meta">In-depth topic · 4 parts · 8 diagrams · 10 worked examples · 13 practice questions</p>
+<nav class="chips" aria-label="On this page"><a href="#keyfacts">Key facts</a><a href="#part1">Part 1</a><a href="#part2">Part 2</a><a href="#part3">Part 3</a><a href="#part4">Part 4</a><a href="#watch">Watch out</a><a href="#practice">Practice</a><a href="#done">Tick off</a></nav>
+<section class="tp-sec" id="keyfacts"><div class="keyfacts"><h2 style="margin:0 0 4px;font-size:1.2rem">Key facts</h2><ul><li>a<sup>1/2</sup> = √a, a<sup>1/3</sup> = ∛a, a<sup>1/n</sup> = the nth root of a</li><li>a<sup>m/n</sup> = (ⁿ√a)<sup>m</sup>: the <b>bottom</b> is the <b>root</b>, the <b>top</b> is the <b>power</b></li><li>Do the root first; the numbers stay small</li><li>a<sup>−m/n</sup> = <span class="fr"><span>1</span><span>a<sup>m/n</sup></span></span>: negative → flip, then root, then power</li><li>To solve 8<sup>x</sup> = 4, write both as powers of 2: 2<sup>3x</sup> = 2<sup>2</sup>, so x = ⅔</li></ul></div></section><section class="part tp-sec" id="part1"><h2><span class="pn">Part 1</span>Unit fractions are roots</h2>
+<div class="way"><p>What could 9<sup>½</sup> mean? Use the index laws: 9<sup>½</sup> × 9<sup>½</sup> = 9<sup>½ + ½</sup> = 9<sup>1</sup> = 9.</p>
+<p>So 9<sup>½</sup> is a number that multiplies by itself to make 9. That is the <b>square root</b>: 9<sup>½</sup> = 3.</p>
+<p>In the same way, 8<sup>⅓</sup> × 8<sup>⅓</sup> × 8<sup>⅓</sup> = 8, so 8<sup>⅓</sup> is the <b>cube root</b> of 8, which is 2.</p>
+<p style="text-align:center;font-size:1.1rem"><b>a<sup>1/n</sup> = the nth root of a</b></p>
+<p>Examples: 49<sup>½</sup> = 7, 125<sup>⅓</sup> = 5, 81<sup>¼</sup> = 3 (because 3 × 3 × 3 × 3 = 81), 32<sup>1/5</sup> = 2.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 110" role="img" aria-label="Nine to the half times nine to the half equals nine, so nine to the half is three">
+<g font-size="15" text-anchor="middle"><text x="60" y="40">9<tspan dy="-7" font-size="10">½</tspan></text><text x="95" y="40">×</text><text x="130" y="40">9<tspan dy="-7" font-size="10">½</tspan></text><text x="165" y="40">=</text><text x="205" y="40">9<tspan dy="-7" font-size="10">1</tspan></text><text x="245" y="40">=</text><text x="280" y="40">9</text></g>
+<g font-size="13" text-anchor="middle"><text x="160" y="80" class="a">so 9<tspan dy="-6" font-size="9">½</tspan><tspan dy="6"> is the number that squares to 9 → 3</tspan></text></g>
+<text x="160" y="102" font-size="10" text-anchor="middle" class="m">add the powers: ½ + ½ = 1</text></svg><figcaption>The index laws force a power of ½ to be a square root.</figcaption></figure><figure><svg viewBox="0 0 320 124" role="img" aria-label="Table of powers"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">n</text><text x="50.123683005038934" y="18" font-weight="700">n²</text><text x="105.42006413192854" y="18" font-weight="700">n³</text><text x="173.8891433806688" y="18" font-weight="700">n⁴</text><text x="242.35822262940906" y="18" font-weight="700">n⁵</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">2</text><text x="50.123683005038934" y="42">4</text><text x="105.42006413192854" y="42">8</text><text x="173.8891433806688" y="42">16</text><text x="242.35822262940906" y="42">32</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">3</text><text x="50.123683005038934" y="66">9</text><text x="105.42006413192854" y="66">27</text><text x="173.8891433806688" y="66">81</text><text x="242.35822262940906" y="66">243</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">4</text><text x="50.123683005038934" y="90">16</text><text x="105.42006413192854" y="90">64</text><text x="173.8891433806688" y="90">256</text><text x="242.35822262940906" y="90">1024</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">5</text><text x="50.123683005038934" y="114">25</text><text x="105.42006413192854" y="114">125</text><text x="173.8891433806688" y="114">625</text><text x="242.35822262940906" y="114">3125</text><rect x="2" y="2" width="316.0" height="120" class="ln" style="fill:none"/><path d="M44.123683005038934 2 V122" class="lm"/><path d="M99.42006413192854 2 V122" class="lm"/><path d="M167.8891433806688 2 V122" class="lm"/><path d="M236.35822262940906 2 V122" class="lm"/></g></svg><figcaption>Know these powers: they are the roots you will need.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">Work out 49<sup>½</sup>.</p><ol class="steps"><li>Power ½ = square root</li><li>√49</li></ol><p class="ansx">Answer: <mark>7</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">Work out 81<sup>¼</sup>.</p><ol class="steps"><li>Power ¼ = fourth root</li><li>3 × 3 × 3 × 3 = 81</li></ol><p class="ansx">Answer: <mark>3</mark></p></div></section><section class="part tp-sec" id="part2"><h2><span class="pn">Part 2</span>Other fractions: root, then power</h2>
+<div class="way"><p>For a power like <span class="fr"><span>2</span><span>3</span></span>, split it into two jobs. <span class="fr"><span>2</span><span>3</span></span> = <span class="fr"><span>1</span><span>3</span></span> × 2, so:</p>
+<p style="text-align:center">8<sup>2/3</sup> = (8<sup>1/3</sup>)<sup>2</sup> = 2<sup>2</sup> = 4</p>
+<ul><li>The <b>denominator</b> (bottom) tells you the <b>root</b>.</li><li>The <b>numerator</b> (top) tells you the <b>power</b>.</li></ul>
+<p>Memory trick: the root is at the <b>roots</b> of the fraction, at the bottom, like the roots of a tree.</p>
+<p>Always take the root first, so the numbers stay small: 27<sup>4/3</sup> = (∛27)<sup>4</sup> = 3<sup>4</sup> = 81. (Doing the power first, you would need the cube root of 531 441!)</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 130" role="img" aria-label="In the fraction m over n, the top is the power and the bottom is the root, drawn as a tree">
+<path d="M70 70 C40 70 30 30 70 20 C110 30 100 70 70 70 Z" class="ft"/><path d="M70 70 V100" class="ln" style="stroke-width:5"/>
+<path d="M70 100 L50 118 M70 100 L70 120 M70 100 L90 118" class="la" style="stroke-width:2"/>
+<g font-size="14" text-anchor="middle"><text x="70" y="50">power</text><text x="70" y="130" font-size="11" class="a">root (roots!)</text></g>
+<g font-size="20" text-anchor="middle"><text x="210" y="48">a</text><text x="240" y="34" font-size="14">m</text><path d="M230 40 H250" class="ln"/><text x="240" y="56" font-size="14" class="a">n</text></g>
+<g font-size="11"><text x="165" y="90">top m → power</text><text x="165" y="108" class="a">bottom n → root (do first)</text></g></svg><figcaption>The top is up in the tree (power); the bottom is in the roots (root).</figcaption></figure><figure><svg viewBox="0 0 320 80" role="img" aria-label="Fractional power method"><g font-size="10" text-anchor="middle"><rect x="2.0" y="14" width="97.3" height="48" rx="5" class="fb"/><text x="50.7" y="35">Find the</text><text x="50.7" y="50">root (bottom)</text><path d="M100.3 38 h9" class="ln"/><path d="M107.3 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="111.3" y="14" width="97.3" height="48" rx="5" class="fb"/><text x="160.0" y="35">Raise to the</text><text x="160.0" y="50">power (top)</text><path d="M209.7 38 h9" class="ln"/><path d="M216.7 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="220.7" y="14" width="97.3" height="48" rx="5" class="ft"/><text x="269.3" y="42">Simplify</text></g></svg><figcaption>Root first, then power.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 3 <span class="lvl l1">Warm-up</span></h3><p class="qx">Work out 8<sup>2/3</sup>.</p><ol class="steps"><li>Cube root of 8 = 2</li><li>2² = 4</li></ol><p class="ansx">Answer: <mark>4</mark></p></div><div class="ex"><h3>Example 4 <span class="lvl l2">Standard</span></h3><p class="qx">Work out 27<sup>4/3</sup>.</p><ol class="steps"><li>Cube root of 27 = 3</li><li>3⁴ = 81</li></ol><p class="ansx">Answer: <mark>81</mark></p></div><div class="ex"><h3>Example 5 <span class="lvl l2">Standard</span></h3><p class="qx">Work out 32<sup>3/5</sup>.</p><ol class="steps"><li>Fifth root of 32 = 2</li><li>2³ = 8</li></ol><p class="ansx">Answer: <mark>8</mark></p></div></section><section class="part tp-sec" id="part3"><h2><span class="pn">Part 3</span>Negative fractional powers</h2>
+<div class="way"><p>Now combine the two topics. A negative fractional power has three jobs. Use the order <b>F-R-P</b>:</p>
+<ol><li><b>F</b>lip (because of the minus sign).</li><li><b>R</b>oot (the denominator).</li><li><b>P</b>ower (the numerator).</li></ol>
+<p>Example: 16<sup>−3/4</sup> → flip: (<span class="fr"><span>1</span><span>16</span></span>)<sup>3/4</sup> → fourth root: (<span class="fr"><span>1</span><span>2</span></span>)<sup>3</sup> → cube: <span class="fr"><span>1</span><span>8</span></span>.</p>
+<p>With a fraction: (<span class="fr"><span>27</span><span>8</span></span>)<sup>−2/3</sup> → flip: (<span class="fr"><span>8</span><span>27</span></span>)<sup>2/3</sup> → cube roots: (<span class="fr"><span>2</span><span>3</span></span>)<sup>2</sup> → square: <span class="fr"><span>4</span><span>9</span></span>.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 80" role="img" aria-label="Flip, root, power"><g font-size="10" text-anchor="middle"><rect x="2.0" y="14" width="97.3" height="48" rx="5" class="fb"/><text x="50.7" y="35">F</text><text x="50.7" y="50">flip</text><path d="M100.3 38 h9" class="ln"/><path d="M107.3 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="111.3" y="14" width="97.3" height="48" rx="5" class="fb"/><text x="160.0" y="35">R</text><text x="160.0" y="50">root (bottom)</text><path d="M209.7 38 h9" class="ln"/><path d="M216.7 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="220.7" y="14" width="97.3" height="48" rx="5" class="ft"/><text x="269.3" y="35">P</text><text x="269.3" y="50">power (top)</text></g></svg><figcaption>F-R-P: flip, root, power.</figcaption></figure><figure><svg viewBox="0 0 320 100" role="img" aria-label="16 to the minus three quarters: flip to one sixteenth, fourth root gives one half, cube gives one eighth">
+<g font-size="13" text-anchor="middle"><text x="32" y="40">16<tspan dy="-7" font-size="9">−3/4</tspan></text><text x="118" y="40">(1/16)<tspan dy="-7" font-size="9">3/4</tspan></text><text x="208" y="40">(1/2)<tspan dy="-7" font-size="9">3</tspan></text><text x="290" y="40" font-weight="700" class="a">1/8</text>
+<text x="72" y="40" class="a">→</text><text x="163" y="40" class="a">→</text><text x="250" y="40" class="a">→</text></g>
+<g font-size="10" text-anchor="middle" class="m"><text x="72" y="64">flip</text><text x="163" y="64">4th root</text><text x="250" y="64">cube</text></g></svg><figcaption>A worked example of F-R-P.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 6 <span class="lvl l2">Standard</span></h3><p class="qx">Work out 16<sup>−3/4</sup>.</p><ol class="steps"><li>Flip: (1/16)<sup>3/4</sup></li><li>Fourth root: (½)³</li><li>Cube: ⅛</li></ol><p class="ansx">Answer: <mark><span class="fr"><span>1</span><span>8</span></span></mark></p></div><div class="ex"><h3>Example 7 <span class="lvl l3">Exam-style</span></h3><p class="qx">Work out (27/8)<sup>−2/3</sup>.</p><ol class="steps"><li>Flip: (8/27)<sup>2/3</sup></li><li>Cube roots: (2/3)²</li><li>Square: 4/9</li></ol><p class="ansx">Answer: <mark><span class="fr"><span>4</span><span>9</span></span></mark></p></div></section><section class="part tp-sec" id="part4"><h2><span class="pn">Part 4</span>Fractional powers in algebra and equations</h2>
+<div class="way"><p>Roots can be written as powers, so you can use the index laws on them:</p>
+<ul><li>√x = x<sup>½</sup> &nbsp; ∛x = x<sup>⅓</sup> &nbsp; ∛(x<sup>2</sup>) = x<sup>2/3</sup></li><li><span class="fr"><span>1</span><span>√x</span></span> = x<sup>−½</sup> &nbsp; <span class="fr"><span>√x</span><span>x<sup>2</sup></span></span> = x<sup>½ − 2</sup> = x<sup>−3/2</sup></li></ul>
+<p>A power outside a bracket applies to the number <b>and</b> the letter: (16x<sup>8</sup>)<sup>3/4</sup> = 16<sup>3/4</sup> × x<sup>8 × 3/4</sup> = 8x<sup>6</sup>.</p>
+<p><b>Equations</b>: write both sides with the same base. 8<sup>x</sup> = 4 → (2<sup>3</sup>)<sup>x</sup> = 2<sup>2</sup> → 3x = 2 → x = ⅔. And 9<sup>x</sup> = 27 → 3<sup>2x</sup> = 3<sup>3</sup> → x = <span class="fr"><span>3</span><span>2</span></span>.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 148" role="img" aria-label="Roots written as powers"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Root form</text><text x="159.24659464537342" y="18" font-weight="700">Power form</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">√x</text><text x="159.24659464537342" y="42">x<tspan dy="-5" font-size="75%">1/2</tspan><tspan dy="5"> </tspan></text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">∛x</text><text x="159.24659464537342" y="66">x<tspan dy="-5" font-size="75%">1/3</tspan><tspan dy="5"> </tspan></text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">∛(x²)</text><text x="159.24659464537342" y="90">x<tspan dy="-5" font-size="75%">2/3</tspan><tspan dy="5"> </tspan></text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">1 / √x</text><text x="159.24659464537342" y="114">x<tspan dy="-5" font-size="75%">−1/2</tspan><tspan dy="5"> </tspan></text><path d="M2 122 H318.0" class="lm"/><text x="8" y="138">x√x</text><text x="159.24659464537342" y="138">x<tspan dy="-5" font-size="75%">3/2</tspan><tspan dy="5"> </tspan></text><rect x="2" y="2" width="316.0" height="144" class="ln" style="fill:none"/><path d="M153.24659464537342 2 V146" class="lm"/></g></svg><figcaption>Write roots as powers before using the index laws.</figcaption></figure><figure><svg viewBox="0 0 320 172" role="img" aria-label="Numbers as powers of 2"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Number</text><text x="135.01293103448276" y="18" font-weight="700">Power of 2</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">2</text><text x="135.01293103448276" y="42">2¹</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">4</text><text x="135.01293103448276" y="66">2²</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">8</text><text x="135.01293103448276" y="90">2³</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">16</text><text x="135.01293103448276" y="114">2⁴</text><path d="M2 122 H318.0" class="lm"/><text x="8" y="138">√2</text><text x="135.01293103448276" y="138">2<tspan dy="-5" font-size="75%">1/2</tspan><tspan dy="5"> </tspan></text><path d="M2 146 H318.0" class="lm"/><text x="8" y="162">1/√8</text><text x="135.01293103448276" y="162">2<tspan dy="-5" font-size="75%">−3/2</tspan><tspan dy="5"> </tspan></text><rect x="2" y="2" width="316.0" height="168" class="ln" style="fill:none"/><path d="M129.01293103448276 2 V170" class="lm"/></g></svg><figcaption>Changing everything to the same base is the key to the equations.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 8 <span class="lvl l2">Standard</span></h3><p class="qx">Simplify (16x<sup>8</sup>)<sup>3/4</sup>.</p><ol class="steps"><li>16<sup>3/4</sup> = (⁴√16)³ = 2³ = 8</li><li>x<sup>8 × 3/4</sup> = x⁶</li></ol><p class="ansx">Answer: <mark>8x<sup>6</sup></mark></p></div><div class="ex"><h3>Example 9 <span class="lvl l3">Exam-style</span></h3><p class="qx">Solve 8<sup>x</sup> = 4.</p><ol class="steps"><li>8 = 2³ and 4 = 2²</li><li>2<sup>3x</sup> = 2²</li><li>3x = 2</li></ol><p class="ansx">Answer: <mark>x = ⅔</mark></p></div><div class="ex"><h3>Example 10 <span class="lvl l3">Exam-style</span></h3><p class="qx">Write √x / x<sup>2</sup> as a single power of x.</p><ol class="steps"><li>√x = x<sup>½</sup></li><li>½ − 2 = −3/2</li></ol><p class="ansx">Answer: <mark>x<sup>−3/2</sup></mark></p></div></section><section class="tp-sec" id="watch"><div class="way warn"><h3>Watch out for</h3><ul><li>Halving instead of square-rooting: 16<sup>½</sup> = 4, not 8.</li><li>Swapping root and power: in 8<sup>2/3</sup> the 3 is the root and the 2 is the power.</li><li>Forgetting to flip for a negative power: 25<sup>−½</sup> = ⅕, not −5.</li><li>Applying the power only to the letter: (8x³)<sup>⅔</sup> = 4x², not 8x².</li><li>Not changing to the same base in equations (e.g. leaving 8 and 4 instead of 2³ and 2²).</li></ul></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>13 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one on paper first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">Work out 64<sup>½</sup>.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>8</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Work out 64<sup>⅓</sup>.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>4</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l1">Warm-up</span></div><p class="qx">Work out 1000<sup>⅓</sup>.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>10</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">Work out 25<sup>3/2</sup>.</p><details><summary>Show answer</summary><ol><li>√25 = 5</li><li>5³</li></ol><p class="pa">Answer: <mark>125</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l2">Standard</span></div><p class="qx">Work out 16<sup>3/4</sup>.</p><details><summary>Show answer</summary><ol><li>⁴√16 = 2</li><li>2³</li></ol><p class="pa">Answer: <mark>8</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l2">Standard</span></div><p class="qx">Work out 36<sup>−½</sup>.</p><details><summary>Show answer</summary><ol><li>Flip and square root</li></ol><p class="pa">Answer: <mark><span class="fr"><span>1</span><span>6</span></span></mark></p></details></div><div class="pq"><div class="pqh"><b>Q7</b><span class="lvl l2">Standard</span></div><p class="qx">Write ∛(x<sup>2</sup>) as a power of x.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>x<sup>2/3</sup></mark></p></details></div><div class="pq"><div class="pqh"><b>Q8</b><span class="lvl l2">Standard</span></div><p class="qx">Write 1/√x as a power of x.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>x<sup>−½</sup></mark></p></details></div><div class="pq"><div class="pqh"><b>Q9</b><span class="lvl l3">Exam-style</span></div><p class="qx">Work out (9/16)<sup>−3/2</sup>.</p><details><summary>Show answer</summary><ol><li>Flip: (16/9)<sup>3/2</sup></li><li>Square root: (4/3)³</li></ol><p class="pa">Answer: <mark><span class="fr"><span>64</span><span>27</span></span></mark></p></details></div><div class="pq"><div class="pqh"><b>Q10</b><span class="lvl l3">Exam-style</span></div><p class="qx">Simplify (8x<sup>6</sup>)<sup>2/3</sup>.</p><details><summary>Show answer</summary><ol><li>8<sup>2/3</sup> = 4</li><li>x<sup>6 × 2/3</sup> = x⁴</li></ol><p class="pa">Answer: <mark>4x<sup>4</sup></mark></p></details></div><div class="pq"><div class="pqh"><b>Q11</b><span class="lvl l3">Exam-style</span></div><p class="qx">Solve 27<sup>x</sup> = 9.</p><details><summary>Show answer</summary><ol><li>3<sup>3x</sup> = 3²</li><li>3x = 2</li></ol><p class="pa">Answer: <mark>x = ⅔</mark></p></details></div><div class="pq"><div class="pqh"><b>Q12</b><span class="lvl l3">Exam-style</span></div><p class="qx">Solve 4<sup>x</sup> = 1/32.</p><details><summary>Show answer</summary><ol><li>4<sup>x</sup> = 2<sup>2x</sup>; 1/32 = 2<sup>−5</sup></li><li>2x = −5</li></ol><p class="pa">Answer: <mark>x = −5/2</mark></p></details></div><div class="pq"><div class="pqh"><b>Q13</b><span class="lvl l3">Exam-style</span></div><p class="qx">Simplify x<sup>½</sup> × x<sup>3/2</sup>.</p><details><summary>Show answer</summary><ol><li>½ + 3/2 = 2</li></ol><p class="pa">Answer: <mark>x<sup>2</sup></mark></p></details></div></div></section>
+<section class="tp-sec" id="done"><div class="donebox"><button type="button" id="donebtn" aria-pressed="false">Mark this topic as done</button>
+<span class="ilprog" id="donemsg">When you are confident with every part, tick it off. Then get your test from the <a href="index.html#test">Important learning page</a>.</span></div></section>
+<script>(function(){var id="fractional-indices",b=document.getElementById('donebtn');
+function show(){var d=ilDone.load(),on=!!d[id];b.setAttribute('aria-pressed',on);b.textContent=on?'✓ Done – click to untick':'Mark this topic as done';}
+b.addEventListener('click',function(){var d=ilDone.load();if(d[id])delete d[id];else d[id]=1;ilDone.save(d);show();});show();})();</script>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://myedspace.co.uk/myresources/gcse/maths/revision-notes/negative-and-fractional-indices" rel="noopener" target="_blank">MyEdSpace: negative and fractional indices</a></li><li><a href="https://tutorful.co.uk/hub/gcse/maths/learn/understanding-and-using-fractional-indices" rel="noopener" target="_blank">Tutorful: understanding fractional indices</a></li><li><a href="https://blog.flyingcoloursmaths.co.uk/negative-fractional-powers-work-way/" rel="noopener" target="_blank">Flying Colours Maths: why fractional powers are roots</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="negative-indices.html">← Negative indices</a><a href="surds-brackets.html" style="text-align:right">Expanding brackets with surds →</a></nav>
+</div>
+</body>
+</html>

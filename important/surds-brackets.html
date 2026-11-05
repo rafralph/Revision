@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Expanding brackets with surds · Important learning · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.92em;line-height:1.1;margin:0 2px}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 3px}
+.fr>span:last-child{padding:0 3px}
+.keyfacts{background:var(--accent-soft);border:1px solid var(--rule);border-radius:8px;padding:12px 16px}
+.keyfacts ul{margin:.3em 0;padding-left:1.2rem;line-height:1.8}
+.part{border-top:2px solid var(--ink);padding-top:10px;margin-top:34px}
+.part>h2{font-size:1.45rem;margin:0 0 4px}
+.part>h2 .pn{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;margin-bottom:2px}
+.part h3.sub{font-size:1.05rem;margin:18px 0 8px}
+.donebox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:14px 16px;margin:30px 0}
+.donebox button,.ilbtn{font:600 .9rem var(--f-mono);padding:9px 14px;border-radius:8px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.donebox button[aria-pressed="true"]{background:#1d6b3c;border-color:#1d6b3c;color:#fff}
+.ilbtn.primary{background:var(--ink);color:var(--card)}
+.ilcard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px}
+.ilcard input{width:22px;height:22px;margin-top:2px;accent-color:#1d6b3c;flex:none}
+.ilcard a{color:var(--ink);font-weight:700;font-size:1.05rem}
+.ilcard p{margin:4px 0 0;color:var(--muted);font-size:.9rem;line-height:1.45}
+.ilcard.done{border-color:#1d6b3c;background:#eef8f1}
+.ilgrid{display:grid;gap:10px}
+.testbox{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:16px;margin-top:26px}
+.testbox textarea{width:100%;min-height:15rem;font:400 .85rem/1.5 var(--f-mono);padding:10px;border:1px solid var(--rule);border-radius:6px;box-sizing:border-box;background:#fff;color:#141a24}
+.testbox .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.ilprog{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li><li><a href="../important/" aria-current="page">Important learning</a></li></ul></nav>
+<script>
+(function(){
+var KEY='il-done-v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return {}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+window.ilDone={load:load,save:save};
+})();
+</script><div class="wrap">
+<div class="crumb"><a href="index.html">← All Important learning topics</a><span>Topic 3 of 4</span></div>
+<h1 class="tp-h1">Expanding brackets with surds</h1>
+<p class="tp-meta">In-depth topic · 4 parts · 7 diagrams · 10 worked examples · 12 practice questions</p>
+<nav class="chips" aria-label="On this page"><a href="#keyfacts">Key facts</a><a href="#part1">Part 1</a><a href="#part2">Part 2</a><a href="#part3">Part 3</a><a href="#part4">Part 4</a><a href="#watch">Watch out</a><a href="#practice">Practice</a><a href="#done">Tick off</a></nav>
+<section class="tp-sec" id="keyfacts"><div class="keyfacts"><h2 style="margin:0 0 4px;font-size:1.2rem">Key facts</h2><ul><li>√a × √b = √(ab) and √a × √a = a</li><li>√(ab) = √a × √b: simplify by taking out the biggest square factor, e.g. √50 = 5√2</li><li>Only like surds add: 3√2 + 5√2 = 8√2, but √2 + √3 stays as it is</li><li>Expand surd brackets exactly like algebra: every term times every term</li><li>(a + √b)(a − √b) = a² − b: the surds cancel (difference of two squares)</li></ul></div></section><section class="part tp-sec" id="part1"><h2><span class="pn">Part 1</span>The surd rules you need</h2>
+<div class="way"><p>A <b>surd</b> is a root that is not a whole number, like √2 or √7. We leave it as a root because it is exact.</p>
+<ul><li><b>Multiply</b>: √a × √b = √(ab). So √3 × √12 = √36 = 6.</li><li><b>Square</b>: √a × √a = a. So √5 × √5 = 5. This is the most-used rule in this topic.</li><li><b>Simplify</b>: find the biggest <b>square</b> factor. √72 = √(36 × 2) = 6√2.</li><li><b>Add</b>: treat √2 like a letter x. 3√2 + 5√2 = 8√2 (like 3x + 5x). But √2 + √3 cannot be simplified.</li></ul>
+<p>Sometimes you must simplify before adding: √50 + √8 = 5√2 + 2√2 = 7√2.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 148" role="img" aria-label="Surd rules"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Rule</text><text x="150.35473340587595" y="18" font-weight="700">Example</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">√a × √b = √(ab)</text><text x="150.35473340587595" y="42">√2 × √8 = √16 = 4</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">√a × √a = a</text><text x="150.35473340587595" y="66">√7 × √7 = 7</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">√(a/b) = √a / √b</text><text x="150.35473340587595" y="90">√(9/4) = 3/2</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">Simplify</text><text x="150.35473340587595" y="114">√72 = √36 × √2 = 6√2</text><path d="M2 122 H318.0" class="lm"/><text x="8" y="138">Like surds add</text><text x="150.35473340587595" y="138">3√5 + 2√5 = 5√5</text><rect x="2" y="2" width="316.0" height="144" class="ln" style="fill:none"/><path d="M144.35473340587595 2 V146" class="lm"/></g></svg><figcaption>Learn these five rules.</figcaption></figure><figure><svg viewBox="0 0 320 80" role="img" aria-label="Simplifying root 72"><g font-size="10" text-anchor="middle"><rect x="2.0" y="14" width="70.0" height="48" rx="5" class="fb"/><text x="37.0" y="42">√72</text><path d="M73.0 38 h9" class="ln"/><path d="M80.0 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="84.0" y="14" width="70.0" height="48" rx="5" class="fb"/><text x="119.0" y="35">Biggest square</text><text x="119.0" y="50">factor: 36</text><path d="M155.0 38 h9" class="ln"/><path d="M162.0 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="166.0" y="14" width="70.0" height="48" rx="5" class="fb"/><text x="201.0" y="42">√36 × √2</text><path d="M237.0 38 h9" class="ln"/><path d="M244.0 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="248.0" y="14" width="70.0" height="48" rx="5" class="ft"/><text x="283.0" y="42">6√2</text></g></svg><figcaption>To simplify, find the biggest square factor (4, 9, 16, 25, 36, 49, 64, 81, 100...).</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">Work out √3 × √12.</p><ol class="steps"><li>√(3 × 12) = √36</li></ol><p class="ansx">Answer: <mark>6</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">Simplify √50 + √8.</p><ol class="steps"><li>√50 = √25 × √2 = 5√2</li><li>√8 = √4 × √2 = 2√2</li><li>5√2 + 2√2</li></ol><p class="ansx">Answer: <mark>7√2</mark></p></div></section><section class="part tp-sec" id="part2"><h2><span class="pn">Part 2</span>Single brackets</h2>
+<div class="way"><p>Multiply the term outside by <b>each</b> term inside, just like 3(x + 2) = 3x + 6.</p>
+<p>√5(3 + √5) = 3√5 + √5 × √5 = 3√5 + 5.</p>
+<p>Then <b>simplify</b> any surds: √2(√6 − √8) = √12 − √16 = 2√3 − 4.</p>
+<p>Write whole numbers first and surds after if the question asks for the form a + b√c.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 110" role="img" aria-label="Root 5 times bracket 3 plus root 5 gives 3 root 5 plus 5">
+<g font-size="16" text-anchor="middle"><text x="40" y="60">√5</text><text x="70" y="60">(</text><text x="95" y="60">3</text><text x="122" y="60">+</text><text x="152" y="60">√5</text><text x="178" y="60">)</text></g>
+<path d="M40 42 C55 10 85 10 95 42" class="la" style="fill:none"/><path d="M40 42 C70 0 130 0 150 42" class="lt" style="fill:none"/>
+<g font-size="15"><text x="200" y="45" class="a">3√5</text><text x="240" y="45">+</text><text x="258" y="45" class="t">5</text></g>
+<text x="200" y="92" font-size="10" class="m">√5 × √5 = 5</text></svg><figcaption>The outside term multiplies each term inside.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 3 <span class="lvl l1">Warm-up</span></h3><p class="qx">Expand √5(3 + √5).</p><ol class="steps"><li>√5 × 3 = 3√5</li><li>√5 × √5 = 5</li></ol><p class="ansx">Answer: <mark>5 + 3√5</mark></p></div><div class="ex"><h3>Example 4 <span class="lvl l2">Standard</span></h3><p class="qx">Expand and simplify √2(√6 − √8).</p><ol class="steps"><li>√2 × √6 = √12 = 2√3</li><li>√2 × √8 = √16 = 4</li></ol><p class="ansx">Answer: <mark>2√3 − 4</mark></p></div></section><section class="part tp-sec" id="part3"><h2><span class="pn">Part 3</span>Double brackets and squaring</h2>
+<div class="way"><p>Multiply <b>every term by every term</b> (four multiplications), then collect like terms. A grid helps.</p>
+<p>(3 + √2)(5 − √2) = 15 − 3√2 + 5√2 − 2 = <b>13 + 2√2</b>.</p>
+<p><b>Squaring</b>: write the bracket twice. (2 + √5)<sup>2</sup> = (2 + √5)(2 + √5) = 4 + 2√5 + 2√5 + 5 = <b>9 + 4√5</b>. It is <b>not</b> 4 + 5: you must include the two middle terms.</p>
+<p><b>Difference of two squares</b>: when the brackets differ only by a sign, the middle terms cancel and the surd disappears. (√7 + 2)(√7 − 2) = 7 − 2√7 + 2√7 − 4 = <b>3</b>.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 150" role="img" aria-label="Grid method for 3 plus root 2 times 5 minus root 2">
+<g font-size="14" text-anchor="middle">
+<rect x="80" y="40" width="90" height="40" class="fb"/><rect x="170" y="40" width="90" height="40" class="fb"/><rect x="80" y="80" width="90" height="40" class="fb"/><rect x="170" y="80" width="90" height="40" class="ft"/>
+<text x="125" y="30">5</text><text x="215" y="30">−√2</text><text x="55" y="65">3</text><text x="55" y="105">+√2</text>
+<text x="125" y="65">15</text><text x="215" y="65" class="a">−3√2</text><text x="125" y="105" class="a">+5√2</text><text x="215" y="105">−2</text></g>
+<text x="160" y="142" font-size="12" text-anchor="middle">15 − 2 = 13 and −3√2 + 5√2 = 2√2 → <tspan font-weight="700">13 + 2√2</tspan></text></svg><figcaption>The grid makes sure you do all four multiplications.</figcaption></figure><figure><svg viewBox="0 0 320 100" role="img" aria-label="Squaring and difference of two squares"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Brackets</text><text x="121.6611642050391" y="18" font-weight="700">Result</text><text x="179.1094700260643" y="18" font-weight="700">Why</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">(2 + √5)²</text><text x="121.6611642050391" y="42">9 + 4√5</text><text x="179.1094700260643" y="42">4 + 2√5 + 2√5 + 5</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">(√7 + 2)(√7 − 2)</text><text x="121.6611642050391" y="66">3</text><text x="179.1094700260643" y="66">middle terms cancel</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">(a + √b)(a − √b)</text><text x="121.6611642050391" y="90">a² − b</text><text x="179.1094700260643" y="90">always a whole number</text><rect x="2" y="2" width="316.0" height="96" class="ln" style="fill:none"/><path d="M115.6611642050391 2 V98" class="lm"/><path d="M173.1094700260643 2 V98" class="lm"/></g></svg><figcaption>Squaring gives a middle term; opposite signs make the surds cancel.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 5 <span class="lvl l2">Standard</span></h3><p class="qx">Expand and simplify (3 + √2)(5 − √2).</p><ol class="steps"><li>3 × 5 = 15; 3 × (−√2) = −3√2</li><li>√2 × 5 = 5√2; √2 × (−√2) = −2</li><li>15 − 2 + 2√2</li></ol><p class="ansx">Answer: <mark>13 + 2√2</mark></p></div><div class="ex"><h3>Example 6 <span class="lvl l2">Standard</span></h3><p class="qx">Expand (2 + √5)<sup>2</sup>. Give your answer in the form a + b√5.</p><ol class="steps"><li>(2 + √5)(2 + √5)</li><li>4 + 2√5 + 2√5 + 5</li></ol><p class="ansx">Answer: <mark>9 + 4√5</mark></p></div><div class="ex"><h3>Example 7 <span class="lvl l3">Exam-style</span></h3><p class="qx">Expand and simplify (2√3 − 1)(√3 + 4).</p><ol class="steps"><li>2√3 × √3 = 2 × 3 = 6</li><li>2√3 × 4 = 8√3; −1 × √3 = −√3; −1 × 4 = −4</li><li>6 − 4 + 8√3 − √3</li></ol><p class="ansx">Answer: <mark>2 + 7√3</mark></p></div></section><section class="part tp-sec" id="part4"><h2><span class="pn">Part 4</span>Using it: rationalising and exam problems</h2>
+<div class="way"><p><b>Rationalising the denominator</b> means removing the surd from the bottom of a fraction. Multiply the top and bottom by the same thing (so the value does not change).</p>
+<ul><li>Bottom is √a: multiply by √a. <span class="fr"><span>6</span><span>√3</span></span> × <span class="fr"><span>√3</span><span>√3</span></span> = <span class="fr"><span>6√3</span><span>3</span></span> = 2√3.</li><li>Bottom is a ± √b: multiply by the <b>conjugate</b> (same terms, opposite sign). The difference of two squares removes the surd:</li></ul>
+<p style="text-align:center"><span class="fr"><span>4</span><span>3 − √5</span></span> × <span class="fr"><span>3 + √5</span><span>3 + √5</span></span> = <span class="fr"><span>4(3 + √5)</span><span>9 − 5</span></span> = <span class="fr"><span>4(3 + √5)</span><span>4</span></span> = 3 + √5</p>
+<p>Other exam problems use the same skills: the <b>area</b> of a rectangle with surd sides, <b>Pythagoras</b> with surd lengths, or "show that" questions where you must reach an exact answer.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 80" role="img" aria-label="Rationalising with a conjugate"><g font-size="10" text-anchor="middle"><rect x="2.0" y="14" width="70.0" height="48" rx="5" class="fb"/><text x="37.0" y="35">Find the</text><text x="37.0" y="50">conjugate</text><path d="M73.0 38 h9" class="ln"/><path d="M80.0 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="84.0" y="14" width="70.0" height="48" rx="5" class="fb"/><text x="119.0" y="35">Multiply top</text><text x="119.0" y="50">and bottom</text><path d="M155.0 38 h9" class="ln"/><path d="M162.0 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="166.0" y="14" width="70.0" height="48" rx="5" class="fb"/><text x="201.0" y="35">a² − b</text><text x="201.0" y="50">on bottom</text><path d="M237.0 38 h9" class="ln"/><path d="M244.0 35 l3 3 l-3 3" class="ln" style="fill:none"/><rect x="248.0" y="14" width="70.0" height="48" rx="5" class="ft"/><text x="283.0" y="42">Simplify</text></g></svg><figcaption>Rationalising a denominator like 3 − √5.</figcaption></figure><figure><svg viewBox="0 0 320 130" role="img" aria-label="Rectangle with sides 3 plus root 2 and 3 minus root 2 has area 7">
+<rect x="60" y="20" width="160" height="80" class="fb"/>
+<g font-size="13" text-anchor="middle"><text x="140" y="15">3 + √2</text><text x="240" y="65" text-anchor="start">3 − √2</text><text x="140" y="65" class="a">area = 9 − 2 = 7</text></g>
+<text x="160" y="122" font-size="10" text-anchor="middle" class="m">difference of two squares: the surds cancel</text></svg><figcaption>Surd sides can give a whole-number area.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 8 <span class="lvl l2">Standard</span></h3><p class="qx">Rationalise the denominator of 6/√3.</p><ol class="steps"><li>Multiply top and bottom by √3</li><li>6√3 / 3</li></ol><p class="ansx">Answer: <mark>2√3</mark></p></div><div class="ex"><h3>Example 9 <span class="lvl l3">Exam-style</span></h3><p class="qx">Rationalise 4/(3 − √5). Simplify your answer.</p><ol class="steps"><li>× (3 + √5)/(3 + √5)</li><li>Bottom: 9 − 5 = 4</li><li>4(3 + √5) / 4</li></ol><p class="ansx">Answer: <mark>3 + √5</mark></p></div><div class="ex"><h3>Example 10 <span class="lvl l3">Exam-style</span></h3><p class="qx">Show that (√3 + √12)<sup>2</sup> = 27.</p><ol class="steps"><li>√12 = 2√3, so √3 + √12 = 3√3</li><li>(3√3)² = 9 × 3</li></ol><p class="ansx">Answer: <mark>27 ✓</mark></p></div></section><section class="tp-sec" id="watch"><div class="way warn"><h3>Watch out for</h3><ul><li>Writing √a × √a = a². It is just <b>a</b>.</li><li>Adding unlike surds: √2 + √3 is not √5.</li><li>Squaring a bracket by squaring each term: (2 + √5)² is not 4 + 5. Write it out twice.</li><li>Forgetting to simplify at the end, e.g. leaving √12 instead of 2√3.</li><li>When rationalising, multiplying only the bottom. Multiply top <b>and</b> bottom.</li><li>Using the same sign instead of the conjugate: for 3 − √5, multiply by 3 + √5.</li></ul></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>12 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one on paper first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">Work out √2 × √8.</p><details><summary>Show answer</summary><ol><li>√16</li></ol><p class="pa">Answer: <mark>4</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Work out √3 × √3.</p><details><summary>Show answer</summary><p class="pa">Answer: <mark>3</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l1">Warm-up</span></div><p class="qx">Simplify √45.</p><details><summary>Show answer</summary><ol><li>√9 × √5</li></ol><p class="pa">Answer: <mark>3√5</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">Expand √3(4 − √3).</p><details><summary>Show answer</summary><ol><li>4√3 − 3</li></ol><p class="pa">Answer: <mark>4√3 − 3</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l2">Standard</span></div><p class="qx">Expand and simplify (1 + √2)(3 + √2).</p><details><summary>Show answer</summary><ol><li>3 + √2 + 3√2 + 2</li></ol><p class="pa">Answer: <mark>5 + 4√2</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l2">Standard</span></div><p class="qx">Expand and simplify (√5 − 1)<sup>2</sup>.</p><details><summary>Show answer</summary><ol><li>(√5 − 1)(√5 − 1)</li><li>5 − √5 − √5 + 1</li></ol><p class="pa">Answer: <mark>6 − 2√5</mark></p></details></div><div class="pq"><div class="pqh"><b>Q7</b><span class="lvl l2">Standard</span></div><p class="qx">Expand and simplify (4 + √3)(4 − √3).</p><details><summary>Show answer</summary><ol><li>16 − 3</li></ol><p class="pa">Answer: <mark>13</mark></p></details></div><div class="pq"><div class="pqh"><b>Q8</b><span class="lvl l3">Exam-style</span></div><p class="qx">Expand and simplify (2 + √8)(3 − √2).</p><details><summary>Show answer</summary><ol><li>6 − 2√2 + 3√8 − √16</li><li>3√8 = 6√2; √16 = 4</li><li>6 − 4 − 2√2 + 6√2</li></ol><p class="pa">Answer: <mark>2 + 4√2</mark></p></details></div><div class="pq"><div class="pqh"><b>Q9</b><span class="lvl l3">Exam-style</span></div><p class="qx">Rationalise 10/√5.</p><details><summary>Show answer</summary><ol><li>10√5 / 5</li></ol><p class="pa">Answer: <mark>2√5</mark></p></details></div><div class="pq"><div class="pqh"><b>Q10</b><span class="lvl l3">Exam-style</span></div><p class="qx">Rationalise 2/(√3 + 1).</p><details><summary>Show answer</summary><ol><li>× (√3 − 1)/(√3 − 1)</li><li>Bottom: 3 − 1 = 2</li><li>2(√3 − 1)/2</li></ol><p class="pa">Answer: <mark>√3 − 1</mark></p></details></div><div class="pq"><div class="pqh"><b>Q11</b><span class="lvl l3">Exam-style</span></div><p class="qx">A right-angled triangle has shorter sides 2 + √3 and 2 − √3. Find the length of the hypotenuse.</p><details><summary>Show answer</summary><ol><li>(2 + √3)² = 7 + 4√3</li><li>(2 − √3)² = 7 − 4√3</li><li>Sum = 14</li></ol><p class="pa">Answer: <mark>√14</mark></p></details></div><div class="pq"><div class="pqh"><b>Q12</b><span class="lvl l3">Exam-style</span></div><p class="qx">(3 + √2)(a − √2) = 10 + √2, where a is a whole number. Find a.</p><details><summary>Show answer</summary><ol><li>Expand: 3a − 3√2 + a√2 − 2 = (3a − 2) + (a − 3)√2</li><li>Match whole numbers: 3a − 2 = 10 → a = 4</li><li>Check the surd part: a − 3 = 1 ✓</li></ol><p class="pa">Answer: <mark>a = 4</mark></p></details></div></div></section>
+<section class="tp-sec" id="done"><div class="donebox"><button type="button" id="donebtn" aria-pressed="false">Mark this topic as done</button>
+<span class="ilprog" id="donemsg">When you are confident with every part, tick it off. Then get your test from the <a href="index.html#test">Important learning page</a>.</span></div></section>
+<script>(function(){var id="surds-brackets",b=document.getElementById('donebtn');
+function show(){var d=ilDone.load(),on=!!d[id];b.setAttribute('aria-pressed',on);b.textContent=on?'✓ Done – click to untick':'Mark this topic as done';}
+b.addEventListener('click',function(){var d=ilDone.load();if(d[id])delete d[id];else d[id]=1;ilDone.save(d);show();});show();})();</script>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://www.cognito.org/blog/gcse-maths-surds-rationalising" rel="noopener" target="_blank">Cognito: surds and rationalising explained</a></li><li><a href="https://www.savemyexams.com/gcse/maths_higher/edexcel/22/revision-notes/number/surds/rationalising-denominators" rel="noopener" target="_blank">Save My Exams: rationalising denominators</a></li><li><a href="https://mathsgenie.co.uk/gcse/maths/edexcel/grade-7-7-1-surds/revision-guides" rel="noopener" target="_blank">Maths Genie: surds revision</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="fractional-indices.html">← Fractional indices</a><a href="quadratic-sequences.html" style="text-align:right">Quadratic sequences: nth term and proof →</a></nav>
+</div>
+</body>
+</html>

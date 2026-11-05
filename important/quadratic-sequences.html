@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quadratic sequences: nth term and proof · Important learning · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.92em;line-height:1.1;margin:0 2px}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 3px}
+.fr>span:last-child{padding:0 3px}
+.keyfacts{background:var(--accent-soft);border:1px solid var(--rule);border-radius:8px;padding:12px 16px}
+.keyfacts ul{margin:.3em 0;padding-left:1.2rem;line-height:1.8}
+.part{border-top:2px solid var(--ink);padding-top:10px;margin-top:34px}
+.part>h2{font-size:1.45rem;margin:0 0 4px}
+.part>h2 .pn{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;margin-bottom:2px}
+.part h3.sub{font-size:1.05rem;margin:18px 0 8px}
+.donebox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:14px 16px;margin:30px 0}
+.donebox button,.ilbtn{font:600 .9rem var(--f-mono);padding:9px 14px;border-radius:8px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.donebox button[aria-pressed="true"]{background:#1d6b3c;border-color:#1d6b3c;color:#fff}
+.ilbtn.primary{background:var(--ink);color:var(--card)}
+.ilcard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px}
+.ilcard input{width:22px;height:22px;margin-top:2px;accent-color:#1d6b3c;flex:none}
+.ilcard a{color:var(--ink);font-weight:700;font-size:1.05rem}
+.ilcard p{margin:4px 0 0;color:var(--muted);font-size:.9rem;line-height:1.45}
+.ilcard.done{border-color:#1d6b3c;background:#eef8f1}
+.ilgrid{display:grid;gap:10px}
+.testbox{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:16px;margin-top:26px}
+.testbox textarea{width:100%;min-height:15rem;font:400 .85rem/1.5 var(--f-mono);padding:10px;border:1px solid var(--rule);border-radius:6px;box-sizing:border-box;background:#fff;color:#141a24}
+.testbox .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.ilprog{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li><li><a href="../important/" aria-current="page">Important learning</a></li></ul></nav>
+<script>
+(function(){
+var KEY='il-done-v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return {}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+window.ilDone={load:load,save:save};
+})();
+</script><div class="wrap">
+<div class="crumb"><a href="index.html">← All Important learning topics</a><span>Topic 4 of 4</span></div>
+<h1 class="tp-h1">Quadratic sequences: nth term and proof</h1>
+<p class="tp-meta">In-depth topic · 4 parts · 9 diagrams · 11 worked examples · 13 practice questions</p>
+<nav class="chips" aria-label="On this page"><a href="#keyfacts">Key facts</a><a href="#part1">Part 1</a><a href="#part2">Part 2</a><a href="#part3">Part 3</a><a href="#part4">Part 4</a><a href="#watch">Watch out</a><a href="#practice">Practice</a><a href="#done">Tick off</a></nav>
+<section class="tp-sec" id="keyfacts"><div class="keyfacts"><h2 style="margin:0 0 4px;font-size:1.2rem">Key facts</h2><ul><li>A sequence is quadratic when the <b>second differences</b> are constant</li><li>nth term = an² + bn + c, where a = second difference ÷ 2</li><li>Subtract an² from the terms; what is left is linear (bn + c) or a constant</li><li>Shortcut: 2a = 2nd difference, 3a + b = first 1st difference, a + b + c = first term</li><li>Proof: write the general term with n, then use even = 2k and odd = 2k + 1</li></ul></div></section><section class="part tp-sec" id="part1"><h2><span class="pn">Part 1</span>Spotting a quadratic sequence</h2>
+<div class="way"><p>In a <b>linear</b> sequence (like 3, 7, 11, 15) the gap is always the same. In a <b>quadratic</b> sequence the gaps change, but the gaps between the gaps (the <b>second differences</b>) are the same.</p>
+<p>The simplest quadratic sequence is the square numbers: 1, 4, 9, 16, 25. Gaps: 3, 5, 7, 9. Second differences: 2, 2, 2.</p>
+<p>That is where the "n²" comes from. Any quadratic sequence has an <b>n²</b> term. Once you know the second difference you can find the next terms without a formula: add the next gap.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 132" role="img" aria-label="Square numbers difference table"><g font-size="13" text-anchor="middle"><rect x="20" y="6" width="40" height="24" rx="5" class="fb"/><text x="40" y="23">1</text><rect x="80" y="6" width="40" height="24" rx="5" class="fb"/><text x="100" y="23">4</text><rect x="140" y="6" width="40" height="24" rx="5" class="fb"/><text x="160" y="23">9</text><rect x="200" y="6" width="40" height="24" rx="5" class="fb"/><text x="220" y="23">16</text><rect x="260" y="6" width="40" height="24" rx="5" class="fb"/><text x="280" y="23">25</text><path d="M40 32 L70 48 L100 32" class="lm" style="fill:none"/><text x="70" y="64">+3</text><path d="M100 32 L130 48 L160 32" class="lm" style="fill:none"/><text x="130" y="64">+5</text><path d="M160 32 L190 48 L220 32" class="lm" style="fill:none"/><text x="190" y="64">+7</text><path d="M220 32 L250 48 L280 32" class="lm" style="fill:none"/><text x="250" y="64">+9</text><path d="M70 70 L100 84 L130 70" class="lm" style="fill:none"/><text x="100" y="100" class="a" font-weight="700">+2</text><path d="M130 70 L160 84 L190 70" class="lm" style="fill:none"/><text x="160" y="100" class="a" font-weight="700">+2</text><path d="M190 70 L220 84 L250 70" class="lm" style="fill:none"/><text x="220" y="100" class="a" font-weight="700">+2</text></g><g font-size="10" class="m"><text x="4" y="122">terms → 1st differences → 2nd differences</text></g></svg><figcaption>Square numbers: the second difference is always 2.</figcaption></figure><figure><svg viewBox="0 0 320 76" role="img" aria-label="Types of sequence"><g font-size="10.1"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">Type</text><text x="67.29411764705883" y="18" font-weight="700">1st differences</text><text x="158.11764705882354" y="18" font-weight="700">2nd differences</text><text x="248.94117647058823" y="18" font-weight="700">nth term</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">Linear</text><text x="67.29411764705883" y="42">constant</text><text x="158.11764705882354" y="42">all 0</text><text x="248.94117647058823" y="42">bn + c</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">Quadratic</text><text x="67.29411764705883" y="66">change</text><text x="158.11764705882354" y="66">constant</text><text x="248.94117647058823" y="66">an² + bn + c</text><rect x="2" y="2" width="316.0" height="72" class="ln" style="fill:none"/><path d="M61.294117647058826 2 V74" class="lm"/><path d="M152.11764705882354 2 V74" class="lm"/><path d="M242.94117647058823 2 V74" class="lm"/></g></svg><figcaption>Use the differences to name the type of sequence.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 1 <span class="lvl l1">Warm-up</span></h3><p class="qx">Is 2, 5, 10, 17, 26 a quadratic sequence?</p><ol class="steps"><li>1st differences: 3, 5, 7, 9</li><li>2nd differences: 2, 2, 2 (constant)</li></ol><p class="ansx">Answer: <mark>Yes</mark></p></div><div class="ex"><h3>Example 2 <span class="lvl l2">Standard</span></h3><p class="qx">Find the next term of 4, 7, 12, 19, 28.</p><ol class="steps"><li>1st differences: 3, 5, 7, 9 → next is 11</li><li>28 + 11</li></ol><p class="ansx">Answer: <mark>39</mark></p></div></section><section class="part tp-sec" id="part2"><h2><span class="pn">Part 2</span>Finding the nth term: an² + bn + c</h2>
+<div class="way"><p>Method (example: 4, 11, 22, 37, 56):</p>
+<ol><li>Find the second difference: 4. <b>Halve it</b>: a = 2, so the sequence starts 2n².</li><li>Write out 2n² for n = 1, 2, 3...: 2, 8, 18, 32, 50.</li><li><b>Subtract</b> from the sequence: 4 − 2 = 2, 11 − 8 = 3, 22 − 18 = 4, 37 − 32 = 5, 56 − 50 = 6.</li><li>The leftover 2, 3, 4, 5, 6 is <b>linear</b>: n + 1.</li><li>Add the parts: <b>2n² + n + 1</b>. Check: n = 3 gives 18 + 3 + 1 = 22 ✓.</li></ol>
+<p>If the leftover is the same number every time, it is just a constant (e.g. 2n² + 1).</p>
+<p><b>Shortcut</b>: for an² + bn + c, the first term is a + b + c, the first gap is 3a + b, and the second difference is 2a. Solve from the bottom up.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 132" role="img" aria-label="Difference table for 4, 11, 22, 37, 56"><g font-size="13" text-anchor="middle"><rect x="20" y="6" width="40" height="24" rx="5" class="fb"/><text x="40" y="23">4</text><rect x="80" y="6" width="40" height="24" rx="5" class="fb"/><text x="100" y="23">11</text><rect x="140" y="6" width="40" height="24" rx="5" class="fb"/><text x="160" y="23">22</text><rect x="200" y="6" width="40" height="24" rx="5" class="fb"/><text x="220" y="23">37</text><rect x="260" y="6" width="40" height="24" rx="5" class="fb"/><text x="280" y="23">56</text><path d="M40 32 L70 48 L100 32" class="lm" style="fill:none"/><text x="70" y="64">+7</text><path d="M100 32 L130 48 L160 32" class="lm" style="fill:none"/><text x="130" y="64">+11</text><path d="M160 32 L190 48 L220 32" class="lm" style="fill:none"/><text x="190" y="64">+15</text><path d="M220 32 L250 48 L280 32" class="lm" style="fill:none"/><text x="250" y="64">+19</text><path d="M70 70 L100 84 L130 70" class="lm" style="fill:none"/><text x="100" y="100" class="a" font-weight="700">+4</text><path d="M130 70 L160 84 L190 70" class="lm" style="fill:none"/><text x="160" y="100" class="a" font-weight="700">+4</text><path d="M190 70 L220 84 L250 70" class="lm" style="fill:none"/><text x="220" y="100" class="a" font-weight="700">+4</text></g><g font-size="10" class="m"><text x="4" y="122">terms → 1st differences → 2nd differences</text></g></svg><figcaption>Second difference 4, so a = 2.</figcaption></figure><figure><svg viewBox="0 0 320 100" role="img" aria-label="Subtracting 2n² from the sequence"><g font-size="10.5"><rect x="2" y="2" width="316.00000000000006" height="24" class="fb"/><text x="8" y="18" font-weight="700">n</text><text x="114.75209319257372" y="18" font-weight="700">1</text><text x="148.22715689843466" y="18" font-weight="700">2</text><text x="192.170367673826" y="18" font-weight="700">3</text><text x="236.11357844921736" y="18" font-weight="700">4</text><text x="280.0567892246087" y="18" font-weight="700">5</text><path d="M2 26 H318.00000000000006" class="lm"/><text x="8" y="42">Sequence</text><text x="114.75209319257372" y="42">4</text><text x="148.22715689843466" y="42">11</text><text x="192.170367673826" y="42">22</text><text x="236.11357844921736" y="42">37</text><text x="280.0567892246087" y="42">56</text><path d="M2 50 H318.00000000000006" class="lm"/><text x="8" y="66">2n²</text><text x="114.75209319257372" y="66">2</text><text x="148.22715689843466" y="66">8</text><text x="192.170367673826" y="66">18</text><text x="236.11357844921736" y="66">32</text><text x="280.0567892246087" y="66">50</text><path d="M2 74 H318.00000000000006" class="lm"/><text x="8" y="90">Leftover</text><text x="114.75209319257372" y="90">2</text><text x="148.22715689843466" y="90">3</text><text x="192.170367673826" y="90">4</text><text x="236.11357844921736" y="90">5</text><text x="280.0567892246087" y="90">6</text><rect x="2" y="2" width="316.00000000000006" height="96" class="ln" style="fill:none"/><path d="M108.75209319257372 2 V98" class="lm"/><path d="M142.22715689843466 2 V98" class="lm"/><path d="M186.170367673826 2 V98" class="lm"/><path d="M230.11357844921736 2 V98" class="lm"/><path d="M274.0567892246087 2 V98" class="lm"/></g></svg><figcaption>The leftover 2, 3, 4, 5, 6 has nth term n + 1.</figcaption></figure><figure><svg viewBox="0 0 320 150" role="img" aria-label="Shortcut: a plus b plus c is the first term, 3a plus b the first difference, 2a the second difference">
+<g font-size="13" text-anchor="middle">
+<rect x="20" y="10" width="90" height="30" rx="6" class="fb"/><text x="65" y="30">a + b + c</text>
+<rect x="115" y="55" width="90" height="30" rx="6" class="fb"/><text x="160" y="75">3a + b</text>
+<rect x="210" y="100" width="90" height="30" rx="6" class="ft"/><text x="255" y="120">2a</text></g>
+<g font-size="11"><text x="120" y="28">= first term (4)</text><text x="212" y="73">= first gap (7)</text><text x="20" y="120" class="a">= 2nd difference (4)</text></g>
+<text x="160" y="145" font-size="10" text-anchor="middle" class="m">a = 2 → b = 7 − 6 = 1 → c = 4 − 2 − 1 = 1</text></svg><figcaption>The shortcut: work up from the second difference.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 3 <span class="lvl l2">Standard</span></h3><p class="qx">Find the nth term of 3, 9, 19, 33, 51.</p><ol class="steps"><li>1st differences 6, 10, 14, 18; 2nd difference 4 → a = 2</li><li>2n²: 2, 8, 18, 32, 50</li><li>Leftover: 1, 1, 1, 1, 1 (constant)</li></ol><p class="ansx">Answer: <mark>2n² + 1</mark></p></div><div class="ex"><h3>Example 4 <span class="lvl l3">Exam-style</span></h3><p class="qx">Find the nth term of 4, 11, 22, 37, 56.</p><ol class="steps"><li>2nd difference 4 → 2n²</li><li>Leftover 2, 3, 4, 5, 6 → n + 1</li></ol><p class="ansx">Answer: <mark>2n² + n + 1</mark></p></div><div class="ex"><h3>Example 5 <span class="lvl l3">Exam-style</span></h3><p class="qx">Find the nth term of 5, 8, 9, 8, 5.</p><ol class="steps"><li>1st differences 3, 1, −1, −3; 2nd difference −2 → a = −1</li><li>−n²: −1, −4, −9, −16, −25</li><li>Leftover: 6, 12, 18, 24, 30 → 6n</li></ol><p class="ansx">Answer: <mark>−n² + 6n</mark></p></div></section><section class="part tp-sec" id="part3"><h2><span class="pn">Part 3</span>Using the nth term</h2>
+<div class="way"><p>Once you have the nth term you can answer three kinds of question:</p>
+<ul><li><b>Find a term</b>: substitute n. The 10th term of 2n² + n + 1 is 200 + 10 + 1 = 211.</li><li><b>Which term is it?</b> Set the nth term equal to the number and solve the quadratic. n must be a <b>positive whole number</b>.</li><li><b>Is it in the sequence?</b> Solve the same way. If n is not a positive whole number, the number is not in the sequence.</li></ul>
+<p>Remember: if the 7th term is 106, then n = 7 and the term is 106. Do not mix up n (the position) and the term (the value).</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 214" role="img" aria-label="Is a number in the sequence?"><g font-size="11" text-anchor="middle"><rect x="10.0" y="4" width="300" height="30" rx="5" class="fb"/><text x="160" y="23">Set nth term = the number</text><path d="M160 35 v11" class="ln"/><path d="M156 42 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="48" width="300" height="30" rx="5" class="fb"/><text x="160" y="67">Rearrange to … = 0</text><path d="M160 79 v11" class="ln"/><path d="M156 86 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="92" width="300" height="30" rx="5" class="fb"/><text x="160" y="111">Solve (factorise or formula)</text><path d="M160 123 v11" class="ln"/><path d="M156 130 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="136" width="300" height="30" rx="5" class="fb"/><text x="160" y="155">Positive whole number? → it is that term</text><path d="M160 167 v11" class="ln"/><path d="M156 174 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="180" width="300" height="30" rx="5" class="ft"/><text x="160" y="199">Not a whole number? → not in the sequence</text></g></svg><figcaption>Checking whether a number is in a sequence.</figcaption></figure><figure><svg viewBox="0 0 320 90" role="img" aria-label="Position n and value: the 7th term is 106">
+<g font-size="12" text-anchor="middle"><rect x="20" y="20" width="120" height="40" rx="6" class="fb"/><text x="80" y="38">position n</text><text x="80" y="54" font-weight="700">7</text>
+<rect x="180" y="20" width="120" height="40" rx="6" class="ft"/><text x="240" y="38">value (term)</text><text x="240" y="54" font-weight="700">106</text></g>
+<path d="M142 40 H176" class="la"/><text x="160" y="80" font-size="10" text-anchor="middle" class="m">substitute n → get the value</text></svg><figcaption>n is the position; the term is the value.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 6 <span class="lvl l1">Warm-up</span></h3><p class="qx">Find the 10th term of 2n² + n + 1.</p><ol class="steps"><li>2(10²) + 10 + 1 = 200 + 11</li></ol><p class="ansx">Answer: <mark>211</mark></p></div><div class="ex"><h3>Example 7 <span class="lvl l3">Exam-style</span></h3><p class="qx">Which term of 2n² + n + 1 is 106?</p><ol class="steps"><li>2n² + n + 1 = 106 → 2n² + n − 105 = 0</li><li>(2n + 15)(n − 7) = 0</li><li>n = 7 (n = −7.5 is not allowed)</li></ol><p class="ansx">Answer: <mark>The 7th term</mark></p></div><div class="ex"><h3>Example 8 <span class="lvl l3">Exam-style</span></h3><p class="qx">Is 50 a term of the sequence 2n² + 1?</p><ol class="steps"><li>2n² + 1 = 50 → n² = 24.5</li><li>n = √24.5 = 4.95… (not a whole number)</li></ol><p class="ansx">Answer: <mark>No</mark></p></div></section><section class="part tp-sec" id="part4"><h2><span class="pn">Part 4</span>Proof with sequences</h2>
+<div class="way"><p>A proof shows something is true for <b>every</b> term, not just the ones you tested. Use algebra:</p>
+<ul><li>Write the <b>general term</b> with n (and the next term with n + 1 if needed).</li><li>Expand and simplify.</li><li>Show the result has the property: <b>even</b> = 2 × (whole number), <b>odd</b> = 2 × (whole number) + 1, <b>multiple of k</b> = k × (whole number), <b>always positive</b> = (something)² + positive number.</li><li>Finish with a sentence.</li></ul>
+<p>Useful facts: n and n + 1 are consecutive, so one of them is even, which makes n(n + 1) always even. A square is never negative, so (n − 2)² + 1 is always at least 1.</p>
+<p>Why do we halve the second difference? For an² + bn + c, the gap between term n and term n + 1 is 2an + a + b. The gap between gaps is 2a. So the second difference is always 2a.</p></div>
+<h3 class="sub">Diagrams</h3><div class="figs"><figure><svg viewBox="0 0 320 148" role="img" aria-label="Proof targets"><g font-size="10.5"><rect x="2" y="2" width="316.0" height="24" class="fb"/><text x="8" y="18" font-weight="700">To prove…</text><text x="139.28218741704273" y="18" font-weight="700">Show it equals…</text><path d="M2 26 H318.0" class="lm"/><text x="8" y="42">even</text><text x="139.28218741704273" y="42">2 × (whole number)</text><path d="M2 50 H318.0" class="lm"/><text x="8" y="66">odd</text><text x="139.28218741704273" y="66">2 × (whole number) + 1</text><path d="M2 74 H318.0" class="lm"/><text x="8" y="90">multiple of 3</text><text x="139.28218741704273" y="90">3 × (whole number)</text><path d="M2 98 H318.0" class="lm"/><text x="8" y="114">always positive</text><text x="139.28218741704273" y="114">(…)² + positive number</text><path d="M2 122 H318.0" class="lm"/><text x="8" y="138">a square</text><text x="139.28218741704273" y="138">(…)²</text><rect x="2" y="2" width="316.0" height="144" class="ln" style="fill:none"/><path d="M133.28218741704273 2 V146" class="lm"/></g></svg><figcaption>What to aim for in each type of proof.</figcaption></figure><figure><svg viewBox="0 0 320 170" role="img" aria-label="Why the second difference is 2a"><g font-size="11" text-anchor="middle"><rect x="10.0" y="4" width="300" height="30" rx="5" class="fb"/><text x="160" y="23">T(n) = an² + bn + c</text><path d="M160 35 v11" class="ln"/><path d="M156 42 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="48" width="300" height="30" rx="5" class="fb"/><text x="160" y="67">T(n + 1) − T(n) = 2an + a + b</text><path d="M160 79 v11" class="ln"/><path d="M156 86 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="92" width="300" height="30" rx="5" class="fb"/><text x="160" y="111">Next gap − this gap = 2a</text><path d="M160 123 v11" class="ln"/><path d="M156 130 l4 4 l4 -4" class="ln" style="fill:none"/><rect x="10.0" y="136" width="300" height="30" rx="5" class="ft"/><text x="160" y="155">So 2nd difference = 2a → a = half of it</text></g></svg><figcaption>A proof of why you halve the second difference.</figcaption></figure></div>
+<h3 class="sub">Worked examples</h3><div class="ex"><h3>Example 9 <span class="lvl l2">Standard</span></h3><p class="qx">Prove that every term of n² + 3n is even.</p><ol class="steps"><li>n² + 3n = n² + n + 2n = n(n + 1) + 2n</li><li>n(n + 1) is two consecutive numbers multiplied, so it is even</li><li>2n is even; even + even = even</li></ol><p class="ansx">Answer: <mark>Every term is even</mark></p></div><div class="ex"><h3>Example 10 <span class="lvl l3">Exam-style</span></h3><p class="qx">Prove that the difference between consecutive terms of n² + 3n + 1 is always even.</p><ol class="steps"><li>T(n + 1) = (n + 1)² + 3(n + 1) + 1 = n² + 5n + 5</li><li>T(n + 1) − T(n) = 2n + 4 = 2(n + 2)</li></ol><p class="ansx">Answer: <mark>2(n + 2) is a multiple of 2, so always even</mark></p></div><div class="ex"><h3>Example 11 <span class="lvl l3">Exam-style</span></h3><p class="qx">Prove that every term of n² − 4n + 5 is positive.</p><ol class="steps"><li>Complete the square: (n − 2)² − 4 + 5 = (n − 2)² + 1</li><li>(n − 2)² ≥ 0, so (n − 2)² + 1 ≥ 1</li></ol><p class="ansx">Answer: <mark>Every term is at least 1, so positive</mark></p></div></section><section class="tp-sec" id="watch"><div class="way warn"><h3>Watch out for</h3><ul><li>Using the second difference as a, without halving it.</li><li>Subtracting the wrong way round: work out (sequence) − an², not an² − (sequence).</li><li>Getting the sign wrong when the second difference is negative (a is then negative).</li><li>Mixing up n (the position) and the term (the value).</li><li>Accepting a negative or decimal n when checking whether a number is in a sequence.</li><li>In a proof, only testing numbers. You must use algebra and finish with a sentence.</li></ul></div></section>
+<section class="tp-sec" id="practice"><h2>Practice <small>13 questions · easy to exam-style</small></h2><p class="tp-meta">Try each one on paper first. Then open the answer to check your working.</p><div class="prac"><div class="pq"><div class="pqh"><b>Q1</b><span class="lvl l1">Warm-up</span></div><p class="qx">Find the second difference of 1, 4, 9, 16, 25.</p><details><summary>Show answer</summary><ol><li>Gaps 3, 5, 7, 9</li></ol><p class="pa">Answer: <mark>2</mark></p></details></div><div class="pq"><div class="pqh"><b>Q2</b><span class="lvl l1">Warm-up</span></div><p class="qx">Find the next two terms of 2, 6, 12, 20, 30.</p><details><summary>Show answer</summary><ol><li>Gaps 4, 6, 8, 10 → 12, 14</li></ol><p class="pa">Answer: <mark>42, 56</mark></p></details></div><div class="pq"><div class="pqh"><b>Q3</b><span class="lvl l1">Warm-up</span></div><p class="qx">Write the first three terms of n² + 2.</p><details><summary>Show answer</summary><ol><li>n = 1, 2, 3</li></ol><p class="pa">Answer: <mark>3, 6, 11</mark></p></details></div><div class="pq"><div class="pqh"><b>Q4</b><span class="lvl l2">Standard</span></div><p class="qx">Find the nth term of 2, 6, 12, 20, 30.</p><details><summary>Show answer</summary><ol><li>2nd difference 2 → n²</li><li>Leftover: 1, 2, 3, 4, 5 → n</li></ol><p class="pa">Answer: <mark>n² + n</mark></p></details></div><div class="pq"><div class="pqh"><b>Q5</b><span class="lvl l2">Standard</span></div><p class="qx">Find the nth term of 3, 12, 27, 48, 75.</p><details><summary>Show answer</summary><ol><li>2nd difference 6 → 3n²</li><li>Leftover: 0</li></ol><p class="pa">Answer: <mark>3n²</mark></p></details></div><div class="pq"><div class="pqh"><b>Q6</b><span class="lvl l2">Standard</span></div><p class="qx">Find the nth term of 6, 15, 28, 45, 66.</p><details><summary>Show answer</summary><ol><li>2nd difference 4 → 2n²: 2, 8, 18, 32, 50</li><li>Leftover: 4, 7, 10, 13, 16 → 3n + 1</li></ol><p class="pa">Answer: <mark>2n² + 3n + 1</mark></p></details></div><div class="pq"><div class="pqh"><b>Q7</b><span class="lvl l2">Standard</span></div><p class="qx">Find the nth term of 7, 10, 11, 10, 7.</p><details><summary>Show answer</summary><ol><li>2nd difference −2 → −n²: −1, −4, −9, −16, −25</li><li>Leftover: 8, 14, 20, 26, 32 → 6n + 2</li></ol><p class="pa">Answer: <mark>−n² + 6n + 2</mark></p></details></div><div class="pq"><div class="pqh"><b>Q8</b><span class="lvl l3">Exam-style</span></div><p class="qx">Which term of n² + n is 156?</p><details><summary>Show answer</summary><ol><li>n² + n − 156 = 0</li><li>(n + 13)(n − 12) = 0</li></ol><p class="pa">Answer: <mark>The 12th term</mark></p></details></div><div class="pq"><div class="pqh"><b>Q9</b><span class="lvl l3">Exam-style</span></div><p class="qx">Is 75 a term of n² + 2n? Explain.</p><details><summary>Show answer</summary><ol><li>n² + 2n − 75 = 0</li><li>Discriminant 4 + 300 = 304, not a square number</li><li>So n is not a whole number</li></ol><p class="pa">Answer: <mark>No</mark></p></details></div><div class="pq"><div class="pqh"><b>Q10</b><span class="lvl l3">Exam-style</span></div><p class="qx">Find the first term of 2n² + 1 that is greater than 500.</p><details><summary>Show answer</summary><ol><li>2n² + 1 > 500 → n² > 249.5</li><li>n = 15 gives 451; n = 16 gives 513</li></ol><p class="pa">Answer: <mark>513 (the 16th term)</mark></p></details></div><div class="pq"><div class="pqh"><b>Q11</b><span class="lvl l3">Exam-style</span></div><p class="qx">Prove that every term of n² + n is even.</p><details><summary>Show answer</summary><ol><li>n² + n = n(n + 1)</li><li>n and n + 1 are consecutive, so one is even</li></ol><p class="pa">Answer: <mark>The product is even</mark></p></details></div><div class="pq"><div class="pqh"><b>Q12</b><span class="lvl l3">Exam-style</span></div><p class="qx">Prove that the sum of two consecutive square numbers is always odd.</p><details><summary>Show answer</summary><ol><li>n² + (n + 1)² = 2n² + 2n + 1</li><li>= 2(n² + n) + 1</li></ol><p class="pa">Answer: <mark>2 × (whole number) + 1, so odd</mark></p></details></div><div class="pq"><div class="pqh"><b>Q13</b><span class="lvl l3">Exam-style</span></div><p class="qx">Prove that every term of 4n² + 4n + 1 is an odd square number.</p><details><summary>Show answer</summary><ol><li>4n² + 4n + 1 = (2n + 1)²</li><li>2n + 1 is odd</li></ol><p class="pa">Answer: <mark>It is the square of an odd number</mark></p></details></div></div></section>
+<section class="tp-sec" id="done"><div class="donebox"><button type="button" id="donebtn" aria-pressed="false">Mark this topic as done</button>
+<span class="ilprog" id="donemsg">When you are confident with every part, tick it off. Then get your test from the <a href="index.html#test">Important learning page</a>.</span></div></section>
+<script>(function(){var id="quadratic-sequences",b=document.getElementById('donebtn');
+function show(){var d=ilDone.load(),on=!!d[id];b.setAttribute('aria-pressed',on);b.textContent=on?'✓ Done – click to untick':'Mark this topic as done';}
+b.addEventListener('click',function(){var d=ilDone.load();if(d[id])delete d[id];else d[id]=1;ilDone.save(d);show();});show();})();</script>
+<section class="tp-sec links" id="more"><h2>More help</h2><ul><li><a href="https://thirdspacelearning.com/gcse-maths/algebra/quadratic-sequences" rel="noopener" target="_blank">Third Space Learning: quadratic sequences</a></li><li><a href="https://thirdspacelearning.com/wp-content/uploads/2024/02/GCSE-Exam-Questions-Quadratic-Sequences.pdf" rel="noopener" target="_blank">Third Space Learning: quadratic sequences exam questions (PDF)</a></li><li><a href="https://www.mathsgenie.co.uk/resources/quadraticsequences.pdf" rel="noopener" target="_blank">Maths Genie: quadratic sequences questions (PDF)</a></li><li><a href="https://mmerevise.co.uk/gcse-maths-revision/quadratic-sequences-gcse-maths-revision-worksheets/" rel="noopener" target="_blank">MME Revise: quadratic sequences</a></li></ul></section>
+<nav class="pager" aria-label="Topics"><a href="surds-brackets.html">← Expanding brackets with surds</a><span></span></nav>
+</div>
+</body>
+</html>
