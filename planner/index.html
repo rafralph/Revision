@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Homework planner · GCSE Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column on graph paper; each topic is a numbered exam "question card" with video, STE text, diagram, worked example. */
+:root{
+  --paper:#eef2f6; --grid:#dfe6ee; --card:#ffffff; --ink:#14213d; --muted:#56627a; --rule:#c9d3df;
+  --accent:#b77900; --accent-soft:#fff3d6; --teal:#1f8a78; --red:#c8443d; --blue:#2b78b4;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif; --f-body:"Atkinson Hyperlegible",Verdana,system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0f141b; --grid:#16202b; --card:#161d27; --ink:#e6ebf2; --muted:#9aa6b6; --rule:#2a3442;
+  --accent:#ffc94d; --accent-soft:#2c2412; --teal:#5cd0b3; --red:#ff7a6e; --blue:#6cc4e6; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.6 var(--f-body);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.wrap{max-width:46rem;margin:0 auto;padding-inline:16px;padding-block:28px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-stretch:85%;line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,6vw,3rem);font-weight:800;letter-spacing:-.01em}
+h2{font-size:1.6rem;font-weight:750}
+h3{font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+p{margin:0}
+.lede{color:var(--muted);max-width:38rem}
+.mono{font-family:var(--f-mono);font-size:.82em}
+.code{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+a{color:var(--blue)}
+a:focus-visible,summary:focus-visible,video:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+header{display:grid;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* ranking */
+.rank{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 16px;display:grid;gap:14px}
+.rows{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.row{display:grid;grid-template-columns:1.8rem minmax(0,1fr) 3.4rem;gap:10px;align-items:center;font-variant-numeric:tabular-nums}
+.row a{color:var(--ink);text-decoration:none;font-weight:700}
+.row a:hover{text-decoration:underline}
+.row .n{font-family:var(--f-mono);color:var(--muted);font-size:.85rem}
+.row .pct{font-family:var(--f-mono);font-size:.85rem;text-align:right}
+.bar{height:6px;border-radius:3px;background:var(--rule);margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--teal)}
+.row .sub{font-size:.8rem;color:var(--muted)}
+details{border-top:1px solid var(--rule);padding-top:10px}
+summary{cursor:pointer;font-weight:700}
+.tbl{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+th,td{text-align:left;padding:5px 8px;border-bottom:1px solid var(--rule);white-space:nowrap}
+td.t{white-space:normal;min-width:12rem}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num,th.num{text-align:right}
+
+/* method */
+.method{display:grid;gap:12px}
+.method ol{margin:0;padding-left:1.3rem;display:grid;gap:8px}
+
+/* topic card */
+.topic{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:grid}
+.topic-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:baseline;padding:18px 16px 14px;border-bottom:1px solid var(--rule)}
+.qnum{font-family:var(--f-display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--accent);grid-row:span 2}
+.topic-head .meta{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#0e1116}
+.body{padding:16px;display:grid;gap:20px}
+.idea{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 12px;border-radius:0 4px 4px 0}
+.idea b{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;color:var(--muted);font-weight:600}
+.ste{display:grid;gap:10px}
+.ste ol{margin:0;padding-left:1.4rem;display:grid;gap:4px}
+.caution{font-weight:700}
+.caution span{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;color:var(--red);margin-right:6px}
+figure{margin:0;display:grid;gap:6px}
+figure .svgbox{overflow-x:auto;border:1px solid var(--rule);border-radius:4px;background:var(--paper)}
+figure svg{display:block;width:100%;min-width:300px;height:auto}
+figcaption{font-size:.85rem;color:var(--muted)}
+.exam{border:1.5px solid var(--ink);border-radius:2px;padding:14px;display:grid;gap:10px}
+.exam .q{display:flex;gap:10px;justify-content:space-between;align-items:baseline;flex-wrap:wrap}
+.exam .q p{flex:1 1 18rem;min-width:0}
+.marks{font-family:var(--f-mono);font-size:.82rem;font-weight:600;white-space:nowrap}
+.work{margin:0;padding-left:1.4rem;display:grid;gap:4px;font-variant-numeric:tabular-nums}
+.ans{font-weight:700}
+.ans mark{background:var(--accent-soft);color:var(--ink);padding:1px 6px;border-radius:3px;border:1px solid var(--accent)}
+sup,sub{line-height:0}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.85em;line-height:1.05;margin:0 1px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 2px}
+
+/* svg palette */
+svg text{font-family:var(--f-body);fill:var(--ink)}
+svg .m{fill:var(--muted)} svg .a{fill:var(--accent)} svg .t{fill:var(--teal)}
+svg .ln{stroke:var(--ink);fill:none;stroke-width:1.5}
+svg .lm{stroke:var(--muted);fill:none;stroke-width:1}
+svg .la{stroke:var(--accent);fill:none;stroke-width:3}
+svg .lt{stroke:var(--teal);fill:none;stroke-width:2.5}
+svg .lb{stroke:var(--blue);fill:none;stroke-width:2.5}
+svg .fb{fill:var(--blue);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .ft{fill:var(--teal);fill-opacity:.35;stroke:var(--ink);stroke-width:1}
+svg .fa{fill:var(--accent);fill-opacity:.4;stroke:var(--accent);stroke-width:1.5}
+svg .fr{fill:var(--red);fill-opacity:.85}
+svg .fi{fill:var(--ink)}
+svg .fp{fill:var(--card);stroke:var(--accent);stroke-width:2.5}
+footer{font-size:.85rem;color:var(--muted);display:grid;gap:8px}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+html{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+
+.sitenav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--rule)}
+.sitenav ul{list-style:none;margin:0 auto;max-width:46rem;padding:0 16px;display:flex;gap:4px;overflow-x:auto}
+.sitenav a,.sitenav span{display:block;padding:12px 10px;font-family:var(--f-display);font-stretch:85%;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);white-space:nowrap;border-bottom:3px solid transparent}
+.sitenav a:hover{color:var(--ink)}
+.sitenav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.sitenav span{opacity:.55;cursor:default}
+.sitenav small{font-family:var(--f-mono);font-weight:400;font-size:.68rem;margin-left:4px}
+
+.crumb{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.8rem;margin:4px 0 12px}
+.crumb a{color:var(--ink)}
+.tp-h1{font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.1;margin:.2em 0 .3em}
+.tp-meta{font-family:var(--f-mono);font-size:.8rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 18px;position:sticky;top:48px;z-index:5;background:var(--bg,#eef2f7);padding:6px 0}
+.chips a{font-family:var(--f-mono);font-size:.78rem;padding:5px 9px;border:1px solid var(--rule);border-radius:999px;text-decoration:none;color:var(--ink);background:var(--card)}
+.tp-sec{margin:28px 0;scroll-margin-top:100px}
+.tp-sec>h2{font-size:1.5rem;margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.tp-sec>h2 small{font-family:var(--f-mono);font-size:.75rem;color:var(--muted);font-weight:400}
+.ways{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr))}
+.way{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px}
+.way h3{margin:0 0 6px;font-size:1rem;display:flex;gap:8px;align-items:center}
+.way h3 .wn{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:var(--accent);color:#fff;font-family:var(--f-mono);font-size:.8rem}
+.way p,.way li{line-height:1.55}
+.way ul,.way ol{padding-left:1.2rem;margin:.3em 0}
+.way.warn{border-left:4px solid #c0392b}
+.figs{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr))}
+.figs figure{margin:0;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px}
+.figs figure svg{width:100%;height:auto;max-width:34rem;display:block;margin:0 auto}
+.figs figcaption{font-size:.85rem;color:var(--muted);margin-top:6px}
+.ex{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin:0 0 12px}
+.ex h3{margin:0 0 8px;font-size:1rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.lvl{font-family:var(--f-mono);font-size:.7rem;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);font-weight:600}
+.lvl.l1{background:#e3f4ea;color:#1d6b3c;border-color:#9fd3b2}
+.lvl.l2{background:#fff4d6;color:#7a5600;border-color:#e8c76a}
+.lvl.l3{background:#fde3e0;color:#8f2418;border-color:#e9a59c}
+.ex .qx{margin:0 0 8px;line-height:1.55}
+.ex ol.steps{margin:6px 0;padding-left:1.3rem;line-height:1.6}
+.ex .ansx{margin:6px 0 0;font-weight:600}
+.ex .ansx mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.prac{display:grid;gap:10px;counter-reset:pq}
+.pq{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.pq .pqh{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.pq .pqh b{font-family:var(--f-mono)}
+.pq p{margin:.4em 0;line-height:1.55}
+.pq details{margin-top:6px}
+.pq summary{cursor:pointer;font-family:var(--f-mono);font-size:.8rem;color:var(--accent);font-weight:600}
+.pq details[open] summary{margin-bottom:6px}
+.pq details ol{margin:4px 0;padding-left:1.3rem;line-height:1.6}
+.pq .pa{font-weight:600}
+.pq .pa mark{background:var(--accent-soft);padding:1px 4px;border-radius:3px}
+.links ul{padding-left:1.2rem;line-height:1.8}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:30px 0 10px;border-top:1px solid var(--rule);padding-top:14px}
+.pager a{font-family:var(--f-mono);font-size:.85rem;color:var(--ink);max-width:48%}
+.tgrid{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(min(100%,15rem),1fr));margin-top:10px}
+.tcard{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:12px;text-decoration:none;color:var(--ink)}
+.tcard:hover{border-color:var(--ink)}
+.tcard .tn{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);min-width:1.6em}
+.tcard b{display:block;line-height:1.25}
+.tcard small{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+blockquote.extract{margin:0 0 8px;padding:10px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:normal;line-height:1.6}
+pre.code{margin:0;overflow-x:auto;background:#141a24;color:#e6ebf2;border-radius:6px;padding:12px 14px;font:400 .85rem/1.5 var(--f-mono);tab-size:4}
+
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;font-size:.92em;line-height:1.1;margin:0 2px}
+.fr>span:first-child{border-bottom:1.5px solid currentColor;padding:0 3px}
+.fr>span:last-child{padding:0 3px}
+.keyfacts{background:var(--accent-soft);border:1px solid var(--rule);border-radius:8px;padding:12px 16px}
+.keyfacts ul{margin:.3em 0;padding-left:1.2rem;line-height:1.8}
+.part{border-top:2px solid var(--ink);padding-top:10px;margin-top:34px}
+.part>h2{display:block;font-size:1.45rem;margin:0 0 4px}
+.part>h2 .pn{display:block;font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-weight:400;margin-bottom:2px}
+.part h3.sub{font-size:1.05rem;margin:18px 0 8px}
+.donebox{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:14px 16px;margin:30px 0}
+.donebox button,.ilbtn{font:600 .9rem var(--f-mono);padding:9px 14px;border-radius:8px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.donebox button[aria-pressed="true"]{background:#1d6b3c;border-color:#1d6b3c;color:#fff}
+.ilbtn.primary{background:var(--ink);color:var(--card)}
+.ilcard{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:14px}
+.ilcard input{width:22px;height:22px;margin-top:2px;accent-color:#1d6b3c;flex:none}
+.ilcard a{color:var(--ink);font-weight:700;font-size:1.05rem}
+.ilcard p{margin:4px 0 0;color:var(--muted);font-size:.9rem;line-height:1.45}
+.ilcard.done{border-color:#1d6b3c;background:#eef8f1}
+.ilgrid{display:grid;gap:10px}
+.testbox{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:16px;margin-top:26px}
+.testbox textarea{width:100%;min-height:15rem;font:400 .85rem/1.5 var(--f-mono);padding:10px;border:1px solid var(--rule);border-radius:6px;box-sizing:border-box;background:#fff;color:#141a24}
+.testbox .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.ilprog{font-family:var(--f-mono);font-size:.85rem;color:var(--muted)}
+
+.qcheck{margin-top:14px}
+.qcheck h3{font-size:1rem;margin:0 0 8px}
+.tips{background:var(--card);border:1px solid var(--rule);border-left:4px solid var(--blue,#2b6cb0);border-radius:8px;padding:12px 16px}
+.tips ul{margin:.3em 0;padding-left:1.2rem;line-height:1.65}
+.way h4{margin:12px 0 4px;font-size:.95rem}
+.way .method{background:var(--accent-soft);border-radius:6px;padding:8px 12px;margin:8px 0}
+
+.pl-intro{max-width:44rem;line-height:1.6}
+.hourbar{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:14px 0 4px;max-width:44rem}
+.hourbar div{border:2px solid var(--ink);border-radius:8px;padding:8px 6px;text-align:center;font:600 .8rem/1.3 var(--f-mono);background:var(--card)}
+.hourbar div.rv{background:var(--accent-soft)}
+.pl-card{background:var(--card);border:2px solid var(--ink);border-radius:12px;padding:16px;margin:22px 0}
+.pl-card h2{margin:0 0 10px;font-size:1.3rem}
+.pl-row{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.pl-row label{display:flex;flex-direction:column;gap:4px;font:600 .8rem var(--f-mono);color:var(--muted);flex:1 1 140px}
+.pl-row label.wide{flex:3 1 220px}
+.pl-row input,.pl-row select{font:400 1rem var(--f-body);padding:9px 10px;border:1.5px solid var(--rule);border-radius:8px;background:var(--paper);color:var(--ink);min-height:42px;box-sizing:border-box;width:100%}
+.btn{font:600 .9rem var(--f-mono);padding:10px 14px;border-radius:8px;border:2px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer;min-height:42px}
+.btn.primary{background:var(--ink);color:var(--card)}
+.btn.small{padding:6px 10px;min-height:34px;font-size:.8rem}
+.btn:disabled{opacity:.45;cursor:default}
+.blocks{display:grid;gap:10px}
+.block{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;border:1.5px solid var(--rule);border-radius:10px;padding:12px;background:var(--paper)}
+.block .tick{width:28px;height:28px;accent-color:#1d6b3c;margin-top:2px}
+.block .when{font:600 .8rem var(--f-mono);color:var(--muted)}
+.block .kind{display:inline-block;font:700 .7rem var(--f-mono);text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:999px;border:1px solid var(--rule);margin-left:6px}
+.block.rev .kind{background:var(--accent-soft)}
+.block h3{margin:4px 0 2px;font-size:1.08rem}
+.block p{margin:2px 0;color:var(--muted);font-size:.92rem}
+.block .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.block.done{opacity:.6}
+.block.done h3{text-decoration:line-through}
+.timer{font:700 1.1rem var(--f-mono);min-width:4.2em}
+.warn{background:#fff4e5;border:1.5px solid #c26a00;color:#5a3200;border-radius:8px;padding:10px 12px;margin:10px 0;font-size:.92rem}
+.okmsg{background:#eef8f1;border:1.5px solid #1d6b3c;color:#14482a;border-radius:8px;padding:10px 12px;margin:10px 0;font-size:.92rem}
+.hwlist{display:grid;gap:8px}
+.hw{display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;border:1.5px solid var(--rule);border-radius:10px;padding:10px 12px;background:var(--paper)}
+.hw b{font-size:1rem}
+.hw .meta{font:400 .82rem var(--f-mono);color:var(--muted)}
+.hw .due-soon{color:#b3261e;font-weight:700}
+.pips{display:inline-flex;gap:3px;vertical-align:middle;margin-left:4px}
+.pips i{width:12px;height:12px;border-radius:3px;border:1.5px solid var(--ink);display:inline-block}
+.pips i.f{background:#1d6b3c;border-color:#1d6b3c}
+.subjgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.subj{border:1.5px solid var(--rule);border-radius:8px;padding:8px 10px;background:var(--paper)}
+.subj b{display:block}
+.subj span{font:400 .8rem var(--f-mono);color:var(--muted)}
+details.backup summary{cursor:pointer;font:600 .9rem var(--f-mono)}
+details.backup textarea{width:100%;min-height:7rem;font:400 .78rem/1.4 var(--f-mono);box-sizing:border-box;padding:8px;border:1px solid var(--rule);border-radius:6px;background:var(--paper);color:var(--ink)}
+.muted{color:var(--muted)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .warn{background:#3a2a10;color:#ffd9a8}:root:not([data-theme="light"]) .okmsg{background:#12301e;color:#bfe8cc}}
+</style>
+</head>
+<body>
+
+<nav class="sitenav" aria-label="Subjects"><ul><li><a href="../">Home</a></li><li><a href="../planner/" aria-current="page">Planner</a></li><li><a href="../maths/">Maths</a></li><li><a href="../english/">English</a></li><li><a href="../triple-science/">Triple Science</a></li><li><a href="../computer-science/">Computer Science</a></li><li><a href="../important/">Important learning</a></li></ul></nav>
+<script>
+(function(){
+var KEY='il-done-v1';
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return {}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+window.ilDone={load:load,save:save};
+})();
+</script><div class="wrap">
+<p class="tp-meta" style="margin-top:8px">ONE HOUR A DAY</p>
+<h1 class="tp-h1">Homework planner</h1>
+<p class="pl-intro">Tell the planner what homework you have. Each day it makes a one-hour plan: <b>three 15-minute homework pieces</b> first, then a <b>15-minute revision session</b> on one subject. Homework due soonest goes first. Revision takes turns between subjects and picks the most important topic you have not revised yet.</p>
+<div class="hourbar" aria-hidden="true"><div>15 min<br>homework</div><div>15 min<br>homework</div><div>15 min<br>homework</div><div class="rv">15 min<br>revision</div></div>
+
+<section class="pl-card" id="add">
+<h2>1. Add your homework</h2>
+<form id="hwform" class="pl-row" autocomplete="off">
+<label>Subject<select id="f-subj" required></select></label>
+<label class="wide">What is it?<input id="f-task" required placeholder="e.g. Sparx Maths, Chemistry worksheet"></label>
+<label>Due date<input id="f-due" type="date" required></label>
+<label>How long?<select id="f-len"><option value="1">15 min</option><option value="2">30 min</option><option value="3">45 min</option><option value="4">1 hour</option><option value="6">1½ hours</option><option value="8">2 hours</option></select></label>
+<button class="btn primary" type="submit">Add homework</button>
+</form>
+<p class="muted" style="margin:10px 0 0;font-size:.88rem">Longer homework is split into 15-minute pieces and spread over the days before it is due.</p>
+</section>
+
+<section class="pl-card" id="plan">
+<h2>2. Your plan</h2>
+<div class="pl-row" style="margin-bottom:12px">
+<label>Day<input id="p-date" type="date"></label>
+<label>Start time<input id="p-start" type="time" value="17:00"></label>
+<button class="btn" id="p-remake" type="button">Make a new plan</button>
+</div>
+<div id="p-msgs"></div>
+<div class="blocks" id="p-blocks"></div>
+<p class="muted" style="font-size:.88rem;margin:12px 0 0">Tick each piece when you finish it. Ticking homework updates its progress; ticking revision records the topic so it is not picked again too soon. Stand up and stretch for a minute between pieces.</p>
+</section>
+
+<section class="pl-card" id="list">
+<h2>3. Homework list</h2>
+<div class="hwlist" id="hw-open"></div>
+<details style="margin-top:12px"><summary class="muted" style="cursor:pointer">Finished homework</summary><div class="hwlist" id="hw-done" style="margin-top:8px"></div></details>
+</section>
+
+<section class="pl-card" id="revlog">
+<h2>4. Revision so far</h2>
+<p class="muted" style="margin-top:0;font-size:.9rem">When each subject was last revised. The planner picks the one that has waited longest.</p>
+<div class="subjgrid" id="subjgrid"></div>
+<h3 style="font-size:1rem;margin:16px 0 6px">Recent sessions</h3>
+<ol id="revrecent" style="margin:0;padding-left:1.3rem;line-height:1.7"></ol>
+</section>
+
+<section class="pl-card">
+<details class="backup"><summary>Move to another device (backup)</summary>
+<p class="muted" style="font-size:.88rem">Your homework and plans are saved in this browser only. To move them, copy this backup code, then paste it into the box on the other device and press Restore.</p>
+<textarea id="bk-text" aria-label="Backup code"></textarea>
+<div class="pl-row" style="margin-top:8px"><button class="btn small" id="bk-copy" type="button">Copy backup code</button><button class="btn small" id="bk-load" type="button">Restore from code</button><span class="muted" id="bk-msg"></span></div>
+</details>
+</section>
+</div>
+<script>
+(function(){
+var TOPICS={"Maths": [["maths/probability.html", "Probability"], ["maths/algebra.html", "Algebraic manipulation"], ["maths/percentages.html", "Percentages, interest & growth/decay"], ["maths/area.html", "Area, perimeter, arcs & sectors"], ["maths/statistics.html", "Cumulative frequency, box plots & histograms"], ["maths/ratio.html", "Ratio"], ["maths/compound.html", "Compound measures (speed, density, pressure)"], ["maths/quadratics.html", "Quadratics"], ["maths/linear.html", "Linear equations & inequalities"], ["maths/lines.html", "Straight-line graphs"], ["maths/volume.html", "Volume, surface area & 3D shapes"], ["maths/averages.html", "Averages & grouped data"], ["maths/indices.html", "Indices & surds"], ["maths/fractions.html", "Fractions, decimals & recurring decimals"], ["maths/sequences.html", "Sequences"], ["maths/trigonometry.html", "Sine/cosine rule, ½ab sin C & trig graphs"], ["maths/bounds.html", "Bounds, rounding & estimation"], ["maths/circles.html", "Circle theorems"], ["maths/rates.html", "Real-life graphs, rates & area under graphs"], ["maths/transformations.html", "Non-linear graphs & graph transformations"], ["maths/functions.html", "Functions (composite & inverse)"], ["maths/transformations-shapes.html", "Transformations"], ["maths/polygons.html", "Angles & polygons"], ["maths/pythagoras.html", "Pythagoras & right-angled trigonometry"], ["maths/proportion.html", "Direct & inverse proportion"], ["maths/similarity.html", "Similarity & congruence"], ["maths/primes.html", "Factors, multiples & primes"], ["maths/vectors.html", "Vectors"], ["maths/scatter.html", "Scatter graphs, charts & sampling"], ["maths/simultaneous.html", "Simultaneous equations"], ["maths/circle-equation.html", "Equation of a circle & tangents"], ["maths/standard-form.html", "Standard form"], ["maths/proof.html", "Algebraic proof"], ["maths/counting.html", "Counting (product rule)"], ["maths/bearings.html", "Constructions, loci & bearings"], ["maths/iteration.html", "Iteration"]], "Biology": [["triple-science/genetics.html", "DNA, meiosis and genetic crosses"], ["triple-science/ecosystems.html", "Ecosystems, adaptations and sampling"], ["triple-science/heart.html", "Heart, blood, vessels and lungs"], ["triple-science/enzymes.html", "Digestion and enzymes"], ["triple-science/osmosis.html", "Diffusion, osmosis and active transport"], ["triple-science/cells.html", "Cell structure and microscopy"], ["triple-science/non-communicable.html", "Non-communicable disease"], ["triple-science/decomposition.html", "Decomposition"], ["triple-science/photosynthesis.html", "Photosynthesis"], ["triple-science/transpiration.html", "Plant tissues and transpiration"], ["triple-science/respiration.html", "Respiration and metabolism"], ["triple-science/homeostasis.html", "Body temperature and the kidneys"], ["triple-science/food-security.html", "Biomass, food chains and food security"], ["triple-science/classification.html", "Classification, fossils and extinction"], ["triple-science/evolution.html", "Variation, evolution and selective breeding"], ["triple-science/monoclonal-antibodies.html", "Monoclonal antibodies"], ["triple-science/biodiversity.html", "Biodiversity and human impact"], ["triple-science/culturing.html", "Culturing microorganisms"], ["triple-science/pathogens.html", "Communicable disease and pathogens"], ["triple-science/plant-hormones.html", "Plant hormones"], ["triple-science/cell-division.html", "Cell division and stem cells"], ["triple-science/drugs.html", "Antibiotics and drug development"], ["triple-science/plant-disease.html", "Plant diseases and defences"], ["triple-science/immunity.html", "Defences, immunity and vaccination"], ["triple-science/hormones.html", "Hormones and blood glucose"], ["triple-science/nervous-system.html", "Nervous system and reflexes"], ["triple-science/brain-eye.html", "The brain and the eye"], ["triple-science/menstrual-cycle.html", "Reproductive hormones and contraception"], ["triple-science/carbon-cycle.html", "Carbon and water cycles"], ["triple-science/reproduction.html", "Sexual and asexual reproduction"], ["triple-science/genetic-engineering.html", "Genetic engineering and cloning"]], "Chemistry": [["triple-science/energy-changes.html", "Energy changes and bond energies"], ["triple-science/rates.html", "Rates of reaction"], ["triple-science/moles.html", "Moles, masses and conservation of mass"], ["triple-science/resources.html", "Water, life cycles and resources"], ["triple-science/periodic-table.html", "The periodic table and groups"], ["triple-science/acids.html", "Acids, salts and pH"], ["triple-science/titration.html", "Concentration and titrations"], ["triple-science/electrolysis.html", "Electrolysis"], ["triple-science/atmosphere.html", "The atmosphere and climate change"], ["triple-science/crude-oil.html", "Crude oil, alkanes and alkenes"], ["triple-science/reactivity.html", "Reactivity, extraction and redox"], ["triple-science/alcohols-polymers.html", "Alcohols, carboxylic acids and polymers"], ["triple-science/atoms.html", "Atoms, isotopes and atomic models"], ["triple-science/giant-structures.html", "Giant structures, metals and carbon"], ["triple-science/chromatography.html", "Purity, formulations, chromatography and gas tests"], ["triple-science/identifying-ions.html", "Identifying ions"], ["triple-science/yield.html", "Yield, atom economy and gas volumes"], ["triple-science/haber.html", "The Haber process and NPK fertilisers"], ["triple-science/equilibrium.html", "Reversible reactions and equilibrium"], ["triple-science/cells-fuel-cells.html", "Chemical cells and fuel cells"], ["triple-science/covalent.html", "Covalent bonding and simple molecules"], ["triple-science/materials.html", "Materials: alloys, ceramics, composites, corrosion"], ["triple-science/ionic-bonding.html", "Ionic bonding"], ["triple-science/nanoparticles.html", "Nanoparticles"], ["triple-science/states.html", "States of matter"]], "Physics": [["triple-science/forces-springs.html", "Forces, work and springs"], ["triple-science/light.html", "Reflection, refraction, lenses and colour"], ["triple-science/induction.html", "Generators, transformers and induction"], ["triple-science/space.html", "Space physics"], ["triple-science/newtons-laws.html", "Newton's laws and terminal velocity"], ["triple-science/energy-stores.html", "Energy stores and transfers"], ["triple-science/motor-effect.html", "Magnetism and the motor effect"], ["triple-science/waves.html", "Wave properties"], ["triple-science/power-efficiency.html", "Power and efficiency"], ["triple-science/circuits.html", "Circuits, current, p.d. and resistance"], ["triple-science/mains.html", "Mains electricity and electrical power"], ["triple-science/motion.html", "Speed, acceleration and motion graphs"], ["triple-science/pressure.html", "Pressure in fluids"], ["triple-science/iv-graphs.html", "I–V characteristics and components"], ["triple-science/radioactivity.html", "Radioactive decay and half-life"], ["triple-science/latent-heat.html", "Internal energy and latent heat"], ["triple-science/specific-heat.html", "Specific heat capacity"], ["triple-science/stopping-distance.html", "Stopping distances"], ["triple-science/momentum.html", "Momentum"], ["triple-science/gas-pressure.html", "Gas pressure and temperature"], ["triple-science/infrared.html", "Infrared and black body radiation"], ["triple-science/density.html", "Density"], ["triple-science/sound.html", "Sound, ultrasound and seismic waves"], ["triple-science/energy-resources.html", "Energy resources"], ["triple-science/atomic-structure.html", "Atomic structure and isotopes"], ["triple-science/static.html", "Static electricity"], ["triple-science/fission-fusion.html", "Nuclear fission and fusion"], ["triple-science/em-spectrum.html", "Electromagnetic spectrum"], ["triple-science/moments.html", "Moments, levers and gears"]], "English": [["english/#creative-writing", "Descriptive or narrative writing"], ["english/#viewpoint-writing", "Writing to present a viewpoint"], ["english/#evaluation", "Evaluating a statement about a text"], ["english/#compare-perspectives", "Comparing writers' perspectives"], ["english/#language-nonfiction", "Language analysis in non-fiction"], ["english/#language-fiction", "Language analysis in fiction"], ["english/#structure", "Structure: how the text is built"], ["english/#summary", "Summary of differences"], ["english/#retrieval", "Retrieval and true statements"], ["english/#technical-accuracy", "Technical accuracy (spelling, punctuation, grammar)"], ["english/#shakespeare", "Shakespeare essay (e.g. Macbeth)"], ["english/#modern-text", "Modern text essay (e.g. An Inspector Calls)"], ["english/#anthology-poetry", "Comparing anthology poems"], ["english/#nineteenth-century-novel", "19th-century novel essay (e.g. A Christmas Carol)"], ["english/#unseen-poetry", "Unseen poetry analysis"], ["english/#unseen-comparison", "Unseen poetry comparison"]], "Computer Science": [["computer-science/#programs", "Writing complete programs"], ["computer-science/#sql", "Databases and SQL"], ["computer-science/#trace-tables", "Algorithms, trace tables and pseudocode"], ["computer-science/#validation", "Validation, testing and errors"], ["computer-science/#networks", "Networks and protocols"], ["computer-science/#binary", "Binary, hex and binary arithmetic"], ["computer-science/#cyber-security", "Cyber security"], ["computer-science/#subroutines", "Subroutines and parameters"], ["computer-science/#ethics", "Ethical, legal and environmental issues"], ["computer-science/#selection-iteration", "Selection and iteration"], ["computer-science/#logic", "Boolean logic and logic gates"], ["computer-science/#lists", "Lists, arrays and records"], ["computer-science/#sorting", "Sorting algorithms"], ["computer-science/#languages", "Programming languages and translators"], ["computer-science/#operating-system", "Hardware, software and the OS"], ["computer-science/#memory-storage", "Memory and storage"], ["computer-science/#strings", "String handling"], ["computer-science/#images", "Representing images"], ["computer-science/#sound", "Representing sound"], ["computer-science/#cpu", "The CPU and the fetch–execute cycle"], ["computer-science/#compression", "Data compression"], ["computer-science/#data-types", "Data types, variables and constants"], ["computer-science/#operators", "Arithmetic, relational and Boolean operators"], ["computer-science/#searching", "Searching algorithms"], ["computer-science/#units", "Units of information"], ["computer-science/#network-security", "Network security"], ["computer-science/#characters", "Character encoding"]], "Important": [["important/negative-indices.html", "Negative indices"], ["important/fractional-indices.html", "Fractional indices"], ["important/surds-brackets.html", "Expanding brackets with surds"], ["important/quadratic-sequences.html", "Quadratic sequences: nth term and proof"]]};
+var SUBJECTS=['Maths','English','Biology','Chemistry','Physics','Computer Science'];
+var HW_SUBJECTS=SUBJECTS.concat(['Other']);
+var KEY='planner-v1';
+function load(){try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&s.hw)return s;}catch(e){}return {hw:[],plans:{},rev:[]};}
+var S=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function ilDone(){try{return JSON.parse(localStorage.getItem('il-done-v1')||'{}')||{}}catch(e){return {}}}
+function $(id){return document.getElementById(id)}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function iso(d){var z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10)}
+function today(){return iso(new Date())}
+function addDays(s,n){var d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return iso(d)}
+function daysBetween(a,b){return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/86400000)}
+function nice(s){var d=new Date(s+'T12:00:00');return d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function hwById(id){for(var i=0;i<S.hw.length;i++)if(S.hw[i].id===id)return S.hw[i];return null}
+
+/* ---------- how many pieces of a homework are already booked on other days (not yet done) ---------- */
+function bookedElsewhere(hwId,date){return 0}
+
+/* ---------- revision choice ---------- */
+function lastRevised(subj){var last=null;S.rev.forEach(function(r){if(r.subject===subj&&(!last||r.date>last))last=r.date});return last}
+function revisedTopics(){var m={};S.rev.forEach(function(r){if(!m[r.url]||r.date>m[r.url])m[r.url]=r.date});return m}
+function topicList(subj){var L=(TOPICS[subj]||[]).slice();
+  if(subj==='Maths'){var dn=ilDone();var imp=(TOPICS['Important']||[]).filter(function(t){var id=t[0].split('/').pop().replace('.html','');return !dn[id]});L=imp.concat(L);}
+  return L;}
+function pickTopic(subj,skip){var L=topicList(subj),seen=revisedTopics(),fresh=L.filter(function(t){return !seen[t[0]]&&(!skip||skip.indexOf(t[0])<0)});
+  if(fresh.length)return fresh[0];
+  var rest=L.filter(function(t){return !skip||skip.indexOf(t[0])<0});if(!rest.length)rest=L;
+  rest.sort(function(a,b){return (seen[a[0]]||'')<(seen[b[0]]||'')?-1:1});return rest[0];}
+function pickSubject(date,avoid,exclude){
+  var plannedRev={};for(var d in S.plans){S.plans[d].blocks.forEach(function(b,i){if(b.type==='rev'&&d<date&&d>=addDays(date,-6)&&!S.plans[d].done[i])plannedRev[b.subject]=d;})}
+  var c=SUBJECTS.filter(function(s){return exclude.indexOf(s)<0}).map(function(s,i){var l=lastRevised(s)||plannedRev[s]||'0000';return {s:s,l:l,av:avoid.indexOf(s)>=0?1:0,i:i}});
+  c.sort(function(a,b){return a.l<b.l?-1:a.l>b.l?1:(a.av-b.av)||(a.i-b.i)});
+  var noAvoid=c.filter(function(x){return !x.av});
+  return (noAvoid.length&&noAvoid[0].l===c[0].l?noAvoid[0]:c[0]).s;}
+function revBlock(subj,extra){var t=pickTopic(subj);return {type:'rev',subject:subj,url:t[0],title:t[1],extra:!!extra}}
+
+/* ---------- make a plan ---------- */
+function makePlan(date){
+  var old=S.plans[date],kept=[];
+  if(old)old.blocks.forEach(function(b,i){if(old.done[i])kept.push(b)});
+  var keptMain=kept.filter(function(b){return b.type==='rev'&&!b.extra}).length;
+  var cap=3-kept.filter(function(b){return b.type==='hw'||b.extra}).length;
+  var open=S.hw.filter(function(h){return h.done<h.chunks}).map(function(h){return {h:h,left:h.chunks-h.done-bookedElsewhere(h.id,date)}}).filter(function(x){return x.left>0});
+  open.sort(function(a,b){return a.h.due<b.h.due?-1:a.h.due>b.h.due?1:(a.h.added<b.h.added?-1:1)});
+  var slots=[],warn=[];
+  function take(x,n){for(var k=0;k<n&&slots.length<cap&&x.left>0;k++){slots.push(x.h.id);x.left--;}}
+  // 1. overdue or due tomorrow (or today): all remaining pieces
+  open.forEach(function(x){if(daysBetween(date,x.h.due)<=1)take(x,x.left)});
+  // 2. spread the rest: pieces needed per day before the due date
+  open.forEach(function(x){var days=Math.max(1,daysBetween(date,x.h.due));take(x,Math.max(1,Math.ceil(x.left/days)))});
+  // 3. fill any spare slot with the soonest-due homework
+  open.forEach(function(x){take(x,x.left)});
+  open.forEach(function(x){if(x.left>0&&daysBetween(date,x.h.due)<=1)warn.push(esc(x.h.subject+': '+x.h.task)+' still needs '+(x.left*15)+' more minutes before it is due ('+nice(x.h.due)+'). Do some extra time today, or tell your teacher.')});
+  var blocks=kept.filter(function(b){return b.type==='hw'||b.extra}),count={};
+  slots.forEach(function(id){count[id]=(count[id]||0)+1;var h=hwById(id);blocks.push({type:'hw',hwId:id,piece:h.done+bookedElsewhere(id,date)+count[id],of:h.chunks})});
+  var hwSubjects=blocks.filter(function(b){return b.type==='hw'&&hwById(b.hwId)}).map(function(b){return hwById(b.hwId).subject});
+  var used=blocks.filter(function(b){return b.type==='rev'}).map(function(b){return b.subject});
+  while(blocks.length<3){var s=pickSubject(date,hwSubjects,used);used.push(s);blocks.push(revBlock(s,true))}
+  if(keptMain)blocks=blocks.concat(kept.filter(function(b){return b.type==='rev'&&!b.extra}));
+  else{var s=pickSubject(date,hwSubjects,used);blocks.push(revBlock(s,false));}
+  var doneFlags=blocks.map(function(b){return kept.indexOf(b)>=0});
+  S.plans[date]={start:(old&&old.start)||($('p-start').value||'17:00'),blocks:blocks,done:doneFlags,warn:warn,made:new Date().toISOString()};
+  save();}
+
+function planStarted(p){return p&&p.done.some(Boolean)}
+function ensurePlan(date,force){var p=S.plans[date];if(force||!p||!planStarted(p))makePlan(date);}
+
+/* ---------- timer ---------- */
+var T={i:null,left:0,timer:null};
+function beep(){try{var a=new (window.AudioContext||window.webkitAudioContext)();[0,0.35,0.7].forEach(function(t){var o=a.createOscillator(),g=a.createGain();o.frequency.value=880;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(0.2,a.currentTime+t);o.start(a.currentTime+t);o.stop(a.currentTime+t+0.25)})}catch(e){}}
+function fmt(s){return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2)}
+function startTimer(i){if(T.timer&&T.i===i){clearInterval(T.timer);T.timer=null;drawPlan();return}
+  if(T.timer)clearInterval(T.timer);if(T.i!==i)T.left=15*60;T.i=i;
+  T.timer=setInterval(function(){T.left--;var el=$('tm'+i);if(el)el.textContent=fmt(T.left);if(T.left<=0){clearInterval(T.timer);T.timer=null;beep();T.left=15*60;drawPlan();var m=$('tm'+i);if(m)m.textContent='Time!';}},1000);drawPlan();}
+
+/* ---------- draw ---------- */
+function timeAt(start,k){var p=start.split(':'),m=+p[0]*60+(+p[1])+k*15;return ('0'+Math.floor(m/60)%24).slice(-2)+':'+('0'+m%60).slice(-2)}
+function drawPlan(){var date=$('p-date').value,p=S.plans[date];var box=$('p-blocks'),msg=$('p-msgs');
+  if(!p){box.innerHTML='';msg.innerHTML='';return}
+  $('p-start').value=p.start;
+  var h='';var nHw=p.blocks.filter(function(b){return b.type==='hw'}).length;
+  var m=(p.warn||[]).map(function(w){return '<div class="warn">⚠ '+w+'</div>'}).join('');
+  if(nHw===0)m+='<div class="okmsg">No homework planned for this day, so the hour is all revision.</div>';
+  else if(nHw<3)m+='<div class="okmsg">Only '+nHw+' homework piece'+(nHw>1?'s':'')+' to do, so the spare time is extra revision.</div>';
+  if(p.done.every(Boolean))m+='<div class="okmsg">✓ All done for '+nice(date)+'. Great work!</div>';
+  msg.innerHTML=m;
+  p.blocks.forEach(function(b,i){var done=p.done[i],t0=timeAt(p.start,i),t1=timeAt(p.start,i).split(':');var e=+t1[0]*60+(+t1[1])+15;var tEnd=('0'+Math.floor(e/60)%24).slice(-2)+':'+('0'+e%60).slice(-2);
+    var running=T.timer&&T.i===i,tv=(T.i===i?fmt(T.left):'15:00');
+    if(b.type==='hw'){var hw=hwById(b.hwId);if(!hw)return;
+      h+='<div class="block'+(done?' done':'')+'"><input type="checkbox" class="tick" data-i="'+i+'"'+(done?' checked':'')+' aria-label="Done"><div><span class="when">'+t0+'–'+tEnd+'</span><span class="kind">Homework</span>'+
+      '<h3>'+esc(hw.subject)+': '+esc(hw.task)+'</h3><p>Piece '+b.piece+' of '+b.of+' · due '+nice(hw.due)+'</p>'+
+      '<div class="acts"><button class="btn small" data-timer="'+i+'">'+(running?'Pause':'Start 15 min')+'</button><span class="timer" id="tm'+i+'">'+tv+'</span></div></div></div>';}
+    else{h+='<div class="block rev'+(done?' done':'')+'"><input type="checkbox" class="tick" data-i="'+i+'"'+(done?' checked':'')+' aria-label="Done"><div><span class="when">'+t0+'–'+tEnd+'</span><span class="kind">'+(b.extra?'Extra revision':'Revision')+'</span>'+
+      '<h3>'+esc(b.subject)+': '+esc(b.title)+'</h3><p>Open the guide, read the explanations, then try the practice questions.</p>'+
+      '<div class="acts"><a class="btn small" href="../'+b.url+'" target="_blank" rel="noopener">Open topic</a><button class="btn small" data-timer="'+i+'">'+(running?'Pause':'Start 15 min')+'</button><span class="timer" id="tm'+i+'">'+tv+'</span>'+
+      (done?'':'<button class="btn small" data-swap="'+i+'">Different topic</button><select class="btn small" data-subj="'+i+'" aria-label="Change subject">'+SUBJECTS.map(function(s){return '<option'+(s===b.subject?' selected':'')+'>'+s+'</option>'}).join('')+'</select>')+'</div></div></div>';}
+  });
+  box.innerHTML=h;}
+function drawHw(){var open=S.hw.filter(function(h){return h.done<h.chunks}).sort(function(a,b){return a.due<b.due?-1:1}),done=S.hw.filter(function(h){return h.done>=h.chunks}).sort(function(a,b){return a.due>b.due?-1:1});
+  function row(h){var pips='';for(var k=0;k<h.chunks;k++)pips+='<i class="'+(k<h.done?'f':'')+'"></i>';var dl=daysBetween(today(),h.due);
+    var dueTxt=dl<0?'<span class="due-soon">overdue ('+nice(h.due)+')</span>':dl===0?'<span class="due-soon">due today</span>':dl===1?'<span class="due-soon">due tomorrow</span>':'due '+nice(h.due);
+    return '<div class="hw"><div><b>'+esc(h.subject)+': '+esc(h.task)+'</b><br><span class="meta">'+dueTxt+' · '+(h.chunks*15)+' min<span class="pips" aria-label="'+h.done+' of '+h.chunks+' pieces done">'+pips+'</span></span></div>'+
+    '<div class="pl-row" style="gap:6px">'+(h.done<h.chunks?'<button class="btn small" data-hwdone="'+h.id+'">Mark finished</button>':'<button class="btn small" data-hwundo="'+h.id+'">Not finished</button>')+'<button class="btn small" data-hwdel="'+h.id+'">Delete</button></div></div>';}
+  $('hw-open').innerHTML=open.length?open.map(row).join(''):'<p class="muted" style="margin:0">No homework waiting. Add some above.</p>';
+  $('hw-done').innerHTML=done.length?done.map(row).join(''):'<p class="muted" style="margin:0">Nothing finished yet.</p>';}
+function drawRev(){$('subjgrid').innerHTML=SUBJECTS.map(function(s){var l=lastRevised(s);var d=l?daysBetween(l,today()):null;
+    return '<div class="subj"><b>'+s+'</b><span>'+(l?(d===0?'today':d===1?'yesterday':d+' days ago'):'not yet')+'</span></div>'}).join('');
+  var r=S.rev.slice().sort(function(a,b){return a.date<b.date?1:-1}).slice(0,8);
+  $('revrecent').innerHTML=r.length?r.map(function(x){return '<li>'+nice(x.date)+': <b>'+esc(x.subject)+'</b> – <a href="../'+x.url+'">'+esc(x.title)+'</a></li>'}).join(''):'<li class="muted">No revision ticked off yet.</li>';
+  $('bk-text').value=JSON.stringify(S);}
+function drawAll(){drawPlan();drawHw();drawRev();}
+
+/* ---------- events ---------- */
+$('f-subj').innerHTML=HW_SUBJECTS.map(function(s){return '<option>'+s+'</option>'}).join('');
+$('p-date').value=today();$('f-due').value=addDays(today(),2);
+$('hwform').addEventListener('submit',function(e){e.preventDefault();var task=$('f-task').value.trim();if(!task)return;
+  S.hw.push({id:uid(),subject:$('f-subj').value,task:task,due:$('f-due').value||addDays(today(),1),chunks:+$('f-len').value,done:0,added:new Date().toISOString()});
+  $('f-task').value='';save();ensurePlan($('p-date').value);
+  var p=S.plans[$('p-date').value];if(planStarted(p))$('p-msgs').insertAdjacentHTML('afterbegin','<div class="okmsg">Homework added. Press “Make a new plan” to fit it into today.</div>');
+  drawAll();if(!planStarted(p))$('p-msgs').insertAdjacentHTML('afterbegin','<div class="okmsg">Homework added and the plan below is updated.</div>');});
+$('p-date').addEventListener('change',function(){ensurePlan(this.value);drawAll()});
+$('p-start').addEventListener('change',function(){var p=S.plans[$('p-date').value];if(p){p.start=this.value;save();drawPlan()}});
+$('p-remake').addEventListener('click',function(){var d=$('p-date').value,p=S.plans[d];
+  makePlan(d);drawAll();});
+document.addEventListener('click',function(e){var t=e.target,d=$('p-date').value,p=S.plans[d];
+  if(t.dataset.timer!==undefined){startTimer(+t.dataset.timer);return}
+  if(t.dataset.swap!==undefined){var b=p.blocks[+t.dataset.swap];var nt=pickTopic(b.subject,[b.url].concat(b.skipped||[]));b.skipped=(b.skipped||[]).concat([b.url]);b.url=nt[0];b.title=nt[1];save();drawPlan();return}
+  if(t.dataset.hwdone){var h=hwById(t.dataset.hwdone);h.done=h.chunks;save();ensurePlan(d);drawAll();return}
+  if(t.dataset.hwundo){var h2=hwById(t.dataset.hwundo);h2.done=Math.max(0,h2.chunks-1);save();drawAll();return}
+  if(t.dataset.hwdel){var h3=hwById(t.dataset.hwdel);if(!confirm('Delete "'+h3.task+'"?'))return;S.hw=S.hw.filter(function(x){return x.id!==h3.id});
+    for(var k in S.plans){var pl=S.plans[k];var keep=[],kd=[];pl.blocks.forEach(function(b,i){if(!(b.type==='hw'&&b.hwId===h3.id)){keep.push(b);kd.push(pl.done[i])}});pl.blocks=keep;pl.done=kd;}
+    save();ensurePlan(d);drawAll();return}
+});
+document.addEventListener('change',function(e){var t=e.target,d=$('p-date').value,p=S.plans[d];
+  if(t.classList.contains('tick')){var i=+t.dataset.i,b=p.blocks[i],on=t.checked;p.done[i]=on;
+    if(b.type==='hw'){var h=hwById(b.hwId);if(h)h.done=Math.max(0,Math.min(h.chunks,h.done+(on?1:-1)));}
+    else{if(on)S.rev.push({date:d,subject:b.subject,url:b.url,title:b.title});else S.rev=S.rev.filter(function(r){return !(r.date===d&&r.url===b.url)});}
+    if(T.i===i&&T.timer){clearInterval(T.timer);T.timer=null}
+    save();drawAll();return}
+  if(t.dataset.subj!==undefined){var b2=p.blocks[+t.dataset.subj];b2.subject=t.value;b2.skipped=[];var nt=pickTopic(t.value);b2.url=nt[0];b2.title=nt[1];save();drawPlan();return}
+});
+$('bk-copy').addEventListener('click',function(){var t=$('bk-text');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){try{document.execCommand('copy')}catch(e2){}}$('bk-msg').textContent='Copied ✓'});
+$('bk-load').addEventListener('click',function(){try{var s=JSON.parse($('bk-text').value);if(!s||!s.hw||!s.plans||!s.rev)throw 0;if(!confirm('Replace the homework and plans in this browser with the backup?'))return;S=s;save();ensurePlan($('p-date').value);drawAll();$('bk-msg').textContent='Restored ✓'}catch(e){$('bk-msg').textContent='That code did not work. Copy the whole backup code and try again.'}});
+ensurePlan($('p-date').value);drawAll();
+})();
+</script>
+</body>
+</html>
